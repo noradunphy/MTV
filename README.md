@@ -13,7 +13,7 @@ More details can be found in our [paper](https://arxiv.org/abs/2406.15334).
 ---
 Our method consists of three steps. The first step performs some amount of forward pass on ICL examples and take the average activations of these forward pass. The second step consists of running REINFORCE to locate the attention heads in the Language Backbone that capture the given multimodal tasks. During zero-shot inference, intervention is performed on the selected attention heads to replace the current activations with the average activations, in which we called the Multimodal Task Vector.
 <p align="center">
-  <img src=MTV/data/method.png />
+  <img src=MTV/data/method.png width="500" height="700"/>
 </p>
 
 ### 💻 Setup
