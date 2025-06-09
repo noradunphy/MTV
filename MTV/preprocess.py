@@ -7,21 +7,29 @@ Then use the given image and answer the question in the same way as the examples
 If the question can not be answered, respond unanswerable. """
 ####
 
-def open_data(dataset_name, path):
-
+def open_data(dataset_name, path, dialogue_act=None):
     jsonl_format_dataset = ["vizwiz", "okvqa"]
-    list_format_dataset = ["flower", "cub", "dtd"]
+    list_format_dataset = ["flower", "cub", "dtd", "swda"]
 
     with open(path, 'r') as json_file:
         if dataset_name in jsonl_format_dataset:
             dataset = list(json_file)
         elif dataset_name in list_format_dataset:
             dataset = json.load(json_file)
+    
+    # If dialogue_act is specified and dataset is swda, filter for that act
+    if dialogue_act is not None and dataset_name == "swda":
+        filtered_dataset = []
+        for item in dataset:
+            # item is already a dict for .json files
+            if item.get('dialog_act') == dialogue_act:
+                filtered_dataset.append(item)
+        dataset = filtered_dataset
     return dataset
 
 
 ### Each format function should return (full_text, image_list, answer, question_id)
-def get_format_func(cur_dataset):
+def get_format_func(cur_dataset, zero_shot=False):
 
     if cur_dataset == "vizwiz":
         return format_vizwiz
@@ -33,6 +41,8 @@ def get_format_func(cur_dataset):
         return format_cub
     if cur_dataset == "dtd":
         return format_dtd
+    if cur_dataset == "swda" or cur_dataset == "swda_nextutt":
+        return format_swda_next_utt
 
 
 ####All return format will be in the form (Text, list of images, Answer, Question_id)
@@ -117,6 +127,23 @@ def format_flower(all_data, cur_item=None, num_shot=0, model_helper=None, split=
 
         return neg_example + pos_example + cur_query, [neg, pos, query], query_label, -1
 
+#actual zero
+def format_flower_for_eval(all_data, cur_item=None, num_shot=0, model_helper=None, split="train"):
+    pos = cur_item["pos"]
+    neg = cur_item["neg"]
+    pos_label = cur_item["pos_label"]
+    neg_label = cur_item["neg_label"]
+    query = cur_item["query"]
+    rand_num = random.randint(0,1)
+    if rand_num == 0:
+        cur_query = f"<image>What is the type of flower in the image? A.{pos_label} B.{neg_label}\nAnswer with the option's letter from the given choice directly. Answer:"
+        query_label = "A"
+    else:
+        cur_query = f"<image>What is the type of flower in the image? A.{neg_label} B.{pos_label}\nAnswer with the option's letter from the given choice directly. Answer:"
+        query_label = "B"
+
+    return cur_query, [pos, neg, query], query_label, -1
+
 
 def format_cub(all_data, cur_item=None, num_shot=0, model_helper=None, split="train"):
 
@@ -170,3 +197,41 @@ def format_dtd(all_data, cur_item=None, num_shot=0, model_helper=None, split="tr
         query_label = "B"
 
         return neg_example + pos_example + cur_query, [neg, pos, query], query_label, -1
+
+#NEW
+
+def format_swda_next_utt(all_data, cur_item=None, num_shot=0, model_helper=None, split="train"):
+    """Format function for next utterance generation in SWDA with N-shot prompting."""
+    if cur_item is None:
+        data = random.sample(all_data, 1)[0]
+    else:
+        data = cur_item
+
+    # Get N random examples from the same dialog act class if num_shot > 0
+    prompt = ""
+    if num_shot > 0 and split == "train":
+        # Get examples with the same dialog act
+        same_act_examples = [ex for ex in all_data if ex.get('dialog_act') == data.get('dialog_act') and ex != data]
+        if same_act_examples:
+            # Sample N examples
+            shot_examples = random.sample(same_act_examples, min(num_shot, len(same_act_examples)))
+            
+            # Format each example
+            for i, ex in enumerate(shot_examples):
+                prompt += f"Chat {i+1}\n"
+                if ex.get("text", "").strip() != "":
+                    prompt += ex["text"] + "\n"
+                prompt += f"Final Response {ex['caller']}: {ex['response']}\n"
+                prompt += "______\n"
+            
+            prompt += "\n"  # Add spacing between examples and query
+
+    # Add the current query
+    if data.get("text", "").strip() != "":
+        prompt += data["text"] + "\n"
+    prompt += f"Final Response {data['caller']}:"
+
+    target = data["response"]
+    utt_id = data.get("utterance_id", -1)
+    
+    return prompt, [], target, utt_id

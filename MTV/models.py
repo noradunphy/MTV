@@ -3,6 +3,7 @@ from preprocess import *
 from PIL import Image
 import torch
 import copy
+import os
 
 # from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, IGNORE_INDEX
 # from llava.conversation import conv_templates, SeparatorStyle
@@ -10,8 +11,29 @@ import copy
 
 def load_image(image_file):
     try:
-        image = Image.open(image_file).convert("RGB")
-    except:
+        # Remove ./ prefix if present
+        if image_file.startswith('./'):
+            image_file = image_file[2:]
+        # Remove flowers-102/ prefix if present
+        if image_file.startswith('flowers-102/'):
+            image_file = image_file[12:]
+        # Handle relative paths
+        if not os.path.isabs(image_file):
+            # If the path already starts with jpg/, just prepend data/flower
+            if image_file.startswith('jpg/'):
+                image_file = os.path.join('data/flower', image_file)
+            # If the path doesn't start with jpg/, prepend data/flower/jpg
+            else:
+                image_file = os.path.join('data/flower/jpg', image_file)
+        # Convert to absolute path for better error messages
+        abs_path = os.path.abspath(image_file)
+        # Remove MTV from path if present
+        abs_path = abs_path.replace('/MTV/data/', '/data/')
+        if not os.path.exists(abs_path):
+            raise FileNotFoundError(f"Image file not found: {abs_path}")
+        image = Image.open(abs_path).convert("RGB")
+    except Exception as e:
+        print(f"Error loading image {image_file}: {str(e)}")
         return image_file
     return image
 
@@ -37,6 +59,7 @@ class ModelHelper:
         self.cur_dataset: Name of the current dataset
         self.split_idx: The index of "layer" when you parse "attn_hook_names" with "."
         self.nonspecial_idx: The index in which the generated tokens are not special token. Used to skip special token and construct the current target output for loss calculation.
+        self.zero_shot: Whether to use zero-shot evaluation for applicable datasets
         """
 
 
@@ -135,7 +158,7 @@ class llavaOAHelper(ModelHelper):
 
 class QwenHelper(ModelHelper):
 
-    def __init__(self, model, tokenizer, cur_dataset):
+    def __init__(self, model, tokenizer, cur_dataset, zero_shot=False):
         self.model = model
         self.tokenizer = tokenizer
         self.model_config = {"n_heads":model.transformer.config.num_attention_heads,
@@ -144,20 +167,45 @@ class QwenHelper(ModelHelper):
                     "name_or_path":model.transformer.config._name_or_path,
                     "attn_hook_names":[f'transformer.h.{layer}.attn.c_proj' for layer in range(model.transformer.config.num_hidden_layers)],
                     "layer_hook_names":[f'transformer.h.{layer}' for layer in range(model.transformer.config.num_hidden_layers)]}
-        self.format_func = get_format_func(cur_dataset)
+        self.format_func = get_format_func(cur_dataset, zero_shot=zero_shot)
         self.space = True
         self.cur_dataset = cur_dataset
         self.split_idx = 2
         self.nonspecial_idx = 0
         self.question_lookup = None
+        self.zero_shot = zero_shot
 
     def insert_image(self, text, image_list):
+        # Preprocess image paths
+        processed_images = []
+        for image_path in image_list:
+            # Handle different dataset paths
+            if self.cur_dataset == "flower":
+                if image_path.startswith('jpg/'):
+                    image_path = os.path.join('data/flower', image_path)
+                else:
+                    image_path = os.path.join('data/flower/jpg', image_path)
+            elif self.cur_dataset == "cub":
+                # Remove any leading ./ if present
+                if image_path.startswith('./'):
+                    image_path = image_path[2:]
+                # Join with the correct base path, preserving CUB_200_2011 in the path
+                if not image_path.startswith('CUB_200_2011/'):
+                    image_path = os.path.join('CUB_200_2011', image_path)
+                image_path = os.path.join('MTV/data/cub', image_path)
+            # Convert to absolute path for better error messages
+            abs_path = os.path.abspath(image_path)
+            # Remove MTV from path if present
+            abs_path = abs_path.replace('/MTV/data/', '/data/')
+            if not os.path.exists(abs_path):
+                raise FileNotFoundError(f"Image file not found: {abs_path}")
+            processed_images.append(abs_path)
 
         text = text.replace("<image>", "<img></img>")
         text = text.split("</img>")
 
         new_text = ""
-        for text_split, image in zip(text[:-1], image_list):
+        for text_split, image in zip(text[:-1], processed_images):
             new_text += f"{text_split}{image}</img>"
         return self.tokenizer(new_text + text[-1], return_tensors='pt', padding='longest')
     
@@ -324,6 +372,119 @@ class Idefics2Helper(ModelHelper):
         output = self.processor.batch_decode(output[:, model_input["input_ids"].size(1):],
                             skip_special_tokens=True)[0].strip()
         return output
+
+#NEW
+class TextModelHelper(ModelHelper):
+    def __init__(self, model, tokenizer, cur_dataset, zero_shot=False):
+        self.model = model
+        self.tokenizer = tokenizer
+        self.model_config = {
+            "n_heads": model.config.num_attention_heads,
+            "n_layers": model.config.num_hidden_layers,
+            "resid_dim": model.config.hidden_size,
+            "name_or_path": model.config._name_or_path,
+            "attn_hook_names": [f'model.layers.{layer}.self_attn.o_proj' for layer in range(model.config.num_hidden_layers)],
+            "layer_hook_names": [f'model.layers.{layer}' for layer in range(model.config.num_hidden_layers)],
+            "mlp_hook_names": [f'model.layers.{layer}.mlp.down_proj' for layer in range(model.config.num_hidden_layers)]
+        }
+        self.format_func = get_format_func(cur_dataset, zero_shot=zero_shot)
+        self.space = False
+        self.cur_dataset = cur_dataset
+        self.split_idx = 2
+        self.nonspecial_idx = 0
+        self.zero_shot = zero_shot
+
+    def insert_image(self, text, image_list):
+        # For text-only models, we ignore image_list and just process the text
+        inputs = self.tokenizer(text, return_tensors="pt", padding=True, truncation=True)
+        inputs = {k: v.to("cuda") for k, v in inputs.items()}
+        return inputs
+
+    def forward(self, model_input, labels=None):
+        if labels is not None:
+            labels = labels.to(model_input["input_ids"].device)
+        outputs = self.model(**model_input, labels=labels)
+        return outputs
+
+    def generate(self, model_input, max_new_tokens):
+        outputs = self.model.generate(
+            **model_input,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,  # Disable sampling for deterministic outputs
+            num_beams=1,  # No beam search
+            pad_token_id=self.tokenizer.pad_token_id,
+            eos_token_id=self.tokenizer.eos_token_id,
+            repetition_penalty=1.0  # No repetition penalty
+        )
+        # Get the input length to slice the output
+        input_length = model_input["input_ids"].size(1)
+        # Slice the output to remove the prompt
+        generated_output = outputs[:, input_length:]
+        # Decode only the generated part
+        full_output = self.tokenizer.batch_decode(generated_output, skip_special_tokens=True)[0].strip()
+        
+        # Clean up the output using extract_first_turn
+        from mtv_utils import extract_first_turn
+        cleaned_output = extract_first_turn(full_output)
+        
+        # Remove any non-alphanumeric characters at the start
+        cleaned_output = cleaned_output.lstrip('0123456789: ')
+        
+        return cleaned_output
+
+
+def load_model(model_name, cur_dataset, zero_shot=False):
+    if model_name == "llava":
+        from llava.model.builder import load_pretrained_model
+        from llava.mm_utils import get_model_name_from_path
+        from llava.constants import DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
+        from llava.conversation import conv_templates
+        from llava.mm_utils import tokenizer_image_token, KeywordsStoppingCriteria
+        from llava.constants import IMAGE_TOKEN_INDEX
+        from llava.mm_utils import process_images
+
+        model_path = "liuhaotian/llava-v1.5-7b"
+        model_name = get_model_name_from_path(model_path)
+        tokenizer, model, processor, _ = load_pretrained_model(model_path, None, model_name, load_8bit=False, load_4bit=False)
+        model = model.to("cuda")
+        return llavaOAHelper(model, tokenizer, processor, cur_dataset)
+    
+    elif model_name == "Qwen-VL":
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers.generation import GenerationConfig
+        tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-VL-Chat", trust_remote_code=True)
+        model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="cuda", trust_remote_code=True).eval()
+        model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-VL-Chat", trust_remote_code=True)
+        return QwenHelper(model, tokenizer, cur_dataset, zero_shot)
+    
+    elif model_name == "vila":
+        from transformers import AutoModelForCausalLM, AutoTokenizer, CLIPImageProcessor
+        model = AutoModelForCausalLM.from_pretrained("vila-7b", device_map="cuda", trust_remote_code=True).eval()
+        tokenizer = AutoTokenizer.from_pretrained("vila-7b", trust_remote_code=True)
+        image_processor = CLIPImageProcessor.from_pretrained("vila-7b", trust_remote_code=True)
+        return ViLAHelper(model, tokenizer, image_processor, cur_dataset)
+    
+    elif model_name == "idefics2":
+        from transformers import IdeficsForVisionText2Text, AutoProcessor
+        model = IdeficsForVisionText2Text.from_pretrained("HuggingFaceM4/idefics-80b-instruct", device_map="cuda", torch_dtype=torch.float16, trust_remote_code=True)
+        processor = AutoProcessor.from_pretrained("HuggingFaceM4/idefics-80b-instruct", trust_remote_code=True)
+        return Idefics2Helper(model, processor, cur_dataset)
+    
+    elif model_name == "text":
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+        # Use Meta's Llama-3.1-8B for SWDA
+        model = AutoModelForCausalLM.from_pretrained(
+            "meta-llama/Llama-3.1-8B",
+            torch_dtype=torch.bfloat16,
+            device_map="auto"
+        )
+        tokenizer = AutoTokenizer.from_pretrained(
+            "meta-llama/Llama-3.1-8B",
+            padding_side="right",
+            use_fast=False
+        )
+        tokenizer.pad_token = tokenizer.eos_token
+        return TextModelHelper(model, tokenizer, cur_dataset, zero_shot)
 
 
 
