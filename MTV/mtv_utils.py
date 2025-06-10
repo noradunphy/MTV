@@ -7,6 +7,7 @@ import numpy as np
 import json
 import random
 from tqdm import tqdm
+import pdb
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoProcessor, AutoModelForVision2Seq, logging
 import sys
@@ -472,7 +473,7 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
 
     This function defaults to perform intervention during the full generation. To perform intervention on certain token/generation step, modify the function accordingly.
     """
-
+    #pdb.set_trace()
 
     if patching:
         edit_layers = [replace_layer]
@@ -532,17 +533,15 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
     return rep_act
 
 
-def compute_perplexity(model_input, target_text, model_helper, intervention_locations=None, avg_activations=None):
+def compute_perplexity(model_input, target_text, model_helper):
     """
-    Compute perplexity of target text given the model input, with optional intervention.
+    Compute perplexity of target text given the model input
     Measures how surprised the model is by the target response.
     
     Parameters:
     model_input: Input to the model (context) - can be either a tuple or dictionary
     target_text: Target text to compute perplexity for
     model_helper: Model helper instance
-    intervention_locations: Optional locations for intervention
-    avg_activations: Optional activations for intervention
     
     Returns:
     perplexity: Perplexity score for target text only
@@ -550,9 +549,6 @@ def compute_perplexity(model_input, target_text, model_helper, intervention_loca
     # Prepare target text
     if model_helper.space:
         target_text = " " + target_text
-    
-    # Extract first turn from target text
-    target_text = extract_first_turn(target_text)
     
     # Prepare input with target for computing loss
     if isinstance(model_input, tuple):
@@ -571,34 +567,10 @@ def compute_perplexity(model_input, target_text, model_helper, intervention_loca
     input_len = len(model_helper.tokenizer(input_text, return_tensors='pt')["input_ids"][0])
     target_tokens[:, :input_len] = -100
     
-    # Compute loss with or without intervention
-    if intervention_locations is not None and avg_activations is not None:
-        intervention_fn = last_replace_activation_w_avg(
-            layer_head_token_pairs=intervention_locations,
-            avg_activations=avg_activations,
-            model=model_helper.model,
-            model_config=model_helper.model_config,
-            batched_input=False,
-            last_token_only=True,
-            split_idx=model_helper.split_idx
-        )
-        
-        with TraceDict(model_helper.model, layers=model_helper.model_config['attn_hook_names'], edit_output=intervention_fn):
-            # Get model's predictions for each token
-            with torch.no_grad():
-                outputs = model_helper.forward(input_with_target)
-                logits = outputs.logits[:, input_len-1:-1]  # Get logits for target tokens
-                target_tokens = target_tokens[:, input_len:]  # Get target tokens
-                # Compute loss manually to get per-token perplexity
-                loss = torch.nn.functional.cross_entropy(logits.view(-1, logits.size(-1)), target_tokens.view(-1))
-    else:
-        # Get model's predictions for each token
-        with torch.no_grad():
-            outputs = model_helper.forward(input_with_target)
-            logits = outputs.logits[:, input_len-1:-1]  # Get logits for target tokens
-            target_tokens = target_tokens[:, input_len:]  # Get target tokens
-            # Compute loss manually to get per-token perplexity
-            loss = torch.nn.functional.cross_entropy(logits.view(-1, logits.size(-1)), target_tokens.view(-1))
+    with torch.no_grad():
+        # Pass labels to forward to use model's built-in loss computation
+        outputs = model_helper.forward(input_with_target, labels=target_tokens)
+        loss = outputs.loss
     
     # Compute perplexity from loss
     perplexity = torch.exp(loss).item()
@@ -619,6 +591,7 @@ def fv_intervention_natural_text(model_input, model_helper, max_new_tokens=10, r
     avg_activations: Optional activations for intervention
     target_output: Target output to compute perplexity on
     """
+    #pdb.set_trace()
     #Text form to avoid for-loop inside eval loop
     clean_output, intervention_output = "None", "None"
     clean_perplexity, intervention_perplexity = None, None
@@ -645,7 +618,7 @@ def fv_intervention_natural_text(model_input, model_helper, max_new_tokens=10, r
                 intervention_output = model_helper.generate(model_input, max_new_tokens)
                 # Compute perplexity for intervention model with intervention applied
                 # Note: The intervention is still active from the TraceDict context
-                intervention_perplexity = compute_perplexity(model_input, target_output, model_helper, intervention_locations, avg_activations)
+                intervention_perplexity = compute_perplexity(model_input, target_output, model_helper)
 
     return clean_output, intervention_output, clean_perplexity, intervention_perplexity
 

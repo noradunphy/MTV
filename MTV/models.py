@@ -401,9 +401,9 @@ class TextModelHelper(ModelHelper):
         return inputs
 
     def forward(self, model_input, labels=None):
-        if labels is not None:
-            labels = labels.to(model_input["input_ids"].device)
-        outputs = self.model(**model_input, labels=labels)
+        #if labels is not None:
+        #    labels = labels.to(model_input["input_ids"].device)
+        outputs = self.model(**model_input, labels=labels, use_cache=False)
         return outputs
 
     def generate(self, model_input, max_new_tokens):

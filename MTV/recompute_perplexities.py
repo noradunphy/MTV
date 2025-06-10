@@ -7,6 +7,8 @@ import argparse
 import numpy as np
 from backchannel_classifier import load_classifier as load_backchannel_classifier
 from declarative_classifier import load_classifier as load_declarative_classifier
+import pdb
+import random
 
 def recompute_perplexities(args):
     # Create output file
@@ -65,15 +67,26 @@ def recompute_perplexities(args):
         for idx, item in enumerate(tqdm(val_dataset)):
             text, image_list, target_out, question_id = model_helper.format_func(train_dataset, item, num_shot=args.eval_num_shot)
             new_input = model_helper.insert_image(text, image_list)
+            #pdb.set_trace()
+            # Get clean and interventsion outputs with perplexities
+            zero_activations = torch.zeros_like(mean_activations)
             
-            # Get clean and intervention outputs with perplexities
+            # Create intervention locations for every layer and head
+            num_layers = model_helper.model_config["n_layers"]
+            num_heads = model_helper.model_config["n_heads"]
+            
+            all_intervention_locations = []
+            for layer in range(num_layers):
+                for head in range(num_heads):
+                    all_intervention_locations.append((layer, head, -1))  # -1 for last token
+            
             clean_out, interv_out, clean_ppl, interv_ppl = fv_intervention_natural_text(
                 new_input, 
                 model_helper, 
                 max_new_tokens=args.max_token, 
                 return_item="both",  # Always compute both
-                intervention_locations=intervention_locations, 
-                avg_activations=mean_activations,
+                intervention_locations=all_intervention_locations,  # Intervene everywhere
+                avg_activations=zero_activations,
                 target_output=target_out  # Pass target output for perplexity computation
             )
 
