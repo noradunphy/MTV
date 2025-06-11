@@ -4,6 +4,7 @@ from PIL import Image
 import torch
 import copy
 import os
+import pdb
 
 # from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, IGNORE_INDEX
 # from llava.conversation import conv_templates, SeparatorStyle
@@ -401,35 +402,42 @@ class TextModelHelper(ModelHelper):
         return inputs
 
     def forward(self, model_input, labels=None):
-        #if labels is not None:
-        #    labels = labels.to(model_input["input_ids"].device)
         outputs = self.model(**model_input, labels=labels, use_cache=False)
         return outputs
-
-    def generate(self, model_input, max_new_tokens):
+    
+    def generate(self, model_input, max_new_tokens, return_scores=False, return_dict_in_generate=False, **generate_kwargs):
+        """
+        Wrapper around HuggingFace `model.generate()` that lets you
+        pull out raw logits (when return_scores=True) and control
+        return_dict_in_generate, plus any other HF generate args.
+        """
         outputs = self.model.generate(
             **model_input,
             max_new_tokens=max_new_tokens,
-            do_sample=False,  # Disable sampling for deterministic outputs
-            num_beams=1,  # No beam search
+            do_sample=False,
+            num_beams=1,
             pad_token_id=self.tokenizer.pad_token_id,
             eos_token_id=self.tokenizer.eos_token_id,
-            repetition_penalty=1.0  # No repetition penalty
+            repetition_penalty=1.0,
+            use_cache=False,
+            output_scores=return_scores,
+            return_dict_in_generate=return_dict_in_generate,
+            **generate_kwargs,               # e.g. you could override do_sample, num_beams, etc.
         )
-        # Get the input length to slice the output
-        input_length = model_input["input_ids"].size(1)
-        # Slice the output to remove the prompt
-        generated_output = outputs[:, input_length:]
-        # Decode only the generated part
-        full_output = self.tokenizer.batch_decode(generated_output, skip_special_tokens=True)[0].strip()
-        
-        # Clean up the output using extract_first_turn
+
+        # strip off the prompt tokens
+        input_len      = model_input["input_ids"].size(1)
+        gen_tokens     = outputs.sequences[:, input_len:]
+        decoded        = self.tokenizer.batch_decode(
+            gen_tokens, skip_special_tokens=True
+        )[0].strip()
         from mtv_utils import extract_first_turn
-        cleaned_output = extract_first_turn(full_output)
-        
-        # Remove any non-alphanumeric characters at the start
-        cleaned_output = cleaned_output.lstrip('0123456789: ')
-        
+        cleaned_output = extract_first_turn(decoded).lstrip('0123456789: ')
+
+        if return_scores:
+            # returns (text, raw_logits_list)
+            return cleaned_output, outputs.scores
+
         return cleaned_output
 
 

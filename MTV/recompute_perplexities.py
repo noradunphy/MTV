@@ -63,33 +63,26 @@ def recompute_perplexities(args):
 
         f.write("\n[INFO] Starting evaluation loop over validation set...\n")
         f.flush()
-        
+
         for idx, item in enumerate(tqdm(val_dataset)):
             text, image_list, target_out, question_id = model_helper.format_func(train_dataset, item, num_shot=args.eval_num_shot)
             new_input = model_helper.insert_image(text, image_list)
-            #pdb.set_trace()
-            # Get clean and interventsion outputs with perplexities
-            zero_activations = torch.zeros_like(mean_activations)
-            
-            # Create intervention locations for every layer and head
-            num_layers = model_helper.model_config["n_layers"]
-            num_heads = model_helper.model_config["n_heads"]
-            
-            all_intervention_locations = []
-            for layer in range(num_layers):
-                for head in range(num_heads):
-                    all_intervention_locations.append((layer, head, -1))  # -1 for last token
-            
+
+            f.write(f"\n[DEBUG] Example {idx+1}:\n")
+            f.write(f"[DEBUG] Input text: {text}\n")
+            f.write(f"[DEBUG] Target output: {target_out}\n")
+
+            # Get clean and intervention outputs with perplexities
             clean_out, interv_out, clean_ppl, interv_ppl = fv_intervention_natural_text(
                 new_input, 
                 model_helper, 
                 max_new_tokens=args.max_token, 
                 return_item="both",  # Always compute both
-                intervention_locations=all_intervention_locations,  # Intervene everywhere
-                avg_activations=zero_activations,
-                target_output=target_out  # Pass target output for perplexity computation
+                intervention_locations=intervention_locations, 
+                avg_activations=mean_activations,
+                target_output=target_out,
+                f=f
             )
-
             # Track perplexities
             if clean_ppl is not None:
                 clean_perplexities.append(clean_ppl)
@@ -122,17 +115,16 @@ def recompute_perplexities(args):
             interv_pred_acts.append(interv_act)
 
             # Write detailed output for each example
-            f.write(f"\n[DEBUG] Example {idx+1}:\n")
-            f.write(f"[DEBUG] Input text: {text}\n")
-            f.write(f"[DEBUG] Clean model output: {clean_out}\n")
-            f.write(f"[DEBUG] Intervention model output: {interv_out}\n")
-            f.write(f"[DEBUG] Target output: {target_out}\n")
-            f.write(f"[DEBUG] Target dialog act: {target_act}\n")
-            f.write(f"[DEBUG] Clean model dialog act: {clean_act}\n")
-            f.write(f"[DEBUG] Intervention model dialog act: {interv_act}\n")
-            f.write(f"[DEBUG] Clean model perplexity: {clean_ppl:.2f}\n")
-            f.write(f"[DEBUG] Intervention model perplexity: {interv_ppl:.2f}\n")
-            f.write("-" * 80 + "\n")
+
+            # f.write(f"[DEBUG] Clean model output: {clean_out}\n")
+            # f.write(f"[DEBUG] Intervention model output: {interv_out}\n")
+            # f.write(f"[DEBUG] Target output: {target_out}\n")
+            # f.write(f"[DEBUG] Target dialog act: {target_act}\n")
+            # f.write(f"[DEBUG] Clean model dialog act: {clean_act}\n")
+            # f.write(f"[DEBUG] Intervention model dialog act: {interv_act}\n")
+            # f.write(f"[DEBUG] Clean model perplexity: {clean_ppl:.2f}\n")
+            # f.write(f"[DEBUG] Intervention model perplexity: {interv_ppl:.2f}\n")
+            f.write("=" * 100 + "\n")
             f.flush()
 
         # Write summary statistics

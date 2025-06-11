@@ -3,6 +3,7 @@ from models import *
 from preprocess import *
 import sys
 import torch
+import torch.nn.functional as F
 import numpy as np
 import json
 import random
@@ -480,7 +481,8 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
     else:
         edit_layers = [x[0] for x in layer_head_token_pairs]
 
-
+    #pdb.set_trace()
+    print("replacing activations")
     def rep_act(output, layer_name, inputs):
         current_layer = int(layer_name.split('.')[split_idx])
 
@@ -533,76 +535,95 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
     return rep_act
 
 
-def compute_perplexity(model_input, target_text, model_helper):
+def print_token_log_probs(scores, tokenizer, target_text, f):
     """
-    Compute perplexity of target text given the model input
-    Measures how surprised the model is by the target response.
-    
-    Parameters:
-    model_input: Input to the model (context) - can be either a tuple or dictionary
-    target_text: Target text to compute perplexity for
-    model_helper: Model helper instance
-    
-    Returns:
-    perplexity: Perplexity score for target text only
+    Write per-token log‐probs of target_text into file handle `f`.
     """
-    # Prepare target text
-    if model_helper.space:
-        target_text = " " + target_text
-    
-    # Prepare input with target for computing loss
-    if isinstance(model_input, tuple):
-        # For tuple inputs (text + image), use the original input
-        input_with_target = model_input
-    else:
-        # For dictionary inputs (text-only models), concatenate input and target
-        input_text = model_helper.tokenizer.decode(model_input["input_ids"][0])
-        full_text = input_text + " " + target_text
-        input_with_target = model_helper.tokenizer(full_text, return_tensors='pt', padding=True, truncation=True)
-        input_with_target = {k: v.to("cuda") for k, v in input_with_target.items()}
-    
-    # Get target tokens from the full input
-    target_tokens = input_with_target["input_ids"].clone()
-    # Set all tokens before the target to -100 (ignore index)
-    input_len = len(model_helper.tokenizer(input_text, return_tensors='pt')["input_ids"][0])
-    target_tokens[:, :input_len] = -100
-    
-    with torch.no_grad():
-        # Pass labels to forward to use model's built-in loss computation
-        outputs = model_helper.forward(input_with_target, labels=target_tokens)
-        loss = outputs.loss
-    
-    # Compute perplexity from loss
-    perplexity = torch.exp(loss).item()
-    
-    return perplexity
+    # 1. Figure out the device from your scores list
+    device = scores[0].device
 
+    # 2. Tokenize onto CPU then move only the tensor to GPU (or CPU)
+    enc = tokenizer(
+        target_text,
+        return_tensors="pt",
+        add_special_tokens=False
+    )
+    input_ids = enc["input_ids"].to(device)  # <— only the tensor goes to `device`
 
-def fv_intervention_natural_text(model_input, model_helper, max_new_tokens=10, return_item="both", intervention_locations=None, avg_activations=None, target_output=None):
+    T = min(len(scores), input_ids.size(1))
+    print("Per-token log-probs:", file=f)
+    for i in range(T):
+        logits     = scores[i][0]                   # [vocab]
+        log_probs  = F.log_softmax(logits, dim=-1)  # [vocab]
+        tok_id     = input_ids[0, i].item()
+        token_str  = tokenizer.decode([tok_id])
+        print(f"  [{i:02d}] {token_str!r} → log-prob = {log_probs[tok_id].item():.4f}", file=f)
+
+    return log_probs
+
+def ppl_from_scores(scores, tokenizer, target_text):
     """
-    This function is a wrapper of generation intervention
-    
-    Parameters:
-    model_input: Input to the model
-    model_helper: Model helper instance
-    max_new_tokens: Maximum number of tokens to generate
-    return_item: What to return ("clean", "interv", or "both")
-    intervention_locations: Optional locations for intervention
-    avg_activations: Optional activations for intervention
-    target_output: Target output to compute perplexity on
+    Compute perplexity of `target_text` given the list of raw logits `scores`
+    produced by generate(..., return_scores=True, return_dict_in_generate=True).
     """
-    #pdb.set_trace()
-    #Text form to avoid for-loop inside eval loop
-    clean_output, intervention_output = "None", "None"
+    # 1. Figure out which device the scores are on
+    device = scores[0].device
+
+    # 2. Tokenize the target (no special tokens) and move to that device
+    enc = tokenizer(
+        target_text,
+        return_tensors="pt",
+        add_special_tokens=False
+    ).to(device)
+    target_ids = enc["input_ids"][0]             # shape [T]
+
+    # 3. Only score as many tokens as we have scores for
+    T = min(len(scores), target_ids.size(0))
+
+    # 4. For each step i, take the logits, softmax->log, then grab the log‐prob of the true token
+    log_probs = torch.stack([
+        F.log_softmax(scores[i], dim=-1)[0]
+        for i in range(T)
+    ], dim=0)                                    # shape [T, vocab]
+
+    token_log_probs = log_probs[torch.arange(T), target_ids[:T]]  # shape [T]
+
+    # 5. Average log‐prob (negate for cross‐entropy), exponentiate for PPL
+    avg_log_prob = token_log_probs.mean()
+    ppl = torch.exp(-avg_log_prob).item()
+
+    return ppl, torch.exp(-token_log_probs).tolist()  # returns (scalar PPL, list of per‐token PPLs)
+
+def fv_intervention_natural_text(model_input, model_helper, max_new_tokens=10, return_item="both", intervention_locations=None, avg_activations=None, target_output=None, f=None):
+    """
+    Runs both clean and intervened generation, then uses the stored
+    output_scores to compute PPL on `target_output`.
+    """
+    clean_output, intervention_output = None, None
     clean_perplexity, intervention_perplexity = None, None
 
-    if return_item == "clean" or return_item == "both":
-        with torch.no_grad():
-            clean_output = model_helper.generate(model_input, max_new_tokens)
-            # Compute perplexity for clean model without intervention
-            clean_perplexity = compute_perplexity(model_input, target_output, model_helper)
-
-    if return_item == "interv" or return_item == "both":
+    # ---- CLEAN PASS ----
+    if return_item in ("clean", "both"):
+        clean_output, clean_scores = model_helper.generate(
+            model_input,
+            max_new_tokens,
+            return_scores=True,
+            return_dict_in_generate=True
+        )
+        if target_output is not None:
+            clean_perplexity, _ = ppl_from_scores(
+                clean_scores,
+                model_helper.tokenizer,
+                target_output
+            )
+        print("--------------------------------", file=f)
+        print("[DEBUG] Clean output:", clean_output, file=f)
+        print_token_log_probs(clean_scores, model_helper.tokenizer, target_output, f)
+        print("[DEBUG] Clean perplexity:", clean_perplexity, file=f)
+        print("--------------------------------", file=f)
+    # ---- INTERVENTION PASS ----
+    if return_item in ("interv", "both"):
+        # build hook fn
         intervention_fn = last_replace_activation_w_avg(
             layer_head_token_pairs=intervention_locations,
             avg_activations=avg_activations,
@@ -612,15 +633,31 @@ def fv_intervention_natural_text(model_input, model_helper, max_new_tokens=10, r
             last_token_only=True,
             split_idx=model_helper.split_idx
         )
-        
-        with TraceDict(model_helper.model, layers=model_helper.model_config['attn_hook_names'], edit_output=intervention_fn):     
-            with torch.no_grad():
-                intervention_output = model_helper.generate(model_input, max_new_tokens)
-                # Compute perplexity for intervention model with intervention applied
-                # Note: The intervention is still active from the TraceDict context
-                intervention_perplexity = compute_perplexity(model_input, target_output, model_helper)
 
+        with TraceDict(
+            model_helper.model,
+            layers=model_helper.model_config["attn_hook_names"],
+            edit_output=intervention_fn
+        ):
+            intervention_output, intervention_scores = model_helper.generate(
+                model_input,
+                max_new_tokens,
+                return_scores=True,
+                return_dict_in_generate=True
+            )
+            if target_output is not None:
+                intervention_perplexity, _ = ppl_from_scores(
+                    intervention_scores,
+                    model_helper.tokenizer,
+                    target_output
+                )
+                print("--------------------------------", file=f)
+                print("[DEBUG] Intervention output:", intervention_output, file=f)
+                print_token_log_probs(intervention_scores, model_helper.tokenizer, target_output, f)
+                print("[DEBUG] Intervention perplexity:", intervention_perplexity, file=f)
+                print("--------------------------------", file=f)
     return clean_output, intervention_output, clean_perplexity, intervention_perplexity
+
 
 
 def eval_vqa(cur_dataset, results_path, answers):
