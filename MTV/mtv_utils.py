@@ -468,29 +468,26 @@ def reinforce_intervention_location(sampled, categorical=None, token_idx = -1):
 
 
 ###Based on Function Vector: https://github.com/ericwtodd/function_vectors/blob/874d6e93c099d71fe4a2d76551fab233e60062c2/src/utils/intervention_utils.py#L16
-def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model, model_config, batched_input=False, last_token_only=False, patching=False, replace_layer = 0, split_idx=2, intervention_token=None, prefix_len=None):
+def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model, model_config, batched_input=False, last_token_only=False, patching=False, replace_layer = 0, split_idx=2, intervention_token=None):
 
     """
     This function performs intervention on during generation.
 
     This function defaults to perform intervention during the full generation. To perform intervention on certain token/generation step, modify the function accordingly.
     """
-    #pdb.set_trace()
+
 
     if patching:
         edit_layers = [replace_layer]
     else:
         edit_layers = [x[0] for x in layer_head_token_pairs]
 
-    #pdb.set_trace()
-    print("replacing activations")
+
     def rep_act(output, layer_name, inputs):
         current_layer = int(layer_name.split('.')[split_idx])
 
         token_len = inputs[0].shape[1]
         if current_layer in edit_layers:
-            if last_token_only:
-                print(f"[HOOK] layer {current_layer}: patching last token index {token_len-1}")
             if isinstance(inputs, tuple):
                 inputs = inputs[0]
 
@@ -500,21 +497,29 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
             new_shape = inputs.size()[:-1] + (model_config['n_heads'], model_config['resid_dim']//model_config['n_heads']) # split by head: + (n_attn_heads, hidden_size/n_attn_heads)
             inputs = inputs.view(*new_shape) # inputs shape: (batch_size , tokens (n), heads, hidden_dim)
 
-            # Decide which token positions to patch
+            # Patch activations only at the last token for interventions like
+
+
+            # cloned_inputs = inputs.clone()
+
             if last_token_only:
-                token_slice = -1                    # just final position
+
+                for (layer,head_n, token_n) in layer_head_token_pairs:
+
+                    if layer == current_layer:
+   
+                        #cloned_inputs[-1,-1,head_n] = avg_activations[layer,head_n,0]
+                        inputs[-1,-1,head_n] = avg_activations[layer,head_n,0]
+
             elif intervention_token is not None:
-                token_slice = intervention_token    # custom single index
-            elif prefix_len is not None:
-                token_slice = slice(prefix_len, token_len)  # every position after prefix
-            else:
-                token_slice = -1  # fallback to last position
+                for (layer,head_n, token_n) in layer_head_token_pairs:
 
-            for (layer, head_n, _) in layer_head_token_pairs:
-                if layer == current_layer:
-                    inputs[-1, token_slice, head_n] = avg_activations[layer, head_n, 0]
+                    if layer == current_layer:
+   
+                        #cloned_inputs[-1,intervention_token,head_n] = avg_activations[layer,head_n,0]
+                        inputs[-1,intervention_token,head_n] = avg_activations[layer,head_n,0]
 
-            # reshape back to (batch, tokens, resid_dim) before projection
+            #cloned_inputs = cloned_inputs.view(*original_shape)
             inputs = inputs.view(*original_shape)
 
             proj_module = get_module(model, layer_name)
@@ -529,65 +534,6 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
             return output
     return rep_act
 
-
-def print_token_log_probs(scores, tokenizer, target_text, f):
-    """
-    Write per-token log‐probs of target_text into file handle `f`.
-    """
-    # 1. Figure out the device from your scores list
-    device = scores[0].device
-
-    # 2. Tokenize onto CPU then move only the tensor to GPU (or CPU)
-    enc = tokenizer(
-        target_text,
-        return_tensors="pt",
-        add_special_tokens=False
-    )
-    input_ids = enc["input_ids"].to(device)  # <— only the tensor goes to `device`
-
-    T = min(len(scores), input_ids.size(1))
-    print("Per-token log-probs:", file=f)
-    for i in range(T):
-        logits     = scores[i][0]                   # [vocab]
-        log_probs  = F.log_softmax(logits, dim=-1)  # [vocab]
-        tok_id     = input_ids[0, i].item()
-        token_str  = tokenizer.decode([tok_id])
-        print(f"  [{i:02d}] {token_str!r} → log-prob = {log_probs[tok_id].item():.4f}", file=f)
-
-    return log_probs
-
-def ppl_from_scores(scores, tokenizer, target_text):
-    """
-    Compute perplexity of `target_text` given the list of raw logits `scores`
-    produced by generate(..., return_scores=True, return_dict_in_generate=True).
-    """
-    # 1. Figure out which device the scores are on
-    device = scores[0].device
-
-    # 2. Tokenize the target (no special tokens) and move to that device
-    enc = tokenizer(
-        target_text,
-        return_tensors="pt",
-        add_special_tokens=False
-    ).to(device)
-    target_ids = enc["input_ids"][0]             # shape [T]
-
-    # 3. Only score as many tokens as we have scores for
-    T = min(len(scores), target_ids.size(0))
-
-    # 4. For each step i, take the logits, softmax->log, then grab the log‐prob of the true token
-    log_probs = torch.stack([
-        F.log_softmax(scores[i], dim=-1)[0]
-        for i in range(T)
-    ], dim=0)                                    # shape [T, vocab]
-
-    token_log_probs = log_probs[torch.arange(T), target_ids[:T]]  # shape [T]
-
-    # 5. Average log‐prob (negate for cross‐entropy), exponentiate for PPL
-    avg_log_prob = token_log_probs.mean()
-    ppl = torch.exp(-avg_log_prob).item()
-
-    return ppl, torch.exp(-token_log_probs).tolist()  # returns (scalar PPL, list of per‐token PPLs)
 
 def fv_intervention_natural_text(
     model_input,
@@ -634,8 +580,7 @@ def fv_intervention_natural_text(
             model=model_helper.model,
             model_config=model_helper.model_config,
             batched_input=False,
-            last_token_only=False,
-            prefix_len=model_input['input_ids'].shape[1],
+            last_token_only=True,
             split_idx=model_helper.split_idx
         )
         

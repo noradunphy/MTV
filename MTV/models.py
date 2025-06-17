@@ -5,6 +5,7 @@ import torch
 import copy
 import os
 import pdb
+import math
 
 # from llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN, IGNORE_INDEX
 # from llava.conversation import conv_templates, SeparatorStyle
@@ -428,6 +429,7 @@ class TextModelHelper(ModelHelper):
             **generate_kwargs,               # e.g. you could override do_sample, num_beams, etc.
         )
 
+        
         # HF returns either a Tensor (when return_dict=False) or a GenerateDecoderOnlyOutput / similar.
         sequences = outputs.sequences if not isinstance(outputs, torch.Tensor) else outputs
 
@@ -473,29 +475,50 @@ class TextModelHelper(ModelHelper):
                         max_new_tokens=max_new_tokens
                     )
                     print(f"[DEBUG] Generated text with intervention: {gen_text}")
+                #   a) tokenize the target, no special tokens
+                    tg = tok(target_text, return_tensors="pt", add_special_tokens=False).to(device)    
+                    target_ids = tg['input_ids'][0] # Remove batch dimension
                     
-                    # 2) PPL ON TARGET via built-in loss
-                    print("[DEBUG] Computing perplexity with intervention...")
-                    #   a) tokenize the target, no special tokens
-                    tg = tok(target_text, return_tensors="pt", add_special_tokens=False).to(device)
-                    #   b) build a single input_ids = [prefix ‖ target]
-                    inp_ids = torch.cat([prefix_input['input_ids'].to(device), tg['input_ids']], dim=1)
-                    attn = torch.ones_like(inp_ids)
-                    #   c) mask out the prefix in labels
-                    labels = inp_ids.clone()
-                    prefix_len = prefix_input['input_ids'].shape[1]
-                    labels[:, :prefix_len] = -100
-                    # DEBUG: how many tokens contribute to the loss?
-                    print(f"[DEBUG] Tokens scored in PPL (intervention): {(labels != -100).sum().item()}")
+                    # Start with just the prefix input
+                    current_input = prefix_input.copy()
+                    total_loss = 0.0
+                    num_tokens = 0
 
-                    #   d) forward pass with hook still active
-                    outputs = model(input_ids=inp_ids,
-                                  attention_mask=attn,
-                                  labels=labels,
-                                  use_cache=False)  # force every layer to run so TraceDict fires
-                    loss = outputs.loss  # = average -log P(t_n | prefix, t_<n)
-                    ppl = torch.exp(loss).item()
-                    print(f"[DEBUG] Computed perplexity with intervention: {ppl:.2f}")
+                    # Autoregressive loop over target tokens
+                    for i in range(len(target_ids)):
+                        # Get next target token
+                        target_token = target_ids[i:i+1]
+                        
+                        # Forward pass to get logits for next token
+                        outputs = model(**current_input, use_cache=False)
+                        logits = outputs.logits[:, -1, :] # Last token prediction
+                        
+                        # Calculate loss for this step
+                        loss = torch.nn.functional.cross_entropy(
+                            logits, 
+                            target_token,  # Remove .unsqueeze(0) since target_token is already correct shape
+                            reduction='sum'
+                        )
+                        total_loss += loss.item()
+                        num_tokens += 1
+                        
+                        # Add target token to input for next iteration
+                        current_input['input_ids'] = torch.cat([
+                            current_input['input_ids'],
+                            target_token.unsqueeze(0)
+                        ], dim=1)
+                        current_input['attention_mask'] = torch.ones_like(
+                            current_input['input_ids']
+                        )
+                        
+                        print(f"[DEBUG] Token {i+1}/{len(target_ids)}, Loss: {loss.item():.4f}")
+                    
+                    # Calculate final perplexity
+                    avg_loss = total_loss / num_tokens
+                    ppl = math.exp(avg_loss)
+                    print(f"[DEBUG] NEW APPROACH: Computed perplexity with intervention: {ppl:.2f}")
+
+                    
         else:
             # Clean branch - no intervention
             with torch.no_grad():
@@ -505,7 +528,13 @@ class TextModelHelper(ModelHelper):
                 )
                 print(f"[DEBUG] Generated text without intervention: {gen_text}")
                 
-                # 2) PPL ON TARGET via built-in loss
+                # 2) PPL ON TARGET via autoregressive loop
+               
+                
+
+                '''
+                #original aproach
+                ''' 
                 #   a) tokenize the target, no special tokens
                 tg = tok(target_text, return_tensors="pt", add_special_tokens=False).to(device)
                 #   b) build a single input_ids = [prefix ‖ target]
@@ -525,7 +554,60 @@ class TextModelHelper(ModelHelper):
                               use_cache=False)
                 loss = outputs.loss  # = average -log P(t_n | prefix, t_<n)
                 ppl = torch.exp(loss).item()
-                print(f"[DEBUG] Computed perplexity without intervention: {ppl:.2f}")
+                print(f"[DEBUG] ORIGINAL APPROACH: Computed perplexity without intervention: {ppl:.2f}")
+
+
+
+                '''
+                #iterate through target tokens, apply last replace activation w avg, forward pass to get logits
+                #add last token to prefix, the run on target being next 
+                #store logits in list / tensor
+                # use cross entropy with labels
+                #labels are indices of logits
+                '''
+
+                tg = tok(target_text, return_tensors="pt", add_special_tokens=False).to(device)
+                target_ids = tg['input_ids'][0] # Remove batch dimension
+                
+                # Start with just the prefix input
+                current_input = prefix_input.copy()
+                total_loss = 0.0
+                num_tokens = 0
+
+                # Autoregressive loop over target tokens
+                for i in range(len(target_ids)):
+                    # Get next target token
+                    target_token = target_ids[i:i+1]
+                    
+                    # Forward pass to get logits for next token
+                    outputs = model(**current_input, use_cache=False)
+                    logits = outputs.logits[:, -1, :] # Last token prediction
+                    
+                    # Calculate loss for this step
+                    loss = torch.nn.functional.cross_entropy(
+                        logits, 
+                        target_token,  # Remove .unsqueeze(0) since target_token is already correct shape
+                        reduction='sum'
+                    )
+                    total_loss += loss.item()
+                    num_tokens += 1
+                    
+                    # Add target token to input for next iteration
+                    current_input['input_ids'] = torch.cat([
+                        current_input['input_ids'],
+                        target_token.unsqueeze(0)
+                    ], dim=1)
+                    current_input['attention_mask'] = torch.ones_like(
+                        current_input['input_ids']
+                    )
+                    
+                    print(f"[DEBUG] Token {i+1}/{len(target_ids)}, Loss: {loss.item():.4f}")
+                
+                # Calculate final perplexity
+                avg_loss = total_loss / num_tokens
+                ppl = math.exp(avg_loss)
+                print(f"[DEBUG] NEW APPROACH: Computed perplexity without intervention: {ppl:.2f}")
+
         return gen_text, ppl
 
 

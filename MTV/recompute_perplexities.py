@@ -41,7 +41,6 @@ def recompute_perplexities(args):
     
     print("[INFO] Loading model...")
     model_helper = load_model(args.model_name, args.data_name, zero_shot=args.zero_shot)
-    pdb.set_trace()
     print(f"[INFO] Model '{args.model_name}' loaded successfully!")
     
     print("[INFO] Loading classifiers...")
@@ -66,7 +65,6 @@ def recompute_perplexities(args):
     print(f"\n[INFO] Activation dimensions:")
     print(f"Mean activations shape: {mean_activations.shape}")
     print(f"Number of intervention locations: {len(intervention_locations)}")
-    pdb.set_trace()
 
     # Initialize tracking lists
     clean_perplexities = []
@@ -88,6 +86,7 @@ def recompute_perplexities(args):
         new_input = model_helper.insert_image(text, image_list)
         
         # Get clean and intervention outputs with perplexities
+        print(f"[DEBUG] Target output: {target_out}")
         clean_out, interv_out, clean_ppl, interv_ppl = fv_intervention_natural_text(
             new_input, 
             model_helper, 
