@@ -9,12 +9,12 @@ from backchannel_classifier import load_classifier
 def test_generate(num_shot=4):
     # Load model and tokenizer
     model = AutoModelForCausalLM.from_pretrained(
-        "meta-llama/Llama-3.1-8B",
+        "meta-llama/Llama-3.2-1B",
         torch_dtype=torch.bfloat16,
         device_map="auto"
     )
     tokenizer = AutoTokenizer.from_pretrained(
-        "meta-llama/Llama-3.1-8B",
+        "meta-llama/Llama-3.2-1B",
         padding_side="right",
         use_fast=False
     )

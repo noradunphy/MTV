@@ -81,17 +81,18 @@ def load_model(model_name, cur_dataset, zero_shot=False):
     if model_name == "text":
         from transformers import AutoModelForCausalLM, AutoTokenizer
         model = AutoModelForCausalLM.from_pretrained(
-            "meta-llama/Llama-3.2-1B",
+            "meta-llama/Llama-3.1-8B",
             torch_dtype=torch.bfloat16,
             device_map="auto"
         ).eval()
         tokenizer = AutoTokenizer.from_pretrained(
-            "meta-llama/Llama-3.2-1B",
+            "meta-llama/Llama-3.1-8B",
             padding_side="right",
             use_fast=False
         )
         tokenizer.pad_token = tokenizer.eos_token
         model_helper = TextModelHelper(model, tokenizer, cur_dataset, zero_shot)
+        print("this is in mtv_utils.py")
     
     if model_name == "llava":
         from llava.model.builder import load_pretrained_model
@@ -467,7 +468,7 @@ def reinforce_intervention_location(sampled, categorical=None, token_idx = -1):
 
 
 ###Based on Function Vector: https://github.com/ericwtodd/function_vectors/blob/874d6e93c099d71fe4a2d76551fab233e60062c2/src/utils/intervention_utils.py#L16
-def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model, model_config, batched_input=False, last_token_only=False, patching=False, replace_layer = 0, split_idx=2, intervention_token=None):
+def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model, model_config, batched_input=False, last_token_only=False, patching=False, replace_layer = 0, split_idx=2, intervention_token=None, prefix_len=None):
 
     """
     This function performs intervention on during generation.
@@ -488,6 +489,8 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
 
         token_len = inputs[0].shape[1]
         if current_layer in edit_layers:
+            if last_token_only:
+                print(f"[HOOK] layer {current_layer}: patching last token index {token_len-1}")
             if isinstance(inputs, tuple):
                 inputs = inputs[0]
 
@@ -497,29 +500,21 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
             new_shape = inputs.size()[:-1] + (model_config['n_heads'], model_config['resid_dim']//model_config['n_heads']) # split by head: + (n_attn_heads, hidden_size/n_attn_heads)
             inputs = inputs.view(*new_shape) # inputs shape: (batch_size , tokens (n), heads, hidden_dim)
 
-            # Patch activations only at the last token for interventions like
-
-
-            # cloned_inputs = inputs.clone()
-
+            # Decide which token positions to patch
             if last_token_only:
-
-                for (layer,head_n, token_n) in layer_head_token_pairs:
-
-                    if layer == current_layer:
-   
-                        #cloned_inputs[-1,-1,head_n] = avg_activations[layer,head_n,0]
-                        inputs[-1,-1,head_n] = avg_activations[layer,head_n,0]
-
+                token_slice = -1                    # just final position
             elif intervention_token is not None:
-                for (layer,head_n, token_n) in layer_head_token_pairs:
+                token_slice = intervention_token    # custom single index
+            elif prefix_len is not None:
+                token_slice = slice(prefix_len, token_len)  # every position after prefix
+            else:
+                token_slice = -1  # fallback to last position
 
-                    if layer == current_layer:
-   
-                        #cloned_inputs[-1,intervention_token,head_n] = avg_activations[layer,head_n,0]
-                        inputs[-1,intervention_token,head_n] = avg_activations[layer,head_n,0]
+            for (layer, head_n, _) in layer_head_token_pairs:
+                if layer == current_layer:
+                    inputs[-1, token_slice, head_n] = avg_activations[layer, head_n, 0]
 
-            #cloned_inputs = cloned_inputs.view(*original_shape)
+            # reshape back to (batch, tokens, resid_dim) before projection
             inputs = inputs.view(*original_shape)
 
             proj_module = get_module(model, layer_name)
@@ -594,70 +589,66 @@ def ppl_from_scores(scores, tokenizer, target_text):
 
     return ppl, torch.exp(-token_log_probs).tolist()  # returns (scalar PPL, list of per‐token PPLs)
 
-def fv_intervention_natural_text(model_input, model_helper, max_new_tokens=10, return_item="both", intervention_locations=None, avg_activations=None, target_output=None, f=None):
+def fv_intervention_natural_text(
+    model_input,
+    model_helper,
+    max_new_tokens,
+    return_item="both",
+    intervention_locations=None,
+    avg_activations=None,
+    target_output=None,
+    f=None
+):
     """
-    Runs both clean and intervened generation, then uses the stored
-    output_scores to compute PPL on `target_output`.
+    Run clean and intervention passes on model input, returning generated text and perplexities.
+    
+    Args:
+        model_input: Tokenized input to model
+        model_helper: ModelHelper instance
+        max_new_tokens: Max tokens to generate
+        return_item: What to return - "clean", "interv", or "both"
+        intervention_locations: Locations to intervene on
+        avg_activations: Average activations to use for intervention
+        target_output: Target text for perplexity calculation
+        f: Optional file handle for debug logging
+        
+    Returns:
+        clean_text: Text from clean pass
+        interv_text: Text from intervention pass  
+        clean_ppl: Perplexity from clean pass
+        interv_ppl: Perplexity from intervention pass
     """
-    clean_output, intervention_output = None, None
-    clean_perplexity, intervention_perplexity = None, None
+    # Clean pass
+    clean_text, clean_ppl = model_helper.generate_and_score(
+        prefix_input=model_input,
+        target_text=target_output,
+        max_new_tokens=max_new_tokens,
+        intervention_fn=None
+    )
 
-    # ---- CLEAN PASS ----
-    if return_item in ("clean", "both"):
-        clean_output, clean_scores = model_helper.generate(
-            model_input,
-            max_new_tokens,
-            return_scores=True,
-            return_dict_in_generate=True
-        )
-        if target_output is not None:
-            clean_perplexity, _ = ppl_from_scores(
-                clean_scores,
-                model_helper.tokenizer,
-                target_output
-            )
-        print("--------------------------------", file=f)
-        print("[DEBUG] Clean output:", clean_output, file=f)
-        print_token_log_probs(clean_scores, model_helper.tokenizer, target_output, f)
-        print("[DEBUG] Clean perplexity:", clean_perplexity, file=f)
-        print("--------------------------------", file=f)
-    # ---- INTERVENTION PASS ----
+    # Intervention pass
     if return_item in ("interv", "both"):
-        # build hook fn
-        intervention_fn = last_replace_activation_w_avg(
+        interv_fn = last_replace_activation_w_avg(
             layer_head_token_pairs=intervention_locations,
             avg_activations=avg_activations,
             model=model_helper.model,
             model_config=model_helper.model_config,
             batched_input=False,
-            last_token_only=True,
+            last_token_only=False,
+            prefix_len=model_input['input_ids'].shape[1],
             split_idx=model_helper.split_idx
         )
+        
+        interv_text, interv_ppl = model_helper.generate_and_score(
+            prefix_input=model_input,
+            target_text=target_output, 
+            max_new_tokens=max_new_tokens,
+            intervention_fn=interv_fn
+        )
+    else:
+        interv_text, interv_ppl = None, None
 
-        with TraceDict(
-            model_helper.model,
-            layers=model_helper.model_config["attn_hook_names"],
-            edit_output=intervention_fn
-        ):
-            intervention_output, intervention_scores = model_helper.generate(
-                model_input,
-                max_new_tokens,
-                return_scores=True,
-                return_dict_in_generate=True
-            )
-            if target_output is not None:
-                intervention_perplexity, _ = ppl_from_scores(
-                    intervention_scores,
-                    model_helper.tokenizer,
-                    target_output
-                )
-                print("--------------------------------", file=f)
-                print("[DEBUG] Intervention output:", intervention_output, file=f)
-                print_token_log_probs(intervention_scores, model_helper.tokenizer, target_output, f)
-                print("[DEBUG] Intervention perplexity:", intervention_perplexity, file=f)
-                print("--------------------------------", file=f)
-    return clean_output, intervention_output, clean_perplexity, intervention_perplexity
-
+    return clean_text, interv_text, clean_ppl, interv_ppl
 
 
 def eval_vqa(cur_dataset, results_path, answers):

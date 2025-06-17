@@ -77,7 +77,7 @@ def load_and_format_swda_hf():
                 "label": label,
                 "utterance_index": utterance_index,
                 "conversation_no": conv_no,
-                "next_speaker": utt['caller'],
+                "next_caller": utt['caller'],
             })
     # Remove examples with empty responses
     formatted = [ex for ex in formatted if ex['response'].strip() != ""]
@@ -100,9 +100,9 @@ def format_for_model(ex):
     Formats a single example for model input: just the dialogue history, then the next speaker letter and a colon.
     """
     if ex['history'].strip() == "":
-        return f"{ex['next_speaker']}:"
+        return f"{ex['next_caller']}:"
     else:
-        return f"{ex['history']}\n{ex['next_speaker']}:"
+        return f"{ex['history']}\n{ex['next_caller']}:"
 
 # Example usage (uncomment to run as script):
 if __name__ == "__main__":

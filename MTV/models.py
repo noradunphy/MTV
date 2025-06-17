@@ -411,6 +411,9 @@ class TextModelHelper(ModelHelper):
         pull out raw logits (when return_scores=True) and control
         return_dict_in_generate, plus any other HF generate args.
         """
+        # Ensure we ask for dict form if we need scores; HF returns a Tensor otherwise.
+        effective_return_dict = return_scores or return_dict_in_generate
+
         outputs = self.model.generate(
             **model_input,
             max_new_tokens=max_new_tokens,
@@ -421,13 +424,16 @@ class TextModelHelper(ModelHelper):
             repetition_penalty=1.0,
             use_cache=False,
             output_scores=return_scores,
-            return_dict_in_generate=return_dict_in_generate,
+            return_dict_in_generate=effective_return_dict,
             **generate_kwargs,               # e.g. you could override do_sample, num_beams, etc.
         )
 
+        # HF returns either a Tensor (when return_dict=False) or a GenerateDecoderOnlyOutput / similar.
+        sequences = outputs.sequences if not isinstance(outputs, torch.Tensor) else outputs
+
         # strip off the prompt tokens
         input_len      = model_input["input_ids"].size(1)
-        gen_tokens     = outputs.sequences[:, input_len:]
+        gen_tokens     = sequences[:, input_len:]
         decoded        = self.tokenizer.batch_decode(
             gen_tokens, skip_special_tokens=True
         )[0].strip()
@@ -435,64 +441,147 @@ class TextModelHelper(ModelHelper):
         cleaned_output = extract_first_turn(decoded).lstrip('0123456789: ')
 
         if return_scores:
-            # returns (text, raw_logits_list)
-            return cleaned_output, outputs.scores
+            # If we requested scores but outputs is Tensor (shouldn't happen), return None for scores.
+            raw_scores = outputs.scores if not isinstance(outputs, torch.Tensor) else None
+            return cleaned_output, raw_scores
 
         return cleaned_output
+    
+    def generate_and_score(
+        model_helper,
+        prefix_input,        # e.g. {"input_ids": ..., "attention_mask": ...}
+        target_text,         # the gold string whose PPL you want
+        max_new_tokens=10,
+        intervention_fn=None # your TraceDict edit_output function, or None
+    ):
+        """
+        Generate text and compute perplexity on target text, with optional intervention.
+        Returns generated text and perplexity score.
+        """
+        model = model_helper.model
+        tok = model_helper.tokenizer
+        device = next(model.parameters()).device
+
+        # 1) GENERATION
+        if intervention_fn is not None:
+            # Intervention branch - wrap model forward pass with hook
+            with TraceDict(model, layers=model_helper.model_config['attn_hook_names'], edit_output=intervention_fn):
+                with torch.no_grad():
+                    print("[DEBUG] Starting generation with intervention...")
+                    gen_text = model_helper.generate(
+                        prefix_input,
+                        max_new_tokens=max_new_tokens
+                    )
+                    print(f"[DEBUG] Generated text with intervention: {gen_text}")
+                    
+                    # 2) PPL ON TARGET via built-in loss
+                    print("[DEBUG] Computing perplexity with intervention...")
+                    #   a) tokenize the target, no special tokens
+                    tg = tok(target_text, return_tensors="pt", add_special_tokens=False).to(device)
+                    #   b) build a single input_ids = [prefix ‖ target]
+                    inp_ids = torch.cat([prefix_input['input_ids'].to(device), tg['input_ids']], dim=1)
+                    attn = torch.ones_like(inp_ids)
+                    #   c) mask out the prefix in labels
+                    labels = inp_ids.clone()
+                    prefix_len = prefix_input['input_ids'].shape[1]
+                    labels[:, :prefix_len] = -100
+                    # DEBUG: how many tokens contribute to the loss?
+                    print(f"[DEBUG] Tokens scored in PPL (intervention): {(labels != -100).sum().item()}")
+
+                    #   d) forward pass with hook still active
+                    outputs = model(input_ids=inp_ids,
+                                  attention_mask=attn,
+                                  labels=labels,
+                                  use_cache=False)  # force every layer to run so TraceDict fires
+                    loss = outputs.loss  # = average -log P(t_n | prefix, t_<n)
+                    ppl = torch.exp(loss).item()
+                    print(f"[DEBUG] Computed perplexity with intervention: {ppl:.2f}")
+        else:
+            # Clean branch - no intervention
+            with torch.no_grad():
+                gen_text = model_helper.generate(
+                    prefix_input,
+                    max_new_tokens=max_new_tokens
+                )
+                print(f"[DEBUG] Generated text without intervention: {gen_text}")
+                
+                # 2) PPL ON TARGET via built-in loss
+                #   a) tokenize the target, no special tokens
+                tg = tok(target_text, return_tensors="pt", add_special_tokens=False).to(device)
+                #   b) build a single input_ids = [prefix ‖ target]
+                inp_ids = torch.cat([prefix_input['input_ids'].to(device), tg['input_ids']], dim=1)
+                attn = torch.ones_like(inp_ids)
+                #   c) mask out the prefix in labels
+                labels = inp_ids.clone()
+                prefix_len = prefix_input['input_ids'].shape[1]
+                labels[:, :prefix_len] = -100
+                # DEBUG: how many tokens contribute to the loss?
+                print(f"[DEBUG] Tokens scored in PPL (clean): {(labels != -100).sum().item()}")
+
+                #   d) forward pass without hook
+                outputs = model(input_ids=inp_ids,
+                              attention_mask=attn,
+                              labels=labels,
+                              use_cache=False)
+                loss = outputs.loss  # = average -log P(t_n | prefix, t_<n)
+                ppl = torch.exp(loss).item()
+                print(f"[DEBUG] Computed perplexity without intervention: {ppl:.2f}")
+        return gen_text, ppl
 
 
-def load_model(model_name, cur_dataset, zero_shot=False):
-    if model_name == "llava":
-        from llava.model.builder import load_pretrained_model
-        from llava.mm_utils import get_model_name_from_path
-        from llava.constants import DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
-        from llava.conversation import conv_templates
-        from llava.mm_utils import tokenizer_image_token, KeywordsStoppingCriteria
-        from llava.constants import IMAGE_TOKEN_INDEX
-        from llava.mm_utils import process_images
+# def load_model(model_name, cur_dataset, zero_shot=False):
+#     if model_name == "llava":
+#         from llava.model.builder import load_pretrained_model
+#         from llava.mm_utils import get_model_name_from_path
+#         from llava.constants import DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
+#         from llava.conversation import conv_templates
+#         from llava.mm_utils import tokenizer_image_token, KeywordsStoppingCriteria
+#         from llava.constants import IMAGE_TOKEN_INDEX
+#         from llava.mm_utils import process_images
 
-        model_path = "liuhaotian/llava-v1.5-7b"
-        model_name = get_model_name_from_path(model_path)
-        tokenizer, model, processor, _ = load_pretrained_model(model_path, None, model_name, load_8bit=False, load_4bit=False)
-        model = model.to("cuda")
-        return llavaOAHelper(model, tokenizer, processor, cur_dataset)
+#         model_path = "liuhaotian/llava-v1.5-7b"
+#         model_name = get_model_name_from_path(model_path)
+#         tokenizer, model, processor, _ = load_pretrained_model(model_path, None, model_name, load_8bit=False, load_4bit=False)
+#         model = model.to("cuda")
+#         return llavaOAHelper(model, tokenizer, processor, cur_dataset)
     
-    elif model_name == "Qwen-VL":
-        from transformers import AutoModelForCausalLM, AutoTokenizer
-        from transformers.generation import GenerationConfig
-        tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-VL-Chat", trust_remote_code=True)
-        model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="cuda", trust_remote_code=True).eval()
-        model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-VL-Chat", trust_remote_code=True)
-        return QwenHelper(model, tokenizer, cur_dataset, zero_shot)
+#     elif model_name == "Qwen-VL":
+#         from transformers import AutoModelForCausalLM, AutoTokenizer
+#         from transformers.generation import GenerationConfig
+#         tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen-VL-Chat", trust_remote_code=True)
+#         model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen-VL-Chat", device_map="cuda", trust_remote_code=True).eval()
+#         model.generation_config = GenerationConfig.from_pretrained("Qwen/Qwen-VL-Chat", trust_remote_code=True)
+#         return QwenHelper(model, tokenizer, cur_dataset, zero_shot)
     
-    elif model_name == "vila":
-        from transformers import AutoModelForCausalLM, AutoTokenizer, CLIPImageProcessor
-        model = AutoModelForCausalLM.from_pretrained("vila-7b", device_map="cuda", trust_remote_code=True).eval()
-        tokenizer = AutoTokenizer.from_pretrained("vila-7b", trust_remote_code=True)
-        image_processor = CLIPImageProcessor.from_pretrained("vila-7b", trust_remote_code=True)
-        return ViLAHelper(model, tokenizer, image_processor, cur_dataset)
+#     elif model_name == "vila":
+#         from transformers import AutoModelForCausalLM, AutoTokenizer, CLIPImageProcessor
+#         model = AutoModelForCausalLM.from_pretrained("vila-7b", device_map="cuda", trust_remote_code=True).eval()
+#         tokenizer = AutoTokenizer.from_pretrained("vila-7b", trust_remote_code=True)
+#         image_processor = CLIPImageProcessor.from_pretrained("vila-7b", trust_remote_code=True)
+#         return ViLAHelper(model, tokenizer, image_processor, cur_dataset)
     
-    elif model_name == "idefics2":
-        from transformers import IdeficsForVisionText2Text, AutoProcessor
-        model = IdeficsForVisionText2Text.from_pretrained("HuggingFaceM4/idefics-80b-instruct", device_map="cuda", torch_dtype=torch.float16, trust_remote_code=True)
-        processor = AutoProcessor.from_pretrained("HuggingFaceM4/idefics-80b-instruct", trust_remote_code=True)
-        return Idefics2Helper(model, processor, cur_dataset)
+#     elif model_name == "idefics2":
+#         from transformers import IdeficsForVisionText2Text, AutoProcessor
+#         model = IdeficsForVisionText2Text.from_pretrained("HuggingFaceM4/idefics-80b-instruct", device_map="cuda", torch_dtype=torch.float16, trust_remote_code=True)
+#         processor = AutoProcessor.from_pretrained("HuggingFaceM4/idefics-80b-instruct", trust_remote_code=True)
+#         return Idefics2Helper(model, processor, cur_dataset)
     
-    elif model_name == "text":
-        from transformers import AutoModelForCausalLM, AutoTokenizer
-        # Use Meta's Llama-3.1-8B for SWDA
-        model = AutoModelForCausalLM.from_pretrained(
-            "meta-llama/Llama-3.1-8B",
-            torch_dtype=torch.bfloat16,
-            device_map="auto"
-        )
-        tokenizer = AutoTokenizer.from_pretrained(
-            "meta-llama/Llama-3.1-8B",
-            padding_side="right",
-            use_fast=False
-        )
-        tokenizer.pad_token = tokenizer.eos_token
-        return TextModelHelper(model, tokenizer, cur_dataset, zero_shot)
+#     elif model_name == "text":
+#         from transformers import AutoModelForCausalLM, AutoTokenizer
+#         # Use Meta's Llama-3.1-8B for SWDA
+#         model = AutoModelForCausalLM.from_pretrained(
+#             "meta-llama/Llama-3.1-8B",
+#             torch_dtype=torch.bfloat16,
+#             device_map="auto" 
+#         )
+#         tokenizer = AutoTokenizer.from_pretrained(
+#             "meta-llama/Llama-3.1-8B",
+#             padding_side="right",
+#             use_fast=False
+#         )
+#         tokenizer.pad_token = tokenizer.eos_token
+#         print("this is in models.py")
+#         return TextModelHelper(model, tokenizer, cur_dataset, zero_shot)
 
 
 

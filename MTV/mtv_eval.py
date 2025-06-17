@@ -51,6 +51,7 @@ def eval_reinforce(args):
 
         print("[INFO] Loading model...")
         model_helper = load_model(args.model_name, args.data_name, zero_shot=args.zero_shot)
+        pdb.set_trace()
         f.write(f"[INFO] Model '{args.model_name}' loaded successfully!\n")
         f.flush()
         

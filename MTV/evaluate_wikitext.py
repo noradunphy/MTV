@@ -24,6 +24,7 @@ def split_at_sentence_boundary(text, tokenizer, target_length):
     return text[:len(text)//2], text[len(text)//2:]
 
 def sanity_check_wikitext(model_name="text", num_lines=50):
+    print(f"Evaluating {model_name} on {num_lines} lines of WikiText-2")
     # ——— Model setup (same as in recompute_perplexities) ———
     model_helper = load_model(model_name, "wikitext-2-raw-v1", zero_shot=True)
     
@@ -41,13 +42,15 @@ def sanity_check_wikitext(model_name="text", num_lines=50):
         f.write("=" * 60 + "\n\n")
 
         ppls = []
+        print(f"Evaluating {len(lines)} lines")
         for i, line in enumerate(lines, start=1):
             # Split line into prefix and suffix at natural boundaries
-            prefix_text, suffix_text = split_at_sentence_boundary(line, tokenizer, len(line)//2)
+            prefix_text = ""
+            suffix_text = line
             
             # Tokenize prefix
             prefix_enc = tokenizer(prefix_text, return_tensors="pt", add_special_tokens=False)
-            prefix_ids = prefix_enc["input_ids"].to("cuda")
+            prefix_ids = prefix_enc["input_ids"].to("cuda").long()
             
             # Tokenize suffix for length reference
             suffix_enc = tokenizer(suffix_text, return_tensors="pt", add_special_tokens=False)
@@ -56,7 +59,7 @@ def sanity_check_wikitext(model_name="text", num_lines=50):
             # Build context for generation
             context_input = {
                 "input_ids": prefix_ids,
-                "attention_mask": torch.ones_like(prefix_ids)
+                "attention_mask": torch.ones_like(prefix_ids, dtype=torch.long)
             }
 
             # Generate raw logits for the suffix length
