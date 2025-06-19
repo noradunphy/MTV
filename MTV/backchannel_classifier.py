@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from tqdm import tqdm
 import time
 from datetime import datetime
+from download_swda import clean_swda_text
 import os
 
 class BackchannelDataset(Dataset):
@@ -31,7 +32,7 @@ class BackchannelDataset(Dataset):
         
         # Tokenize the text
         encoding = self.tokenizer(
-            item['text'],
+            clean_swda_text(item['text']),
             padding='max_length',
             truncation=True,
             max_length=128,
@@ -76,10 +77,14 @@ class BackchannelClassifier(nn.Module):
         logits = self.classifier(pooled_output)
         return logits
 
-    def classify_utterance(self, utterance, device="cuda"):
+    def classify_utterance(self, utterance, device="cuda", pre_cleaned=False):
         """Classify a single utterance as backchannel (1) or not (0)."""
         self.eval()
         with torch.no_grad():
+            # Clean the utterance text if needed
+            if not pre_cleaned:
+                utterance = clean_swda_text(utterance)
+            
             # Tokenize the utterance
             encoded = self.tokenizer(
                 utterance,

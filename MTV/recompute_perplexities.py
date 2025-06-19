@@ -5,9 +5,6 @@ from tqdm import tqdm
 import torch
 import argparse
 import numpy as np
-from backchannel_classifier import load_classifier as load_backchannel_classifier
-from declarative_classifier import load_classifier as load_declarative_classifier
-from statement_opinion_classifier import load_classifier as load_statement_opinion_classifier
 import json
 import os
 import pandas as pd
@@ -43,11 +40,10 @@ def recompute_perplexities(args):
     model_helper = load_model(args.model_name, args.data_name, zero_shot=args.zero_shot)
     print(f"[INFO] Model '{args.model_name}' loaded successfully!")
     
-    print("[INFO] Loading classifiers...")
-    backchannel_classifier = load_backchannel_classifier()
-    declarative_classifier = load_declarative_classifier()
-    statement_opinion_classifier = load_statement_opinion_classifier()
-    print("[INFO] Classifiers loaded!")
+    # Load the classifier for the target dialogue act
+    print("[INFO] Loading classifier...")
+    classifier, classify_func = get_classifier(args.dialogue_act or 'b', contextual=False)
+    print("[INFO] Classifier loaded!")
     
     # Load saved activations and bernoullis
     print("[INFO] Loading saved activations and bernoullis...")
@@ -111,25 +107,9 @@ def recompute_perplexities(args):
         clean_out = extract_first_turn(clean_out)
         interv_out = extract_first_turn(interv_out)
         
-        # Classify generated responses based on target act
-        if target_act == 'sd':
-            # Use declarative classifier for sd acts
-            clean_is_declarative = declarative_classifier.classify_utterance(clean_out)
-            interv_is_declarative = declarative_classifier.classify_utterance(interv_out)
-            clean_act = 'sd' if clean_is_declarative else 'o'
-            interv_act = 'sd' if interv_is_declarative else 'o'
-        elif target_act == 'sv':
-            # Use statement/opinion classifier for sv acts
-            clean_is_statement = statement_opinion_classifier.classify_utterance(clean_out)
-            interv_is_statement = statement_opinion_classifier.classify_utterance(interv_out)
-            clean_act = 'sv' if clean_is_statement else 'o'
-            interv_act = 'sv' if interv_is_statement else 'o'
-        else:
-            # Use backchannel classifier for other acts
-            clean_is_backchannel = backchannel_classifier.classify_utterance(clean_out)
-            interv_is_backchannel = backchannel_classifier.classify_utterance(interv_out)
-            clean_act = 'b' if clean_is_backchannel else 'o'
-            interv_act = 'b' if interv_is_backchannel else 'o'
+        # Use the generalizable classifier function
+        clean_act = classify_func(clean_out)
+        interv_act = classify_func(interv_out)
             
         clean_pred_acts.append(clean_act)
         interv_pred_acts.append(interv_act)

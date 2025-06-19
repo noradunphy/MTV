@@ -12,7 +12,8 @@ from datetime import datetime
 from download_swda import clean_swda_text
 import os
 
-class DeclarativeDataset(Dataset):
+
+class AgreementDataset(Dataset):
     def __init__(self, split="train"):
         self.dataset = load_dataset("swda", trust_remote_code=True)[split]
         self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
@@ -27,8 +28,8 @@ class DeclarativeDataset(Dataset):
         damsl_idx = item['damsl_act_tag']
         tag = self.dataset.features['damsl_act_tag'].names[damsl_idx]
         
-        # Convert to binary label: 1 for declarative (sd), 0 for non-declarative
-        label = 1 if tag == 'sd' else 0
+        # Convert to binary label: 1 for agree/accept (aa), 0 for non-agree/accept
+        label = 1 if tag == 'aa' else 0
         
         # Tokenize the text
         encoding = self.tokenizer(
@@ -45,7 +46,7 @@ class DeclarativeDataset(Dataset):
             'label': torch.tensor(label)
         }
 
-class DeclarativeClassifier(nn.Module):
+class AgreementClassifier(nn.Module):
     def __init__(self, hidden_size=768, model_path=None):
         super().__init__()
         self.bert = AutoModel.from_pretrained("bert-base-uncased")
@@ -78,7 +79,7 @@ class DeclarativeClassifier(nn.Module):
         return logits
 
     def classify_utterance(self, utterance, device="cuda", pre_cleaned=False):
-        """Classify a single utterance as declarative (1) or not (0)."""
+        """Classify a single utterance as agreement/accept (1) or not (0)."""
         self.eval()
         with torch.no_grad():
             # Clean the utterance text if needed
@@ -104,7 +105,7 @@ class DeclarativeClassifier(nn.Module):
             
             return predicted.item()
 
-def train_model(model, train_loader, val_loader, num_epochs=3, device="cuda", save_path="best_declarative_model.pth"):
+def train_model(model, train_loader, val_loader, num_epochs=3, device="cuda", save_path="best_agreement_model.pth"):
     criterion = nn.BCELoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=2e-5)
 
@@ -203,14 +204,14 @@ def train_model(model, train_loader, val_loader, num_epochs=3, device="cuda", sa
     print(f"\nTraining completed in {total_time/60:.2f} minutes")
     print(f"Best validation accuracy: {best_val_acc:.2f}%")
 
-def train_and_save_classifier(save_path="best_declarative_model.pth", num_epochs=3):
-    """Train the declarative classifier and save it for later use."""
+def train_and_save_classifier(save_path="best_agreement_model.pth", num_epochs=3):
+    """Train the agreement classifier and save it for later use."""
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
 
     print("\nLoading datasets...")
-    train_dataset = DeclarativeDataset(split="train")
-    test_dataset = DeclarativeDataset(split="test")
+    train_dataset = AgreementDataset(split="train")
+    test_dataset = AgreementDataset(split="test")
 
     print("\nCreating dataloaders...")
     train_loader = DataLoader(
@@ -234,17 +235,17 @@ def train_and_save_classifier(save_path="best_declarative_model.pth", num_epochs
     )
 
     print("\nInitializing model...")
-    model = DeclarativeClassifier().to(device)
+    model = AgreementClassifier().to(device)
 
     # Train model
     train_model(model, train_loader, test_loader, num_epochs=num_epochs, device=device, save_path=save_path)
 
-def load_classifier(model_path="best_declarative_model.pth"):
-    """Load a trained declarative classifier for inference."""
+def load_classifier(model_path="best_agreement_model.pth"):
+    """Load a trained agreement classifier for inference."""
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # Initialize and load the model
-    model = DeclarativeClassifier(model_path=model_path).to(device)
+    model = AgreementClassifier(model_path=model_path).to(device)
     model.eval()
     
     return model

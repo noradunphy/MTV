@@ -18,15 +18,14 @@ from declarative_classifier import load_classifier as load_declarative_classifie
 from statement_opinion_classifier import load_classifier as load_statement_opinion_classifier
 
 
-def eval_reinforce(args):
+def eval_reinforce_resume(args):
     # Create output file
-    resume_suffix = "_resume" if args.resume else ""
-    output_file_json = f"eval_results_{args.model_name}_{args.data_name}_{args.dialogue_act if args.dialogue_act else 'all'}_maxlen{args.max_dialogue_length}{resume_suffix}.json"
+    output_file_json = f"eval_results_{args.model_name}_{args.data_name}_{args.dialogue_act if args.dialogue_act else 'all'}_maxlen{args.max_dialogue_length}_resume.json"
     
     # Initialize results list to store data for each example
     results = []
     
-    print(f"Evaluation Results for {args.model_name} on {args.data_name}")
+    print(f"Resuming Evaluation Results for {args.model_name} on {args.data_name}")
     print(f"Target dialogue act: {args.dialogue_act if args.dialogue_act else 'all'}")
 
     print(f"[INFO] Loading training data from {args.train_path} for act '{args.dialogue_act}'...")
@@ -43,10 +42,6 @@ def eval_reinforce(args):
         val_dataset = [ex for ex in val_dataset if len(ex.get('text', '').split()) + len(ex.get('response', '').split()) < args.max_dialogue_length]
         print(f"[INFO] After filtering (max length {args.max_dialogue_length}): {len(train_dataset)} training examples, {len(val_dataset)} validation examples")
 
-    activation_data = train_dataset
-    reinforce_data = random.sample(train_dataset, min(100, len(train_dataset)))
-    eval_data = val_dataset[:min(50, len(val_dataset))]
-
     print("[INFO] Loading model...")
     model_helper = load_model(args.model_name, args.data_name, zero_shot=args.zero_shot)
     print(f"[INFO] Model '{args.model_name}' loaded successfully!")
@@ -56,63 +51,15 @@ def eval_reinforce(args):
     classifier, classify_func = get_classifier(args.dialogue_act, contextual=False)
     print("[INFO] Classifier loaded!")
     
+    # Load existing activations and intervention locations
     if args.cur_mode != "clean":
-        if args.resume:
-            # Load existing activations and intervention locations
-            print(f"[INFO] Resuming: Loading existing activations from {args.activation_path}...")
-            mean_activations = torch.load(args.activation_path)
-            print(f"[INFO] Loaded activations with shape: {mean_activations.shape}")
-            
-            print(f"[INFO] Resuming: Loading existing intervention locations from {args.bernoullis_path}...")
-            intervention_locations = torch.load(args.bernoullis_path)
-            print(f"[INFO] Loaded {len(intervention_locations)} intervention locations.")
-        else:
-            print("[INFO] Computing mean activations...")
-            mean_activations = get_last_mean_head_activations(activation_data, model_helper, N_TRIALS = args.num_example, shot=args.num_shot)
-            print("[INFO] Mean activations computed!")
-
-            print("[INFO] Saving activations...")
-            activation_save_path = args.activation_path
-            if args.dialogue_act is not None:
-                activation_save_path = f"{activation_save_path}_{args.dialogue_act}.pt"
-            torch.save(mean_activations, activation_save_path)
-            mean_activations = torch.load(activation_save_path)
-            print(f"[INFO] Activations saved and loaded from {activation_save_path}!")
-
-            print("[INFO] Starting reinforcement learning...")
-            
-            # Debug information
-            print(f"[DEBUG] Model type: {type(model_helper).__name__}")
-            print(f"[DEBUG] Number of layers: {model_helper.model_config['n_layers']}")
-            print(f"[DEBUG] Number of heads: {model_helper.model_config['n_heads']}")
-            print(f"[DEBUG] Mean activation shape: {mean_activations.shape}")
-
-            bernoullis = reinforce(mean_activations, model_helper, reinforce_data, eval_data)
-            print("[INFO] Reinforcement learning completed!")
-
-            best_heads = (999, None)
-            print("[INFO] Sampling best intervention locations...")
-            for i in range(10):
-                print(f"[DEBUG] Sampling intervention set {i+1}/10...")
-                sigmoid_tensor = torch.stack([torch.sigmoid(bernoulli).clamp(min=0, max=1) for bernoulli in bernoullis])
-                if args.model_name == "idefics2":
-                    sigmoid_tensor = torch.nn.functional.threshold(sigmoid_tensor, 0.8, 0)
-                prob_dist = torch.distributions.Bernoulli(sigmoid_tensor)
-                sampled = prob_dist.sample()
-                intervention_locations = reinforce_intervention_location(sampled)
-                cur_heads_loss = validate_reinforce(model_helper, bernoullis, 1e-3, mean_activations, train_dataset[:min(50, len(train_dataset))], 0, sampled=sampled)
-                print(f"[DEBUG] Intervention set {i+1} validation loss: {cur_heads_loss}")
-                if cur_heads_loss < best_heads[0]:
-                    best_heads = (cur_heads_loss, intervention_locations)
-            bernoullis_save_path = args.bernoullis_path
-            if args.dialogue_act is not None:
-                bernoullis_save_path = f"{bernoullis_save_path}_{args.dialogue_act}.pt"
-            torch.save(best_heads[1], bernoullis_save_path)
-            intervention_locations = best_heads[1]
-            print(f"[INFO] Best intervention locations saved to {bernoullis_save_path}.")
-
-            intervention_locations = torch.load(bernoullis_save_path)
-            print(f"[INFO] Loaded {len(intervention_locations)} intervention locations.")
+        print(f"[INFO] Loading existing activations from {args.activation_path}...")
+        mean_activations = torch.load(args.activation_path)
+        print(f"[INFO] Loaded activations with shape: {mean_activations.shape}")
+        
+        print(f"[INFO] Loading existing intervention locations from {args.bernoullis_path}...")
+        intervention_locations = torch.load(args.bernoullis_path)
+        print(f"[INFO] Loaded {len(intervention_locations)} intervention locations.")
     else:
         mean_activations = None
         intervention_locations = None
@@ -263,15 +210,14 @@ if __name__ == "__main__":
     parser.add_argument("--eval_num_shot", type=int, default=0)
     parser.add_argument("--max_token", type=int, default=10)
     parser.add_argument("--max_dialogue_length", type=int, default=100, help="Maximum dialogue length (in words) for filtering SWDA data")
-    parser.add_argument("--bernoullis_path", type=str, default=None)
+    parser.add_argument("--bernoullis_path", type=str, required=True, help="Path to existing bernoullis file")
+    parser.add_argument("--activation_path", type=str, required=True, help="Path to existing activations file")
     parser.add_argument("--is_eval", type=bool, default=False)
     parser.add_argument("--result_folder", type=str, default=None)
     parser.add_argument("--cur_mode", type=str, default="interv")
     parser.add_argument("--experiment_name", type=str, default="")
-    parser.add_argument("--activation_path", type=str, default=None)
     parser.add_argument("--dialogue_act", type=str, default=None, help="Target dialogue act (e.g., 'sd')")
     parser.add_argument("--zero_shot", type=bool, default=False)
-    parser.add_argument("--resume", action="store_true", help="Resume evaluation using existing bernoullis and activations files")
 
     args = parser.parse_args()
 
@@ -279,11 +225,4 @@ if __name__ == "__main__":
     if args.data_name == "swda" and (args.model_name is None or args.model_name.lower() == "none"):
         args.model_name = "text"
 
-    # If resuming, require the file paths
-    if args.resume:
-        if args.bernoullis_path is None or args.activation_path is None:
-            print("ERROR: When using --resume, both --bernoullis_path and --activation_path must be specified")
-            exit(1)
-
-    eval_reinforce(args)
-
+    eval_reinforce_resume(args) 

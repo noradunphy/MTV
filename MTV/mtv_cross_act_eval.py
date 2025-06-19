@@ -76,13 +76,21 @@ def eval_cross_act_intervention(args):
             # Use model_helper.format_func() to properly format input, even in zero-shot mode
             text, image_list, target_out, question_id = model_helper.format_func(val_dataset, item, num_shot=0)  # num_shot=0 for zero-shot
             new_input = model_helper.insert_image(text, image_list)
+            
+            # Debug: Check if target_out is empty
+            if not target_out or target_out.strip() == "":
+                f.write(f"[WARNING] Empty target output for example {idx+1}. Skipping perplexity computation.\n")
+                f.flush()
+                target_out = " "  # Use a space as fallback to avoid tokenizer error
+            
             clean_out, interv_out, clean_ppl, interv_ppl = fv_intervention_natural_text(
                 new_input, 
                 model_helper, 
                 max_new_tokens=args.max_token, 
                 return_item=args.cur_mode, 
                 intervention_locations=intervention_locations, 
-                avg_activations=mean_activations
+                avg_activations=mean_activations,
+                target_output=target_out
             )
 
             # Track perplexities if computed

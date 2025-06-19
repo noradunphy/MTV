@@ -629,3 +629,139 @@ def eval_vqa(cur_dataset, results_path, answers):
     vqa_scorer = VQAEval(vqa, results, n=2)
     vqa_scorer.evaluate()
     print(vqa_scorer.accuracy)
+
+
+def get_classifier(dialogue_act, contextual=False):
+    """
+    Load the appropriate classifier for a given dialogue act.
+    
+    Parameters:
+    dialogue_act: The dialogue act to classify (e.g., 'sd', 'sv', 'b', 'aa', '%', etc.)
+    contextual: Whether to use contextual classifiers that consider previous utterance
+    
+    Returns:
+    classifier: The loaded classifier model
+    classify_func: A function that takes (utterance, previous_utterance=None) and returns predicted act
+    """
+    
+    # Define mapping from dialogue acts to classifier types
+    act_to_classifier = {
+        'sd': 'declarative',
+        'sv': 'statement_opinion', 
+        'b': 'backchannel',
+        'aa': 'agreement',
+        '%': 'abandoned',
+        # Add more mappings as needed
+    }
+    
+    # Get classifier type or default to backchannel for unknown acts
+    classifier_type = act_to_classifier.get(dialogue_act, 'backchannel')
+    
+    if contextual:
+        # Load contextual classifiers (only available for sd, sv, and b)
+        if classifier_type == 'declarative':
+            from contextual_sd_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'sd' if classifier.classify_utterance(utterance, previous_utterance, pre_cleaned=True) else 'o'
+        elif classifier_type == 'statement_opinion':
+            from contextual_sv_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'sv' if classifier.classify_utterance(utterance, previous_utterance, pre_cleaned=True) else 'o'
+        elif classifier_type == 'backchannel':
+            from contextual_backchannel_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'b' if classifier.classify_utterance(utterance, previous_utterance, pre_cleaned=True) else 'o'
+        else:
+            # For agreement and abandoned, fall back to binary classifiers since contextual versions don't exist
+            print(f"Warning: Contextual classifier not available for {dialogue_act}, using binary classifier instead")
+            if classifier_type == 'agreement':
+                from agreement_classifier import load_classifier
+                classifier = load_classifier()
+                def classify_func(utterance, previous_utterance=""):
+                    return 'aa' if classifier.classify_utterance(utterance) else 'o'
+            elif classifier_type == 'abandoned':
+                from abandoned_classifier import load_classifier
+                classifier = load_classifier()
+                def classify_func(utterance, previous_utterance=""):
+                    return '%' if classifier.classify_utterance(utterance) else 'o'
+            else:
+                # Fallback to backchannel
+                from backchannel_classifier import load_classifier
+                classifier = load_classifier()
+                def classify_func(utterance, previous_utterance=""):
+                    return 'b' if classifier.classify_utterance(utterance) else 'o'
+    else:
+        # Load binary classifiers
+        if classifier_type == 'declarative':
+            from declarative_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'sd' if classifier.classify_utterance(utterance) else 'o'
+        elif classifier_type == 'statement_opinion':
+            from statement_opinion_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'sv' if classifier.classify_utterance(utterance) else 'o'
+        elif classifier_type == 'backchannel':
+            from backchannel_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'b' if classifier.classify_utterance(utterance) else 'o'
+        elif classifier_type == 'agreement':
+            from agreement_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'aa' if classifier.classify_utterance(utterance) else 'o'
+        elif classifier_type == 'abandoned':
+            from abandoned_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return '%' if classifier.classify_utterance(utterance) else 'o'
+        else:
+            # Fallback to backchannel
+            from backchannel_classifier import load_classifier
+            classifier = load_classifier()
+            def classify_func(utterance, previous_utterance=""):
+                return 'b' if classifier.classify_utterance(utterance) else 'o'
+    
+    return classifier, classify_func
+
+
+def classify_dialogue_act(utterance, target_act, classifiers_cache=None, previous_utterance="", contextual=False):
+    """
+    Classify a single utterance for a specific target dialogue act.
+    
+    Parameters:
+    utterance: The utterance to classify
+    target_act: The target dialogue act to check for ('sd', 'sv', 'b', 'aa', '%', or 'o')
+    classifiers_cache: Optional dict to cache loaded classifiers
+    previous_utterance: Previous turn for contextual classifiers
+    contextual: Whether to use contextual classifiers
+    
+    Returns:
+    predicted_act: The predicted dialogue act ('sd', 'sv', 'b', 'aa', '%', or 'o')
+    """
+    
+    # Initialize cache if not provided
+    if classifiers_cache is None:
+        classifiers_cache = {}
+    
+    # Check if classifier is already cached
+    cache_key = f"{target_act}_{'contextual' if contextual else 'binary'}"
+    if cache_key not in classifiers_cache:
+        classifier, classify_func = get_classifier(target_act, contextual=contextual)
+        classifiers_cache[cache_key] = (classifier, classify_func)
+    
+    # Use cached classifier
+    classifier, classify_func = classifiers_cache[cache_key]
+    
+    # Classify the utterance
+    if contextual:
+        predicted_act = classify_func(utterance, previous_utterance)
+    else:
+        predicted_act = classify_func(utterance)
+    
+    return predicted_act
