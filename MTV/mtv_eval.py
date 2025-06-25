@@ -43,6 +43,11 @@ def eval_reinforce(args):
         val_dataset = [ex for ex in val_dataset if len(ex.get('text', '').split()) + len(ex.get('response', '').split()) < args.max_dialogue_length]
         print(f"[INFO] After filtering (max length {args.max_dialogue_length}): {len(train_dataset)} training examples, {len(val_dataset)} validation examples")
 
+    # Randomly sample validation examples if max_val_examples is specified
+    if args.max_val_examples is not None:
+        val_dataset = random.sample(val_dataset, min(args.max_val_examples, len(val_dataset)))
+        print(f"[INFO] Randomly sampled {len(val_dataset)} validation examples for evaluation")
+
     activation_data = train_dataset
     reinforce_data = random.sample(train_dataset, min(100, len(train_dataset)))
     eval_data = val_dataset[:min(50, len(val_dataset))]
@@ -272,6 +277,7 @@ if __name__ == "__main__":
     parser.add_argument("--dialogue_act", type=str, default=None, help="Target dialogue act (e.g., 'sd')")
     parser.add_argument("--zero_shot", type=bool, default=False)
     parser.add_argument("--resume", action="store_true", help="Resume evaluation using existing bernoullis and activations files")
+    parser.add_argument("--max_val_examples", type=int, default=250, help="Maximum number of validation examples to evaluate on (randomly sampled)")
 
     args = parser.parse_args()
 

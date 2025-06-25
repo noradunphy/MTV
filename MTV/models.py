@@ -427,7 +427,7 @@ class TextModelHelper(ModelHelper):
             use_cache=False,
             output_scores=return_scores,
             return_dict_in_generate=effective_return_dict,
-            **generate_kwargs,               # e.g. you could override do_sample, num_beams, etc.
+            **generate_kwargs,              
         )
 
         
