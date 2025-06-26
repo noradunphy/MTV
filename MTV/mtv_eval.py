@@ -17,17 +17,62 @@ from backchannel_classifier import load_classifier as load_backchannel_classifie
 from declarative_classifier import load_classifier as load_declarative_classifier
 from statement_opinion_classifier import load_classifier as load_statement_opinion_classifier
 
+def build_reference_sets(train_dataset, dialogue_acts, size_per_act, seed=42):
+    """
+    Build reference sets of utterances for each dialogue act from training data.
+    
+    Args:
+        train_dataset: List of training examples
+        dialogue_acts: List of dialogue acts to collect references for
+        size_per_act: Number of reference utterances to sample per act
+        seed: Random seed for reproducibility
+        
+    Returns:
+        Dict mapping dialogue acts to lists of reference utterances
+    """
+    random.seed(seed)
+    
+    # Group training examples by dialogue act
+    act_to_examples = {}
+    for ex in train_dataset:
+        act = ex.get('dialog_act', 'o')
+        if act not in act_to_examples:
+            act_to_examples[act] = []
+        act_to_examples[act].append(ex)
+    
+    # Sample reference utterances for each act
+    ref_sets = {}
+    for act in dialogue_acts:
+        if act not in act_to_examples or not act_to_examples[act]:
+            print(f"[WARNING] No training examples found for act '{act}', using empty reference set")
+            ref_sets[act] = []
+            continue
+            
+        # Sample with replacement if we need more than we have
+        examples = random.choices(act_to_examples[act], k=size_per_act) if size_per_act > len(act_to_examples[act]) else random.sample(act_to_examples[act], size_per_act)
+        ref_sets[act] = [ex.get('response', '') for ex in examples]
+        
+    return ref_sets
 
 def eval_reinforce(args):
     # Create output file
     resume_suffix = "_resume" if args.resume else ""
-    output_file_json = f"eval_results_{args.model_name}_{args.data_name}_{args.dialogue_act if args.dialogue_act else 'all'}_maxlen{args.max_dialogue_length}{resume_suffix}.json"
+    output_file_json = f"eval_results_{args.model_name}_{args.data_name}_{args.dialogue_act if args.dialogue_act else 'all'}_default_config.json"
     
     # Initialize results list to store data for each example
     results = []
     
     print(f"Evaluation Results for {args.model_name} on {args.data_name}")
     print(f"Target dialogue act: {args.dialogue_act if args.dialogue_act else 'all'}")
+
+    # Open JSON file for incremental writing
+    with open(output_file_json, 'w') as f:
+        # Write the initial structure with empty results
+        json.dump({
+            "summary": {},  # Will be updated at the end
+            "examples": []
+        }, f, indent=2)
+        f.write('\n')  # Add newline for easier reading
 
     print(f"[INFO] Loading training data from {args.train_path} for act '{args.dialogue_act}'...")
     train_dataset = open_data(args.data_name, args.train_path, getattr(args, 'dialogue_act', None))
@@ -47,6 +92,21 @@ def eval_reinforce(args):
     if args.max_val_examples is not None:
         val_dataset = random.sample(val_dataset, min(args.max_val_examples, len(val_dataset)))
         print(f"[INFO] Randomly sampled {len(val_dataset)} validation examples for evaluation")
+
+    # Build reference sets for perplexity computation if requested
+    ref_utterances = None
+    if args.ppl_reference_size > 0:
+        print(f"[INFO] Building reference sets with {args.ppl_reference_size} utterances per dialogue act...")
+        dialogue_acts = ['sd', 'sv', 'b', 'aa', '%', 'o']  # Standard SWDA acts
+        ref_utterances = build_reference_sets(
+            train_dataset, 
+            dialogue_acts,
+            args.ppl_reference_size,
+            seed=args.seed if hasattr(args, 'seed') else 42
+        )
+        print(f"[INFO] Built reference sets for {len(ref_utterances)} dialogue acts")
+        for act, refs in ref_utterances.items():
+            print(f"  • {act}: {len(refs)} references")
 
     activation_data = train_dataset
     reinforce_data = random.sample(train_dataset, min(100, len(train_dataset)))
@@ -148,41 +208,51 @@ def eval_reinforce(args):
             print(f"[WARNING] Empty target output for example {idx+1}. Skipping perplexity computation.")
             target_out = " "  # Use a space as fallback to avoid tokenizer error
         
-        clean_out, interv_out, clean_ppl, interv_ppl = fv_intervention_natural_text(new_input, model_helper, max_new_tokens=args.max_token, return_item=args.cur_mode, intervention_locations=intervention_locations, avg_activations=mean_activations, target_output=target_out)
+        clean_out, interv_out, clean_ppl, interv_ppl = fv_intervention_natural_text(
+            new_input, 
+            model_helper, 
+            max_new_tokens=args.max_token, 
+            return_item=args.cur_mode, 
+            intervention_locations=intervention_locations, 
+            avg_activations=mean_activations, 
+            target_output=target_out,
+            ref_utterances=ref_utterances
+        )
 
-        # Track perplexities if computed
-        if clean_ppl is not None:
-            clean_perplexities.append(clean_ppl)
-        if interv_ppl is not None:
-            interv_perplexities.append(interv_ppl)
+        # Track perplexities and determine predicted acts
+        if isinstance(clean_ppl, dict):
+            # Using reference sets - find act with lowest perplexity
+            clean_act = min(clean_ppl.items(), key=lambda x: x[1])[0] if clean_ppl else 'o'
+            if args.cur_mode in ("interv", "both"):
+                interv_act = min(interv_ppl.items(), key=lambda x: x[1])[0] if interv_ppl else 'o'
+        else:
+            # Original single-target behavior
+            if clean_ppl is not None:
+                clean_perplexities.append(clean_ppl)
+            if interv_ppl is not None:
+                interv_perplexities.append(interv_ppl)
+                
+            # Use classifier for act prediction
+            clean_out = extract_first_turn(clean_out)
+            clean_act = classify_func(clean_out)
+            
+            if args.cur_mode in ("interv", "both"):
+                interv_out = extract_first_turn(interv_out)
+                interv_act = classify_func(interv_out)
 
-        # Get target dialog act
+        # Get target dialog act and check correctness
         target_act = item.get('dialog_act', 'o')
         target_acts.append(target_act)
-
-        # Extract first turn response from model outputs
-        clean_out = extract_first_turn(clean_out)
-        interv_out = extract_first_turn(interv_out)
-
-        # Use the generalizable classifier function
-        clean_act = classify_func(clean_out)
-        interv_act = classify_func(interv_out)
-
-        clean_pred_acts.append(clean_act)
-        interv_pred_acts.append(interv_act)
-
-        # Store answers for evaluation
-        interv_answers.append({"answer": interv_out, "question_id": question_id})
-        clean_answers.append({"answer": clean_out, "question_id": question_id})
-
+        
         clean_correct = int(clean_act == target_act)
-        interv_correct = int(interv_act == target_act)
         clean_count += clean_correct
-        interv_count += interv_correct
         
-        # Calculate perplexity difference
-        ppl_diff = interv_ppl - clean_ppl if (clean_ppl is not None and interv_ppl is not None) else None
-        
+        if args.cur_mode in ("interv", "both"):
+            interv_correct = int(interv_act == target_act)
+            interv_count += interv_correct
+        else:
+            interv_correct = None
+            
         # Store results for this example
         example_data = {
             "example_id": idx + 1,
@@ -193,16 +263,53 @@ def eval_reinforce(args):
             "target_dialogue_act": target_act,
             "clean_output": clean_out,
             "clean_dialogue_act": clean_act,
-            "clean_correct": clean_correct,
-            "clean_perplexity": clean_ppl,
-            "intervention_output": interv_out,
-            "intervention_dialogue_act": interv_act,
-            "intervention_correct": interv_correct,
-            "intervention_perplexity": interv_ppl,
-            "perplexity_difference": ppl_diff
+            "clean_correct": clean_correct
         }
         
-        results.append(example_data)
+        # Add perplexity data based on method used
+        if isinstance(clean_ppl, dict):
+            example_data.update({
+                "clean_perplexities_by_act": clean_ppl,
+                "clean_chosen_act": clean_act,
+                "clean_chosen_act_perplexity": clean_ppl.get(clean_act)
+            })
+        else:
+            example_data["clean_perplexity"] = clean_ppl
+            
+        # Add intervention results if applicable
+        if args.cur_mode in ("interv", "both"):
+            example_data.update({
+                "intervention_output": interv_out,
+                "intervention_dialogue_act": interv_act,
+                "intervention_correct": interv_correct
+            })
+            
+            if isinstance(interv_ppl, dict):
+                example_data.update({
+                    "intervention_perplexities_by_act": interv_ppl,
+                    "intervention_chosen_act": interv_act,
+                    "intervention_chosen_act_perplexity": interv_ppl.get(interv_act)
+                })
+            else:
+                example_data["intervention_perplexity"] = interv_ppl
+                
+            if clean_ppl is not None and interv_ppl is not None:
+                if isinstance(clean_ppl, dict) and isinstance(interv_ppl, dict):
+                    # Compare chosen act perplexities
+                    clean_best_ppl = clean_ppl.get(clean_act)
+                    interv_best_ppl = interv_ppl.get(interv_act)
+                    if clean_best_ppl is not None and interv_best_ppl is not None:
+                        example_data["perplexity_difference"] = interv_best_ppl - clean_best_ppl
+                else:
+                    example_data["perplexity_difference"] = interv_ppl - clean_ppl
+        
+        # Write the current example to the JSON file
+        with open(output_file_json, 'r+') as f:
+            data = json.load(f)
+            data["examples"].append(example_data)
+            f.seek(0)
+            json.dump(data, f, indent=2)
+            f.truncate()
 
     print(f"\n[INFO] Evaluation complete. Clean correct: {clean_count}, Interv correct: {interv_count}, Total: {len(val_dataset)}")
     
@@ -217,15 +324,35 @@ def eval_reinforce(args):
         "num_shot": args.num_shot,
         "eval_num_shot": args.eval_num_shot,
         "max_tokens": args.max_token,
-        "clean_accuracy": clean_count / len(val_dataset) if len(val_dataset) > 0 else 0,
-        "intervention_accuracy": interv_count / len(val_dataset) if len(val_dataset) > 0 else 0,
-        "clean_perplexity_mean": np.mean(clean_perplexities) if clean_perplexities else None,
-        "clean_perplexity_std": np.std(clean_perplexities) if clean_perplexities else None,
-        "intervention_perplexity_mean": np.mean(interv_perplexities) if interv_perplexities else None,
-        "intervention_perplexity_std": np.std(interv_perplexities) if interv_perplexities else None,
-        "perplexity_difference_mean": np.mean(interv_perplexities) - np.mean(clean_perplexities) 
-                                      if (clean_perplexities and interv_perplexities) else None
+        "ppl_reference_size": args.ppl_reference_size,
+        "clean_accuracy": clean_count / len(val_dataset) if len(val_dataset) > 0 else 0
     }
+    
+    if args.cur_mode in ("interv", "both"):
+        summary["intervention_accuracy"] = interv_count / len(val_dataset) if len(val_dataset) > 0 else 0
+    
+    # Add perplexity statistics if using original method
+    if not isinstance(clean_ppl, dict) and clean_perplexities:
+        summary.update({
+            "clean_perplexity_mean": np.mean(clean_perplexities),
+            "clean_perplexity_std": np.std(clean_perplexities)
+        })
+        if args.cur_mode in ("interv", "both") and interv_perplexities:
+            summary.update({
+                "intervention_perplexity_mean": np.mean(interv_perplexities),
+                "intervention_perplexity_std": np.std(interv_perplexities),
+                "perplexity_difference_mean": np.mean(interv_perplexities) - np.mean(clean_perplexities)
+            })
+
+    # Update the summary in the JSON file
+    with open(output_file_json, 'r+') as f:
+        data = json.load(f)
+        data["summary"] = summary
+        f.seek(0)
+        json.dump(data, f, indent=2)
+        f.truncate()
+
+    print(f"[INFO] Evaluation results saved to {output_file_json}")
 
     if args.is_eval:
         if args.data_name == "swda":
@@ -244,17 +371,6 @@ def eval_reinforce(args):
                     summary["clean_score"] = clean_count/len(val_dataset)
                 else:
                     eval_vqa(f"{args.data_name}_val", args.result_folder + f"{args.experiment_name}_clean.json", clean_answers)
-
-    # Save results to JSON
-    output_data = {
-        "summary": summary,
-        "examples": results
-    }
-    
-    with open(output_file_json, 'w') as f:
-        json.dump(output_data, f, indent=2)
-
-    print(f"[INFO] Evaluation results saved to {output_file_json}")
 
 
 if __name__ == "__main__":
@@ -278,6 +394,8 @@ if __name__ == "__main__":
     parser.add_argument("--zero_shot", type=bool, default=False)
     parser.add_argument("--resume", action="store_true", help="Resume evaluation using existing bernoullis and activations files")
     parser.add_argument("--max_val_examples", type=int, default=250, help="Maximum number of validation examples to evaluate on (randomly sampled)")
+    parser.add_argument("--ppl_reference_size", type=int, default=0, help="Number of reference utterances per dialogue act for perplexity computation (0 to use original method)")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
 
     args = parser.parse_args()
 

@@ -139,10 +139,10 @@ def process_all_eval_results():
 # Example usage for a single file:
 if __name__ == "__main__":
     # Process all eval_results_text files
-    process_all_eval_results()
+    # process_all_eval_results()
     
     # Uncomment below for single file processing:
-    # json_to_excel(
-    #     json_path="eval_results_text_swda_sv_maxlen100_resume.json",
-    #     excel_path="eval_results_text_swda_sv_maxlen100_resume.xlsx"
-    # )
+    json_to_excel(
+        json_path="eval_results_text_swda_sd_default_config.json",
+        excel_path="eval_results_text_swda_sd_default_config.xlsx"
+    )

@@ -535,6 +535,49 @@ def last_replace_activation_w_avg(layer_head_token_pairs, avg_activations, model
     return rep_act
 
 
+def compute_avg_perplexities(
+    model_input,
+    model_helper,
+    ref_utterances,
+    intervention_fn=None
+):
+    """
+    Compute average perplexities for each dialogue act using reference utterances.
+    
+    Args:
+        model_input: Tokenized input to model
+        model_helper: ModelHelper instance
+        ref_utterances: Dict mapping dialogue acts to lists of reference utterances
+        intervention_fn: Optional intervention function
+        
+    Returns:
+        Dict mapping dialogue acts to average perplexities
+    """
+    avg_perplexities = {}
+    
+    for act, references in ref_utterances.items():
+        if not references:  # Skip empty reference sets
+            continue
+            
+        # Compute perplexity for each reference
+        perplexities = []
+        for ref in references:
+            _, ppl = model_helper.generate_and_score(
+                prefix_input=model_input,
+                target_text=ref,
+                max_new_tokens=len(ref.split()) + 5,  # Add small buffer
+                intervention_fn=intervention_fn
+            )
+            if ppl is not None:
+                perplexities.append(ppl)
+                
+        # Compute average if we have valid perplexities
+        if perplexities:
+            avg_perplexities[act] = sum(perplexities) / len(perplexities)
+            
+    return avg_perplexities
+
+
 def fv_intervention_natural_text(
     model_input,
     model_helper,
@@ -543,6 +586,7 @@ def fv_intervention_natural_text(
     intervention_locations=None,
     avg_activations=None,
     target_output=None,
+    ref_utterances=None,
     f=None
 ):
     """
@@ -556,21 +600,37 @@ def fv_intervention_natural_text(
         intervention_locations: Locations to intervene on
         avg_activations: Average activations to use for intervention
         target_output: Target text for perplexity calculation
+        ref_utterances: Optional dict of reference utterances per dialogue act
         f: Optional file handle for debug logging
         
     Returns:
         clean_text: Text from clean pass
-        interv_text: Text from intervention pass  
-        clean_ppl: Perplexity from clean pass
-        interv_ppl: Perplexity from intervention pass
+        interv_text: Text from intervention pass
+        clean_ppl: Perplexity from clean pass (or dict of avg perplexities if using ref_utterances)
+        interv_ppl: Perplexity from intervention pass (or dict of avg perplexities if using ref_utterances)
     """
     # Clean pass
-    clean_text, clean_ppl = model_helper.generate_and_score(
-        prefix_input=model_input,
-        target_text=target_output,
-        max_new_tokens=max_new_tokens,
-        intervention_fn=None
-    )
+    if ref_utterances is not None:
+        # Use reference sets
+        clean_text, _ = model_helper.generate_and_score(
+            prefix_input=model_input,
+            target_text=target_output,  # Still need this for generation
+            max_new_tokens=max_new_tokens,
+            intervention_fn=None
+        )
+        clean_ppl = compute_avg_perplexities(
+            model_input,
+            model_helper,
+            ref_utterances
+        )
+    else:
+        # Original single-target behavior
+        clean_text, clean_ppl = model_helper.generate_and_score(
+            prefix_input=model_input,
+            target_text=target_output,
+            max_new_tokens=max_new_tokens,
+            intervention_fn=None
+        )
 
     # Intervention pass
     if return_item in ("interv", "both"):
@@ -584,12 +644,28 @@ def fv_intervention_natural_text(
             split_idx=model_helper.split_idx
         )
         
-        interv_text, interv_ppl = model_helper.generate_and_score(
-            prefix_input=model_input,
-            target_text=target_output, 
-            max_new_tokens=max_new_tokens,
-            intervention_fn=interv_fn
-        )
+        if ref_utterances is not None:
+            # Use reference sets
+            interv_text, _ = model_helper.generate_and_score(
+                prefix_input=model_input,
+                target_text=target_output,  # Still need this for generation
+                max_new_tokens=max_new_tokens,
+                intervention_fn=interv_fn
+            )
+            interv_ppl = compute_avg_perplexities(
+                model_input,
+                model_helper,
+                ref_utterances,
+                intervention_fn=interv_fn
+            )
+        else:
+            # Original single-target behavior
+            interv_text, interv_ppl = model_helper.generate_and_score(
+                prefix_input=model_input,
+                target_text=target_output,
+                max_new_tokens=max_new_tokens,
+                intervention_fn=interv_fn
+            )
     else:
         interv_text, interv_ppl = None, None
 

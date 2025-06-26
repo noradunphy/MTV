@@ -416,28 +416,24 @@ class TextModelHelper(ModelHelper):
         # Ensure we ask for dict form if we need scores; HF returns a Tensor otherwise.
         effective_return_dict = return_scores or return_dict_in_generate
 
-        outputs = self.model.generate(
+        # Only pass required parameters and any additional kwargs
+        generate_params = {
             **model_input,
-            max_new_tokens=max_new_tokens,
-            do_sample=False,
-            num_beams=1,
-            pad_token_id=self.tokenizer.pad_token_id,
-            eos_token_id=self.tokenizer.eos_token_id,
-            repetition_penalty=1.0,
-            use_cache=False,
-            output_scores=return_scores,
-            return_dict_in_generate=effective_return_dict,
-            **generate_kwargs,              
-        )
+            "max_new_tokens": max_new_tokens,
+            "output_scores": return_scores,
+            "return_dict_in_generate": effective_return_dict,
+            **generate_kwargs
+        }
 
-        
+        outputs = self.model.generate(**generate_params)
+
         # HF returns either a Tensor (when return_dict=False) or a GenerateDecoderOnlyOutput / similar.
         sequences = outputs.sequences if not isinstance(outputs, torch.Tensor) else outputs
 
         # strip off the prompt tokens
-        input_len      = model_input["input_ids"].size(1)
-        gen_tokens     = sequences[:, input_len:]
-        decoded        = self.tokenizer.batch_decode(
+        input_len = model_input["input_ids"].size(1)
+        gen_tokens = sequences[:, input_len:]
+        decoded = self.tokenizer.batch_decode(
             gen_tokens, skip_special_tokens=True
         )[0].strip()
         from mtv_utils import extract_first_turn
