@@ -496,22 +496,34 @@ class TextModelHelper(ModelHelper):
         prefix_input,        # e.g. {"input_ids": ..., "attention_mask": ...}
         target_text,         # the gold string whose PPL you want
         max_new_tokens=10,
-        intervention_fn=None # your TraceDict edit_output function, or None
+        intervention_fn=None, # your TraceDict edit_output function, or None
+        skip_generation=False # whether to skip generation and only compute perplexity
     ):
         """
         Generate text and compute perplexity on target text, with optional intervention.
         Returns generated text and perplexity score.
+        
+        Args:
+            prefix_input: Input tokens and attention mask
+            target_text: Target text to compute perplexity on
+            max_new_tokens: Maximum new tokens to generate (ignored if skip_generation=True)
+            intervention_fn: Optional intervention function for attention layers
+            skip_generation: Whether to skip generation and only compute perplexity
+            
+        Returns:
+            gen_text: Generated text (empty string if skip_generation=True)
+            ppl: Perplexity score on target_text
         """
         model = self.model
         tok = self.tokenizer
         device = next(model.parameters()).device
 
-        # 1) GENERATION
+        # 1) GENERATION (if not skipped)
         if intervention_fn is not None:
             # Intervention branch - wrap model forward pass with hook
             with TraceDict(model, layers=self.model_config['attn_hook_names'], edit_output=intervention_fn):
                 with torch.no_grad():
-                    gen_text = self.generate(
+                    gen_text = "" if skip_generation else self.generate(
                         prefix_input,
                         max_new_tokens=max_new_tokens
                     )
@@ -522,7 +534,7 @@ class TextModelHelper(ModelHelper):
         else:
             # Clean branch - no intervention
             with torch.no_grad():
-                gen_text = self.generate(
+                gen_text = "" if skip_generation else self.generate(
                     prefix_input,
                     max_new_tokens=max_new_tokens
                 )

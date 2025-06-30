@@ -10,6 +10,7 @@ import pdb
 logging.set_verbosity_error() 
 import numpy as np
 import json
+import random
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from models import TextModelHelper
 # Import all classifiers
@@ -50,7 +51,24 @@ def build_reference_sets(train_dataset, dialogue_acts, size_per_act, seed=42):
             
         # Sample with replacement if we need more than we have
         examples = random.choices(act_to_examples[act], k=size_per_act) if size_per_act > len(act_to_examples[act]) else random.sample(act_to_examples[act], size_per_act)
-        ref_sets[act] = [ex.get('response', '') for ex in examples]
+        # Extract the response; fall back to other fields if empty
+        utterances = []
+        for ex in examples:
+            utt = ex.get('response', '')
+            if not utt:
+                utt = ex.get('target_out', '') if 'target_out' in ex else ex.get('text', '')
+            if utt:
+                utterances.append(utt)
+        ref_sets[act] = utterances
+
+    # Print reference sets to file
+    with open('reference_sets.txt', 'w') as f:
+        f.write("\n[INFO] Reference sets:\n")
+        for act, utterances in ref_sets.items():
+            f.write(f"\n{act} ({len(utterances)} utterances):\n")
+            for i, utt in enumerate(utterances, 1):
+                f.write(f"  {i}. {utt}\n")
+        f.write("\n") # Add blank line after reference sets
         
     return ref_sets
 
@@ -97,9 +115,16 @@ def eval_reinforce(args):
     ref_utterances = None
     if args.ppl_reference_size > 0:
         print(f"[INFO] Building reference sets with {args.ppl_reference_size} utterances per dialogue act...")
-        dialogue_acts = ['sd', 'sv', 'b', 'aa', '%', 'o']  # Standard SWDA acts
+        dialogue_acts = ['sd', 'sv', 'b', 'aa', '%']  # Standard SWDA acts
+
+        # Load full training data (no act filter) to gather references from all acts
+        full_train_dataset = open_data(args.data_name, args.train_path, None)
+
+        if args.data_name == "swda":
+            full_train_dataset = [ex for ex in full_train_dataset if len(ex.get('text', '').split()) + len(ex.get('response', '').split()) < args.max_dialogue_length]
+
         ref_utterances = build_reference_sets(
-            train_dataset, 
+            full_train_dataset,
             dialogue_acts,
             args.ppl_reference_size,
             seed=args.seed if hasattr(args, 'seed') else 42
@@ -216,7 +241,8 @@ def eval_reinforce(args):
             intervention_locations=intervention_locations, 
             avg_activations=mean_activations, 
             target_output=target_out,
-            ref_utterances=ref_utterances
+            ref_utterances=ref_utterances,
+            skip_generation=args.skip_generation
         )
 
         # Track perplexities and determine predicted acts
@@ -232,13 +258,19 @@ def eval_reinforce(args):
             if interv_ppl is not None:
                 interv_perplexities.append(interv_ppl)
                 
-            # Use classifier for act prediction
-            clean_out = extract_first_turn(clean_out)
-            clean_act = classify_func(clean_out)
-            
-            if args.cur_mode in ("interv", "both"):
-                interv_out = extract_first_turn(interv_out)
-                interv_act = classify_func(interv_out)
+            # Use classifier for act prediction if not skipping generation
+            if not args.skip_generation:
+                clean_out = extract_first_turn(clean_out)
+                clean_act = classify_func(clean_out)
+                
+                if args.cur_mode in ("interv", "both"):
+                    interv_out = extract_first_turn(interv_out)
+                    interv_act = classify_func(interv_out)
+            else:
+                # When skipping generation, use the gold act (no generation to classify)
+                target_act_local = item.get('dialog_act', 'o')
+                clean_act = target_act_local
+                interv_act = target_act_local
 
         # Get target dialog act and check correctness
         target_act = item.get('dialog_act', 'o')
@@ -303,10 +335,17 @@ def eval_reinforce(args):
                 else:
                     example_data["perplexity_difference"] = interv_ppl - clean_ppl
         
+        # Store answers for potential downstream eval (e.g., VQA datasets)
+        interv_answers.append({"answer": interv_out, "question_id": question_id}) if args.cur_mode in ("interv", "both") else None
+        clean_answers.append({"answer": clean_out, "question_id": question_id})
+        
         # Write the current example to the JSON file
         with open(output_file_json, 'r+') as f:
             data = json.load(f)
             data["examples"].append(example_data)
+            # Debug: confirm example appended
+            if (idx % 25) == 0:
+                print(f"[DEBUG] Writing example {idx+1}; total stored = {len(data['examples'])}")
             f.seek(0)
             json.dump(data, f, indent=2)
             f.truncate()
@@ -325,6 +364,7 @@ def eval_reinforce(args):
         "eval_num_shot": args.eval_num_shot,
         "max_tokens": args.max_token,
         "ppl_reference_size": args.ppl_reference_size,
+        "skip_generation": args.skip_generation,
         "clean_accuracy": clean_count / len(val_dataset) if len(val_dataset) > 0 else 0
     }
     
@@ -396,6 +436,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_val_examples", type=int, default=250, help="Maximum number of validation examples to evaluate on (randomly sampled)")
     parser.add_argument("--ppl_reference_size", type=int, default=0, help="Number of reference utterances per dialogue act for perplexity computation (0 to use original method)")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
+    parser.add_argument("--skip_generation", action="store_true", help="Skip generation and only compute perplexities")
 
     args = parser.parse_args()
 

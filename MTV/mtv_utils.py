@@ -539,7 +539,8 @@ def compute_avg_perplexities(
     model_input,
     model_helper,
     ref_utterances,
-    intervention_fn=None
+    intervention_fn=None,
+    skip_generation=False
 ):
     """
     Compute average perplexities for each dialogue act using reference utterances.
@@ -549,6 +550,7 @@ def compute_avg_perplexities(
         model_helper: ModelHelper instance
         ref_utterances: Dict mapping dialogue acts to lists of reference utterances
         intervention_fn: Optional intervention function
+        skip_generation: Whether to skip generation and only compute perplexities
         
     Returns:
         Dict mapping dialogue acts to average perplexities
@@ -563,10 +565,11 @@ def compute_avg_perplexities(
         perplexities = []
         for ref in references:
             _, ppl = model_helper.generate_and_score(
-                prefix_input=model_input,
+                prefix_input={k: v.clone() if hasattr(v, 'clone') else v for k, v in model_input.items()},
                 target_text=ref,
                 max_new_tokens=len(ref.split()) + 5,  # Add small buffer
-                intervention_fn=intervention_fn
+                intervention_fn=intervention_fn,
+                skip_generation=skip_generation
             )
             if ppl is not None:
                 perplexities.append(ppl)
@@ -587,7 +590,8 @@ def fv_intervention_natural_text(
     avg_activations=None,
     target_output=None,
     ref_utterances=None,
-    f=None
+    f=None,
+    skip_generation=False
 ):
     """
     Run clean and intervention passes on model input, returning generated text and perplexities.
@@ -602,10 +606,11 @@ def fv_intervention_natural_text(
         target_output: Target text for perplexity calculation
         ref_utterances: Optional dict of reference utterances per dialogue act
         f: Optional file handle for debug logging
+        skip_generation: Whether to skip generation and only compute perplexities
         
     Returns:
-        clean_text: Text from clean pass
-        interv_text: Text from intervention pass
+        clean_text: Text from clean pass (empty string if skip_generation=True)
+        interv_text: Text from intervention pass (empty string if skip_generation=True)
         clean_ppl: Perplexity from clean pass (or dict of avg perplexities if using ref_utterances)
         interv_ppl: Perplexity from intervention pass (or dict of avg perplexities if using ref_utterances)
     """
@@ -616,12 +621,14 @@ def fv_intervention_natural_text(
             prefix_input=model_input,
             target_text=target_output,  # Still need this for generation
             max_new_tokens=max_new_tokens,
-            intervention_fn=None
+            intervention_fn=None,
+            skip_generation=skip_generation
         )
         clean_ppl = compute_avg_perplexities(
             model_input,
             model_helper,
-            ref_utterances
+            ref_utterances,
+            skip_generation=skip_generation
         )
     else:
         # Original single-target behavior
@@ -629,7 +636,8 @@ def fv_intervention_natural_text(
             prefix_input=model_input,
             target_text=target_output,
             max_new_tokens=max_new_tokens,
-            intervention_fn=None
+            intervention_fn=None,
+            skip_generation=skip_generation
         )
 
     # Intervention pass
@@ -646,17 +654,19 @@ def fv_intervention_natural_text(
         
         if ref_utterances is not None:
             # Use reference sets
-            interv_text, _ = model_helper.generate_and_score(
+            interv_text, interv_ppl = model_helper.generate_and_score(
                 prefix_input=model_input,
                 target_text=target_output,  # Still need this for generation
                 max_new_tokens=max_new_tokens,
-                intervention_fn=interv_fn
+                intervention_fn=interv_fn,
+                skip_generation=skip_generation
             )
             interv_ppl = compute_avg_perplexities(
                 model_input,
                 model_helper,
                 ref_utterances,
-                intervention_fn=interv_fn
+                intervention_fn=interv_fn,
+                skip_generation=skip_generation
             )
         else:
             # Original single-target behavior
@@ -664,7 +674,8 @@ def fv_intervention_natural_text(
                 prefix_input=model_input,
                 target_text=target_output,
                 max_new_tokens=max_new_tokens,
-                intervention_fn=interv_fn
+                intervention_fn=interv_fn,
+                skip_generation=skip_generation
             )
     else:
         interv_text, interv_ppl = None, None
