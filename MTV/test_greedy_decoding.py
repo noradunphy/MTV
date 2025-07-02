@@ -47,6 +47,9 @@ def verify_greedy_decoding_single_example(model_helper, model_input, max_new_tok
                 gen_text, scores = model_helper.generate(
                     model_input,
                     max_new_tokens=max_new_tokens,
+                    do_sample=False,
+                    num_beams=1,
+                    temperature=0.0,
                     return_scores=True,
                     return_dict_in_generate=True
                 )
@@ -56,13 +59,16 @@ def verify_greedy_decoding_single_example(model_helper, model_input, max_new_tok
             gen_text, scores = model_helper.generate(
                 model_input,
                 max_new_tokens=max_new_tokens,
+                do_sample=False,
+                num_beams=1,
+                temperature=0.0,
                 return_scores=True,
                 return_dict_in_generate=True
             )
     
     # Tokenize the generated text to get the actual token IDs
     gen_tokens_enc = tokenizer(gen_text, return_tensors="pt", add_special_tokens=False)
-    generated_token_ids = gen_tokens_enc["input_ids"][0]
+    generated_token_ids = gen_tokens_enc["input_ids"][0].to(device)
     
     # Check if we have scores and they match the expected length
     if scores is None:
@@ -90,7 +96,7 @@ def verify_greedy_decoding_single_example(model_helper, model_input, max_new_tok
     
     for pos in range(len(scores)):
         # Get the scores for this position (last dimension of the score tensor)
-        position_scores = scores[pos][0, -1, :]  # Shape: [vocab_size]
+        position_scores = scores[pos][0].to(device)          # (vocab_size,)
         
         # Get the argmax (most probable token)
         predicted_token_id = torch.argmax(position_scores).item()

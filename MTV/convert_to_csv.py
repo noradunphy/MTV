@@ -46,15 +46,21 @@ def json_to_excel(json_path: str, excel_path: str):
     # 2) Flatten 'examples' into a DataFrame
     df_examples = pd.json_normalize(data["examples"])
     
+    # # Define the most important columns for quick viewing
+    # meta_cols = [
+    #     "example_id", "current_dialogue", "next_caller", "input_text", "target_output", "target_dialogue_act",
+    #     "clean_output", "clean_dialogue_act", "clean_correct",
+    #     "intervention_output", "intervention_dialogue_act", "intervention_correct",
+    #     "clean_perplexity", "intervention_perplexity", "perplexity_difference"
+    # ]
+    
     # Define the most important columns for quick viewing
     meta_cols = [
-        "example_id", "current_dialogue", "target_output",
-        "clean_output", "intervention_output",
-        "target_dialogue_act", "clean_dialogue_act", "intervention_dialogue_act",
-        "clean_correct", "intervention_correct",
-        "clean_perplexity", "intervention_perplexity", "perplexity_difference"
+        "example_id", "current_dialogue", "next_caller", "target_output", "target_dialogue_act",
+        "clean_output", "clean_dialogue_act", "clean_correct", "clean_perplexities_by_act", "clean_chosen_act", "clean_chosen_act_perplexity",
+        "intervention_output", "intervention_dialogue_act", "intervention_correct", "intervention_perplexities_by_act", "intervention_chosen_act", "intervention_chosen_act_perplexity",
+        "perplexity_difference"
     ]
-    
     # Reorder columns to put meta_cols first, then any remaining columns
     available_meta_cols = [col for col in meta_cols if col in df_examples.columns]
     remaining_cols = [col for col in df_examples.columns if col not in meta_cols]
@@ -143,6 +149,6 @@ if __name__ == "__main__":
     
     # Uncomment below for single file processing:
     json_to_excel(
-        json_path="eval_results_text_swda_sd_default_config.json",
-        excel_path="eval_results_text_swda_sd_default_config.xlsx"
+        json_path="eval_results_text_swda_b_default_config.json",
+        excel_path="eval_results_text_swda_b_default_config.xlsx"
     )

@@ -399,6 +399,7 @@ class TextModelHelper(ModelHelper):
 
     def insert_image(self, text, image_list):
         # For text-only models, we ignore image_list and just process the text
+        # check: what index is the colon, is it last?
         inputs = self.tokenizer(text, return_tensors="pt", padding=True, truncation=True)
         inputs = {k: v.to("cuda") for k, v in inputs.items()}
         return inputs

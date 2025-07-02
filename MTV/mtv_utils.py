@@ -199,11 +199,43 @@ def get_last_mean_head_activations(dataset, model_helper, N_TRIALS = 50, shot=4,
         torch.cuda.empty_cache()
         
         text, image_list, _, _ = model_helper.format_func(dataset, None, num_shot=shot, model_helper=model_helper)
+        #is this actually getting the last token?
         inputs = model_helper.insert_image(text, image_list)
         activations_td, result = gather_last_attn_activations(inputs, model_helper)
 
         # Process activations in smaller chunks if needed
         stack_initial = torch.vstack([split_activations_by_head(activations_td[layer].input, model_helper.model_config) for layer in model_helper.model_config['attn_hook_names']]).permute(0,2,1,3)
+        
+        # DEBUG: Show what token the -1 index corresponds to
+        if n == 0 or n == 1 or n == 2:  # Print for first three trials
+            print(f"\n[DEBUG] Last Token Activation Analysis:")
+            print(f"[DEBUG] stack_initial shape: {stack_initial.shape}")
+            print(f"[DEBUG] sequence length (dim 2): {stack_initial.shape[2]}")
+            # Verify sequence length matches input
+            if hasattr(inputs, 'get'):
+                input_ids = inputs.get('input_ids', None)
+                if input_ids is not None:
+                    print(f"[DEBUG] input_ids sequence length: {input_ids.shape[1]}")
+                    print(f"[DEBUG] Do they match? {input_ids.shape[1] == stack_initial.shape[2]}")
+            print(f"[DEBUG] Extracting activations from token position: -1 (last token)")
+            
+            # Get the input_ids to see what token is at position -1
+            if hasattr(model_helper, 'tokenizer') and hasattr(inputs, 'get'):
+                input_ids = inputs.get('input_ids', None)
+                if input_ids is not None:
+                    last_token_id = input_ids[0, -1].item()
+                    print(f"[DEBUG] Last token ID: {last_token_id}")
+                    print(f"[DEBUG] Last token decoded: {repr(model_helper.tokenizer.decode([last_token_id]))}")
+                    
+                    # Show last few tokens for context
+                    last_5_tokens = input_ids[0, -5:].tolist()
+                    print(f"[DEBUG] Last 5 tokens: {last_5_tokens}")
+                    print(f"[DEBUG] Last 5 tokens decoded: {[repr(model_helper.tokenizer.decode([tid])) for tid in last_5_tokens]}")
+                else:
+                    print(f"[DEBUG] Could not access input_ids from inputs")
+            else:
+                print(f"[DEBUG] No tokenizer available or inputs not in expected format")
+        
         cur_activation = stack_initial[:, :, -1, :].unsqueeze(dim=2).unsqueeze(dim=0)
         
         # Move to CPU if memory is tight

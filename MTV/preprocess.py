@@ -75,6 +75,7 @@ def format_vizwiz(all_data, cur_item=None, num_shot=0, model_helper=None, split=
 
 
 def format_okvqa(all_data, cur_item=None, num_shot=0, model_helper=None, split="train"):
+    #check model outputs multiple tokens or not
     prompt = '<image>{} Answer:'
 
     image_list = []

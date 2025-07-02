@@ -1,0 +1,6722 @@
+{
+  "model_name": "text",
+  "data_name": "swda",
+  "max_tokens": 100,
+  "num_examples": 4,
+  "clean_results": {
+    "total": 4,
+    "successful": 1,
+    "greedy_correct": 0,
+    "greedy_accuracy": 0.0
+  },
+  "intervention_results": {
+    "total": 4,
+    "successful": 1,
+    "greedy_correct": 0,
+    "greedy_accuracy": 0.0
+  },
+  "failed_clean_examples": [
+    {
+      "success": true,
+      "all_greedy_correct": false,
+      "generated_text": "I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,",
+      "generated_tokens": [
+        40,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11
+      ],
+      "scores_length": 100,
+      "verification_results": [
+        {
+          "position": 0,
+          "predicted_token_id": 358,
+          "actual_token_id": 40,
+          "predicted_token": " I",
+          "actual_token": "I",
+          "is_greedy_correct": false,
+          "actual_token_prob": 1.6558620700379834e-05,
+          "predicted_token_prob": 0.15686751902103424,
+          "top_5_tokens": [
+            [
+              " I",
+              0.15686751902103424
+            ],
+            [
+              " Uh",
+              0.09514495730400085
+            ],
+            [
+              " And",
+              0.08396513760089874
+            ],
+            [
+              " Yeah",
+              0.07409896701574326
+            ],
+            [
+              " Sometimes",
+              0.029017575085163116
+            ]
+          ]
+        },
+        {
+          "position": 1,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.09771057963371277,
+          "predicted_token_prob": 0.09771057963371277,
+          "top_5_tokens": [
+            [
+              ",",
+              0.09771057963371277
+            ],
+            [
+              "'d",
+              0.07609707862138748
+            ],
+            [
+              " think",
+              0.06715543568134308
+            ],
+            [
+              "'m",
+              0.06715543568134308
+            ],
+            [
+              " like",
+              0.05926446244120598
+            ]
+          ]
+        },
+        {
+          "position": 2,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8230100274085999,
+          "predicted_token_prob": 0.8230100274085999,
+          "top_5_tokens": [
+            [
+              " I",
+              0.8230100274085999
+            ],
+            [
+              " uh",
+              0.0464310497045517
+            ],
+            [
+              " i",
+              0.01935534179210663
+            ],
+            [
+              " it",
+              0.010360167361795902
+            ],
+            [
+              " you",
+              0.007120431866496801
+            ]
+          ]
+        },
+        {
+          "position": 3,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.15109245479106903,
+          "predicted_token_prob": 0.15109245479106903,
+          "top_5_tokens": [
+            [
+              ",",
+              0.15109245479106903
+            ],
+            [
+              " like",
+              0.08087396621704102
+            ],
+            [
+              "'m",
+              0.049052536487579346
+            ],
+            [
+              " think",
+              0.049052536487579346
+            ],
+            [
+              " don",
+              0.043288715183734894
+            ]
+          ]
+        },
+        {
+          "position": 4,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.710072934627533,
+          "predicted_token_prob": 0.710072934627533,
+          "top_5_tokens": [
+            [
+              " I",
+              0.710072934627533
+            ],
+            [
+              " uh",
+              0.10889321565628052
+            ],
+            [
+              " i",
+              0.024297358468174934
+            ],
+            [
+              " it",
+              0.01300544012337923
+            ],
+            [
+              " um",
+              0.010128646157681942
+            ]
+          ]
+        },
+        {
+          "position": 5,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.15721553564071655,
+          "predicted_token_prob": 0.15721553564071655,
+          "top_5_tokens": [
+            [
+              ",",
+              0.15721553564071655
+            ],
+            [
+              " like",
+              0.07426335662603378
+            ],
+            [
+              "'m",
+              0.0510404109954834
+            ],
+            [
+              " think",
+              0.04504300653934479
+            ],
+            [
+              " don",
+              0.03975031152367592
+            ]
+          ]
+        },
+        {
+          "position": 6,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.6928977966308594,
+          "predicted_token_prob": 0.6928977966308594,
+          "top_5_tokens": [
+            [
+              " I",
+              0.6928977966308594
+            ],
+            [
+              " uh",
+              0.10625932365655899
+            ],
+            [
+              " i",
+              0.02686656266450882
+            ],
+            [
+              " it",
+              0.014380634762346745
+            ],
+            [
+              " um",
+              0.011199649423360825
+            ]
+          ]
+        },
+        {
+          "position": 7,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.1738150417804718,
+          "predicted_token_prob": 0.1738150417804718,
+          "top_5_tokens": [
+            [
+              ",",
+              0.1738150417804718
+            ],
+            [
+              " like",
+              0.07245688885450363
+            ],
+            [
+              "'m",
+              0.04979884624481201
+            ],
+            [
+              " think",
+              0.04394732415676117
+            ],
+            [
+              " don",
+              0.04128469154238701
+            ]
+          ]
+        },
+        {
+          "position": 8,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7233699560165405,
+          "predicted_token_prob": 0.7233699560165405,
+          "top_5_tokens": [
+            [
+              " I",
+              0.7233699560165405
+            ],
+            [
+              " uh",
+              0.0978974774479866
+            ],
+            [
+              " i",
+              0.024752357974648476
+            ],
+            [
+              " it",
+              0.011692185886204243
+            ],
+            [
+              " um",
+              0.010318317450582981
+            ]
+          ]
+        },
+        {
+          "position": 9,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.2308436781167984,
+          "predicted_token_prob": 0.2308436781167984,
+          "top_5_tokens": [
+            [
+              ",",
+              0.2308436781167984
+            ],
+            [
+              " like",
+              0.05836642161011696
+            ],
+            [
+              "'m",
+              0.051508188247680664
+            ],
+            [
+              " think",
+              0.040114615112543106
+            ],
+            [
+              " don",
+              0.040114615112543106
+            ]
+          ]
+        },
+        {
+          "position": 10,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8008374571800232,
+          "predicted_token_prob": 0.8008374571800232,
+          "top_5_tokens": [
+            [
+              " I",
+              0.8008374571800232
+            ],
+            [
+              " uh",
+              0.05119582265615463
+            ],
+            [
+              " i",
+              0.02418319694697857
+            ],
+            [
+              " it",
+              0.009470275603234768
+            ],
+            [
+              " um",
+              0.007375457789748907
+            ]
+          ]
+        },
+        {
+          "position": 11,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.29434934258461,
+          "predicted_token_prob": 0.29434934258461,
+          "top_5_tokens": [
+            [
+              ",",
+              0.29434934258461
+            ],
+            [
+              " like",
+              0.05115024745464325
+            ],
+            [
+              "'m",
+              0.04513993486762047
+            ],
+            [
+              " think",
+              0.03515501692891121
+            ],
+            [
+              " don",
+              0.03515501692891121
+            ]
+          ]
+        },
+        {
+          "position": 12,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8701114654541016,
+          "predicted_token_prob": 0.8701114654541016,
+          "top_5_tokens": [
+            [
+              " I",
+              0.8701114654541016
+            ],
+            [
+              " i",
+              0.023187685757875443
+            ],
+            [
+              " uh",
+              0.023187685757875443
+            ],
+            [
+              " it",
+              0.006240880582481623
+            ],
+            [
+              " like",
+              0.005173872224986553
+            ]
+          ]
+        },
+        {
+          "position": 13,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.40113818645477295,
+          "predicted_token_prob": 0.40113818645477295,
+          "top_5_tokens": [
+            [
+              ",",
+              0.40113818645477295
+            ],
+            [
+              " like",
+              0.047909125685691833
+            ],
+            [
+              "'m",
+              0.03731166571378708
+            ],
+            [
+              " think",
+              0.03292742744088173
+            ],
+            [
+              " don",
+              0.02905835397541523
+            ]
+          ]
+        },
+        {
+          "position": 14,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.898145318031311,
+          "predicted_token_prob": 0.898145318031311,
+          "top_5_tokens": [
+            [
+              " I",
+              0.898145318031311
+            ],
+            [
+              " i",
+              0.02112235315144062
+            ],
+            [
+              " uh",
+              0.014517166651785374
+            ],
+            [
+              " like",
+              0.005340567324310541
+            ],
+            [
+              " it",
+              0.0047130342572927475
+            ]
+          ]
+        },
+        {
+          "position": 15,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.5040925145149231,
+          "predicted_token_prob": 0.5040925145149231,
+          "top_5_tokens": [
+            [
+              ",",
+              0.5040925145149231
+            ],
+            [
+              " like",
+              0.03651634231209755
+            ],
+            [
+              " think",
+              0.028438953682780266
+            ],
+            [
+              "'m",
+              0.028438953682780266
+            ],
+            [
+              " would",
+              0.025097288191318512
+            ]
+          ]
+        },
+        {
+          "position": 16,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9277209639549255,
+          "predicted_token_prob": 0.9277209639549255,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9277209639549255
+            ],
+            [
+              " i",
+              0.013233228586614132
+            ],
+            [
+              " uh",
+              0.008026358671486378
+            ],
+            [
+              " like",
+              0.005182207096368074
+            ],
+            [
+              " it",
+              0.003143167356029153
+            ]
+          ]
+        },
+        {
+          "position": 17,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.5926379561424255,
+          "predicted_token_prob": 0.5926379561424255,
+          "top_5_tokens": [
+            [
+              ",",
+              0.5926379561424255
+            ],
+            [
+              " like",
+              0.02950570546090603
+            ],
+            [
+              "'m",
+              0.022979067638516426
+            ],
+            [
+              " think",
+              0.022979067638516426
+            ],
+            [
+              ",\n",
+              0.022979067638516426
+            ]
+          ]
+        },
+        {
+          "position": 18,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9420568943023682,
+          "predicted_token_prob": 0.9420568943023682,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9420568943023682
+            ],
+            [
+              " i",
+              0.011858746409416199
+            ],
+            [
+              " uh",
+              0.005262286867946386
+            ],
+            [
+              " like",
+              0.004643951542675495
+            ],
+            [
+              " it",
+              0.002335125580430031
+            ]
+          ]
+        },
+        {
+          "position": 19,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.6422210931777954,
+          "predicted_token_prob": 0.6422210931777954,
+          "top_5_tokens": [
+            [
+              ",",
+              0.6422210931777954
+            ],
+            [
+              " like",
+              0.028217226266860962
+            ],
+            [
+              ",\n",
+              0.028217226266860962
+            ],
+            [
+              "'m",
+              0.019393397495150566
+            ],
+            [
+              " think",
+              0.019393397495150566
+            ]
+          ]
+        },
+        {
+          "position": 20,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9488039016723633,
+          "predicted_token_prob": 0.9488039016723633,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9488039016723633
+            ],
+            [
+              " i",
+              0.010540259070694447
+            ],
+            [
+              " like",
+              0.004393833689391613
+            ],
+            [
+              " uh",
+              0.004127624910324812
+            ],
+            [
+              " it",
+              0.0019497518660500646
+            ]
+          ]
+        },
+        {
+          "position": 21,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7151849865913391,
+          "predicted_token_prob": 0.7151849865913391,
+          "top_5_tokens": [
+            [
+              ",",
+              0.7151849865913391
+            ],
+            [
+              ",\n",
+              0.027730731293559074
+            ],
+            [
+              " like",
+              0.021596714854240417
+            ],
+            [
+              " think",
+              0.015800494700670242
+            ],
+            [
+              "\n",
+              0.015800494700670242
+            ]
+          ]
+        },
+        {
+          "position": 22,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9550027847290039,
+          "predicted_token_prob": 0.9550027847290039,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9550027847290039
+            ],
+            [
+              " i",
+              0.01060912199318409
+            ],
+            [
+              " like",
+              0.004154592286795378
+            ],
+            [
+              " uh",
+              0.0028554066084325314
+            ],
+            [
+              " it",
+              0.0015283889370039105
+            ]
+          ]
+        },
+        {
+          "position": 23,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7700732946395874,
+          "predicted_token_prob": 0.7700732946395874,
+          "top_5_tokens": [
+            [
+              ",",
+              0.7700732946395874
+            ],
+            [
+              ",\n",
+              0.026350459083914757
+            ],
+            [
+              " like",
+              0.01811038888990879
+            ],
+            [
+              "\n",
+              0.014104384928941727
+            ],
+            [
+              " think",
+              0.013249842450022697
+            ]
+          ]
+        },
+        {
+          "position": 24,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9633803963661194,
+          "predicted_token_prob": 0.9633803963661194,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9633803963661194
+            ],
+            [
+              " i",
+              0.009444648399949074
+            ],
+            [
+              " like",
+              0.003474492346867919
+            ],
+            [
+              " uh",
+              0.0019797058776021004
+            ],
+            [
+              " it",
+              0.0012007523328065872
+            ]
+          ]
+        },
+        {
+          "position": 25,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7996572852134705,
+          "predicted_token_prob": 0.7996572852134705,
+          "top_5_tokens": [
+            [
+              ",",
+              0.7996572852134705
+            ],
+            [
+              ",\n",
+              0.027362767606973648
+            ],
+            [
+              " like",
+              0.01464623399078846
+            ],
+            [
+              "\n",
+              0.01464623399078846
+            ],
+            [
+              " think",
+              0.011406498029828072
+            ]
+          ]
+        },
+        {
+          "position": 26,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9692435264587402,
+          "predicted_token_prob": 0.9692435264587402,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9692435264587402
+            ],
+            [
+              " i",
+              0.00740026542916894
+            ],
+            [
+              " like",
+              0.002722405595704913
+            ],
+            [
+              " uh",
+              0.001651222468353808
+            ],
+            [
+              " it",
+              0.001001517055556178
+            ]
+          ]
+        },
+        {
+          "position": 27,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8367928266525269,
+          "predicted_token_prob": 0.8367928266525269,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8367928266525269
+            ],
+            [
+              ",\n",
+              0.025268953293561935
+            ],
+            [
+              "\n",
+              0.013525496236979961
+            ],
+            [
+              " like",
+              0.010533667169511318
+            ],
+            [
+              " think",
+              0.009295928291976452
+            ]
+          ]
+        },
+        {
+          "position": 28,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9739423990249634,
+          "predicted_token_prob": 0.9739423990249634,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9739423990249634
+            ],
+            [
+              " i",
+              0.007436141837388277
+            ],
+            [
+              " like",
+              0.0018801511032506824
+            ],
+            [
+              " uh",
+              0.00129220774397254
+            ],
+            [
+              " it",
+              0.0007837635930627584
+            ]
+          ]
+        },
+        {
+          "position": 29,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8649028539657593,
+          "predicted_token_prob": 0.8649028539657593,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8649028539657593
+            ],
+            [
+              ",\n",
+              0.023048879578709602
+            ],
+            [
+              "\n",
+              0.012337176129221916
+            ],
+            [
+              " think",
+              0.007965479977428913
+            ],
+            [
+              " like",
+              0.007965479977428913
+            ]
+          ]
+        },
+        {
+          "position": 30,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9785282015800476,
+          "predicted_token_prob": 0.9785282015800476,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9785282015800476
+            ],
+            [
+              " i",
+              0.006593271158635616
+            ],
+            [
+              " like",
+              0.0014711576513946056
+            ],
+            [
+              " uh",
+              0.0008923022542148829
+            ],
+            [
+              " it",
+              0.0006132697453722358
+            ]
+          ]
+        },
+        {
+          "position": 31,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8756048679351807,
+          "predicted_token_prob": 0.8756048679351807,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8756048679351807
+            ],
+            [
+              ",\n",
+              0.0233340784907341
+            ],
+            [
+              "\n",
+              0.01173311099410057
+            ],
+            [
+              " think",
+              0.007116491906344891
+            ],
+            [
+              " like",
+              0.007116491906344891
+            ]
+          ]
+        },
+        {
+          "position": 32,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9826419353485107,
+          "predicted_token_prob": 0.9826419353485107,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9826419353485107
+            ],
+            [
+              " i",
+              0.0051564318127930164
+            ],
+            [
+              " like",
+              0.0010153616312891245
+            ],
+            [
+              " uh",
+              0.0007428544340655208
+            ],
+            [
+              " it",
+              0.0005105558666400611
+            ]
+          ]
+        },
+        {
+          "position": 33,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8951981067657471,
+          "predicted_token_prob": 0.8951981067657471,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8951981067657471
+            ],
+            [
+              ",\n",
+              0.021053042262792587
+            ],
+            [
+              "\n",
+              0.010586134158074856
+            ],
+            [
+              " think",
+              0.006031797267496586
+            ],
+            [
+              " like",
+              0.005323042627424002
+            ]
+          ]
+        },
+        {
+          "position": 34,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9832574725151062,
+          "predicted_token_prob": 0.9832574725151062,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9832574725151062
+            ],
+            [
+              " i",
+              0.005159661639481783
+            ],
+            [
+              " like",
+              0.001015997608192265
+            ],
+            [
+              " uh",
+              0.0006162337376736104
+            ],
+            [
+              " it",
+              0.0004799232992809266
+            ]
+          ]
+        },
+        {
+          "position": 35,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9023178219795227,
+          "predicted_token_prob": 0.9023178219795227,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9023178219795227
+            ],
+            [
+              ",\n",
+              0.021220481023192406
+            ],
+            [
+              "\n",
+              0.010670328512787819
+            ],
+            [
+              " think",
+              0.005365378223359585
+            ],
+            [
+              " like",
+              0.005040306132286787
+            ]
+          ]
+        },
+        {
+          "position": 36,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9849163293838501,
+          "predicted_token_prob": 0.9849163293838501,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9849163293838501
+            ],
+            [
+              " i",
+              0.005168366711586714
+            ],
+            [
+              " like",
+              0.000792594684753567
+            ],
+            [
+              " uh",
+              0.0005117375985719264
+            ],
+            [
+              " it",
+              0.00042424537241458893
+            ]
+          ]
+        },
+        {
+          "position": 37,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9126096963882446,
+          "predicted_token_prob": 0.9126096963882446,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9126096963882446
+            ],
+            [
+              ",\n",
+              0.018940608948469162
+            ],
+            [
+              "\n",
+              0.009523937478661537
+            ],
+            [
+              " think",
+              0.004788936115801334
+            ],
+            [
+              ".\n",
+              0.004788936115801334
+            ]
+          ]
+        },
+        {
+          "position": 38,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9876503348350525,
+          "predicted_token_prob": 0.9876503348350525,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9876503348350525
+            ],
+            [
+              " i",
+              0.004036301281303167
+            ],
+            [
+              " like",
+              0.0005814842879772186
+            ],
+            [
+              " uh",
+              0.00048206743667833507
+            ],
+            [
+              " it",
+              0.00033131978125311434
+            ]
+          ]
+        },
+        {
+          "position": 39,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9239793419837952,
+          "predicted_token_prob": 0.9239793419837952,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9239793419837952
+            ],
+            [
+              ",\n",
+              0.019176578149199486
+            ],
+            [
+              "\n",
+              0.009058373980224133
+            ],
+            [
+              ".\n",
+              0.004278873093426228
+            ],
+            [
+              " think",
+              0.0037760925479233265
+            ]
+          ]
+        },
+        {
+          "position": 40,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9898505210876465,
+          "predicted_token_prob": 0.9898505210876465,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9898505210876465
+            ],
+            [
+              " i",
+              0.0031504773069173098
+            ],
+            [
+              " like",
+              0.00045386928832158446
+            ],
+            [
+              " uh",
+              0.0004263707378413528
+            ],
+            [
+              " \n",
+              0.00027528562350198627
+            ]
+          ]
+        },
+        {
+          "position": 41,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9358009099960327,
+          "predicted_token_prob": 0.9358009099960327,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9358009099960327
+            ],
+            [
+              ",\n",
+              0.017139792442321777
+            ],
+            [
+              "\n",
+              0.00809626467525959
+            ],
+            [
+              ".\n",
+              0.004333617631345987
+            ],
+            [
+              " think",
+              0.00297844922170043
+            ]
+          ]
+        },
+        {
+          "position": 42,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9904809594154358,
+          "predicted_token_prob": 0.9904809594154358,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9904809594154358
+            ],
+            [
+              " i",
+              0.003152483841404319
+            ],
+            [
+              " like",
+              0.00037651052116416395
+            ],
+            [
+              " uh",
+              0.0003322693519294262
+            ],
+            [
+              " \n",
+              0.0003121381450910121
+            ]
+          ]
+        },
+        {
+          "position": 43,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9443209767341614,
+          "predicted_token_prob": 0.9443209767341614,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9443209767341614
+            ],
+            [
+              ",\n",
+              0.015263526700437069
+            ],
+            [
+              "\n",
+              0.007674983236938715
+            ],
+            [
+              ".\n",
+              0.003625405253842473
+            ],
+            [
+              " think",
+              0.0023407377302646637
+            ]
+          ]
+        },
+        {
+          "position": 44,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9925829172134399,
+          "predicted_token_prob": 0.9925829172134399,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9925829172134399
+            ],
+            [
+              " i",
+              0.002171266358345747
+            ],
+            [
+              " \n",
+              0.0003128005482722074
+            ],
+            [
+              " uh",
+              0.0002938489196822047
+            ],
+            [
+              " like",
+              0.0002436093200230971
+            ]
+          ]
+        },
+        {
+          "position": 45,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9473165273666382,
+          "predicted_token_prob": 0.9473165273666382,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9473165273666382
+            ],
+            [
+              ",\n",
+              0.015311945229768753
+            ],
+            [
+              "\n",
+              0.007232850883156061
+            ],
+            [
+              ".\n",
+              0.0036369056906551123
+            ],
+            [
+              " think",
+              0.0022058947943150997
+            ]
+          ]
+        },
+        {
+          "position": 46,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9940019249916077,
+          "predicted_token_prob": 0.9940019249916077,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9940019249916077
+            ],
+            [
+              " i",
+              0.0015908032655715942
+            ],
+            [
+              " \n",
+              0.0003132477286271751
+            ],
+            [
+              " uh",
+              0.0002022479457082227
+            ],
+            [
+              " like",
+              0.00018999437452293932
+            ]
+          ]
+        },
+        {
+          "position": 47,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.949765145778656,
+          "predicted_token_prob": 0.949765145778656,
+          "top_5_tokens": [
+            [
+              ",",
+              0.949765145778656
+            ],
+            [
+              ",\n",
+              0.015351523645222187
+            ],
+            [
+              "\n",
+              0.006812197156250477
+            ],
+            [
+              ".\n",
+              0.00388147309422493
+            ],
+            [
+              " think",
+              0.001951727201230824
+            ]
+          ]
+        },
+        {
+          "position": 48,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9932788014411926,
+          "predicted_token_prob": 0.9932788014411926,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9932788014411926
+            ],
+            [
+              " i",
+              0.0018013051012530923
+            ],
+            [
+              " \n",
+              0.00037757406244054437
+            ],
+            [
+              " uh",
+              0.00022901022748555988
+            ],
+            [
+              " like",
+              0.0002021008258452639
+            ]
+          ]
+        },
+        {
+          "position": 49,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.951960563659668,
+          "predicted_token_prob": 0.951960563659668,
+          "top_5_tokens": [
+            [
+              ",",
+              0.951960563659668
+            ],
+            [
+              ",\n",
+              0.015387008897960186
+            ],
+            [
+              "\n",
+              0.006414259783923626
+            ],
+            [
+              ".\n",
+              0.0038904452230781317
+            ],
+            [
+              " think",
+              0.0018377162050455809
+            ]
+          ]
+        },
+        {
+          "position": 50,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9937114715576172,
+          "predicted_token_prob": 0.9937114715576172,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9937114715576172
+            ],
+            [
+              " i",
+              0.001403468893840909
+            ],
+            [
+              " \n",
+              0.00037773852818645537
+            ],
+            [
+              " uh",
+              0.00022910998086445034
+            ],
+            [
+              " like",
+              0.0002152289089281112
+            ]
+          ]
+        },
+        {
+          "position": 51,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9570322632789612,
+          "predicted_token_prob": 0.9570322632789612,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9570322632789612
+            ],
+            [
+              ",\n",
+              0.013651331886649132
+            ],
+            [
+              "\n",
+              0.00569072226062417
+            ],
+            [
+              ".\n",
+              0.003674206091091037
+            ],
+            [
+              " think",
+              0.0016304191667586565
+            ]
+          ]
+        },
+        {
+          "position": 52,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9934669137001038,
+          "predicted_token_prob": 0.9934669137001038,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9934669137001038
+            ],
+            [
+              " i",
+              0.001692489953711629
+            ],
+            [
+              " \n",
+              0.00031307913013733923
+            ],
+            [
+              " uh",
+              0.00024382627452723682
+            ],
+            [
+              " like",
+              0.00021517593995667994
+            ]
+          ]
+        },
+        {
+          "position": 53,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.957653820514679,
+          "predicted_token_prob": 0.957653820514679,
+          "top_5_tokens": [
+            [
+              ",",
+              0.957653820514679
+            ],
+            [
+              ",\n",
+              0.013660198077559471
+            ],
+            [
+              "\n",
+              0.0056944177486002445
+            ],
+            [
+              ".\n",
+              0.0039137122221291065
+            ],
+            [
+              " think",
+              0.0015326316934078932
+            ]
+          ]
+        },
+        {
+          "position": 54,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9947372078895569,
+          "predicted_token_prob": 0.9947372078895569,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9947372078895569
+            ],
+            [
+              " i",
+              0.0012398352846503258
+            ],
+            [
+              " \n",
+              0.0002766446559689939
+            ],
+            [
+              "<|end_of_text|>",
+              0.00017861522792372853
+            ],
+            [
+              " like",
+              0.00016779346333350986
+            ]
+          ]
+        },
+        {
+          "position": 55,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9639396667480469,
+          "predicted_token_prob": 0.9639396667480469,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9639396667480469
+            ],
+            [
+              ",\n",
+              0.012134210206568241
+            ],
+            [
+              "\n",
+              0.004751824773848057
+            ],
+            [
+              ".\n",
+              0.003068008692935109
+            ],
+            [
+              " think",
+              0.0012789362808689475
+            ]
+          ]
+        },
+        {
+          "position": 56,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9958951473236084,
+          "predicted_token_prob": 0.9958951473236084,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9958951473236084
+            ],
+            [
+              " i",
+              0.0007528735441155732
+            ],
+            [
+              " \n",
+              0.00027696668985299766
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016798879369162023
+            ],
+            [
+              " uh",
+              0.00013082980876788497
+            ]
+          ]
+        },
+        {
+          "position": 57,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9704519510269165,
+          "predicted_token_prob": 0.9704519510269165,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9704519510269165
+            ],
+            [
+              ",\n",
+              0.00951397605240345
+            ],
+            [
+              "\n",
+              0.003966015297919512
+            ],
+            [
+              ".\n",
+              0.002560652093961835
+            ],
+            [
+              " think",
+              0.0010027657262980938
+            ]
+          ]
+        },
+        {
+          "position": 58,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9960049986839294,
+          "predicted_token_prob": 0.9960049986839294,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9960049986839294
+            ],
+            [
+              " i",
+              0.0007073372253216803
+            ],
+            [
+              " \n",
+              0.00026021484518423676
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016800731827970594
+            ],
+            [
+              " uh",
+              0.00010847367957467213
+            ]
+          ]
+        },
+        {
+          "position": 59,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9674624800682068,
+          "predicted_token_prob": 0.9674624800682068,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9674624800682068
+            ],
+            [
+              ",\n",
+              0.010747537016868591
+            ],
+            [
+              "\n",
+              0.004769190680235624
+            ],
+            [
+              ".\n",
+              0.002892660442739725
+            ],
+            [
+              " think",
+              0.0010641502449288964
+            ]
+          ]
+        },
+        {
+          "position": 60,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9953441023826599,
+          "predicted_token_prob": 0.9953441023826599,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9953441023826599
+            ],
+            [
+              " i",
+              0.0009076363639906049
+            ],
+            [
+              " \n",
+              0.00031367072369903326
+            ],
+            [
+              "<|end_of_text|>",
+              0.00020252104150131345
+            ],
+            [
+              " uh",
+              0.00013919055345468223
+            ]
+          ]
+        },
+        {
+          "position": 61,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9639476537704468,
+          "predicted_token_prob": 0.9639476537704468,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9639476537704468
+            ],
+            [
+              ",\n",
+              0.0121343107894063
+            ],
+            [
+              "\n",
+              0.0050583332777023315
+            ],
+            [
+              ".\n",
+              0.003265905426815152
+            ],
+            [
+              " think",
+              0.0012014593230560422
+            ]
+          ]
+        },
+        {
+          "position": 62,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9953054785728455,
+          "predicted_token_prob": 0.9953054785728455,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9953054785728455
+            ],
+            [
+              " i",
+              0.0008526123128831387
+            ],
+            [
+              " \n",
+              0.0003136585291940719
+            ],
+            [
+              "<|end_of_text|>",
+              0.00019024353241547942
+            ],
+            [
+              " uh",
+              0.00016788933135103434
+            ]
+          ]
+        },
+        {
+          "position": 63,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9691428542137146,
+          "predicted_token_prob": 0.9691428542137146,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9691428542137146
+            ],
+            [
+              ",\n",
+              0.010766204446554184
+            ],
+            [
+              "\n",
+              0.0044880216009914875
+            ],
+            [
+              ".\n",
+              0.0027221227064728737
+            ],
+            [
+              " think",
+              0.0009407404577359557
+            ]
+          ]
+        },
+        {
+          "position": 64,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.995760977268219,
+          "predicted_token_prob": 0.995760977268219,
+          "top_5_tokens": [
+            [
+              " I",
+              0.995760977268219
+            ],
+            [
+              " i",
+              0.0008013217593543231
+            ],
+            [
+              " \n",
+              0.00027692937874235213
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016796616546344012
+            ],
+            [
+              " uh",
+              0.00016796616546344012
+            ]
+          ]
+        },
+        {
+          "position": 65,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9720563292503357,
+          "predicted_token_prob": 0.9720563292503357,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9720563292503357
+            ],
+            [
+              ",\n",
+              0.009529704228043556
+            ],
+            [
+              "\n",
+              0.003972572274506092
+            ],
+            [
+              ".\n",
+              0.00240948679856956
+            ],
+            [
+              " think",
+              0.0008864006376825273
+            ]
+          ]
+        },
+        {
+          "position": 66,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.996396005153656,
+          "predicted_token_prob": 0.996396005153656,
+          "top_5_tokens": [
+            [
+              " I",
+              0.996396005153656
+            ],
+            [
+              " i",
+              0.0006647427217103541
+            ],
+            [
+              " \n",
+              0.00022972891747485846
+            ],
+            [
+              "<|end_of_text|>",
+              0.00014832413580734283
+            ],
+            [
+              " uh",
+              0.00012296503700781614
+            ]
+          ]
+        },
+        {
+          "position": 67,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9722574353218079,
+          "predicted_token_prob": 0.9722574353218079,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9722574353218079
+            ],
+            [
+              ",\n",
+              0.009531675837934017
+            ],
+            [
+              "\n",
+              0.00397339416667819
+            ],
+            [
+              ".\n",
+              0.002409985288977623
+            ],
+            [
+              " think",
+              0.000832868623547256
+            ]
+          ]
+        },
+        {
+          "position": 68,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9966513514518738,
+          "predicted_token_prob": 0.9966513514518738,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9966513514518738
+            ],
+            [
+              " i",
+              0.0005512322532013059
+            ],
+            [
+              " \n",
+              0.00021586567163467407
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001579306845087558
+            ],
+            [
+              " uh",
+              0.00010854406718863174
+            ]
+          ]
+        },
+        {
+          "position": 69,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9753711223602295,
+          "predicted_token_prob": 0.9753711223602295,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9753711223602295
+            ],
+            [
+              ",\n",
+              0.008438613265752792
+            ],
+            [
+              "\n",
+              0.0035177376121282578
+            ],
+            [
+              ".\n",
+              0.002133615780621767
+            ],
+            [
+              ".",
+              0.0007373578264378011
+            ]
+          ]
+        },
+        {
+          "position": 70,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9966304898262024,
+          "predicted_token_prob": 0.9966304898262024,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9966304898262024
+            ],
+            [
+              " i",
+              0.000551220728084445
+            ],
+            [
+              " \n",
+              0.00021586114598903805
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016811283421702683
+            ],
+            [
+              " and",
+              0.00010854179708985612
+            ]
+          ]
+        },
+        {
+          "position": 71,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9756428003311157,
+          "predicted_token_prob": 0.9756428003311157,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9756428003311157
+            ],
+            [
+              ",\n",
+              0.008440963923931122
+            ],
+            [
+              "\n",
+              0.0037456550635397434
+            ],
+            [
+              ".\n",
+              0.0021342099644243717
+            ],
+            [
+              ".",
+              0.0007375632412731647
+            ]
+          ]
+        },
+        {
+          "position": 72,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9967058300971985,
+          "predicted_token_prob": 0.9967058300971985,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9967058300971985
+            ],
+            [
+              " i",
+              0.0005178630817681551
+            ],
+            [
+              " \n",
+              0.00022980035282671452
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001681255380390212
+            ],
+            [
+              " uh",
+              0.00011555087985470891
+            ]
+          ]
+        },
+        {
+          "position": 73,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9804291725158691,
+          "predicted_token_prob": 0.9804291725158691,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9804291725158691
+            ],
+            [
+              ",\n",
+              0.006606079638004303
+            ],
+            [
+              "\n",
+              0.002931430237367749
+            ],
+            [
+              ".\n",
+              0.0017780023626983166
+            ],
+            [
+              ".",
+              0.0006962756742723286
+            ]
+          ]
+        },
+        {
+          "position": 74,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9972510933876038,
+          "predicted_token_prob": 0.9972510933876038,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9972510933876038
+            ],
+            [
+              " i",
+              0.0003345404693391174
+            ],
+            [
+              " \n",
+              0.00021599556203000247
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001682175206951797
+            ],
+            [
+              " uh",
+              9.584744839230552e-05
+            ]
+          ]
+        },
+        {
+          "position": 75,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9812673330307007,
+          "predicted_token_prob": 0.9812673330307007,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9812673330307007
+            ],
+            [
+              ",\n",
+              0.006611727178096771
+            ],
+            [
+              "\n",
+              0.0025891896802932024
+            ],
+            [
+              ".\n",
+              0.0015704227844253182
+            ],
+            [
+              ".",
+              0.0006546496879309416
+            ]
+          ]
+        },
+        {
+          "position": 76,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9975177049636841,
+          "predicted_token_prob": 0.9975177049636841,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9975177049636841
+            ],
+            [
+              " i",
+              0.0002774179447442293
+            ],
+            [
+              " \n",
+              0.00021605330402962863
+            ],
+            [
+              "<|end_of_text|>",
+              0.00015806796727702022
+            ],
+            [
+              " uh",
+              8.460769458906725e-05
+            ]
+          ]
+        },
+        {
+          "position": 77,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9808353185653687,
+          "predicted_token_prob": 0.9808353185653687,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9808353185653687
+            ],
+            [
+              ",\n",
+              0.0066088163293898106
+            ],
+            [
+              "\n",
+              0.0027549644000828266
+            ],
+            [
+              ".\n",
+              0.0017787389224395156
+            ],
+            [
+              ".",
+              0.0006965640932321548
+            ]
+          ]
+        },
+        {
+          "position": 78,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.997521698474884,
+          "predicted_token_prob": 0.997521698474884,
+          "top_5_tokens": [
+            [
+              " I",
+              0.997521698474884
+            ],
+            [
+              " i",
+              0.00027741905068978667
+            ],
+            [
+              " \n",
+              0.00020296411821618676
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016826315550133586
+            ],
+            [
+              " and",
+              9.006477193906903e-05
+            ]
+          ]
+        },
+        {
+          "position": 79,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9787848591804504,
+          "predicted_token_prob": 0.9787848591804504,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9787848591804504
+            ],
+            [
+              ",\n",
+              0.007473114412277937
+            ],
+            [
+              "\n",
+              0.00311525771394372
+            ],
+            [
+              ".\n",
+              0.0020113615319132805
+            ],
+            [
+              ".",
+              0.0007876604795455933
+            ]
+          ]
+        },
+        {
+          "position": 80,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9973459243774414,
+          "predicted_token_prob": 0.9973459243774414,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9973459243774414
+            ],
+            [
+              " i",
+              0.00029525900026783347
+            ],
+            [
+              " \n",
+              0.00020292834960855544
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016823351325001568
+            ],
+            [
+              " and",
+              9.00489030755125e-05
+            ]
+          ]
+        },
+        {
+          "position": 81,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9834641814231873,
+          "predicted_token_prob": 0.9834641814231873,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9834641814231873
+            ],
+            [
+              ",\n",
+              0.005847891792654991
+            ],
+            [
+              "\n",
+              0.0024377640802413225
+            ],
+            [
+              ".\n",
+              0.0015739386435598135
+            ],
+            [
+              ".",
+              0.0006163632497191429
+            ]
+          ]
+        },
+        {
+          "position": 82,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9976776242256165,
+          "predicted_token_prob": 0.9976776242256165,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9976776242256165
+            ],
+            [
+              " i",
+              0.00023002440866548568
+            ],
+            [
+              " \n",
+              0.00017914321506395936
+            ],
+            [
+              "<|end_of_text|>",
+              0.00015809331671334803
+            ],
+            [
+              " and",
+              7.949431892484426e-05
+            ]
+          ]
+        },
+        {
+          "position": 83,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.983185350894928,
+          "predicted_token_prob": 0.983185350894928,
+          "top_5_tokens": [
+            [
+              ",",
+              0.983185350894928
+            ],
+            [
+              ",\n",
+              0.005846234038472176
+            ],
+            [
+              "\n",
+              0.002437073038890958
+            ],
+            [
+              ".\n",
+              0.0016749741043895483
+            ],
+            [
+              ".",
+              0.0006161885103210807
+            ]
+          ]
+        },
+        {
+          "position": 84,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9974810481071472,
+          "predicted_token_prob": 0.9974810481071472,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9974810481071472
+            ],
+            [
+              " i",
+              0.0002606004709377885
+            ],
+            [
+              " \n",
+              0.00019065936794504523
+            ],
+            [
+              "<|end_of_text|>",
+              0.00017910791211761534
+            ],
+            [
+              " and",
+              9.006110485643148e-05
+            ]
+          ]
+        },
+        {
+          "position": 85,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9810795783996582,
+          "predicted_token_prob": 0.9810795783996582,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9810795783996582
+            ],
+            [
+              ",\n",
+              0.006610461976379156
+            ],
+            [
+              "\n",
+              0.0027556505519896746
+            ],
+            [
+              ".\n",
+              0.0018939292058348656
+            ],
+            [
+              ".",
+              0.0006967376102693379
+            ]
+          ]
+        },
+        {
+          "position": 86,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9975641965866089,
+          "predicted_token_prob": 0.9975641965866089,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9975641965866089
+            ],
+            [
+              " i",
+              0.00021606337395496666
+            ],
+            [
+              " \n",
+              0.0001906752586364746
+            ],
+            [
+              "<|end_of_text|>",
+              0.00017912284238263965
+            ],
+            [
+              " and",
+              7.948527490952983e-05
+            ]
+          ]
+        },
+        {
+          "position": 87,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9842149615287781,
+          "predicted_token_prob": 0.9842149615287781,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9842149615287781
+            ],
+            [
+              ",\n",
+              0.0058523560874164104
+            ],
+            [
+              "\n",
+              0.0021529614459723234
+            ],
+            [
+              ".\n",
+              0.0014797073090448976
+            ],
+            [
+              ".",
+              0.0005794616881757975
+            ]
+          ]
+        },
+        {
+          "position": 88,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9978783130645752,
+          "predicted_token_prob": 0.9978783130645752,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9978783130645752
+            ],
+            [
+              " \n",
+              0.00016832331311888993
+            ],
+            [
+              "<|end_of_text|>",
+              0.00014854480104986578
+            ],
+            [
+              " i",
+              0.00014854480104986578
+            ],
+            [
+              ".\n",
+              7.469301635865122e-05
+            ]
+          ]
+        },
+        {
+          "position": 89,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9842751622200012,
+          "predicted_token_prob": 0.9842751622200012,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9842751622200012
+            ],
+            [
+              ",\n",
+              0.00585271418094635
+            ],
+            [
+              "\n",
+              0.002291955752298236
+            ],
+            [
+              ".\n",
+              0.001479797763749957
+            ],
+            [
+              ".",
+              0.0005794971366412938
+            ]
+          ]
+        },
+        {
+          "position": 90,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9981060028076172,
+          "predicted_token_prob": 0.9981060028076172,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9981060028076172
+            ],
+            [
+              " \n",
+              0.00015816120139788836
+            ],
+            [
+              " i",
+              0.00014857869246043265
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013957677583675832
+            ],
+            [
+              ".\n",
+              6.593139551114291e-05
+            ]
+          ]
+        },
+        {
+          "position": 91,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9859372973442078,
+          "predicted_token_prob": 0.9859372973442078,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9859372973442078
+            ],
+            [
+              ",\n",
+              0.005173724144697189
+            ],
+            [
+              "\n",
+              0.0020260594319552183
+            ],
+            [
+              ".\n",
+              0.001308122300542891
+            ],
+            [
+              ".",
+              0.0005453064804896712
+            ]
+          ]
+        },
+        {
+          "position": 92,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9981593489646912,
+          "predicted_token_prob": 0.9981593489646912,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9981593489646912
+            ],
+            [
+              " \n",
+              0.00015816964150872082
+            ],
+            [
+              " i",
+              0.00014858663780614734
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001311272499151528
+            ],
+            [
+              ".\n",
+              7.018735777819529e-05
+            ]
+          ]
+        },
+        {
+          "position": 93,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9850903749465942,
+          "predicted_token_prob": 0.9850903749465942,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9850903749465942
+            ],
+            [
+              ",\n",
+              0.005169279873371124
+            ],
+            [
+              "\n",
+              0.0021548764780163765
+            ],
+            [
+              ".\n",
+              0.001481023384258151
+            ],
+            [
+              ".",
+              0.0005799771170131862
+            ]
+          ]
+        },
+        {
+          "position": 94,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9981377124786377,
+          "predicted_token_prob": 0.9981377124786377,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9981377124786377
+            ],
+            [
+              " i",
+              0.00015816622180864215
+            ],
+            [
+              " \n",
+              0.00015816622180864215
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013112441229168326
+            ],
+            [
+              " and",
+              6.59334909869358e-05
+            ]
+          ]
+        },
+        {
+          "position": 95,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9858216643333435,
+          "predicted_token_prob": 0.9858216643333435,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9858216643333435
+            ],
+            [
+              ",\n",
+              0.005173117388039827
+            ],
+            [
+              "\n",
+              0.0020258217118680477
+            ],
+            [
+              ".\n",
+              0.0013923256192356348
+            ],
+            [
+              ".",
+              0.0005804076790809631
+            ]
+          ]
+        },
+        {
+          "position": 96,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9981266856193542,
+          "predicted_token_prob": 0.9981266856193542,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9981266856193542
+            ],
+            [
+              " \n",
+              0.00015816447557881474
+            ],
+            [
+              " i",
+              0.00014858177746646106
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013957967166788876
+            ],
+            [
+              ".\n",
+              6.593276339117438e-05
+            ]
+          ]
+        },
+        {
+          "position": 97,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9790697693824768,
+          "predicted_token_prob": 0.9790697693824768,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9790697693824768
+            ],
+            [
+              ",\n",
+              0.007475289981812239
+            ],
+            [
+              "\n",
+              0.0031161645893007517
+            ],
+            [
+              ".\n",
+              0.002750005340203643
+            ],
+            [
+              ".",
+              0.0010116704506799579
+            ]
+          ]
+        },
+        {
+          "position": 98,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9982329607009888,
+          "predicted_token_prob": 0.9982329607009888,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9982329607009888
+            ],
+            [
+              " \n",
+              0.0001485975953983143
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013113692693877965
+            ],
+            [
+              " i",
+              0.00012319172674324363
+            ],
+            [
+              ".\n",
+              7.953856402309611e-05
+            ]
+          ]
+        },
+        {
+          "position": 99,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9852334856987,
+          "predicted_token_prob": 0.9852334856987,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9852334856987
+            ],
+            [
+              ",\n",
+              0.005858412478119135
+            ],
+            [
+              "\n",
+              0.0020246130879968405
+            ],
+            [
+              ".\n",
+              0.0013914949959143996
+            ],
+            [
+              ".",
+              0.0005800614017061889
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "success": false,
+      "error": "Scores length (100) doesn't match generated tokens length (2)",
+      "generated_text": "Okay.",
+      "generated_tokens": [
+        33413,
+        13
+      ],
+      "scores_length": 100
+    },
+    {
+      "success": false,
+      "error": "Scores length (100) doesn't match generated tokens length (8)",
+      "generated_text": "I think it's a good idea.",
+      "generated_tokens": [
+        40,
+        1781,
+        433,
+        596,
+        264,
+        1695,
+        4623,
+        13
+      ],
+      "scores_length": 100
+    },
+    {
+      "success": false,
+      "error": "Scores length (100) doesn't match generated tokens length (6)",
+      "generated_text": "I just like the Giants.",
+      "generated_tokens": [
+        40,
+        1120,
+        1093,
+        279,
+        30835,
+        13
+      ],
+      "scores_length": 100
+    }
+  ],
+  "failed_intervention_examples": [
+    {
+      "success": true,
+      "all_greedy_correct": false,
+      "generated_text": "I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,",
+      "generated_tokens": [
+        40,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11,
+        358,
+        11
+      ],
+      "scores_length": 100,
+      "verification_results": [
+        {
+          "position": 0,
+          "predicted_token_id": 358,
+          "actual_token_id": 40,
+          "predicted_token": " I",
+          "actual_token": "I",
+          "is_greedy_correct": false,
+          "actual_token_prob": 1.6394325939472765e-05,
+          "predicted_token_prob": 0.15531106293201447,
+          "top_5_tokens": [
+            [
+              " I",
+              0.15531106293201447
+            ],
+            [
+              " Uh",
+              0.09420092403888702
+            ],
+            [
+              " And",
+              0.08313202857971191
+            ],
+            [
+              " Yeah",
+              0.07336375117301941
+            ],
+            [
+              " Sometimes",
+              0.02872965857386589
+            ]
+          ]
+        },
+        {
+          "position": 1,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.09768756479024887,
+          "predicted_token_prob": 0.09768756479024887,
+          "top_5_tokens": [
+            [
+              ",",
+              0.09768756479024887
+            ],
+            [
+              "'d",
+              0.07607915252447128
+            ],
+            [
+              "'m",
+              0.06713961809873581
+            ],
+            [
+              " think",
+              0.06713961809873581
+            ],
+            [
+              " like",
+              0.05925050377845764
+            ]
+          ]
+        },
+        {
+          "position": 2,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8181977272033691,
+          "predicted_token_prob": 0.8181977272033691,
+          "top_5_tokens": [
+            [
+              " I",
+              0.8181977272033691
+            ],
+            [
+              " uh",
+              0.04615955799818039
+            ],
+            [
+              " i",
+              0.02180423028767109
+            ],
+            [
+              " it",
+              0.010299589484930038
+            ],
+            [
+              " you",
+              0.008021327666938305
+            ]
+          ]
+        },
+        {
+          "position": 3,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.15343926846981049,
+          "predicted_token_prob": 0.15343926846981049,
+          "top_5_tokens": [
+            [
+              ",",
+              0.15343926846981049
+            ],
+            [
+              " like",
+              0.08213012665510178
+            ],
+            [
+              " think",
+              0.043961089104413986
+            ],
+            [
+              " don",
+              0.043961089104413986
+            ],
+            [
+              " go",
+              0.043961089104413986
+            ]
+          ]
+        },
+        {
+          "position": 4,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7149754166603088,
+          "predicted_token_prob": 0.7149754166603088,
+          "top_5_tokens": [
+            [
+              " I",
+              0.7149754166603088
+            ],
+            [
+              " uh",
+              0.10964503884315491
+            ],
+            [
+              " i",
+              0.02159038744866848
+            ],
+            [
+              " it",
+              0.013095231726765633
+            ],
+            [
+              " um",
+              0.010198576375842094
+            ]
+          ]
+        },
+        {
+          "position": 5,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.160835862159729,
+          "predicted_token_prob": 0.160835862159729,
+          "top_5_tokens": [
+            [
+              ",",
+              0.160835862159729
+            ],
+            [
+              " like",
+              0.06704635918140411
+            ],
+            [
+              "'m",
+              0.052215758711099625
+            ],
+            [
+              " think",
+              0.046080246567726135
+            ],
+            [
+              " don",
+              0.040665674954652786
+            ]
+          ]
+        },
+        {
+          "position": 6,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7123727202415466,
+          "predicted_token_prob": 0.7123727202415466,
+          "top_5_tokens": [
+            [
+              " I",
+              0.7123727202415466
+            ],
+            [
+              " uh",
+              0.1092458963394165
+            ],
+            [
+              " i",
+              0.02151179313659668
+            ],
+            [
+              " it",
+              0.01304756198078394
+            ],
+            [
+              " um",
+              0.010161451064050198
+            ]
+          ]
+        },
+        {
+          "position": 7,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.17837147414684296,
+          "predicted_token_prob": 0.17837147414684296,
+          "top_5_tokens": [
+            [
+              ",",
+              0.17837147414684296
+            ],
+            [
+              " like",
+              0.06561920046806335
+            ],
+            [
+              "'m",
+              0.045099370181560516
+            ],
+            [
+              " think",
+              0.045099370181560516
+            ],
+            [
+              " don",
+              0.042366936802864075
+            ]
+          ]
+        },
+        {
+          "position": 8,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7523471117019653,
+          "predicted_token_prob": 0.7523471117019653,
+          "top_5_tokens": [
+            [
+              " I",
+              0.7523471117019653
+            ],
+            [
+              " uh",
+              0.08985505253076553
+            ],
+            [
+              " i",
+              0.02004937082529068
+            ],
+            [
+              " it",
+              0.010731655173003674
+            ],
+            [
+              " um",
+              0.009470652788877487
+            ]
+          ]
+        },
+        {
+          "position": 9,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.2142850011587143,
+          "predicted_token_prob": 0.2142850011587143,
+          "top_5_tokens": [
+            [
+              ",",
+              0.2142850011587143
+            ],
+            [
+              " like",
+              0.06139368191361427
+            ],
+            [
+              "'m",
+              0.047813449054956436
+            ],
+            [
+              " think",
+              0.04219521954655647
+            ],
+            [
+              " don",
+              0.037237148731946945
+            ]
+          ]
+        },
+        {
+          "position": 10,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8105104565620422,
+          "predicted_token_prob": 0.8105104565620422,
+          "top_5_tokens": [
+            [
+              " I",
+              0.8105104565620422
+            ],
+            [
+              " uh",
+              0.05181419849395752
+            ],
+            [
+              " i",
+              0.01682160794734955
+            ],
+            [
+              " it",
+              0.009003957733511925
+            ],
+            [
+              " um",
+              0.007012289483100176
+            ]
+          ]
+        },
+        {
+          "position": 11,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.31139329075813293,
+          "predicted_token_prob": 0.31139329075813293,
+          "top_5_tokens": [
+            [
+              ",",
+              0.31139329075813293
+            ],
+            [
+              " like",
+              0.0477537102997303
+            ],
+            [
+              "'m",
+              0.04214249923825264
+            ],
+            [
+              " think",
+              0.03719062730669975
+            ],
+            [
+              " don",
+              0.03282060846686363
+            ]
+          ]
+        },
+        {
+          "position": 12,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8725103735923767,
+          "predicted_token_prob": 0.8725103735923767,
+          "top_5_tokens": [
+            [
+              " I",
+              0.8725103735923767
+            ],
+            [
+              " uh",
+              0.023251613602042198
+            ],
+            [
+              " i",
+              0.015980584546923637
+            ],
+            [
+              " it",
+              0.006661698687821627
+            ],
+            [
+              " like",
+              0.005878928583115339
+            ]
+          ]
+        },
+        {
+          "position": 13,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.40112727880477905,
+          "predicted_token_prob": 0.40112727880477905,
+          "top_5_tokens": [
+            [
+              ",",
+              0.40112727880477905
+            ],
+            [
+              " like",
+              0.04227850213646889
+            ],
+            [
+              " think",
+              0.0329265333712101
+            ],
+            [
+              "'m",
+              0.0329265333712101
+            ],
+            [
+              " would",
+              0.029057564213871956
+            ]
+          ]
+        },
+        {
+          "position": 14,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9133661985397339,
+          "predicted_token_prob": 0.9133661985397339,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9133661985397339
+            ],
+            [
+              " uh",
+              0.01149758417159319
+            ],
+            [
+              " i",
+              0.01149758417159319
+            ],
+            [
+              " like",
+              0.005431074183434248
+            ],
+            [
+              " it",
+              0.004502518568187952
+            ]
+          ]
+        },
+        {
+          "position": 15,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.5139666795730591,
+          "predicted_token_prob": 0.5139666795730591,
+          "top_5_tokens": [
+            [
+              ",",
+              0.5139666795730591
+            ],
+            [
+              " like",
+              0.032856788486242294
+            ],
+            [
+              " think",
+              0.028996014967560768
+            ],
+            [
+              " would",
+              0.02558889426290989
+            ],
+            [
+              ",\n",
+              0.02558889426290989
+            ]
+          ]
+        },
+        {
+          "position": 16,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9275772571563721,
+          "predicted_token_prob": 0.9275772571563721,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9275772571563721
+            ],
+            [
+              " i",
+              0.010304451920092106
+            ],
+            [
+              " uh",
+              0.007538898382335901
+            ],
+            [
+              " like",
+              0.0055155763402581215
+            ],
+            [
+              " it",
+              0.0033453661017119884
+            ]
+          ]
+        },
+        {
+          "position": 17,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.570097804069519,
+          "predicted_token_prob": 0.570097804069519,
+          "top_5_tokens": [
+            [
+              ",",
+              0.570097804069519
+            ],
+            [
+              " like",
+              0.03216271847486496
+            ],
+            [
+              ",\n",
+              0.028383497148752213
+            ],
+            [
+              " think",
+              0.025048349052667618
+            ],
+            [
+              "\n",
+              0.02210509032011032
+            ]
+          ]
+        },
+        {
+          "position": 18,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9456144571304321,
+          "predicted_token_prob": 0.9456144571304321,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9456144571304321
+            ],
+            [
+              " i",
+              0.007219855673611164
+            ],
+            [
+              " like",
+              0.004661488812416792
+            ],
+            [
+              " uh",
+              0.004661488812416792
+            ],
+            [
+              " it",
+              0.002343944041058421
+            ]
+          ]
+        },
+        {
+          "position": 19,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.6320080161094666,
+          "predicted_token_prob": 0.6320080161094666,
+          "top_5_tokens": [
+            [
+              ",",
+              0.6320080161094666
+            ],
+            [
+              ",\n",
+              0.03146582469344139
+            ],
+            [
+              " like",
+              0.027768494561314583
+            ],
+            [
+              "\n",
+              0.021626124158501625
+            ],
+            [
+              " think",
+              0.0203158650547266
+            ]
+          ]
+        },
+        {
+          "position": 20,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9517514705657959,
+          "predicted_token_prob": 0.9517514705657959,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9517514705657959
+            ],
+            [
+              " i",
+              0.006826444528996944
+            ],
+            [
+              " like",
+              0.004407483618706465
+            ],
+            [
+              " uh",
+              0.0036539321299642324
+            ],
+            [
+              " it",
+              0.0018373125931248069
+            ]
+          ]
+        },
+        {
+          "position": 21,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7127084136009216,
+          "predicted_token_prob": 0.7127084136009216,
+          "top_5_tokens": [
+            [
+              ",",
+              0.7127084136009216
+            ],
+            [
+              ",\n",
+              0.03131422400474548
+            ],
+            [
+              " like",
+              0.021521929651498795
+            ],
+            [
+              "\n",
+              0.021521929651498795
+            ],
+            [
+              " think",
+              0.01676129549741745
+            ]
+          ]
+        },
+        {
+          "position": 22,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9590028524398804,
+          "predicted_token_prob": 0.9590028524398804,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9590028524398804
+            ],
+            [
+              " i",
+              0.006878454703837633
+            ],
+            [
+              " like",
+              0.00391922565177083
+            ],
+            [
+              " uh",
+              0.0025304420851171017
+            ],
+            [
+              " it",
+              0.0014418024802580476
+            ]
+          ]
+        },
+        {
+          "position": 23,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7363663911819458,
+          "predicted_token_prob": 0.7363663911819458,
+          "top_5_tokens": [
+            [
+              ",",
+              0.7363663911819458
+            ],
+            [
+              ",\n",
+              0.032353680580854416
+            ],
+            [
+              "\n",
+              0.022236337885260582
+            ],
+            [
+              " like",
+              0.018434571102261543
+            ],
+            [
+              " think",
+              0.015282796695828438
+            ]
+          ]
+        },
+        {
+          "position": 24,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9677243232727051,
+          "predicted_token_prob": 0.9677243232727051,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9677243232727051
+            ],
+            [
+              " i",
+              0.005754299461841583
+            ],
+            [
+              " like",
+              0.0030800544191151857
+            ],
+            [
+              " uh",
+              0.0017549621406942606
+            ],
+            [
+              " it",
+              0.0010644382564350963
+            ]
+          ]
+        },
+        {
+          "position": 25,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.7822144031524658,
+          "predicted_token_prob": 0.7822144031524658,
+          "top_5_tokens": [
+            [
+              ",",
+              0.7822144031524658
+            ],
+            [
+              ",\n",
+              0.030329743400216103
+            ],
+            [
+              "\n",
+              0.01839591935276985
+            ],
+            [
+              " like",
+              0.014326756820082664
+            ],
+            [
+              " think",
+              0.012643317691981792
+            ]
+          ]
+        },
+        {
+          "position": 26,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9744695425033569,
+          "predicted_token_prob": 0.9744695425033569,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9744695425033569
+            ],
+            [
+              " i",
+              0.00451268907636404
+            ],
+            [
+              " like",
+              0.002269122516736388
+            ],
+            [
+              " uh",
+              0.0012929070508107543
+            ],
+            [
+              " it",
+              0.0008347635739482939
+            ]
+          ]
+        },
+        {
+          "position": 27,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8221604228019714,
+          "predicted_token_prob": 0.8221604228019714,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8221604228019714
+            ],
+            [
+              ",\n",
+              0.028132781386375427
+            ],
+            [
+              "\n",
+              0.019335361197590828
+            ],
+            [
+              " like",
+              0.011016955599188805
+            ],
+            [
+              " think",
+              0.009722430258989334
+            ]
+          ]
+        },
+        {
+          "position": 28,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9792137742042542,
+          "predicted_token_prob": 0.9792137742042542,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9792137742042542
+            ],
+            [
+              " i",
+              0.004259918350726366
+            ],
+            [
+              " like",
+              0.0016682080458849669
+            ],
+            [
+              " uh",
+              0.0009505162597633898
+            ],
+            [
+              " it",
+              0.000613699434325099
+            ]
+          ]
+        },
+        {
+          "position": 29,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8450524210929871,
+          "predicted_token_prob": 0.8450524210929871,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8450524210929871
+            ],
+            [
+              ",\n",
+              0.02891610376536846
+            ],
+            [
+              "\n",
+              0.01753850281238556
+            ],
+            [
+              ".\n",
+              0.009387684054672718
+            ],
+            [
+              " like",
+              0.00828460231423378
+            ]
+          ]
+        },
+        {
+          "position": 30,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9814507961273193,
+          "predicted_token_prob": 0.9814507961273193,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9814507961273193
+            ],
+            [
+              " i",
+              0.0042696502059698105
+            ],
+            [
+              " like",
+              0.0013021697523072362
+            ],
+            [
+              " uh",
+              0.0006547720404341817
+            ],
+            [
+              " it",
+              0.0005428250879049301
+            ]
+          ]
+        },
+        {
+          "position": 31,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8729419112205505,
+          "predicted_token_prob": 0.8729419112205505,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8729419112205505
+            ],
+            [
+              ",\n",
+              0.026360562071204185
+            ],
+            [
+              "\n",
+              0.015019794926047325
+            ],
+            [
+              ".\n",
+              0.008039516396820545
+            ],
+            [
+              " think",
+              0.006664993707090616
+            ]
+          ]
+        },
+        {
+          "position": 32,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.985312283039093,
+          "predicted_token_prob": 0.985312283039093,
+          "top_5_tokens": [
+            [
+              " I",
+              0.985312283039093
+            ],
+            [
+              " i",
+              0.0031360331922769547
+            ],
+            [
+              " like",
+              0.0008984885062091053
+            ],
+            [
+              " uh",
+              0.0005449608433991671
+            ],
+            [
+              " it",
+              0.0004244159208610654
+            ]
+          ]
+        },
+        {
+          "position": 33,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.8901984691619873,
+          "predicted_token_prob": 0.8901984691619873,
+          "top_5_tokens": [
+            [
+              ",",
+              0.8901984691619873
+            ],
+            [
+              ",\n",
+              0.02372298575937748
+            ],
+            [
+              "\n",
+              0.014388717710971832
+            ],
+            [
+              ".\n",
+              0.007701725699007511
+            ],
+            [
+              " think",
+              0.005634702742099762
+            ]
+          ]
+        },
+        {
+          "position": 34,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.987220048904419,
+          "predicted_token_prob": 0.987220048904419,
+          "top_5_tokens": [
+            [
+              " I",
+              0.987220048904419
+            ],
+            [
+              " i",
+              0.003142105182632804
+            ],
+            [
+              " like",
+              0.000701098411809653
+            ],
+            [
+              " uh",
+              0.00042523766751401126
+            ],
+            [
+              " it",
+              0.00035253443638794124
+            ]
+          ]
+        },
+        {
+          "position": 35,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9085694551467896,
+          "predicted_token_prob": 0.9085694551467896,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9085694551467896
+            ],
+            [
+              ",\n",
+              0.021367505192756653
+            ],
+            [
+              "\n",
+              0.012960046529769897
+            ],
+            [
+              ".\n",
+              0.006937013473361731
+            ],
+            [
+              " think",
+              0.004478872288018465
+            ]
+          ]
+        },
+        {
+          "position": 36,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9890839457511902,
+          "predicted_token_prob": 0.9890839457511902,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9890839457511902
+            ],
+            [
+              " i",
+              0.0029573075007647276
+            ],
+            [
+              " like",
+              0.0005470468895509839
+            ],
+            [
+              " uh",
+              0.0003318006929475814
+            ],
+            [
+              " \n",
+              0.0003116978914476931
+            ]
+          ]
+        },
+        {
+          "position": 37,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9192506670951843,
+          "predicted_token_prob": 0.9192506670951843,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9192506670951843
+            ],
+            [
+              ",\n",
+              0.019078439101576805
+            ],
+            [
+              "\n",
+              0.01157165877521038
+            ],
+            [
+              ".\n",
+              0.006593332160264254
+            ],
+            [
+              " think",
+              0.0037567673716694117
+            ]
+          ]
+        },
+        {
+          "position": 38,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9895600080490112,
+          "predicted_token_prob": 0.9895600080490112,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9895600080490112
+            ],
+            [
+              " i",
+              0.0027794702909886837
+            ],
+            [
+              " like",
+              0.000453736080089584
+            ],
+            [
+              " uh",
+              0.0003319603856652975
+            ],
+            [
+              " \n",
+              0.0003319603856652975
+            ]
+          ]
+        },
+        {
+          "position": 39,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9272602200508118,
+          "predicted_token_prob": 0.9272602200508118,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9272602200508118
+            ],
+            [
+              ",\n",
+              0.019244670867919922
+            ],
+            [
+              "\n",
+              0.010300930589437485
+            ],
+            [
+              ".\n",
+              0.0058692931197583675
+            ],
+            [
+              " think",
+              0.0031416064593940973
+            ]
+          ]
+        },
+        {
+          "position": 40,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9918156266212463,
+          "predicted_token_prob": 0.9918156266212463,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9918156266212463
+            ],
+            [
+              " i",
+              0.0021695878822356462
+            ],
+            [
+              " like",
+              0.0003327170852571726
+            ],
+            [
+              " \n",
+              0.0002758321352303028
+            ],
+            [
+              " uh",
+              0.0002591203374322504
+            ]
+          ]
+        },
+        {
+          "position": 41,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9331669211387634,
+          "predicted_token_prob": 0.9331669211387634,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9331669211387634
+            ],
+            [
+              ",\n",
+              0.019367260858416557
+            ],
+            [
+              "\n",
+              0.009738471359014511
+            ],
+            [
+              ".\n",
+              0.005548813380300999
+            ],
+            [
+              " think",
+              0.002621073741465807
+            ]
+          ]
+        },
+        {
+          "position": 42,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9918570518493652,
+          "predicted_token_prob": 0.9918570518493652,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9918570518493652
+            ],
+            [
+              " i",
+              0.002458567963913083
+            ],
+            [
+              " like",
+              0.0003125718212686479
+            ],
+            [
+              " \n",
+              0.00029363404610194266
+            ],
+            [
+              " uh",
+              0.00024343117547687143
+            ]
+          ]
+        },
+        {
+          "position": 43,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9421133995056152,
+          "predicted_token_prob": 0.9421133995056152,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9421133995056152
+            ],
+            [
+              ",\n",
+              0.017255408689379692
+            ],
+            [
+              "\n",
+              0.009236154146492481
+            ],
+            [
+              ".\n",
+              0.004943757317960262
+            ],
+            [
+              " think",
+              0.002060864819213748
+            ]
+          ]
+        },
+        {
+          "position": 44,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9939587116241455,
+          "predicted_token_prob": 0.9939587116241455,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9939587116241455
+            ],
+            [
+              " i",
+              0.0016933277947828174
+            ],
+            [
+              " \n",
+              0.00027642815257422626
+            ],
+            [
+              "<|end_of_text|>",
+              0.00020223915635142475
+            ],
+            [
+              " uh",
+              0.00020223915635142475
+            ]
+          ]
+        },
+        {
+          "position": 45,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9472924470901489,
+          "predicted_token_prob": 0.9472924470901489,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9472924470901489
+            ],
+            [
+              ",\n",
+              0.015311555936932564
+            ],
+            [
+              "\n",
+              0.008195685222744942
+            ],
+            [
+              ".\n",
+              0.004669760819524527
+            ],
+            [
+              " think",
+              0.001946645905263722
+            ]
+          ]
+        },
+        {
+          "position": 46,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9942774176597595,
+          "predicted_token_prob": 0.9942774176597595,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9942774176597595
+            ],
+            [
+              " i",
+              0.0015912442468106747
+            ],
+            [
+              " \n",
+              0.00029435058240778744
+            ],
+            [
+              "<|end_of_text|>",
+              0.00021535149426199496
+            ],
+            [
+              " uh",
+              0.0001677159161772579
+            ]
+          ]
+        },
+        {
+          "position": 47,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9517607688903809,
+          "predicted_token_prob": 0.9517607688903809,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9517607688903809
+            ],
+            [
+              ",\n",
+              0.015383780002593994
+            ],
+            [
+              "\n",
+              0.007266783155500889
+            ],
+            [
+              ".\n",
+              0.004407526459544897
+            ],
+            [
+              " think",
+              0.001726012327708304
+            ]
+          ]
+        },
+        {
+          "position": 48,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9945070147514343,
+          "predicted_token_prob": 0.9945070147514343,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9945070147514343
+            ],
+            [
+              " i",
+              0.0014951807679608464
+            ],
+            [
+              " \n",
+              0.0002944185398519039
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002154012181563303
+            ],
+            [
+              " uh",
+              0.0001480429491493851
+            ]
+          ]
+        },
+        {
+          "position": 49,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9519895315170288,
+          "predicted_token_prob": 0.9519895315170288,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9519895315170288
+            ],
+            [
+              ",\n",
+              0.015387477353215218
+            ],
+            [
+              "\n",
+              0.00726852985098958
+            ],
+            [
+              ".\n",
+              0.004692915361374617
+            ],
+            [
+              " think",
+              0.0016218282980844378
+            ]
+          ]
+        },
+        {
+          "position": 50,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9945874214172363,
+          "predicted_token_prob": 0.9945874214172363,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9945874214172363
+            ],
+            [
+              " i",
+              0.0013195991050451994
+            ],
+            [
+              " \n",
+              0.0003336468944326043
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002293119323439896
+            ],
+            [
+              " uh",
+              0.00015760363021399826
+            ]
+          ]
+        },
+        {
+          "position": 51,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9584653973579407,
+          "predicted_token_prob": 0.9584653973579407,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9584653973579407
+            ],
+            [
+              ",\n",
+              0.013671774417161942
+            ],
+            [
+              "\n",
+              0.006066813133656979
+            ],
+            [
+              ".\n",
+              0.0041696554981172085
+            ],
+            [
+              " think",
+              0.0013536890037357807
+            ]
+          ]
+        },
+        {
+          "position": 52,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9947223663330078,
+          "predicted_token_prob": 0.9947223663330078,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9947223663330078
+            ],
+            [
+              " i",
+              0.0012398167746141553
+            ],
+            [
+              " \n",
+              0.000333692179992795
+            ],
+            [
+              "<|end_of_text|>",
+              0.00022934304433874786
+            ],
+            [
+              " uh",
+              0.00015762502152938396
+            ]
+          ]
+        },
+        {
+          "position": 53,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9571157097816467,
+          "predicted_token_prob": 0.9571157097816467,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9571157097816467
+            ],
+            [
+              ",\n",
+              0.015470334328711033
+            ],
+            [
+              "\n",
+              0.006448994856327772
+            ],
+            [
+              ".\n",
+              0.004163783974945545
+            ],
+            [
+              " think",
+              0.0012698824284598231
+            ]
+          ]
+        },
+        {
+          "position": 54,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9954902529716492,
+          "predicted_token_prob": 0.9954902529716492,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9954902529716492
+            ],
+            [
+              " i",
+              0.0010949791176244617
+            ],
+            [
+              " \n",
+              0.00029470963636413217
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002295200974913314
+            ],
+            [
+              " like",
+              0.00012285324919503182
+            ]
+          ]
+        },
+        {
+          "position": 55,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9621955156326294,
+          "predicted_token_prob": 0.9621955156326294,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9621955156326294
+            ],
+            [
+              ",\n",
+              0.013724981807172298
+            ],
+            [
+              "\n",
+              0.005721423774957657
+            ],
+            [
+              ".\n",
+              0.003470218973234296
+            ],
+            [
+              ".",
+              0.0010583569528535008
+            ]
+          ]
+        },
+        {
+          "position": 56,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9958906173706055,
+          "predicted_token_prob": 0.9958906173706055,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9958906173706055
+            ],
+            [
+              " i",
+              0.0008014260674826801
+            ],
+            [
+              " \n",
+              0.000294828147161752
+            ],
+            [
+              "<|end_of_text|>",
+              0.00022961240028962493
+            ],
+            [
+              " uh",
+              0.00011545636516530067
+            ]
+          ]
+        },
+        {
+          "position": 57,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9667935967445374,
+          "predicted_token_prob": 0.9667935967445374,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9667935967445374
+            ],
+            [
+              ",\n",
+              0.012170135043561459
+            ],
+            [
+              "\n",
+              0.005073267035186291
+            ],
+            [
+              ".\n",
+              0.0030770921148359776
+            ],
+            [
+              ".",
+              0.0009384600562043488
+            ]
+          ]
+        },
+        {
+          "position": 58,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9959608912467957,
+          "predicted_token_prob": 0.9959608912467957,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9959608912467957
+            ],
+            [
+              " i",
+              0.0007529232534579933
+            ],
+            [
+              " \n",
+              0.00031386507907882333
+            ],
+            [
+              "<|end_of_text|>",
+              0.00022962861112318933
+            ],
+            [
+              ".\n",
+              0.00010846887016668916
+            ]
+          ]
+        },
+        {
+          "position": 59,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9627937078475952,
+          "predicted_token_prob": 0.9627937078475952,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9627937078475952
+            ],
+            [
+              ",\n",
+              0.013733514584600925
+            ],
+            [
+              "\n",
+              0.005724980961531401
+            ],
+            [
+              ".\n",
+              0.003696325235068798
+            ],
+            [
+              ".",
+              0.0010590149322524667
+            ]
+          ]
+        },
+        {
+          "position": 60,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9959957599639893,
+          "predicted_token_prob": 0.9959957599639893,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9959957599639893
+            ],
+            [
+              " i",
+              0.0007529496215283871
+            ],
+            [
+              " \n",
+              0.000313876080326736
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002296366437803954
+            ],
+            [
+              ".\n",
+              0.00010847266821656376
+            ]
+          ]
+        },
+        {
+          "position": 61,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9672360420227051,
+          "predicted_token_prob": 0.9672360420227051,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9672360420227051
+            ],
+            [
+              ",\n",
+              0.012175705283880234
+            ],
+            [
+              "\n",
+              0.004768074490129948
+            ],
+            [
+              ".\n",
+              0.0032770466059446335
+            ],
+            [
+              ".",
+              0.0009388895705342293
+            ]
+          ]
+        },
+        {
+          "position": 62,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9958772659301758,
+          "predicted_token_prob": 0.9958772659301758,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9958772659301758
+            ],
+            [
+              " i",
+              0.0008014152990654111
+            ],
+            [
+              " \n",
+              0.0003556259034667164
+            ],
+            [
+              "<|end_of_text|>",
+              0.00022960932983551174
+            ],
+            [
+              " uh",
+              0.00010845976794371381
+            ]
+          ]
+        },
+        {
+          "position": 63,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9633790850639343,
+          "predicted_token_prob": 0.9633790850639343,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9633790850639343
+            ],
+            [
+              ",\n",
+              0.013741863891482353
+            ],
+            [
+              "\n",
+              0.005381391849368811
+            ],
+            [
+              ".\n",
+              0.003698572516441345
+            ],
+            [
+              ".",
+              0.0010596588253974915
+            ]
+          ]
+        },
+        {
+          "position": 64,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9962961077690125,
+          "predicted_token_prob": 0.9962961077690125,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9962961077690125
+            ],
+            [
+              " i",
+              0.0007075439789332449
+            ],
+            [
+              " \n",
+              0.00031397072598338127
+            ],
+            [
+              "<|end_of_text|>",
+              0.00020271474204491824
+            ],
+            [
+              " uh",
+              0.0001155033751274459
+            ]
+          ]
+        },
+        {
+          "position": 65,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9701600074768066,
+          "predicted_token_prob": 0.9701600074768066,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9701600074768066
+            ],
+            [
+              ",\n",
+              0.010777504183351994
+            ],
+            [
+              "\n",
+              0.004782488569617271
+            ],
+            [
+              ".\n",
+              0.003087806748226285
+            ],
+            [
+              ".",
+              0.00088467140449211
+            ]
+          ]
+        },
+        {
+          "position": 66,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9963983297348022,
+          "predicted_token_prob": 0.9963983297348022,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9963983297348022
+            ],
+            [
+              " i",
+              0.0006647442351095378
+            ],
+            [
+              " \n",
+              0.000294978468446061
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002027355512836948
+            ],
+            [
+              " uh",
+              0.00010194183414569125
+            ]
+          ]
+        },
+        {
+          "position": 67,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9710929989814758,
+          "predicted_token_prob": 0.9710929989814758,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9710929989814758
+            ],
+            [
+              ",\n",
+              0.01078786887228489
+            ],
+            [
+              "\n",
+              0.004497052635997534
+            ],
+            [
+              ".\n",
+              0.002903515473008156
+            ],
+            [
+              ".",
+              0.0008855222258716822
+            ]
+          ]
+        },
+        {
+          "position": 68,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.996585488319397,
+          "predicted_token_prob": 0.996585488319397,
+          "top_5_tokens": [
+            [
+              " I",
+              0.996585488319397
+            ],
+            [
+              " i",
+              0.0005867449217475951
+            ],
+            [
+              " \n",
+              0.00029503388213925064
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002027736190939322
+            ],
+            [
+              ".\n",
+              9.578347817296162e-05
+            ]
+          ]
+        },
+        {
+          "position": 69,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9714979529380798,
+          "predicted_token_prob": 0.9714979529380798,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9714979529380798
+            ],
+            [
+              ",\n",
+              0.010792367160320282
+            ],
+            [
+              "\n",
+              0.004226351622492075
+            ],
+            [
+              ".\n",
+              0.0027287376578897238
+            ],
+            [
+              ".",
+              0.0008858914952725172
+            ]
+          ]
+        },
+        {
+          "position": 70,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9970749616622925,
+          "predicted_token_prob": 0.9970749616622925,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9970749616622925
+            ],
+            [
+              " i",
+              0.00045718185720033944
+            ],
+            [
+              " \n",
+              0.0002604943874757737
+            ],
+            [
+              "<|end_of_text|>",
+              0.00019058174802921712
+            ],
+            [
+              ".\n",
+              8.457014337182045e-05
+            ]
+          ]
+        },
+        {
+          "position": 71,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9733400940895081,
+          "predicted_token_prob": 0.9733400940895081,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9733400940895081
+            ],
+            [
+              ",\n",
+              0.00954229012131691
+            ],
+            [
+              "\n",
+              0.004234365653246641
+            ],
+            [
+              ".\n",
+              0.0027339118532836437
+            ],
+            [
+              ".",
+              0.0009448147029615939
+            ]
+          ]
+        },
+        {
+          "position": 72,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9971342086791992,
+          "predicted_token_prob": 0.9971342086791992,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9971342086791992
+            ],
+            [
+              " i",
+              0.0004295081307645887
+            ],
+            [
+              " \n",
+              0.0002605098416097462
+            ],
+            [
+              "<|end_of_text|>",
+              0.00019059308397118002
+            ],
+            [
+              ".\n",
+              9.002978913486004e-05
+            ]
+          ]
+        },
+        {
+          "position": 73,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9760754108428955,
+          "predicted_token_prob": 0.9760754108428955,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9760754108428955
+            ],
+            [
+              ",\n",
+              0.008444706909358501
+            ],
+            [
+              "\n",
+              0.0037473158445209265
+            ],
+            [
+              ".\n",
+              0.002419449156150222
+            ],
+            [
+              ".",
+              0.000890065566636622
+            ]
+          ]
+        },
+        {
+          "position": 74,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9971464276313782,
+          "predicted_token_prob": 0.9971464276313782,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9971464276313782
+            ],
+            [
+              " i",
+              0.00040349047048948705
+            ],
+            [
+              " \n",
+              0.0002773146843537688
+            ],
+            [
+              "<|end_of_text|>",
+              0.00020288776431698352
+            ],
+            [
+              " and",
+              8.457620424451306e-05
+            ]
+          ]
+        },
+        {
+          "position": 75,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9761554002761841,
+          "predicted_token_prob": 0.9761554002761841,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9761554002761841
+            ],
+            [
+              ",\n",
+              0.00844539888203144
+            ],
+            [
+              "\n",
+              0.003747622948139906
+            ],
+            [
+              ".\n",
+              0.002419647527858615
+            ],
+            [
+              ".",
+              0.0008901385008357465
+            ]
+          ]
+        },
+        {
+          "position": 76,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9972533583641052,
+          "predicted_token_prob": 0.9972533583641052,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9972533583641052
+            ],
+            [
+              " i",
+              0.0003345412260387093
+            ],
+            [
+              " \n",
+              0.0002773444284684956
+            ],
+            [
+              "<|end_of_text|>",
+              0.00019061585771851242
+            ],
+            [
+              ".\n",
+              9.00405430002138e-05
+            ]
+          ]
+        },
+        {
+          "position": 77,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9748398661613464,
+          "predicted_token_prob": 0.9748398661613464,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9748398661613464
+            ],
+            [
+              ",\n",
+              0.009556992910802364
+            ],
+            [
+              "\n",
+              0.003742572385817766
+            ],
+            [
+              ".\n",
+              0.002572230063378811
+            ],
+            [
+              ".",
+              0.0009462705347687006
+            ]
+          ]
+        },
+        {
+          "position": 78,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.997509241104126,
+          "predicted_token_prob": 0.997509241104126,
+          "top_5_tokens": [
+            [
+              " I",
+              0.997509241104126
+            ],
+            [
+              " i",
+              0.0002774155873339623
+            ],
+            [
+              " \n",
+              0.00026060783420689404
+            ],
+            [
+              "<|end_of_text|>",
+              0.00016826106002554297
+            ],
+            [
+              " and",
+              8.460697426926345e-05
+            ]
+          ]
+        },
+        {
+          "position": 79,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9774109721183777,
+          "predicted_token_prob": 0.9774109721183777,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9774109721183777
+            ],
+            [
+              ",\n",
+              0.008456261828541756
+            ],
+            [
+              "\n",
+              0.003311519743874669
+            ],
+            [
+              ".\n",
+              0.0022759719286113977
+            ],
+            [
+              ".",
+              0.0008912834455259144
+            ]
+          ]
+        },
+        {
+          "position": 80,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9972719550132751,
+          "predicted_token_prob": 0.9972719550132751,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9972719550132751
+            ],
+            [
+              " \n",
+              0.0002773496089503169
+            ],
+            [
+              " i",
+              0.0002605458430480212
+            ],
+            [
+              "<|end_of_text|>",
+              0.0002029133029282093
+            ],
+            [
+              ".\n",
+              9.584945655660704e-05
+            ]
+          ]
+        },
+        {
+          "position": 81,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9772029519081116,
+          "predicted_token_prob": 0.9772029519081116,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9772029519081116
+            ],
+            [
+              ",\n",
+              0.008454462513327599
+            ],
+            [
+              "\n",
+              0.0035243441816419363
+            ],
+            [
+              ".\n",
+              0.002422244055196643
+            ],
+            [
+              ".",
+              0.0008910937467589974
+            ]
+          ]
+        },
+        {
+          "position": 82,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9976531863212585,
+          "predicted_token_prob": 0.9976531863212585,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9976531863212585
+            ],
+            [
+              " \n",
+              0.0002448537270538509
+            ],
+            [
+              " i",
+              0.0002029908646363765
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001682853326201439
+            ],
+            [
+              " and",
+              8.461918332614005e-05
+            ]
+          ]
+        },
+        {
+          "position": 83,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9800969958305359,
+          "predicted_token_prob": 0.9800969958305359,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9800969958305359
+            ],
+            [
+              ",\n",
+              0.007483133114874363
+            ],
+            [
+              "\n",
+              0.0031194339971989393
+            ],
+            [
+              ".\n",
+              0.002014057943597436
+            ],
+            [
+              ".",
+              0.0007887164247222245
+            ]
+          ]
+        },
+        {
+          "position": 84,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9976810216903687,
+          "predicted_token_prob": 0.9976810216903687,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9976810216903687
+            ],
+            [
+              " \n",
+              0.000230025194468908
+            ],
+            [
+              " i",
+              0.0002160886797355488
+            ],
+            [
+              "<|end_of_text|>",
+              0.00017914381169248372
+            ],
+            [
+              " and",
+              8.462154801236466e-05
+            ]
+          ]
+        },
+        {
+          "position": 85,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9814474582672119,
+          "predicted_token_prob": 0.9814474582672119,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9814474582672119
+            ],
+            [
+              ",\n",
+              0.007493443787097931
+            ],
+            [
+              "\n",
+              0.0027566838543862104
+            ],
+            [
+              ".\n",
+              0.0017798489425331354
+            ],
+            [
+              ".",
+              0.000654769828543067
+            ]
+          ]
+        },
+        {
+          "position": 86,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9979617595672607,
+          "predicted_token_prob": 0.9979617595672607,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9979617595672607
+            ],
+            [
+              " \n",
+              0.00021614949218928814
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001581383403390646
+            ],
+            [
+              " i",
+              0.0001581383403390646
+            ],
+            [
+              " and",
+              7.951695442898199e-05
+            ]
+          ]
+        },
+        {
+          "position": 87,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9804257750511169,
+          "predicted_token_prob": 0.9804257750511169,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9804257750511169
+            ],
+            [
+              ",\n",
+              0.007485643029212952
+            ],
+            [
+              "\n",
+              0.0029314199928194284
+            ],
+            [
+              ".\n",
+              0.002014733385294676
+            ],
+            [
+              ".",
+              0.0007411790429614484
+            ]
+          ]
+        },
+        {
+          "position": 88,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9980667233467102,
+          "predicted_token_prob": 0.9980667233467102,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9980667233467102
+            ],
+            [
+              " \n",
+              0.00020307500381022692
+            ],
+            [
+              "<|end_of_text|>",
+              0.00014857284259051085
+            ],
+            [
+              " i",
+              0.00013957128976471722
+            ],
+            [
+              " and",
+              7.01808457961306e-05
+            ]
+          ]
+        },
+        {
+          "position": 89,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9833769798278809,
+          "predicted_token_prob": 0.9833769798278809,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9833769798278809
+            ],
+            [
+              ",\n",
+              0.006625941954553127
+            ],
+            [
+              "\n",
+              0.0024375480134040117
+            ],
+            [
+              ".\n",
+              0.001675300532951951
+            ],
+            [
+              ".",
+              0.0006560570909641683
+            ]
+          ]
+        },
+        {
+          "position": 90,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9983091354370117,
+          "predicted_token_prob": 0.9983091354370117,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9983091354370117
+            ],
+            [
+              " \n",
+              0.0001792566035874188
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013114693865645677
+            ],
+            [
+              " i",
+              0.0001087246200768277
+            ],
+            [
+              " and",
+              6.594481237698346e-05
+            ]
+          ]
+        },
+        {
+          "position": 91,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9835453629493713,
+          "predicted_token_prob": 0.9835453629493713,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9835453629493713
+            ],
+            [
+              ",\n",
+              0.006627076305449009
+            ],
+            [
+              "\n",
+              0.0022902563214302063
+            ],
+            [
+              ".\n",
+              0.0016755873803049326
+            ],
+            [
+              ".",
+              0.0006561694317497313
+            ]
+          ]
+        },
+        {
+          "position": 92,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9980854988098145,
+          "predicted_token_prob": 0.9980854988098145,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9980854988098145
+            ],
+            [
+              " \n",
+              0.0002161762968171388
+            ],
+            [
+              "<|end_of_text|>",
+              0.0001485756365582347
+            ],
+            [
+              " i",
+              0.0001311175583396107
+            ],
+            [
+              " and",
+              7.470852142432705e-05
+            ]
+          ]
+        },
+        {
+          "position": 93,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9823421835899353,
+          "predicted_token_prob": 0.9823421835899353,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9823421835899353
+            ],
+            [
+              ",\n",
+              0.0066189696080982685
+            ],
+            [
+              "\n",
+              0.00259202579036355
+            ],
+            [
+              ".\n",
+              0.002018671715632081
+            ],
+            [
+              ".",
+              0.0007905231905169785
+            ]
+          ]
+        },
+        {
+          "position": 94,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9983024597167969,
+          "predicted_token_prob": 0.9983024597167969,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9983024597167969
+            ],
+            [
+              " \n",
+              0.0001908163831103593
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013114605098962784
+            ],
+            [
+              " i",
+              0.00012320031237322837
+            ],
+            [
+              ".\n",
+              7.019742770353332e-05
+            ]
+          ]
+        },
+        {
+          "position": 95,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9842153191566467,
+          "predicted_token_prob": 0.9842153191566467,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9842153191566467
+            ],
+            [
+              ",\n",
+              0.00663159042596817
+            ],
+            [
+              "\n",
+              0.002152962377294898
+            ],
+            [
+              ".\n",
+              0.0015751407481729984
+            ],
+            [
+              ".",
+              0.0006566164083778858
+            ]
+          ]
+        },
+        {
+          "position": 96,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9983237385749817,
+          "predicted_token_prob": 0.9983237385749817,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9983237385749817
+            ],
+            [
+              " \n",
+              0.00019082044309470803
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013960721844341606
+            ],
+            [
+              " i",
+              0.00010213882342213765
+            ],
+            [
+              ".\n",
+              6.594578007934615e-05
+            ]
+          ]
+        },
+        {
+          "position": 97,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9822247624397278,
+          "predicted_token_prob": 0.9822247624397278,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9822247624397278
+            ],
+            [
+              ",\n",
+              0.006618178449571133
+            ],
+            [
+              "\n",
+              0.002591715892776847
+            ],
+            [
+              ".\n",
+              0.0024346918798983097
+            ],
+            [
+              ".",
+              0.0009534389828331769
+            ]
+          ]
+        },
+        {
+          "position": 98,
+          "predicted_token_id": 358,
+          "actual_token_id": 358,
+          "predicted_token": " I",
+          "actual_token": " I",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9983262419700623,
+          "predicted_token_prob": 0.9983262419700623,
+          "top_5_tokens": [
+            [
+              " I",
+              0.9983262419700623
+            ],
+            [
+              " \n",
+              0.00019082092330791056
+            ],
+            [
+              "<|end_of_text|>",
+              0.00013114917965140194
+            ],
+            [
+              " i",
+              0.00010872648272197694
+            ],
+            [
+              ".\n",
+              7.472654397133738e-05
+            ]
+          ]
+        },
+        {
+          "position": 99,
+          "predicted_token_id": 11,
+          "actual_token_id": 11,
+          "predicted_token": ",",
+          "actual_token": ",",
+          "is_greedy_correct": true,
+          "actual_token_prob": 0.9861167073249817,
+          "predicted_token_prob": 0.9861167073249817,
+          "top_5_tokens": [
+            [
+              ",",
+              0.9861167073249817
+            ],
+            [
+              ",\n",
+              0.005863664671778679
+            ],
+            [
+              "\n",
+              0.0017883166437968612
+            ],
+            [
+              ".\n",
+              0.001482566469348967
+            ],
+            [
+              ".",
+              0.0006180256605148315
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "success": false,
+      "error": "Scores length (100) doesn't match generated tokens length (2)",
+      "generated_text": "Okay.",
+      "generated_tokens": [
+        33413,
+        13
+      ],
+      "scores_length": 100
+    },
+    {
+      "success": false,
+      "error": "Scores length (100) doesn't match generated tokens length (8)",
+      "generated_text": "I think that's a good point.",
+      "generated_tokens": [
+        40,
+        1781,
+        430,
+        596,
+        264,
+        1695,
+        1486,
+        13
+      ],
+      "scores_length": 100
+    },
+    {
+      "success": false,
+      "error": "Scores length (100) doesn't match generated tokens length (6)",
+      "generated_text": "I just like the Giants.",
+      "generated_tokens": [
+        40,
+        1120,
+        1093,
+        279,
+        30835,
+        13
+      ],
+      "scores_length": 100
+    }
+  ]
+}

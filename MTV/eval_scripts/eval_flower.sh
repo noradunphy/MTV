@@ -14,4 +14,5 @@ python3 -m mtv_eval \
     --is_eval True \
     --result_folder ./ \
     --cur_mode interv \
-    --experiment_name temp
+    --experiment_name temp \
+    --zero_shot

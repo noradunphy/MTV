@@ -1,0 +1,63 @@
+
+[INFO] Reference sets:
+
+sd (10 utterances):
+  1. I really appreciated the, the whole, uh, English class where the, uh, the, uh, fellow just wouldn't do it, you know,
+  2. you, you have a step
+  3. I have a Schnauzer
+  4. And, uh, it, it works just fine.
+  5. I'm, I'm sort of mixed on this.
+  6. and
+  7. and I've never painted anyth,
+  8. Oh, so did I.
+  9. and the next thing I know there are policemen all around my house.
+  10. and he gave to all his students.
+
+sv (10 utterances):
+  1. just community activity.
+  2. It's, uh, it's a new, uh, form I think,
+  3. and we look like wh, we don't have anything.
+  4. Uh, I don't think they should abolish it.
+  5. and you got to divide it two different categories whether you live in the city or whether you live in a more rural place like I do.
+  6. and the parents do not let the teachers discipline the children the way that they need to be
+  7. but,
+  8. seems like it's, it's, it's the right thing to do.
+  9. We pay far too much in taxes.
+  10. It's that time of the year.
+
+b (10 utterances):
+  1. Uhhuh.
+  2. Yeah,
+  3. Uhhuh.
+  4. Sure.
+  5. Uhhuh.
+  6. Yes.
+  7. Uhhuh.
+  8. Yeah.
+  9. Yeah.
+  10. Uhhuh.
+
+aa (10 utterances):
+  1. Yeah.
+  2. for certain.
+  3. Oh, same here.
+  4. It does,
+  5. Yes.
+  6. Right.
+  7. yeah.
+  8. yeah.
+  9. I, I think so.
+  10. Yeah,
+
+% (10 utterances):
+  1. Uh, bo,
+  2. but, then whenever, you know,
+  3. I, I,
+  4. I, I, well,
+  5. so,
+  6. Oh, the,
+  7. but,.
+  8. Uh.
+  9. it's,
+  10. Um.
+
