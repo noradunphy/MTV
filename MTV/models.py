@@ -437,8 +437,10 @@ class TextModelHelper(ModelHelper):
         decoded = self.tokenizer.batch_decode(
             gen_tokens, skip_special_tokens=True
         )[0].strip()
-        from mtv_utils import extract_first_turn
-        cleaned_output = extract_first_turn(decoded).lstrip('0123456789: ')
+        #from mtv_utils import extract_first_turn
+        # Preserve leading digits (e.g., "1", "2", etc.) which are crucial for answers in
+        # SWDA multiple-choice. Only trim leading colons and whitespace instead.
+        cleaned_output = decoded
 
         if return_scores:
             # If we requested scores but outputs is Tensor (shouldn't happen), return None for scores.
@@ -530,7 +532,7 @@ class TextModelHelper(ModelHelper):
                     )
                     
                     # 2) PPL ON TARGET via autoregressive loop
-                    ppl = self._compute_autoregressive_perplexity(model, tok, prefix_input, target_text, device)
+                    #ppl = self._compute_autoregressive_perplexity(model, tok, prefix_input, target_text, device)
                     
         else:
             # Clean branch - no intervention
@@ -541,9 +543,9 @@ class TextModelHelper(ModelHelper):
                 )
                 
                 # 2) PPL ON TARGET via autoregressive loop
-                ppl = self._compute_autoregressive_perplexity(model, tok, prefix_input, target_text, device)
+                #ppl = self._compute_autoregressive_perplexity(model, tok, prefix_input, target_text, device)
 
-        return gen_text, ppl
+        return gen_text, None
 
 
 

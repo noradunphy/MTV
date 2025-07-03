@@ -42,7 +42,7 @@ def get_format_func(cur_dataset, zero_shot=False):
     if cur_dataset == "dtd":
         return format_dtd
     if cur_dataset == "swda" or cur_dataset == "swda_nextutt":
-        return format_swda_next_utt
+        return format_swda_multiple_choice
 
 
 ####All return format will be in the form (Text, list of images, Answer, Question_id)
@@ -210,7 +210,7 @@ def format_swda_next_utt(all_data, cur_item=None, num_shot=0, model_helper=None,
 
     # Get N random examples from the same dialog act class if num_shot > 0
     prompt = ""
-    if num_shot > 0 and split == "train":
+    if num_shot > 0:
         # Get examples with the same dialog act
         same_act_examples = [ex for ex in all_data if ex.get('dialog_act') == data.get('dialog_act') and ex != data]
         if same_act_examples:
@@ -236,3 +236,134 @@ def format_swda_next_utt(all_data, cur_item=None, num_shot=0, model_helper=None,
     utt_id = data.get("utterance_id", -1)
     
     return prompt, [], target, utt_id
+
+def format_swda_multiple_choice(filtered_dataset, full_dataset, cur_item=None, num_shot=0, model_helper=None, split="train", mcq_options=None):
+    """
+    Format function for SWDA multiple choice with letter generation.
+    
+    Args:
+        all_data: Dataset filtered to target dialogue act (for correct answers)
+        full_dataset: Complete dataset with all acts (for distractors)
+        cur_item: Current example to format
+        ...
+    """
+    if cur_item is None:
+        data = random.sample(filtered_dataset, 1)[0]
+    else:
+        data = cur_item
+
+    # Group ALL examples by dialogue act once (using full dataset)
+    act_to_examples = {}
+    for ex in full_dataset:  # Use full_dataset here
+        act = ex.get('dialog_act', 'o')
+        if act not in act_to_examples:
+            act_to_examples[act] = []
+        act_to_examples[act].append(ex)
+
+    prompt = ""
+    if num_shot > 0:
+        # Get examples with the same act as current example
+        target_act = data.get('dialog_act', 'o')
+        
+        # For each few-shot example
+        for i in range(num_shot):
+            # Get examples from target act, excluding current example and identical responses
+            same_act_examples = [e for e in filtered_dataset 
+                               if e != data 
+                               and e.get('response', '').strip() != data.get('response', '').strip()]
+            
+            if same_act_examples:
+                # Sample one correct answer from target act
+                correct_example = random.choice(same_act_examples)
+                correct_utterance = correct_example.get('response', '')
+            else:
+                correct_utterance = "I understand."
+
+            # Get other acts to sample distractors from
+            other_acts = [act for act in act_to_examples.keys() if act != target_act]
+            if other_acts:
+                # Sample 3 different acts and get one utterance from each
+                sampled_acts = random.sample(other_acts, min(3, len(other_acts)))
+                distractor_utterances = []
+                for act in sampled_acts:
+                    if act_to_examples[act]:
+                        distractor = random.choice(act_to_examples[act])
+                        distractor_utterances.append(distractor.get('response', ''))
+            else:
+                distractor_utterances = ["I see.", "That's interesting.", "Go on."]
+
+            # Create and shuffle options
+            options = [correct_utterance] + distractor_utterances[:3]
+            random.shuffle(options)
+
+            # Ensure exactly 4 options
+            while len(options) < 4:
+                options.append("I see.")
+            options = options[:4]
+
+            # Find correct number after shuffling
+            correct_number = options.index(correct_utterance) + 1
+
+            # Format the example
+            context = correct_example.get("text", "").strip()
+            if context:
+                context_lines = context.split('\n')
+                formatted_context = '\n'.join([line.strip() for line in context_lines if line.strip()])
+                prompt += f"{formatted_context}\n"
+
+            prompt += f"{correct_example['caller']}: 1) {options[0]} 2) {options[1]} 3) {options[2]} 4) {options[3]}\n"
+            prompt += f"Response: {correct_number}\n\n"
+
+    # Add the current query
+    context = data.get("text", "").strip()
+    if context:
+        context_lines = context.split('\n')
+        formatted_context = '\n'.join([line.strip() for line in context_lines if line.strip()])
+        prompt += f"{formatted_context}\n"
+
+    # Handle current example options
+    target_act = data.get('dialog_act', 'o')
+    
+    if filtered_dataset is None:
+        filtered_dataset = [ex for ex in full_dataset if ex.get('dialog_act') == target_act]
+
+    # Get pool of target act examples (excluding current)
+    same_act_examples = [e for e in filtered_dataset
+                        if e != data 
+                        and e.get('response', '').strip() != data.get('response', '').strip()]
+    
+    if same_act_examples:
+        correct_example = random.choice(same_act_examples)
+        correct_utterance = correct_example.get('response', '')
+    else:
+        correct_utterance = "I understand."
+
+    # Get distractors from other acts
+    other_acts = [act for act in act_to_examples.keys() if act != target_act]
+    if other_acts:
+        sampled_acts = random.sample(other_acts, min(3, len(other_acts)))
+        distractor_utterances = []
+        for act in sampled_acts:
+            if act_to_examples[act]:
+                distractor = random.choice(act_to_examples[act])
+                distractor_utterances.append(distractor.get('response', ''))
+    else:
+        distractor_utterances = ["I see.", "That's interesting.", "Go on."]
+
+    # Create and shuffle options
+    options = [correct_utterance] + distractor_utterances[:3]
+    random.shuffle(options)
+
+    # Ensure exactly 4 options
+    while len(options) < 4:
+        options.append("I see.")
+    options = options[:4]
+
+    # Find correct number after shuffling
+    target_number = options.index(correct_utterance) + 1
+
+    # Format final prompt
+    prompt += f"{data['caller']}: 1) {options[0]} 2) {options[1]} 3) {options[2]} 4) {options[3]}\n"
+    prompt += "Response:"
+
+    return prompt, [], str(target_number), data.get("utterance_id", -1)

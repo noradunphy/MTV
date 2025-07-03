@@ -1,0 +1,2532 @@
+Evaluation run for model=text dataset=swda act=qo
+================================================================================
+
+================================================================================
+EXAMPLE 1
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay.
+B: Okay.
+A: 1) or people just change a, like, one word because they think it sounds better, or whatever. 2) No, 3) What else. 4) So, what do you think about it?
+Response: 4
+
+A: Uh, so, uh, what are your benefits like at your job,
+A: 1) and how do you feel about them? 2) Huh. 3) Um. 4) >.
+Response: 1
+
+A: Hello.
+B: Hello.
+B: I was, I was thinking about our topic for the night. Um, immigration problems.
+B: We have immigration problems
+B: 1) and what do, do you think about it?. 2) Yeah, 3) Which one? 4) Thank you very much.
+Response: 1
+
+A: Okay.
+B: Okay,
+B: I guess we're ready to start.
+B: Well, I guess, what part of t, what part of the country do you live in?
+A: I'm in Dallas, Texas.
+B: Oh, okay.
+A: 1) I mean, I'm, I'm, I'm getting a kick out of the whole program 2) What about yourself? 3) or, or, 4) Uh, we're supposed to talk about the elderly now, I guess, uh,
+Response: 2
+
+A: Okay.
+A: 1) Hi. 2) I have no idea. 3) all right. 4) How about yours?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+2
+
+A: Oh, okay.
+B
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+================================================================================
+
+
+================================================================================
+EXAMPLE 2
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: Okay.
+A: > All right.
+A: 1) Is it, I mean, does it, 2) Why don't you go ahead and start off. 3) Uh, well, I don't know about that, 4) What have you seen?
+Response: 4
+
+A: Well, how do you feel about capital punishment?
+B: Well, I, I just last Friday got off a capital murder case.
+A: Oh, you did?
+B: Yeah,
+B: I was on the jury. Uh,
+A: Wow.
+B: Yeah.
+B: Which is funny because I got called last night
+B: and the topic was, uh, something about juries.
+A: Oh, really?
+B: Yeah,
+B: so I am just hitting it right.
+B: 1) Well, uh, in the case of, 2) So, uh, I hope you like your office. 3) or do you still order for them? 4) Uh, how do I feel about it?
+Response: 4
+
+A: All right.
+B: Okay,
+B: are you on an exercise program now
+B: or,
+A: Yeah,
+A: I exercise pretty regularly.
+B: Uhhuh.
+A: I lift weights quite a bit.
+B: Uhhuh.
+A: Um, I run occasionally.
+A: Let's see what else do I do. Play golf some,
+A: and I work out on a, on a hanging bag.
+A: I'm brown belt in karate,
+A: so I
+B: Uhhuh.
+A: keep up with that a little bit.
+B: Oh, yeah.
+A: 1) How about you. 2) Oh, I'll bet. 3) or is it always complicat, 4) maybe so.
+Response: 1
+
+A: Okay.
+B: 1) Yeah, 2) we have, uh, uh, kind of a core group that, that serves as, quote, officers of the organization, 3) How are you? 4) everybody's got that.
+Response: 3
+
+A: Okay.
+B: Okay,
+B: I guess we're ready to start.
+B: Well, I guess, what part of t, what part of the country do you live in?
+A: I'm in Dallas, Texas.
+B: Oh, okay.
+A: 1) do we not. 2) What about you? 3) >. 4) > I'm trying to think of the guy's name.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: Okay.
+B: Okay
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+A: 2
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 3
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Uh, let's see.
+A: How about, uh, let's see, about ten years ago,
+A: 1) Whatever you like, huh? 2) uh, what do you think was different ten years ago from now? 3) Um, well, what do you think is, uh, the pollutants, the main pollutants in the air? 4) Or should it be used, uh,
+Response: 2
+
+A: Okay.
+A: 1) Uh, first, um, I need to know, uh, how do you feel about, uh, about sending, uh, an elderly, uh, family member to a nursing home? 2) Sure, 3) I really think I am, 4) or do you, do you work or what?
+Response: 1
+
+A: Okay,
+A: 1) But, uh, in the manufacturing sectors and over in semiconductor, 2) how do you feel about them? 3) Thanks. 4) Sorry.
+Response: 2
+
+A: Okay,
+A: well, uh, some of the books I've read lately have to do with crafty type things where I've, where I've, um, learned things that I'm going to do for my children for Christmas
+B: Uhhuh.
+A: and they were really, uh, helpful, because I didn't know how to do this one stitching,
+A: and so, that was very helpful to me as far as books.
+A: Otherwise, um, I like to read children's books, and things like that.
+A: 1) What about you? 2) I don't know. 3) So, I don't, I don't even know who your favorite team is, actually. 4) I am too young, yeah.
+Response: 1
+
+A: So I own a, a P C A T at my home.
+B: Uhhuh,
+B: I could never justify owning a personal computer at home, uh,
+B: I mean, that's quite an expense to look for, uh,
+B: well, who is this,
+B: 1) Oh, okay. 2) Ok, 3) right? 4) How about yourself?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+2
+
+A: Okay,
+A:
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+A: 2
+
+1
+================================================================================
+
+
+================================================================================
+EXAMPLE 4
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: Okay.
+A: Okay.
+A: Do you, uh, do any woodworking?
+B: I do,
+B: and I really love it. Um.
+A: 1) And, of course, it has to have airconditioning. 2) uh, just not, 3) well, how many, uh, uh, families own a refrigerator, 4) Oh, um, what do you do,
+Response: 4
+
+A: So, P C s, personal computers.
+A: Do you have a personal computer?
+B: No
+B: I don't, not at home.
+A: Uhhuh.
+B: I work with them quite a bit though.
+A: Uhhuh,
+A: I, I work with them at Kelly Services, doing, uh, data entry.
+B: Oh, okay.
+A: Uhhuh.
+A: 1) Based on that, who do you think you're talking to, 2) Uh, I'm not sure if I'm familiar with that, 3) What do you, what do you think about them? 4) I'll have to make sure I catch that,
+Response: 3
+
+A: Well, uh, does the company you work for test for drugs?
+B: Actually, uh, they just recently started a policy of testing drugs, which was kind of interesting,
+B: because w, when I went to work for them, uh, they didn't do that,
+B: but, uh, since then they've, they've started a drug testing policy, not because of their own, uh, convictions, but because the clients of our company are requests that we do that.
+A: Huh.
+B: 1) >. 2) we could talk about some of the long range goals 3) he's been the best dog I've ever had in my life 4) How about you?
+Response: 4
+
+A: Hi,
+A: 1) A lot of things, 2) Well, that's, that's good to know how, 3) What's the best part, from your point of view? 4) what do you do with your credit cards?
+Response: 4
+
+A: Okay,
+A: 1) What about you? 2) Yeah, 3) But I'm wondering how many women actually major in engineering. 4) How is it?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: So, I guess that
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+A: 3
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 5
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Well what do you feel about the, um, present situation in the Mideast?
+B: Well, it looks like it's just about as volatile as it usually is.
+A: Uhhuh.
+B: 1) Really? 2) What do you think, Mark? 3) ByeBye. 4) Because they talk so much,
+Response: 2
+
+A: Uh, it seems like an unusual subject this time of the year
+A: but, uh, it's, it's camping.
+B: Really.
+B: When was the last time you went?
+A: The last time I went camping was about, uh, in the middle of October,
+A: and we went up to Lake Bonham and really enjoyed it.
+A: Had a real good time with the family.
+A: We do an awful lot of camping.
+A: 1) Uh, we had a friend give it to us. 2) Question. 3) How about yourself? 4) w, w, what baud rate do you get?
+Response: 3
+
+A: I don't believe that we're ,
+B: 1) So what do you think about, uh, recycling programs in Atlanta, Julie? 2) you're okay, 3) okay, 4) now tell me your favorite team.
+Response: 1
+
+A: Okay,
+A: let's talk about schooling.
+B: Yeah.
+B: 1) Well, you bet. 2) Oh, how exciting. 3) Uh, what, what contacts do you have with the public school sy, 4) Every, what?
+Response: 3
+
+A: Here goes Sharon.
+B: Okay.
+A: 1) No. 2) So, uh, what do you think about it? 3) Um, the hoi sin sauce? 4) Oh, they just painted over varnished wood.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+2
+
+A: I'm sorry, I
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+A: 1
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 6
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: > Okay,
+B: what kind of crafts and hobbies do you have?
+A: Oh, not very many of those at, uh,
+A: sometimes I, I play the trumpet,
+A: and sometimes I work on trumpet mouthpieces.
+B: Uhhuh.
+A: And then I have a five year old daughter
+A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
+B: Uhhuh.
+A: 1) Oh, gosh, 2) Corrode. 3) One of the, 4) Um, how about you?
+Response: 4
+
+A: Okay.
+B: Okay,
+B: that made a nice ugly sound.
+B: So,
+A: Your name is Lynn?
+B: Linda.
+A: Linda.
+B: Uhhuh.
+B: So, sounds like you like to read.
+A: Yeah,
+A: I read quite a bit, probably don't read as much as I would like to.
+B: I don't read as much as I would like to either.
+B: I'm, I'm a single mom,
+B: but I have always loved reading.
+A: Uhhuh.
+B: 1) What do you like to read? 2) Oh I will 3) or lunches 4) Hi.
+Response: 1
+
+A: We could talk about my favorite subject.
+B: Cooking and
+B: 1) What do you like to cook? 2) You know, I, I really do not know. 3) Now what can you do to stop that? 4) Um, I don't know.
+Response: 1
+
+A: Well, I guess, um, I'll start out,
+A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
+A: I have mixed views on all three of them.
+B: Uhhuh.
+B: 1) Okay, 2) What do you think about, what do you think about the, the lower grades, you know, 3) or do you think it can if it's done right? 4) I think that may be.
+Response: 2
+
+A: Okay,
+A: 1) Uh, let's see, 2) Uh, so, uh, what do you consider the most important benefit besides salary? 3) I beg your pardon. 4) I don't know.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Well,
+A:
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+1
+
+2
+
+1
+
+2
+================================================================================
+
+
+================================================================================
+EXAMPLE 7
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Well, I guess, um, I'll start out,
+A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
+A: I have mixed views on all three of them.
+B: Uhhuh.
+B: 1) Dump them off. 2) I'm in Dallas, Texas. 3) What do you think about, what do you think about the, the lower grades, you know, 4) Why did I pick music?
+Response: 3
+
+A: All right,
+A: well I have a lot of different teams that I like to, to keep in touch with,
+A: of course, Texas Rangers being one of them,
+A: I mean, uh, you know, you can't live in Dallas without, you know,
+B: 1) Well what are the others? 2) That's okay. 3) Oh. 4) What's that?
+Response: 1
+
+A: Hello.
+B: Hello.
+B: I was, I was thinking about our topic for the night. Um, immigration problems.
+B: We have immigration problems
+B: 1) and what do, do you think about it?. 2) > 3) Really? 4) Probably,
+Response: 1
+
+A: Okay.
+A: Uh, read any good books lately?.
+B: Uh, yes,
+B: I, I've read, uh, several good books lately.
+B: Uh, lot of them related to, uh, business and financial matters since that's what I do for a living.
+A: Oh, okay.
+A: Uhhuh.
+B: 1) right? 2) Alright. 3) How about yourself? 4) Well, just keeping up with the times,
+Response: 3
+
+A: Well, how do you feel about capital punishment?
+B: Well, I, I just last Friday got off a capital murder case.
+A: Oh, you did?
+B: Yeah,
+B: I was on the jury. Uh,
+A: Wow.
+B: Yeah.
+B: Which is funny because I got called last night
+B: and the topic was, uh, something about juries.
+A: Oh, really?
+B: Yeah,
+B: so I am just hitting it right.
+B: 1) Why don't you tell me what you have found. 2) I'm sorry, 3) That's a plus. 4) right?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: Well,
+A: I
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 8
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Well, uh, ho, how do you view this whole subject?
+A: Are you, uh, one who feels like you have, have benefited from the change in, in roles in women?
+A: 1) or do I look for a used car that's maybe two, three years old that 2) or do you take the ferry, or what? 3) place that, that needed this. *listennot sure who's saying what 4) Or, or what do you think?
+Response: 4
+
+A: Okay,
+A: what types of music do you like to listen to?
+B: Well, I primarily listen to classical music when I have my druthers, partly because I find it more soothing.
+B: I don't know a lot about classical music so far as, uh, any background in music,
+B: but it's the po, the music I enjoy the most.
+B: 1) How about you? 2) I am so sorry to keep you on hold. 3) Learning, 4) and they won't have the same people there all the time
+Response: 1
+
+A: Okay
+A: wow, I don't know what that was.
+B: What was that?
+A: I don't know.
+B: And, uh, to, uh, the Brazos River
+A: Uhhuh.
+B: near Dinosaur Valley State Park.
+A: Oh, yes.
+B: Uhhuh.
+A: Uhhuh,
+A: uh, we have not camped in any of those places,
+A: in fact it has been a number of years since we have camped,
+A: but we used to go to Tyler State Park and, uh, Daingerfield
+A: and in Texas that is where we camp basically. Uh,
+B: 1) Just the degree itself. 2) What are they like? 3) > > Thank you. 4) Do you have any kids?
+Response: 2
+
+A: Jay, um,
+A: my kids are, are both in college, um,
+A: and I'd, I played a fairly active part in helping them decide where to go.
+A: On the other hand, they really decided themselves.
+B: Uhhuh.
+A: 1) Well, that's, that area over there is not as expensive as in the, the immediate, you know, Washington area. 2) They ought to get it for killing a civilian just as easily as a policeman. 3) Oh, that's okay. 4) Um, what, what kind of experience did you have?
+Response: 4
+
+A: Okay.
+A: Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
+B: Well.
+A: 1) what was the results there. 2) So, uh, Mike, what are your opinions on, uh, trial by jury? 3) We, 4) Well, presentation's not always all of it either.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Okay.
+A: Well
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+
+A: 2
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 9
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Uh, I get most of my news uh, from newspapers really.
+A: I read the daily newspaper, uh, the HOUSTON CHRONICLE
+A: and sometimes I'll read like the, uh, WALL STREET or the NEW YORK TIMES.
+A: I don't subscribe to either,
+A: but sometimes I get a hold of copies of it.
+A: 1) um, but it's okay, 2) Are you?. 3) Uh, how about you? 4) What else do you like?
+Response: 3
+
+A: So, uh, do you happen to be working for a large firm?
+B: Well, it's about three hundred and fifty people.
+B: I guess that's not large compared to some,
+B: but it's big enough.
+A: Uhhuh.
+B: And they have a, they don't have any kind of pension plan where they contribute anything
+B: and I wish they did.
+A: Yeah.
+B: You know, they have a four O one K,
+B: but I put all the money into it.
+A: Uhhuh.
+B: They don't add anything.
+B: 1) What about you? 2) Well, right now I'm a student, 3) Uhhuh. 4) thanks a lot.
+Response: 1
+
+B: Uh, tell you what. Um, I'll let you start.
+A: Okay.
+A: My major source of information, I guess, is T V news.
+A: Excuse me. I, uh, wake up to it in the morning.
+A: This is my, I guess, my prime time for news, first thing in the morning while I'm getting ready to go to work.
+A: Oh, I quite frequently glance through headlines or, in the newspaper.
+A: But, uh, primarily mine is T V news.
+A: 1) does it? 2) Well, what a wh, what do we currently have, 3) How about yourself? 4) uh, let's see,
+Response: 3
+
+A: We could talk about my favorite subject.
+B: Cooking and
+B: 1) didn't he? 2) What do you like to cook? 3) Oh, yeah, 4) Or is it pretty dry.
+Response: 2
+
+B: Okay.
+A: Okay,
+A: I, I do a fair amount of cooking.
+B: Uhhuh.
+A: And, and I love having guests to dinner.
+A: I probably do that about once a month.
+A: And, uh, I usually prepare something, depending upon the guests, you know,
+A: it, it, I like to prepare chicken, that seems to please everybody, pasta or a casserole.
+B: Uhhuh.
+A: 1) His lips are moving. 2) and, 3) I'll change your diaper. 4) well what do you do on your yard?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: I think, uh,
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 10
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay.
+B: Hi.
+B: Do you have lots of credit cards?
+A: Yeah,
+A: we, well, we have quite a few
+A: but we don't really use them a lot.
+A: We have, well, we like a lot of gasoline credit cards,
+B: Uhhuh.
+A: because we like to be able to stop, you know, when we're traveling and stuff wherever there's a station,
+A: but as far as like MasterCard and Visa, we don't use those too often.
+A: 1) I'm sorry, I dropped the phone. 2) What about you? 3) you don't have to do as much as, as I thought. 4) Uh, I wouldn't.
+Response: 2
+
+A: Okay,
+A: this topic is, is Russia a threat to our security?
+A: . I think they are more of a threat to their own people at this day and time.
+A: 1) Well, 2) Oh, okay, 3) fine, 4) , how do you feel about it?
+Response: 4
+
+A: What are your favorite shows?
+B: Well, I, it's doesn't seem like I get enough time to watch much T V,
+B: but
+A: Uhhuh.
+B: the ones that are out now.
+B: I, I've watched that SISTERS a couple of times.
+B: I think that's kind of a good show.
+A: I've never seen that.
+B: Haven't you?
+A: Huhuh.
+B: Oh. I like that one,
+B: and, um, I'm trying to think.
+B: I, I don't even know if I have any other real regular ones that I watch.
+B: 1) I don't know 2) I was wondering how, 3) Oh, I don't think so. 4) How about you?
+Response: 4
+
+A: Hi,
+A: how are you today?
+B: I'm great.
+A: Good.
+A: Well as a matter of fact I'm, before we started this conversation I was working on my P C at home.
+B: Yeah.
+A: Do you have one?
+B: No,
+B: I don't have one at home.
+B: I work with one on, at work
+A: Yeah.
+B: continually, you know,
+B: but I do not have one of my own at home.
+A: Do you have,
+B: 1) >. 2) What do you have, at home? 3) I don't know what it's like around, uh, Hattiesburg. 4) You said something else.
+Response: 2
+
+A: Well Jackie, uh, on taxes, I, I guess I would have to say, that I, that my opinion is that I do think Americans are paying too much in taxes.
+A: 1) yeah, 2) Let me ask you a question off the subject though. 3) How about you? 4) but I don't have to deal with it from here, you know,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Hi.
+A: How
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+================================================================================
+
+
+================================================================================
+EXAMPLE 11
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Okay,
+A: do you have.
+B: Are you there?
+A: Yeah.
+B: Okay.
+A: There, okay.
+B: Okay.
+A: Had to mess with my phone here.
+A: Um, do you have children?
+B: Yes,
+B: I have one.
+A: Oh, okay.
+B: 1) or, how do you work your budgeting? 2) and, um, what was the name of that? 3) How about you? 4) our people aren't going to understand what
+Response: 3
+
+A: Okay, uh,
+A: 1) Really? 2) I don't know, 3) Yeah. 4) what kind of hobbies do you have Lori?
+Response: 4
+
+A: Okay.
+A: 1) Thank you, 2) Hi, 3) Well, ho, how do you feel about, uh, drug testing? 4) stick shift,
+Response: 3
+
+A: Okay.
+A: Uh, I haven't been in this situation yet.
+A: You know, my, my parents are not quite at that age yet,
+B: quite elderly, huh.
+A: No.
+A: So I haven't, uh, really been in that situation although they are thinking about my grandmother
+A: but, uh
+B: Uhhuh.
+A: but that's really about it.
+A: 1) Uh, never 2) How about you? 3) Oh. 4) Uh, I'm not sure if I'm familiar with that,
+Response: 2
+
+B: Do you want to start?
+B: G,
+A: Yeah,
+A: I'm trying to think what I've seen lately.
+A: I me, we,
+A: well we just finished watching, uh, TEENAGE MUTANT NINJA TURTLES on tape, you know.
+B: Did you watch DANCES WITH WOLVES,
+B: did you see the movie?
+A: Yeah,
+A: we, we've seen that,
+A: yeah.
+B: Did you like it?
+A: Yeah,
+A: it was great,
+A: have you seen it?
+B: I thought it was very well done.
+A: Yeah,
+A: I, um,
+B: 1) Well, how is that helping my child, you know. 2) How about you? 3) don't get me to lying. 4) the lens to the light.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Okay.
+A: Well
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+
+A: 2
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 12
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+B: Well, let's see.
+A: 1) Clothing, sales. 2) Bye, bye. 3) So what, 4) let alone other countries,
+Response: 3
+
+A: Okay, uh,
+A: 1) Who is that? 2) Um, well, I don't know Dallas, 3) right? 4) what kind of hobbies do you have Lori?
+Response: 4
+
+A: Well, how about you.
+A: Do you use P C s?
+B: Oh constantly.
+A: Yeah.
+A: You and me both.
+B: It seems everything I do is computer related.
+A: Huhuh.
+B: And if it goes down, then we're stuck all day.
+A: Yeah.
+A: And so I like the I B M P C, personally.
+B: Huhuh.
+A: But that's pretty much everything I've worked with
+A: and, uh, I've become so accustomed to it that, uh, it's second nature.
+B: Yeah.
+A: 1) What do you use? 2) at, at some point, what can you do to sort of raise rev, I mean, to raise jobs I wonder. 3) isn't worth very much then. 4) wow, eight kids?
+Response: 1
+
+A: Uh, what kind of house do you live in?
+B: Uh, we live in a one story, just like a style home, you know, the standard Texas, uh, Fox and Jacobs.
+A: Oh, yeah.
+A: With,
+B: 1) I don't know if you've heard Neurotic Collection. 2) and yet most of our usage of the car was just this little shuttle back and forth, 3) No, 4) How about you guys?
+Response: 4
+
+A: All right,
+A: I, I think our experience of camping is,
+A: I, I am the, the passive member,
+A: I get things ready and then I enjoy.
+B: Uhhuh.
+A: Uh, because, my, my husband is a good camper
+A: and so they,
+A: he manages the troops
+A: and they do the work
+A: and I have fun.
+B: Uhhuh.
+B: Well, uh, uh, your, you said your family was gro, uh, all grown up now,
+B: 1) What about you? 2) I'll tell you what, 3) Yeah, 4) I'll let you lead out.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: Oh, I, I
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+================================================================================
+
+
+================================================================================
+EXAMPLE 13
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Hi, Cynthia.
+A: What did you wear to work today?
+B: Um, let's see.
+B: What did I wear to work today?
+B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
+A: So, can you dress pretty casually?
+B: Um, on occasion.
+A: Yeah.
+B: On occasion.
+B: Um, I do vary.
+B: Um, you know, I wear suits,
+B: I wear skirts and sweaters.
+B: On occasion I can wear jeans.
+B: 1) Um, how about you? 2) I want, 3) Right. 4) Pardon?
+Response: 1
+
+A: Okay,
+A: 1) That's okay, 2) No returned checks or anything. 3) Oh, really. 4) uh, so what do you think about the school system?
+Response: 4
+
+A: Wh,
+A: your, uh,
+A: are you into the Cowboys?
+B: Oh, God, no.
+B: Uh, no,
+B: I'm not,
+B: I haven't been,
+B: I grew up in Dallas but I'm still not a Cowboys' man.
+B: I like Philadelphia Eagles.
+A: Oh, yeah?
+B: Yeah.
+B: my favorite team,
+B: so.
+A: that's all
+B: now that Randall's coming back next season, I hope they'll be, do a little bit better.
+B: They didn't do too bad last season.
+A: Yeah.
+B: But, I hope they can do better.
+B: 1) How about yourself? 2) right. 3) >. 4) opposite from mine,
+Response: 1
+
+B: Okay.
+B: Well, uh, I'll let you start, I guess.
+A: Well, uh, yeah,
+A: I, I'm employed by a company that does do, uh, random drug testing
+A: and I've got some very definite, uh, opinions about it. Uh, you know, which haven't changed all that much from my first reactions from, from when they, when they announced it. But, uh, developed a little more, I guess, but haven't changed that much.
+A: 1) Yeah, 2) and you have a good day. 3) What about you? 4) or is it?
+Response: 3
+
+B: All right.
+A: Okay,
+A: 1) >. 2) don't provide very much education. 3) Uh, so, uh, what do you consider the most important benefit besides salary? 4) Uh, and I, I think that, uh, that there's something that has to be changed in the system to, to do that.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+B: Okay.
+A: Okay
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+================================================================================
+
+
+================================================================================
+EXAMPLE 14
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Hi, Cynthia.
+A: What did you wear to work today?
+B: Um, let's see.
+B: What did I wear to work today?
+B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
+A: So, can you dress pretty casually?
+B: Um, on occasion.
+A: Yeah.
+B: On occasion.
+B: Um, I do vary.
+B: Um, you know, I wear suits,
+B: I wear skirts and sweaters.
+B: On occasion I can wear jeans.
+B: 1) where are you from, 2) Um, how about you? 3) Yes, 4) I don't, you know,
+Response: 2
+
+A: Okay, um,
+A: let's see.
+A: 1) The witnesses? 2) what's the word, 3) How do you feel about credit cards? 4) Yeah,
+Response: 3
+
+A: I've, uh, >
+A: are you there?
+B: Yes, sir,
+B: I'm right here.
+A: All right.
+A: Okay, um,
+A: I'm in an area where, um, we can, uh, enjoy it year round,
+A: so, I've actually been, uh, uh, been out within the past couple of weeks.
+A: I'm mainly a freshwater fisherman.
+A: 1) Right. 2) How about yourself? 3) Um, actually, when I was younger, I was a Cardinal fan, too. 4) does she need help with anything,
+Response: 2
+
+A: Your turn.
+B: Oh, I, I start.
+B: Okay.
+B: Well, uh, we keep a budget to an extent.
+B: Uh, and really, i, i, we were really forced into keeping a budget because I'm, I'm paid once a month which sort of, sort of forces some, uh, uh, restrictions
+B: and you need to make sure all your bills are paid.
+B: 1) Okay, 2) it's one of his first books, THE STAND. 3) Uh, about yourself? 4) I'm calling from Texas.
+Response: 3
+
+A: Okay, um, Chuck, do you have any pets
+A: And what kind do you have?
+B: I've got a male Siamese about a year old here.
+B: I live alone in an apartment,
+B: except for the cat.
+A: Uhhuh.
+B: 1) What do you think invades your privacy? > 2) and, uh, inevitably everyone is just very interested 3) Fine, thanks. 4) sorry about my mind.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Um, so, um
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+A: 3
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 15
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Do you have any children?
+B: Yeah,
+B: I have two, two boys, twelve and sixteen.
+A: Twelve and sixteen.
+B: Uhhuh,
+B: 1) that's okay, 2) moved from, 3) You know. 4) how about you?
+Response: 4
+
+A: I pushed it.
+B: Okay.
+A: 1) Unfortunately, yes. 2) Oh, really? 3) What are they going up to, thirty bucks or something? 4) So what do you you in your lawn?
+Response: 4
+
+A: Okay,
+A: what types of music do you like to listen to?
+B: Well, I primarily listen to classical music when I have my druthers, partly because I find it more soothing.
+B: I don't know a lot about classical music so far as, uh, any background in music,
+B: but it's the po, the music I enjoy the most.
+B: 1) or do you all like mail out stuff? 2) How about you? 3) Yeah, 4) so, so how do people in Wisconsin dress?
+Response: 2
+
+A: Okay,
+A: all set.
+B: Good morning.
+A: Good morning.
+A: Let's see,
+A: music, um,
+A: well, I play a couple of instruments.
+B: Uhhuh.
+A: I try to.
+B: What do you play?
+A: Um, clarinet is my primary instrument,
+A: and I also play a little bit of saxophone, flute and piano
+B: Uhhuh.
+A: when I get the opportunity, which isn't very often.
+B: Really,
+B: that's too bad.
+A: 1) Okay. 2) Because it's what? 3) How about yourself? 4) Um, I don't know,
+Response: 3
+
+B: You think about AIDS research?
+A: Well, AIDS is a nasty, terrible disease,
+A: and you die from it.
+A: So I think that, uh, they need to look into it
+A: and it's kind of like cancer.
+A: I don't, you know,
+A: how many years have we tried to find a cure for cancer.
+B: Uhhuh.
+A: I think it'll probably be as difficult.
+A: 1) Well what are the others? 2) You go ahead first, if you'd like. 3) Did he get hurt again? 4) That's all right.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: Okay,
+A: I
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+================================================================================
+
+
+================================================================================
+EXAMPLE 16
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+B: Well, let's see.
+A: 1) Yes. 2) So, you just call him direct 3) So what, 4) yeah,
+Response: 3
+
+B: So do you have an opinion on credit cards?
+A: Um, I do.
+B: You do?
+A: 1) What, what do you think about them? 2) to own them . 3) I can tell you about my last job or 4) My,
+Response: 1
+
+A: I pushed it.
+B: Okay.
+A: 1) So what do you you in your lawn? 2) Yeah. 3) And, um, let's see what else. 4) sorry.
+Response: 1
+
+A: You want to go first.
+B: Well, uh, no
+B: I don, I don't get as much exercise as I, as I should as, or as I would like to, uh, uh, these days.
+B: I,
+B: seems to be to easy to get busy with other things.
+B: Uh, I have, in the past, uh, jogged and, and run,
+B: and every, every January and every September, I start out again
+B: and then it tapers off.
+A: Really?
+B: 1) Uh, what about you? 2) Service charge you mean? 3) Isn't it amazing that somebody can write that many books about science fiction? 4) >.
+Response: 1
+
+A: Hello.
+B: Hello.
+B: I was, I was thinking about our topic for the night. Um, immigration problems.
+B: We have immigration problems
+B: 1) unless an employer has a reason to 2) Yes. 3) How do you feel about them, I mean, since you've 4) >. She's so nice,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Yeah, I mean,
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+A: 3
+
+B:
+================================================================================
+
+
+================================================================================
+EXAMPLE 17
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Well, well, Pat, did you vote in the last election?
+B: Most assuredly.
+A: Oh, you did?
+B: Yes ma'am.
+B: I've voted in every major election since I turned twentyone.
+A: Oh, that's great.
+A: 1) Well, why do you think, 2) You took them to someone's home? 3) Well, but the majority of them are in, like, just like how you said in close, close quarters. 4) All right.
+Response: 1
+
+B: So, how do you feel about capital punishment?
+A: Well, it's,
+A: I am pretty much against it.
+B: Really?
+A: Yeah.
+A: 1) How about you? 2) Yeah. 3) Uh, actually I'm a big Chicago Bears' fan. 4) Okay,
+Response: 1
+
+B: > Okay,
+B: what kind of crafts and hobbies do you have?
+A: Oh, not very many of those at, uh,
+A: sometimes I, I play the trumpet,
+A: and sometimes I work on trumpet mouthpieces.
+B: Uhhuh.
+A: And then I have a five year old daughter
+A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
+B: Uhhuh.
+A: 1) Uhhuh. 2) More of a retirement home. 3) Um, how about you? 4) Let me tell you.
+Response: 3
+
+A: Okay.
+A: Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
+B: Well.
+A: 1) Well, I do it all. 2) I don't know. 3) What do you think would be required, and so forth? 4) What?
+Response: 3
+
+A: Okay
+A: wow, I don't know what that was.
+B: What was that?
+A: I don't know.
+B: And, uh, to, uh, the Brazos River
+A: Uhhuh.
+B: near Dinosaur Valley State Park.
+A: Oh, yes.
+B: Uhhuh.
+A: Uhhuh,
+A: uh, we have not camped in any of those places,
+A: in fact it has been a number of years since we have camped,
+A: but we used to go to Tyler State Park and, uh, Daingerfield
+A: and in Texas that is where we camp basically. Uh,
+B: 1) How about yourself? 2) I mean, I do not, I do not know how it is in the Air Force base. 3) No, 4) Oh, sure.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+B: Well, that's fine
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+
+A: 2
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 18
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: Okay,
+B: I'm ready.
+A: Okay,
+A: so we're going to talk about, uh, what kind of clothes we wear while we work.
+B: Uhhuh.
+A: Do you work for T I?
+B: No,
+B: I work at home.
+A: Oh, you do,
+A: well, you're like me then.
+A: I stay home also.
+B: Do you have children?
+A: Yes,
+A: I have two, a seven year old and three and a half year old.
+B: Oh, that's good.
+A: 1) How about you? 2) Do we get enough news or something like 3) let's see, 4) For the month or whatever.
+Response: 1
+
+A: Yes,
+A: 1) Okay. 2) what's that, what's that state north of us, 3) um, how do you feel about, um, the way the U S has reacted in the Middle East? 4) I, um, I was thinking about it for a long time,
+Response: 3
+
+A: Okay.
+A: 1) Uhhuh. 2) So, uh, what do you think about it? 3) yes. 4) and then reverse it,
+Response: 2
+
+B: So, how do you feel about capital punishment?
+A: Well, it's,
+A: I am pretty much against it.
+B: Really?
+A: Yeah.
+A: 1) I think that we should not loan them anymore money, 2) How about you? 3) oh, really? 4) For making government issue underwear.
+Response: 2
+
+A: Okay, Howard,
+A: 1) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it? 2) I would be prefer , 3) Right? 4) actually I didn't go diving.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Okay.
+A:
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+1
+
+A: 1
+================================================================================
+
+
+================================================================================
+EXAMPLE 19
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Okay.
+A: We're talking about capital punishment.
+B: Right.
+A: 1) How do you feel about that Lenore ? 2) And, you know, in order to survive in this area, I think they have to be good. 3) It's a, it's a debit card, 4) I've become very aware of different political views because some of the things we have to discuss are very politically motivated or whatever,
+Response: 1
+
+A: I pushed it.
+B: Okay.
+A: 1) and, uh, it's really helped, you know, ours 2) how could he say it was, uh, 3) No 4) So what do you you in your lawn?
+Response: 4
+
+B: Do you have kids?
+A: Oh yeah.
+A: I got three.
+A: 1) Yeah. 2) Huh? 3) And that is, it, 4) How about yourself?
+Response: 4
+
+A: Hi, Cynthia.
+A: What did you wear to work today?
+B: Um, let's see.
+B: What did I wear to work today?
+B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
+A: So, can you dress pretty casually?
+B: Um, on occasion.
+A: Yeah.
+B: On occasion.
+B: Um, I do vary.
+B: Um, you know, I wear suits,
+B: I wear skirts and sweaters.
+B: On occasion I can wear jeans.
+B: 1) I have no idea. 2) that's awful, well, 3) Um, how about you? 4) What, what kind of heavy metal are we talking about?
+Response: 3
+
+A: Okay,
+A: I'll let you start this time.
+B: Well, how much do you like lawn and garden work?
+A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
+B: Oh.
+A: the last, I don't know, fifteen, twenty years, so
+B: Oh, for goodness sakes.
+A: Uh, I'm,
+B: 1) Oh, 2) Oh, here's an easy way to make some money. 3) Uh 4) How about you guys?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: 1) Well,
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+B: 3
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 20
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: Okay.
+B: How's the weather been out there?
+A: Well, the last three days it's been pretty rainy.
+A: We went to the beach
+B: Uhhuh.
+A: and, uh, it started, uh, let's see, around four o'clock,
+B: >.
+A: and, uh, it had thunder and lightning,
+A: it was, and then, you know, it was just overcast and rainy for, uh, the next two or three days straight.
+A: 1) It got real cold, 2) yes, 3) How about yours? 4) Yeah,
+Response: 3
+
+A: Uh, let's see.
+A: How about, uh, let's see, about ten years ago,
+A: 1) how much benefit, 2) Oh, you haven't? 3) do you do your own gardening? 4) uh, what do you think was different ten years ago from now?
+Response: 4
+
+A: Yes,
+A: 1) No, 2) You know the Barney? 3) um, how do you feel about, um, the way the U S has reacted in the Middle East? 4) How old were you when you left?
+Response: 3
+
+A: Okay,
+A: 1) uh, what do you consider an invasion of privacy? 2) isn't it? 3) > 4) Yeah.
+Response: 1
+
+A: you've done.
+B: Our most recent series of projects I guess, was, inside was, uh, we remodeled a bathroom recently.
+A: 1) So all we had to sit here and, and ask is well, what aren't they telling us, you know. 2) What, what's my motivation? 3) what else for catering. Uh, 4) How about yourself?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Okay.
+A:
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+
+A: 3
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 21
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay,
+A: well, I don,
+A: 1) Weatherwise. 2) I mean, what thoughts do you have on the subject? 3) it could be. 4) ,
+Response: 2
+
+A: Okay.
+A: Uh, I haven't been in this situation yet.
+A: You know, my, my parents are not quite at that age yet,
+B: quite elderly, huh.
+A: No.
+A: So I haven't, uh, really been in that situation although they are thinking about my grandmother
+A: but, uh
+B: Uhhuh.
+A: but that's really about it.
+A: 1) How about you? 2) as a 3) sorry, 4) Well, do not tell that to all my friends.
+Response: 1
+
+A: Uh, I get most of my news uh, from newspapers really.
+A: I read the daily newspaper, uh, the HOUSTON CHRONICLE
+A: and sometimes I'll read like the, uh, WALL STREET or the NEW YORK TIMES.
+A: I don't subscribe to either,
+A: but sometimes I get a hold of copies of it.
+A: 1) what else have I seen. 2) Huh. 3) yeah. 4) Uh, how about you?
+Response: 4
+
+A: Okay.
+B: Okay,
+B: that made a nice ugly sound.
+B: So,
+A: Your name is Lynn?
+B: Linda.
+A: Linda.
+B: Uhhuh.
+B: So, sounds like you like to read.
+A: Yeah,
+A: I read quite a bit, probably don't read as much as I would like to.
+B: I don't read as much as I would like to either.
+B: I'm, I'm a single mom,
+B: but I have always loved reading.
+A: Uhhuh.
+B: 1) Yeah, 2) work on our vehicle. 3) and, I mean, here it is just a real big deal. 4) What do you like to read?
+Response: 4
+
+A: Jay, um,
+A: my kids are, are both in college, um,
+A: and I'd, I played a fairly active part in helping them decide where to go.
+A: On the other hand, they really decided themselves.
+B: Uhhuh.
+A: 1) Okay. 2) uh, what do you think was different ten years ago from now? 3) I don't want to serve on jury duty, 4) What, what type of area is that,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Okay,
+A: I
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+================================================================================
+
+
+================================================================================
+EXAMPLE 22
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: I pushed it.
+B: Okay.
+A: 1) Hope it's a good program there. 2) I mean but where are they, where are they, 3) So, how do you use your credit cards? 4) I guess so.
+Response: 3
+
+A: Well, ironically enough I'm sitting here with a cast on my leg because I resumed an aerobics class the night before last.
+B: Oh, no.
+A: I ripped the ligaments in my right ankle.
+B: Gosh.
+A: Yeah
+A: so,
+B: Exercise is not supposed to do that to you.
+A: That's what the nurses kept saying as they laughed all the way, you know, down the hallway.
+A: 1) What? 2) Well, it's, uh, it's really both. 3) Do you do anything on a regular basis? 4) Gee whiz,
+Response: 3
+
+B: You think about AIDS research?
+A: Well, AIDS is a nasty, terrible disease,
+A: and you die from it.
+A: So I think that, uh, they need to look into it
+A: and it's kind of like cancer.
+A: I don't, you know,
+A: how many years have we tried to find a cure for cancer.
+B: Uhhuh.
+A: I think it'll probably be as difficult.
+A: 1) Uh, how about yourself. 2) Excuse me, my throat's not as clear today as it should be. 3) What, what kind of, what kind of paint do you normally use? 4) No,
+Response: 1
+
+A: Okay, Deanna, uh,
+A: on capital punishment in our state, they give the death penalty for shooting of a policeman,
+B: Uhhuh.
+A: and I believe also in shooting of, uh, rape, I mean killing a rape victim.
+B: Uhhuh.
+A: I mean someone in the process of rape,
+A: and I don't know what el, I don't really remember what else.
+B: Uhhuh.
+A: But.
+B: 1) but you have a rider. 2) No. 3) it depends. 4) How do yo, wh, what do you think about it.
+Response: 4
+
+B: Okay.
+A: Okay.
+A: Do you, uh, do any woodworking?
+B: I do,
+B: and I really love it. Um.
+A: 1) How do you feel about them, I mean, since you've 2) No, 3) Did, uh, did, like, did you go to Disneyland? 4) I can remember when our children were small.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+B: 1) I was
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 23
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Steve, uh, with the election year and whatnot coming up, do you think we ought to cut taxes, raise them,
+A: 1) pretty much that time. 2) you could take a little longer. 3) Nay. 4) or, or, or what do you think?
+Response: 4
+
+A: Okay,
+A: 1) I think so. 2) So, 3) In other words you own your own home. 4) so, what are, what are your views on capital punishment?
+Response: 4
+
+B: Okay.
+A: 1) Uh, so, what do you think, uh, about putting the elderly in a nursing home? 2) well, I don't know. 3) Really? 4) Is this going to be fun?
+Response: 1
+
+B: So, how do you feel about capital punishment?
+A: Well, it's,
+A: I am pretty much against it.
+B: Really?
+A: Yeah.
+A: 1) Now what year are we talking about? 2) So I certainly hope you have a nice New Year. 3) How about you? 4) Oh, yeah,
+Response: 3
+
+B: Well, let me see,
+B: what have you seen lately?
+A: Well, uh, CITY SLICKERS, and STAR TREK FIVE.
+B: FIVE?
+A: Yeah,
+A: yeah.
+B: Y,
+B: only, only five?
+A: Yeah.
+A: I thought I'd better see that one before I go and see six.
+B: Well, no,
+B: didn't need to.
+A: No,
+A: I found that out.
+A: 1) Right. 2) Well, what do you think about Nolan Ryan being the first baseball player to earn a million dollars? 3) What are you, what are you studying? 4) my goodness, Diane, get down from there.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+B: Well, I think that
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+B: 4
+
+B:
+================================================================================
+
+
+================================================================================
+EXAMPLE 24
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Well, well, Pat, did you vote in the last election?
+B: Most assuredly.
+A: Oh, you did?
+B: Yes ma'am.
+B: I've voted in every major election since I turned twentyone.
+A: Oh, that's great.
+A: 1) Well, why do you think, 2) Marcos 3) Well I, I, I think overall that's right. 4) I'm Jay in Dallas.
+Response: 1
+
+A: All right.
+A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
+A: but my mother's always been administrator of a nursing home
+B: Uhhuh.
+A: so I've always been involved, you know, in one.
+B: 1) Well, 2) well, thanks so much. 3) How do you feel about them, I mean, since you've 4) Well,
+Response: 3
+
+A: All right.
+A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
+A: but my mother's always been administrator of a nursing home
+B: Uhhuh.
+A: so I've always been involved, you know, in one.
+B: 1) I'm not sure. 2) If they want to, right. 3) but I have to tell you this if I don't because you're in Plano, 4) How do you feel about them, I mean, since you've
+Response: 4
+
+A: The question was on lawn and garden work.
+A: 1) Ha, have you ever seen those bunnies 2) Um, how do you like it? 3) What, what do you think is, uh, is an appropriate, uh, punishment for some of the various, you know, such as, things such as rape or, or, uh, murder 4) I do not know if you listen to him or not,
+Response: 2
+
+A: Okay.
+A: Do you work?
+B: Yes,
+B: I do.
+A: I think that's the main change.
+A: 1) you had better hurry. 2) and, uh, I just wondering how I go about getting the cash. 3) don't they? 4) What about you?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: Okay.
+A: Do
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 25
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay.
+B: 1) So, tell me the last time you went for a boat ride. 2) How are you? 3) Oh, sure, 4) > Just a minute,
+Response: 2
+
+A: Uh, I'm of the age that could have gone, although I didn't
+A: and, uh, I guess, uh, looking back on it, I tend to think it was pretty, uh, mostly a mistake.
+B: Uhhuh.
+A: On the other hand, uh, the more I learn about the history, the more I see it was incremental, uh, decisions. Any one of which was sort of understandable at the time.
+B: Uhhuh.
+A: And, uh, but on the whole I think it, uh, probably was the wrong thing to do.
+A: 1) Right. 2) How about you? 3) Byebye. 4) Right?
+Response: 2
+
+A: Well, we, uh,
+A: taxes,
+A: everyone thinks taxes are too high I'm sure.
+A: But, uh, I think we do get quite a good value for the tax dollars we spend in most cases.
+A: 1) Saginaw? 2) this is Betty 3) What do you think? 4) I'll have to check that out,
+Response: 3
+
+A: Okay,
+A: 1) yeah. 2) good luck. 3) how do you feel about them? 4) oh okay.
+Response: 3
+
+A: Okay,
+A: I think we're supposed to discuss our view of the Soviet Union as a continuing threat to the United States.
+B: Okay.
+A: 1) and, uh, in fact I think I was the first person in our department to have my thesis published on recyclable pa, recycled paper. 2) Oh, I know 3) I bet. 4) What about you?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Okay,
+A: I
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 26
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: Okay,
+B: I'm ready.
+A: Okay,
+A: so we're going to talk about, uh, what kind of clothes we wear while we work.
+B: Uhhuh.
+A: Do you work for T I?
+B: No,
+B: I work at home.
+A: Oh, you do,
+A: well, you're like me then.
+A: I stay home also.
+B: Do you have children?
+A: Yes,
+A: I have two, a seven year old and three and a half year old.
+B: Oh, that's good.
+A: 1) excuse me. 2) How about you? 3) Do you, do you have an idea of, of how much. 4) Uh, not that I can think of.
+Response: 2
+
+A: So you have a child
+B: Yeah
+B: we,
+B: Two year old daughter in child care
+B: and we went through the process of searching for child care and
+A: Uhhuh.
+B: uh, finding what we consider to be,
+B: real good child care at a, uh, pretty reasonable price, we think.
+A: Uh,
+B: 1) How about you, 2) Oh well, take care. 3) or, I am sorry, 4) Yeah,
+Response: 1
+
+B: Uhhuh,
+B: I have got two.
+B: One is, uh, two
+B: and the other one's four
+B: and, uh, this is my first year of staying home.
+B: I've always had them in child care.
+A: Oh, well, then you are familiar with it?
+B: Uhhuh.
+A: Okay,
+A: I, uh, I have grandchildren
+A: and I know, uh, one has gone to a, well, two of them have gone to preschool.
+B: Uhhuh.
+A: And I know what the experience my daughter has faced with that.
+A: 1) fine. 2) Yeah, 3) Why don't you tell me what you have found. 4) I think two.
+Response: 3
+
+B: Well, this is an unusual topic.
+B: 1) Does it, does it on its little, on its, on the flower, does it have a beard on it at all? Any kind of fuzzies? 2) I think you would be more willing to either help that person or help it get accomplished, you know. 3) What do you think about it? 4) I got out of that kind of situation.
+Response: 3
+
+A: Okay,
+A: 1) What are some other ones I've seen lately. 2) Uh, what do you think about it? 3) Never 4) Tha, that's right.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Okay,
+A:
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+A: 1
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 27
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: W,
+A: Hi.
+B: 1) Byebye. 2) Thank you. 3) Well, what do you think? 4) I'm watching, Janice,
+Response: 3
+
+A: Okay,
+A: I'll let you start this time.
+B: Well, how much do you like lawn and garden work?
+A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
+B: Oh.
+A: the last, I don't know, fifteen, twenty years, so
+B: Oh, for goodness sakes.
+A: Uh, I'm,
+B: 1) no, 2) What do you do? 3) is it? 4) Have you seen that movie?
+Response: 2
+
+A: They're talking about, uh, federal government, aren't they?
+B: I'm sure,
+B: well, actually probably any government,
+B: but
+A: Yeah.
+B: the federal one's the big one.
+B: 1) Right, 2) Well, I guess. 3) I beg your pardon? 4) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it?
+Response: 4
+
+A: Well, I guess, um, I'll start out,
+A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
+A: I have mixed views on all three of them.
+B: Uhhuh.
+B: 1) Because I often, I often sort of wonder how, having never been to the Soviet Union, um, how different the people there really are, you know. 2) And the money is also another issue. How you're going to pay for it. 3) But I've never really tried anything like that since then. 4) What do you think about, what do you think about the, the lower grades, you know,
+Response: 4
+
+A: Okay.
+A: 1) I, I talked to so many people from Texas 2) How about you? 3) Oh that's, wonderful. 4) Let me ask Nicole.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: 1) Oh,
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+================================================================================
+
+
+================================================================================
+EXAMPLE 28
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: I'm ready if you are.
+B: Okay.
+B: 1) Um, wh, where do you stand, uh, on, 2) right. 3) That's right. 4) Excuse me?
+Response: 1
+
+A: Okay,
+A: have you ever served as a juror?
+B: Never.
+B: I've never been served on the jury, never been called up in a jury, although some of my friends have been jurors.
+A: Uhhuh.
+A: I never have either.
+B: You haven't, huh.
+B: 1) Well, it's going to be interesting. 2) If you were, uh, what do you think about the whole concept of a trial by your peers? 3) and I don't know which ones, 4) Right out,
+Response: 2
+
+A: Uh, what sort of camping do you like to do the most?
+B: Uh, well, I, I do, uh, real rough type camping.
+B: I have a motor home.
+A: Huh, rough type, huh?
+B: Yeah.
+A: Okay.
+B: Uh.
+A: Oh, yeah,
+A: motor homes can be a lot of fun.
+B: Yeah,
+B: they really are.
+A: Yeah.
+B: They really are.
+B: I've, I've enjoyed it.
+B: I've never actually done any, uh, like tent camping,
+A: Uh, that can be a lot of fun, too.
+A: Yeah.
+B: 1) I'm sorry 2) You know. 3) I would love to. 4) How about you?
+Response: 4
+
+A: I pushed it.
+B: Okay.
+A: 1) It sure would be cool and comfortable to wear, you know, 2) so. Um, anyway, let me press one. 3) and my wife normally says, oh, Tom, why, why don't you make a stir fry tonight 4) So what do you you in your lawn?
+Response: 4
+
+A: Uh, it seems like an unusual subject this time of the year
+A: but, uh, it's, it's camping.
+B: Really.
+B: When was the last time you went?
+A: The last time I went camping was about, uh, in the middle of October,
+A: and we went up to Lake Bonham and really enjoyed it.
+A: Had a real good time with the family.
+A: We do an awful lot of camping.
+A: 1) you're okay, 2) What about you? 3) And someone else isn't going to take the time to put it in two separate bags. 4) Mazda,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: 1) I don
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+================================================================================
+
+
+================================================================================
+EXAMPLE 29
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay,
+A: I'm here.
+A: How do you feel about public schools?
+B: Well, our public schools are, are really poor, I feel.
+A: Uhhuh.
+B: Uh, I'm not sure where Georgia ranks in the nation
+B: but, uh, we're toward the bottom.
+A: Yeah.
+B: And, uh, there's a lot of things that I see that are so obviously wrong.
+A: Uhhuh.
+B: That you would think it would be easy to correct.
+A: Right.
+B: But the system doesn't allow for the corrections.
+A: Uhhuh.
+B: 1) How about you? 2) I don't, 3) A small bowl will be plenty. 4) but I don't understand with racialism and the way religion is and everything else how you can get people that are total, totally impartial to it.
+Response: 1
+
+A: Well, I think we pay too much in taxes.
+B: Yeah.
+A: 1) What are yours? 2) Relax, 3) Um, I've never noticed that. 4) How about you?
+Response: 4
+
+A: Jay, um,
+A: my kids are, are both in college, um,
+A: and I'd, I played a fairly active part in helping them decide where to go.
+A: On the other hand, they really decided themselves.
+B: Uhhuh.
+A: 1) Or, I'm sorry no, 2) Um, what, what kind of experience did you have? 3) shall we say? 4) Yeah,
+Response: 2
+
+B: Okay.
+A: > All right.
+A: 1) I'm sorry, 2) , 3) Who's, who's not very well educated? 4) What have you seen?
+Response: 4
+
+B: Well, do you do any recycling?
+A: Uh, we do here.
+A: Uh, see, what do we recycle?
+A: We, they recycle,
+A: they have bins
+B: Yeah.
+A: and they also have centers where you can take aluminum cans and, uh, plastic bottles
+A: and I think that's all they have.
+B: Oh.
+A: 1) but it's kind of boring. 2) Or, I'm sorry no, 3) Well, how did it go? 4) well, then I don't know how much you've been through it,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Well, I think,
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+A: 3
+================================================================================
+
+
+================================================================================
+EXAMPLE 30
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Here goes Sharon.
+B: Okay.
+A: 1) Well, what do you think about Nolan Ryan being the first baseball player to earn a million dollars? 2) Well, I think that, well, part, I think that's partially true, too. 3) No, 4) Yeah
+Response: 1
+
+A: Okay,
+A: well, uh, some of the books I've read lately have to do with crafty type things where I've, where I've, um, learned things that I'm going to do for my children for Christmas
+B: Uhhuh.
+A: and they were really, uh, helpful, because I didn't know how to do this one stitching,
+A: and so, that was very helpful to me as far as books.
+A: Otherwise, um, I like to read children's books, and things like that.
+A: 1) don't tell me what women can do. 2) Okay. 3) Isn't that pretty. 4) What about you?
+Response: 4
+
+B: Bye >. >
+B: So we're, uh, our discussion's about, uh, the care of the elderly?
+A: That's right,
+A: that's right.
+A: 1) Well, no, 2) You know, what, what, uh, what do you think is important? 3) Yeah, 4) Caddo Lake.
+Response: 2
+
+A: Okay,
+A: do you have.
+B: Are you there?
+A: Yeah.
+B: Okay.
+A: There, okay.
+B: Okay.
+A: Had to mess with my phone here.
+A: Um, do you have children?
+B: Yes,
+B: I have one.
+A: Oh, okay.
+B: 1) Yeah. 2) Well, just an amateur singer. 3) How about you? 4) Definitely more to look at.
+Response: 3
+
+A: I've, uh, >
+A: are you there?
+B: Yes, sir,
+B: I'm right here.
+A: All right.
+A: Okay, um,
+A: I'm in an area where, um, we can, uh, enjoy it year round,
+A: so, I've actually been, uh, uh, been out within the past couple of weeks.
+A: I'm mainly a freshwater fisherman.
+A: 1) I think you'll enjoy it. 2) Well, sometimes it's rewarding, 3) Um, what type of magazines do you have? 4) Kiss some butt,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+2
+
+A: Well, I'm not
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+================================================================================
+
+
+================================================================================
+EXAMPLE 31
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay.
+B: 1) of course it's going to take a lot. 2) And, uh, I don't know, 3) So what do you guys having up there? 4) Well, I could pick country music. *answered as if to a qw
+Response: 3
+
+A: Okay.
+B: Hi,
+B: Well, do you do a lot of dining out?
+A: No, um,
+A: we don't although we enjoy it.
+A: Um, we do it more when we have company
+A: 1) I was trying to think, uh, 2) Well, I, I think one of the things that always happens is I think is when the one end wh, you know were moving out to the end where a lot of women will be at work 3) Um, what about you? 4) Okay.
+Response: 3
+
+A: I pushed it.
+B: Okay.
+A: 1) and you get together once a year. 2) let's see. 3) I don't know, 4) So, how do you use your credit cards?
+Response: 4
+
+B: There we go.
+A: Okay.
+A: 1) No. 2) Well, uh, what do you think about taxes, 3) where'd you live at, 4) Yeah
+Response: 2
+
+A: That's it.
+B: Yes.
+A: What do you think are possible changes in the, uh, way trials are conducted these days?
+A: Do you like the way some people in there for instance, really take over and, uh, we have no way, uh, of knowing whether they are legitimately right or wrong and so forth.
+A: 1) yeah, 2) so, we had to, we had to flea bath them 3) Hi, 4) How about you?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+2
+
+A: Okay.
+B:
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+A: 3
+
+A:
+================================================================================
+
+
+================================================================================
+EXAMPLE 32
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Okay.
+B: Okay,
+B: that made a nice ugly sound.
+B: So,
+A: Your name is Lynn?
+B: Linda.
+A: Linda.
+B: Uhhuh.
+B: So, sounds like you like to read.
+A: Yeah,
+A: I read quite a bit, probably don't read as much as I would like to.
+B: I don't read as much as I would like to either.
+B: I'm, I'm a single mom,
+B: but I have always loved reading.
+A: Uhhuh.
+B: 1) What do you like to read? 2) Someti, 3) no 4) you kind of divide it in fourths in a way, don't you?
+Response: 1
+
+A: Your turn.
+B: Oh, I, I start.
+B: Okay.
+B: Well, uh, we keep a budget to an extent.
+B: Uh, and really, i, i, we were really forced into keeping a budget because I'm, I'm paid once a month which sort of, sort of forces some, uh, uh, restrictions
+B: and you need to make sure all your bills are paid.
+B: 1) we got ripped off buying our new car. 2) Did I say channel nine to begin with? 3) Uh, about yourself? 4) instead of being completely penned up.
+Response: 3
+
+A: We could talk about my favorite subject.
+B: Cooking and
+B: 1) A whole new, 2) What do you like to cook? 3) as a separate country, 4) I know that it's a real problem.
+Response: 2
+
+B: There we go.
+A: Okay.
+A: 1) I wonder, I wonder how, how the civil system or the court system must differ between there and say where I am in Minneapolis. 2) know ? 3) or is this, is there a series on. 4) Well, uh, what do you think about taxes,
+Response: 4
+
+A: favorite type of music or musician or any.
+B: I don't really have a favorite type.
+B: I like, uh, a lot of different types of music.
+A: Do you?
+B: Yeah,
+B: I have a, a tape collection that I like to listen to, uh, cassette tapes
+A: Uhhuh.
+B: but it's pretty varied.
+A: Uhhuh.
+B: Yeah.
+B: 1) Let's see , 2) Yeah. 3) or you do that as, just on the side, or what? 4) How do you feel about public schools?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Oh, I'm glad
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 33
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Okay.
+B: Okay.
+A: 1) put it this way, I think, 2) I do not know, 3) DEFENDING YOUR LIFE, 4) So, what do you think about it?
+Response: 4
+
+A: Do you have any children?
+B: Yeah,
+B: I have two, two boys, twelve and sixteen.
+A: Twelve and sixteen.
+B: Uhhuh,
+B: 1) how about you? 2) as opposed to paying for cable. 3) Oh, improve upon that? 4) Um, um, and I don't think this would have anything to do with it,
+Response: 1
+
+A: Okay.
+A: 1) A tent? 2) It wouldn't have, 3) I guess that's some of the answer, I guess is business, uh. Uh, 4) So, uh, Mike, what are your opinions on, uh, trial by jury?
+Response: 4
+
+B: I guess we're ready to talk.
+A: How you doing, Howard?
+A: This is a, a subject that I'm not real well versed on,
+A: but.
+B: Well, let's talk about air pollution.
+A: Okay.
+B: What do you think causes air pollution in Dallas?
+B: Or where are you from?
+A: No.
+B: Maybe you're not in Dallas.
+A: Okay,
+A: I'm from the, uh,
+A: I'm from Dallas.
+A: I'm in Richardson.
+B: Okay. Uh,
+A: 1) I've heard of it a lot, 2) What do you think as far as air pollution in the Dallas area? 3) or do you think it would be better for our leaders to just start seeking God on how to turn our nation around financially? 4) I'm in Plano, > Texas.
+Response: 2
+
+A: Okay,
+A: so you have eight children.
+A: 1) and I know I don't, 2) How about you? 3) No, 4) Isn't that interesting?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Okay.
+B: Okay
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+
+A: 2
+================================================================================
+
+
+================================================================================
+EXAMPLE 34
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+B: Okay,
+B: all set, then.
+B: 1) Uh, what do you think about it? 2) Uhhuh. 3) so maybe it's the law that wrong in their eyes 4) so um, I'm going to leave you alone.
+Response: 1
+
+A: Okay.
+B: All right.
+B: 1) don't provide very much education. 2) and roads, is falling apart. 3) Do you think? 4) What, uh, what kind of camping is there in Texas?
+Response: 4
+
+B: Uhhuh,
+B: I have got two.
+B: One is, uh, two
+B: and the other one's four
+B: and, uh, this is my first year of staying home.
+B: I've always had them in child care.
+A: Oh, well, then you are familiar with it?
+B: Uhhuh.
+A: Okay,
+A: I, uh, I have grandchildren
+A: and I know, uh, one has gone to a, well, two of them have gone to preschool.
+B: Uhhuh.
+A: And I know what the experience my daughter has faced with that.
+A: 1) That's okay. 2) Why don't you tell me what you have found. 3) No, 4) So what car do you drive?
+Response: 2
+
+A: Okay.
+B: 1) So how serious is the, 2) I'll have to make sure I catch that. 3) Uhhuh. 4) Oh, have you?
+Response: 1
+
+A: Hi, Cynthia.
+A: What did you wear to work today?
+B: Um, let's see.
+B: What did I wear to work today?
+B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
+A: So, can you dress pretty casually?
+B: Um, on occasion.
+A: Yeah.
+B: On occasion.
+B: Um, I do vary.
+B: Um, you know, I wear suits,
+B: I wear skirts and sweaters.
+B: On occasion I can wear jeans.
+B: 1) Oh, I know it. 2) no, 3) Possibly. 4) What do you think would be required, and so forth?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+B: 1) That's
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+
+1
+
+1
+
+2
+
+1
+================================================================================
+
+
+================================================================================
+EXAMPLE 35
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+A: Well, I think we pay too much in taxes.
+B: Yeah.
+A: 1) How about you? 2) I have not heard of it, any problems of it flooding anywhere, 3) But, but, but it's, it's more significant, in the sense of, it's a great agricultural region. 4) right?
+Response: 1
+
+A: Wh,
+A: your, uh,
+A: are you into the Cowboys?
+B: Oh, God, no.
+B: Uh, no,
+B: I'm not,
+B: I haven't been,
+B: I grew up in Dallas but I'm still not a Cowboys' man.
+B: I like Philadelphia Eagles.
+A: Oh, yeah?
+B: Yeah.
+B: my favorite team,
+B: so.
+A: that's all
+B: now that Randall's coming back next season, I hope they'll be, do a little bit better.
+B: They didn't do too bad last season.
+A: Yeah.
+B: But, I hope they can do better.
+B: 1) How about yourself? 2) Is that right? 3) > 4) Well, I, I think, uh, my background is probably what absolutely turned me off with SIXTY MINUTES.
+Response: 1
+
+A: Okay.
+A: We're talking about capital punishment.
+B: Right.
+A: 1) How do you feel about that Lenore ? 2) Excuse me. 3) Well, not in the morning, 4) >.
+Response: 1
+
+A: All right.
+A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
+A: but my mother's always been administrator of a nursing home
+B: Uhhuh.
+A: so I've always been involved, you know, in one.
+B: 1) with scallops. 2) this is 3) How do you feel about them, I mean, since you've 4) That's good.
+Response: 3
+
+A: Well, we, uh,
+A: taxes,
+A: everyone thinks taxes are too high I'm sure.
+A: But, uh, I think we do get quite a good value for the tax dollars we spend in most cases.
+A: 1) right, 2) to pay the delivery. 3) or, uh, do you belong to a group? 4) How do you feel about public schools?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+1
+
+A: Yeah.
+A: Well
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+A: 1
+
+1
+================================================================================
+
+
+================================================================================
+EXAMPLE 36
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: Okay,
+A: 1) and I live in Virginia. 2) what kind of hobbies do you have? 3) Yes, 4) Let's see, what did we have the last time we had guests over.
+Response: 2
+
+A: Okay
+A: wow, I don't know what that was.
+B: What was that?
+A: I don't know.
+B: And, uh, to, uh, the Brazos River
+A: Uhhuh.
+B: near Dinosaur Valley State Park.
+A: Oh, yes.
+B: Uhhuh.
+A: Uhhuh,
+A: uh, we have not camped in any of those places,
+A: in fact it has been a number of years since we have camped,
+A: but we used to go to Tyler State Park and, uh, Daingerfield
+A: and in Texas that is where we camp basically. Uh,
+B: 1) and I, I think there's a, a shadow of a doubt, you know, like with this, this guy in, in Milwaukee. 2) Uh, well, a bunch of stuff, I guess, uh, fair number of novels, but mostly shorter ones. 3) What are they like? 4) Oh, okay.
+Response: 3
+
+A: Okay,
+A: I think we're supposed to discuss our view of the Soviet Union as a continuing threat to the United States.
+B: Okay.
+A: 1) I don't know, 2) I'll look at my map later. 3) How do you feel about that. 4) > Ju,
+Response: 3
+
+B: > Okay,
+B: what kind of crafts and hobbies do you have?
+A: Oh, not very many of those at, uh,
+A: sometimes I, I play the trumpet,
+A: and sometimes I work on trumpet mouthpieces.
+B: Uhhuh.
+A: And then I have a five year old daughter
+A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
+B: Uhhuh.
+A: 1) But I have, you know, MasterCard and Visa as you know, 2) but because there's no strings attached, it like gives them a freedom to give us something back. 3) I don't know 4) Um, how about you?
+Response: 4
+
+A: Okay.
+A: Do you work?
+B: Yes,
+B: I do.
+A: I think that's the main change.
+A: What do you think?
+B: Well, I think that's a big part of it
+B: and I, I think it maybe started because women wanted outside of the home
+B: and,
+B: almost think with our society and, and inflation and the cost of things it's anymore it's almost couples have to work outside the home.
+A: That's right.
+B: But, but yeah, I think that's a big change.
+B: I'd like to not work.
+B: 1) What about yourself? 2) A, a, a team effort, 3) No? 4) Uh, it's similar.
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+4
+
+A: Okay,
+A: you
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+================================================================================
+
+
+================================================================================
+EXAMPLE 37
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+A: You bet.
+A: They tell you our topic?
+B: Uh, pets.
+A: You've got it.
+B: Do you have pets?
+A: Yes,
+A: we do.
+A: Uh, my wife and I have a dog that soon be eight years old,
+A: and we have a, a cat, which is, uh, I guess about five years old.
+B: Oh, my goodness.
+A: 1) What's your out of the, out of the state type, 2) that's okay. 3) How about you guys? 4) like say Houston.
+Response: 3
+
+A: You bet.
+A: They tell you our topic?
+B: Uh, pets.
+A: You've got it.
+B: Do you have pets?
+A: Yes,
+A: we do.
+A: Uh, my wife and I have a dog that soon be eight years old,
+A: and we have a, a cat, which is, uh, I guess about five years old.
+B: Oh, my goodness.
+A: 1) How about you guys? 2) Let me ask you a question off the subject though. 3) Are you in the part of town where, uh, they have gotten into the other containers yet for recycling? 4) You don't?
+Response: 1
+
+A: Okay,
+A: I'll let you start this time.
+B: Well, how much do you like lawn and garden work?
+A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
+B: Oh.
+A: the last, I don't know, fifteen, twenty years, so
+B: Oh, for goodness sakes.
+A: Uh, I'm,
+B: 1) What do you do? 2) and it's, uh, real true that, uh, you know, they'll say one thing, 3) I don't know. Um. 4) well, have you any plans to, uh, maybe, uh, expand or move onward?
+Response: 1
+
+A: Wh,
+A: your, uh,
+A: are you into the Cowboys?
+B: Oh, God, no.
+B: Uh, no,
+B: I'm not,
+B: I haven't been,
+B: I grew up in Dallas but I'm still not a Cowboys' man.
+B: I like Philadelphia Eagles.
+A: Oh, yeah?
+B: Yeah.
+B: my favorite team,
+B: so.
+A: that's all
+B: now that Randall's coming back next season, I hope they'll be, do a little bit better.
+B: They didn't do too bad last season.
+A: Yeah.
+B: But, I hope they can do better.
+B: 1) Right, 2) How about yourself? 3) Well there was stuff like that in Florida 4) That's right,
+Response: 2
+
+B: Okay,
+B: well the topic is selecting care for the elderly.
+A: Uhhuh.
+B: And I don't have elderly parents, yet but not that far in the distant future.
+B: 1) Oh well. 2) You know what I bet you they are? 3) I see. 4) Uh, what, what contacts do you have with the public school sy,
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Well,
+A: uh
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+================================================================================
+
+
+================================================================================
+EXAMPLE 38
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+B: > Well I always think I'm paying too much taxes.
+B: 1) Thank you, 2) How about you? 3) Lawn? 4) Really?
+Response: 2
+
+B: So, let's talk about the, uh, wonderful abuses in the State of Pennsylvania of personal property taxes whereby you can purchase something mail order
+B: and after the fact, the State of Pennsylvania can find out about it and send you a bill for the sales tax appropriate to that item that you purchased as well as interest and penalties from the time that you bought it.
+B: 1) What do you think? 2) Yeah. 3) pardon the terminology, 4) I mean, I do not, I do not know how it is in the Air Force base.
+Response: 1
+
+B: Okay,
+B: well the topic is selecting care for the elderly.
+A: Uhhuh.
+B: And I don't have elderly parents, yet but not that far in the distant future.
+B: 1) I haven't done it in quite awhile 2) actually as a matter of fact, they just ran the phone three years ago. 3) How is T I in that mode? 4) What about yourself?
+Response: 4
+
+B: Do you want to start?
+B: G,
+A: Yeah,
+A: I'm trying to think what I've seen lately.
+A: I me, we,
+A: well we just finished watching, uh, TEENAGE MUTANT NINJA TURTLES on tape, you know.
+B: Did you watch DANCES WITH WOLVES,
+B: did you see the movie?
+A: Yeah,
+A: we, we've seen that,
+A: yeah.
+B: Did you like it?
+A: Yeah,
+A: it was great,
+A: have you seen it?
+B: I thought it was very well done.
+A: Yeah,
+A: I, um,
+B: 1) or you going rent it, lease it again? 2) So, I don't know 3) How about GHOST? 4) Huh, rough type, huh?
+Response: 3
+
+A: Okay.
+A: 1) I'm sorry. 2) And, the plots are more, um, challenging, you know, than the sitcoms of regular T V. 3) there's nowhere that you can go that you would have to be afraid. 4) uh, what do you think was different ten years ago from now?
+Response:
+================================================================================
+
+CLEAN OUTPUT:
+3
+
+A: Okay.
+B: Yeah
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+
+1
+
+1
+
+1
+
+2
+================================================================================
+

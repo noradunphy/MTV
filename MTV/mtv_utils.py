@@ -9,6 +9,7 @@ import json
 import random
 from tqdm import tqdm
 import pdb
+import re  # Added for regex operations in extract_first_turn
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, AutoProcessor, AutoModelForVision2Seq, logging
 import sys
@@ -153,25 +154,52 @@ def split_activations_by_head(activations, model_config):
 
 
 def extract_first_turn(text):
-    # Split by newlines and get first non-empty line
-    lines = [line.strip() for line in text.split('\n') if line.strip()]
+    """Extract the model-generated first turn/answer.
+
+    Behaviour:
+    1. Finds the first non-empty line of *text* that is not clearly part of the
+       dialogue history (lines that contain a speaker prefix like "A:" or
+       "Speaker:").
+    2. If that line begins with one or more digits (e.g. "1", "2) …", "3.",
+       etc.) we return *only* the leading digit sequence.  This is crucial for
+       SWDA multiple-choice where the answer is exactly the number.
+    3. Otherwise we return the cleaned line itself.
+
+    The function always returns a **string** so downstream logic that slices
+    (e.g. `s[0]`) continues to work unchanged.
+    """
+
+    if text is None:
+        return ""
+
+    # Split text into non-empty stripped lines
+    lines = [ln.strip() for ln in str(text).split("\n") if ln.strip()]
     if not lines:
-        return text
-    # Get the first line that contains a response (after the caller's name)
-    for line in lines:
-        if ':' in line:
-            # Skip lines that are part of the history
-            continue
-        # Remove any caller name and colon if present
-        if ':' in line:
-            line = line.split(':', 1)[1].strip()
-        return line
-    # If no response line found, return first non-empty line
-    return lines[0]
+        return ""
+
+    # Helper to post-process a candidate line
+    def _clean_line(ln: str) -> str:
+        # Remove speaker labels like "A:" or "Speaker:" if present
+        if ':' in ln and not ln.split(':', 1)[0].strip().isdigit():
+            ln = ln.split(':', 1)[1].strip()
+        return ln
+
+    # Iterate to find the first contentful line
+    for ln in lines:
+        candidate = _clean_line(ln)
+        if candidate:
+            # If the candidate starts with digits, return just those digits
+            m = re.match(r"^(\d+)", candidate)
+            return m.group(1) if m else candidate
+
+    # Fallback to very first line if none matched above
+    first = _clean_line(lines[0])
+    m = re.match(r"^(\d+)", first)
+    return m.group(1) if m else first
 
 
 ###Based on Function Vector: https://github.com/ericwtodd/function_vectors/blob/308e9d174cf0a1cf910b891d340f0dfd14168668/src/utils/extract_utils.py#L46
-def get_last_mean_head_activations(dataset, model_helper, N_TRIALS = 50, shot=4, no_mean=False, save_path=None, load_path=None):
+def get_last_mean_head_activations(dataset, model_helper, N_TRIALS = 50, shot=4, no_mean=False, save_path=None, load_path=None, full_dataset=None):
 
     """
     This function extracts the activation of the last input token.
@@ -198,44 +226,18 @@ def get_last_mean_head_activations(dataset, model_helper, N_TRIALS = 50, shot=4,
         # Clear CUDA cache before each trial
         torch.cuda.empty_cache()
         
-        text, image_list, _, _ = model_helper.format_func(dataset, None, num_shot=shot, model_helper=model_helper)
+        if model_helper.cur_dataset == "swda":
+            text, image_list, _, _ = model_helper.format_func(dataset, full_dataset, None, num_shot=shot, model_helper=model_helper)
+        else:
+            text, image_list, _, _ = model_helper.format_func(dataset, full_dataset, None, num_shot=shot, model_helper=model_helper)
+        if n % 10 == 0:
+            print(text)
         #is this actually getting the last token?
         inputs = model_helper.insert_image(text, image_list)
         activations_td, result = gather_last_attn_activations(inputs, model_helper)
 
         # Process activations in smaller chunks if needed
-        stack_initial = torch.vstack([split_activations_by_head(activations_td[layer].input, model_helper.model_config) for layer in model_helper.model_config['attn_hook_names']]).permute(0,2,1,3)
-        
-        # DEBUG: Show what token the -1 index corresponds to
-        if n == 0 or n == 1 or n == 2:  # Print for first three trials
-            print(f"\n[DEBUG] Last Token Activation Analysis:")
-            print(f"[DEBUG] stack_initial shape: {stack_initial.shape}")
-            print(f"[DEBUG] sequence length (dim 2): {stack_initial.shape[2]}")
-            # Verify sequence length matches input
-            if hasattr(inputs, 'get'):
-                input_ids = inputs.get('input_ids', None)
-                if input_ids is not None:
-                    print(f"[DEBUG] input_ids sequence length: {input_ids.shape[1]}")
-                    print(f"[DEBUG] Do they match? {input_ids.shape[1] == stack_initial.shape[2]}")
-            print(f"[DEBUG] Extracting activations from token position: -1 (last token)")
-            
-            # Get the input_ids to see what token is at position -1
-            if hasattr(model_helper, 'tokenizer') and hasattr(inputs, 'get'):
-                input_ids = inputs.get('input_ids', None)
-                if input_ids is not None:
-                    last_token_id = input_ids[0, -1].item()
-                    print(f"[DEBUG] Last token ID: {last_token_id}")
-                    print(f"[DEBUG] Last token decoded: {repr(model_helper.tokenizer.decode([last_token_id]))}")
-                    
-                    # Show last few tokens for context
-                    last_5_tokens = input_ids[0, -5:].tolist()
-                    print(f"[DEBUG] Last 5 tokens: {last_5_tokens}")
-                    print(f"[DEBUG] Last 5 tokens decoded: {[repr(model_helper.tokenizer.decode([tid])) for tid in last_5_tokens]}")
-                else:
-                    print(f"[DEBUG] Could not access input_ids from inputs")
-            else:
-                print(f"[DEBUG] No tokenizer available or inputs not in expected format")
-        
+        stack_initial = torch.vstack([split_activations_by_head(activations_td[layer].input, model_helper.model_config) for layer in model_helper.model_config['attn_hook_names']]).permute(0,2,1,3) 
         cur_activation = stack_initial[:, :, -1, :].unsqueeze(dim=2).unsqueeze(dim=0)
         
         # Move to CPU if memory is tight
@@ -265,7 +267,7 @@ def get_last_mean_head_activations(dataset, model_helper, N_TRIALS = 50, shot=4,
     return mean_activations
 
 
-def reinforce(mean_activations, model_helper, reinforce_data, eval_data):
+def reinforce(mean_activations, model_helper, reinforce_data, eval_data, full_dataset):
 
     """
     This function performs Reinforce to select the attentions that encodes ICL examples.
@@ -296,7 +298,7 @@ def reinforce(mean_activations, model_helper, reinforce_data, eval_data):
             loss_list = []
             saved_log_probs = []
 
-            text, image_list, target_out, _ = model_helper.format_func(reinforce_data, None, num_shot=0, model_helper=model_helper)
+            text, image_list, target_out, _ = model_helper.format_func(reinforce_data, full_dataset, None, num_shot=0, model_helper=model_helper)
             new_input = model_helper.insert_image(text, image_list)
 
             if type(target_out)==list:
@@ -337,11 +339,11 @@ def reinforce(mean_activations, model_helper, reinforce_data, eval_data):
             optim.step()
             torch.cuda.empty_cache()
             if epoch % 50 == 0:
-                validate_reinforce(model_helper, bernoullis, eps, mean_activations, eval_data, epoch)
+                validate_reinforce(model_helper, bernoullis, eps, mean_activations, eval_data, epoch, full_dataset=full_dataset)
     return bernoullis
 
 
-def validate_reinforce(model_helper, bernoullis, eps, mean_activations, eval_data, epoch, sampled=None):
+def validate_reinforce(model_helper, bernoullis, eps, mean_activations, eval_data, epoch, sampled=None, full_dataset=None):
 
     with torch.no_grad():
         if sampled is None:
@@ -351,7 +353,7 @@ def validate_reinforce(model_helper, bernoullis, eps, mean_activations, eval_dat
 
         loss_list = []
         for item in eval_data:
-            text, image_list, target_out, _ = model_helper.format_func(None, item, num_shot=0, split="test", model_helper=model_helper)
+            text, image_list, target_out, _ = model_helper.format_func(filtered_dataset=None, full_dataset=full_dataset, cur_item=item, num_shot=0, split="test", model_helper=model_helper)
             new_input = model_helper.insert_image(text, image_list)
 
             if model_helper.space:
@@ -372,7 +374,7 @@ def validate_reinforce(model_helper, bernoullis, eps, mean_activations, eval_dat
     return torch.tensor(loss_list).mean().item()
 
 
-def avg_reinforce(mean_activations, model_helper, reinforce_data, eval_data):
+def avg_reinforce(mean_activations, model_helper, reinforce_data, eval_data, full_dataset):
 
     """
     This function performs Reinforce to select the attentions that encodes ICL examples.
@@ -404,7 +406,7 @@ def avg_reinforce(mean_activations, model_helper, reinforce_data, eval_data):
             loss_list = []
             saved_log_probs = []
 
-            text, image_list, target_out, _ = model_helper.format_func(reinforce_data, None, num_shot=0, model_helper=model_helper)
+            text, image_list, target_out, _ = model_helper.format_func(reinforce_data, full_dataset, None, num_shot=0, model_helper=model_helper)
 
             if type(target_out)==list:
                 target_out = target_out[0]
@@ -815,7 +817,7 @@ def get_classifier(dialogue_act, contextual=False):
     else:
         # Load binary classifiers
         if classifier_type == 'declarative':
-            from declarative_classifier import load_classifier
+            from new_classifiers.declarative_classifier import load_classifier
             classifier = load_classifier()
             def classify_func(utterance, previous_utterance=""):
                 return 'sd' if classifier.classify_utterance(utterance) else 'o'
@@ -884,3 +886,171 @@ def classify_dialogue_act(utterance, target_act, classifiers_cache=None, previou
         predicted_act = classify_func(utterance)
     
     return predicted_act
+
+def build_reference_sets(train_dataset, dialogue_acts, size_per_act, seed=42):
+    """
+    Build reference sets of utterances for each dialogue act from training data. --> FOR PERPLEXITY
+    
+    Args:
+        train_dataset: List of training examples
+        dialogue_acts: List of dialogue acts to collect references for
+        size_per_act: Number of reference utterances to sample per act
+        seed: Random seed for reproducibility
+        
+    Returns:
+        Dict mapping dialogue acts to lists of reference utterances
+    """
+    random.seed(seed)
+    
+    # Group training examples by dialogue act
+    act_to_examples = {}
+    for ex in train_dataset:
+        act = ex.get('dialog_act', 'o')
+        if act not in act_to_examples:
+            act_to_examples[act] = []
+        act_to_examples[act].append(ex)
+    
+    # Sample reference utterances for each act
+    ref_sets = {}
+    for act in dialogue_acts:
+        if act not in act_to_examples or not act_to_examples[act]:
+            print(f"[WARNING] No training examples found for act '{act}', using empty reference set")
+            ref_sets[act] = []
+            continue
+            
+        # Sample with replacement if we need more than we have
+        examples = random.choices(act_to_examples[act], k=size_per_act) if size_per_act > len(act_to_examples[act]) else random.sample(act_to_examples[act], size_per_act)
+        # Extract the response; fall back to other fields if empty
+        utterances = []
+        for ex in examples:
+            utt = ex.get('response', '')
+            if not utt:
+                utt = ex.get('target_out', '') if 'target_out' in ex else ex.get('text', '')
+            if utt:
+                utterances.append(utt)
+        ref_sets[act] = utterances
+
+    # Print reference sets to file
+    with open('reference_sets.txt', 'w') as f:
+        f.write("\n[INFO] Reference sets:\n")
+        for act, utterances in ref_sets.items():
+            f.write(f"\n{act} ({len(utterances)} utterances):\n")
+            for i, utt in enumerate(utterances, 1):
+                f.write(f"  {i}. {utt}\n")
+        f.write("\n") # Add blank line after reference sets
+        
+    return ref_sets
+
+def build_multiple_choice_candidates(act_to_utterances, target_act, target_out, max_choices=5):
+    """
+    Build multiple choice candidates for a given example, sampling one utterance per dialogue act.
+    
+    Args:
+        act_to_utterances: Dict mapping dialogue acts to lists of utterances
+        target_act: The target dialogue act for this example
+        target_out: The target/gold utterance to exclude from sampling
+        max_choices: Maximum number of choices to include (including target act)
+        
+    Returns:
+        Dict mapping dialogue acts to lists containing one sampled utterance each
+    """
+    # Get all available acts that have utterances
+    available_acts = [act for act, utts in act_to_utterances.items() if utts]
+    
+    # Always include target act's pool (for fair comparison)
+    if target_act in available_acts:
+        available_acts.remove(target_act)
+    
+    # Sample N-1 other acts (where N is total number of acts)
+    num_other_acts = min(max_choices - 1, len(available_acts))
+    sampled_acts = []
+    if available_acts:
+        sampled_acts = random.sample(available_acts, num_other_acts)
+        if target_act not in sampled_acts:
+            sampled_acts.append(target_act)
+    else:
+        sampled_acts = [target_act] if target_act else []
+    
+    # Sample one utterance per act, ensuring we don't pick the target utterance
+    current_ref_utterances = {}
+    for act in sampled_acts:
+        if not act_to_utterances.get(act):
+            continue
+            
+        # Get utterance pool excluding the target
+        utt_pool = [u for u in act_to_utterances[act] if u.strip() != target_out.strip()]
+        
+        if utt_pool:  # Only add if we have valid candidates
+            sampled_utt = random.choice(utt_pool)
+            current_ref_utterances[act] = [sampled_utt]
+            
+    return current_ref_utterances
+
+def update_multiple_choice_stats(example_data, clean_act, interv_act, target_act, clean_ppl, interv_ppl, args):
+    """
+    Update example statistics for multiple choice evaluation.
+    
+    Args:
+        example_data: Dict containing example-level data to update
+        clean_act: Act selected by clean model
+        interv_act: Act selected by intervention model
+        target_act: Ground truth target act
+        clean_ppl: Clean model perplexities (not used in letter-based approach)
+        interv_ppl: Intervention model perplexities (not used in letter-based approach)
+        args: Runtime arguments
+        
+    Returns:
+        Tuple of (clean_patch_selected, interv_patch_selected) indicating if patch was selected
+    """
+    clean_patch_selected = False
+    interv_patch_selected = False
+    
+    if args.dialogue_act is not None:
+        # Track if model selected the target act
+        clean_correct = clean_act == target_act
+        example_data["clean_selected_correct"] = clean_correct
+        example_data["clean_selected_act"] = clean_act
+        
+        # Track if model selected the patched act
+        if clean_act == args.dialogue_act:
+            clean_patch_selected = True
+            example_data["clean_selected_patch"] = True
+        else:
+            example_data["clean_selected_patch"] = False
+            
+        if args.cur_mode in ("interv", "both"):
+            # Track if intervention model selected correctly
+            interv_correct = interv_act == target_act
+            example_data["interv_selected_correct"] = interv_correct
+            example_data["interv_selected_act"] = interv_act
+            
+            # Track if intervention model selected patched act
+            if interv_act == args.dialogue_act:
+                interv_patch_selected = True
+                example_data["interv_selected_patch"] = True
+            else:
+                example_data["interv_selected_patch"] = False
+            
+    return clean_patch_selected, interv_patch_selected
+
+def update_multiple_choice_summary(summary, clean_patch_count, interv_patch_count, total_examples, args):
+    """
+    Update summary statistics for multiple choice evaluation (patch selection rates).
+    
+    Args:
+        summary: Dict containing summary statistics to update
+        clean_patch_count: Number of times clean model selected patch
+        interv_patch_count: Number of times intervention model selected patch
+        total_examples: Total number of examples evaluated
+        args: Runtime arguments
+    """
+    if args.multiple_choice and args.dialogue_act is not None:
+        summary["clean_patch_selection_rate"] = clean_patch_count / total_examples
+        summary["clean_patch_selections"] = clean_patch_count
+        summary["total_examples"] = total_examples
+        
+        if args.cur_mode in ("interv", "both"):
+            summary["intervention_patch_selection_rate"] = interv_patch_count / total_examples
+            summary["intervention_patch_selections"] = interv_patch_count
+            summary["patch_selection_rate_increase"] = summary["intervention_patch_selection_rate"] - summary["clean_patch_selection_rate"]
+            summary["patch_selection_absolute_increase"] = interv_patch_count - clean_patch_count
