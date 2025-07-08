@@ -3,50 +3,81 @@ Evaluation run for model=text dataset=swda act=qo
 
 ================================================================================
 EXAMPLE 1
-Target Output: 4
+Target Output: 3
 Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: That's it.
+B: Yes.
+A: What do you think are possible changes in the, uh, way trials are conducted these days?
+A: Do you like the way some people in there for instance, really take over and, uh, we have no way, uh, of knowing whether they are legitimately right or wrong and so forth.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Oh, I see, huh. 2) Which ones are you watching, the new ones? 3) do you think about these things? 4) It is in the morning?
+ANSWER: 3
+______
+
+EXAMPLE:
+A: So what do you think about it?
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) A service. 2) How are we doing in recycling? 3) Well, how old, um, does a child have to be before you have to, you get to stop making arrangements for him, I wonder. 4) Part of it is technology, yeah.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Well, I guess, um, I'll start out,
+A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
+A: I have mixed views on all three of them.
+B: Uhhuh.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Um, I haven't done much word processing work with my job. 2) A small bowl will be plenty. 3) Right? 4) What do you think about, what do you think about the, the lower grades, you know,
+ANSWER: 4
+______
+
+EXAMPLE:
 A: Okay.
-B: Okay.
-A: 1) or people just change a, like, one word because they think it sounds better, or whatever. 2) No, 3) What else. 4) So, what do you think about it?
-Response: 4
+A: Um, does, is this something that concerns you?
+B: > Well, I think it does, um, especially because I just moved to Massachusetts and, uh, they're having real problems because they have so many, uh, police layoffs.
+A: Uhhuh.
+B: And, uh, personally I don't live in a real bad section of town
+B: but, uh, just because of the general area I live in, the insurance rates are real high on your car
+B: and, there's a lot of crime within a few miles of me.
+A: Right.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or do you keep 2) How about you? 3) and I, I don't know, 4) Oh, you are
+ANSWER: 2
+______
 
-A: Uh, so, uh, what are your benefits like at your job,
-A: 1) and how do you feel about them? 2) Huh. 3) Um. 4) >.
-Response: 1
-
-A: Hello.
-B: Hello.
-B: I was, I was thinking about our topic for the night. Um, immigration problems.
-B: We have immigration problems
-B: 1) and what do, do you think about it?. 2) Yeah, 3) Which one? 4) Thank you very much.
-Response: 1
-
-A: Okay.
-B: Okay,
-B: I guess we're ready to start.
-B: Well, I guess, what part of t, what part of the country do you live in?
-A: I'm in Dallas, Texas.
-B: Oh, okay.
-A: 1) I mean, I'm, I'm, I'm getting a kick out of the whole program 2) What about yourself? 3) or, or, 4) Uh, we're supposed to talk about the elderly now, I guess, uh,
-Response: 2
-
-A: Okay.
-A: 1) Hi. 2) I have no idea. 3) all right. 4) How about yours?
-Response:
+TEST EXAMPLE:
+A: Uh, it seems like an unusual subject this time of the year
+A: but, uh, it's, it's camping.
+B: Really.
+B: When was the last time you went?
+A: The last time I went camping was about, uh, in the middle of October,
+A: and we went up to Lake Bonham and really enjoyed it.
+A: Had a real good time with the family.
+A: We do an awful lot of camping.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Do you read a newspaper? 2) I'm sorry. 3) How are you? 4) Whoever Troy Aikman is.
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
 2
-
-A: Oh, okay.
-B
+______ A: Uh, it
 ================================================================================
 
 INTERVENTION OUTPUT:
-2
+1
+______ ________ __ ______ ______
 ================================================================================
 
 
@@ -57,26 +88,679 @@ Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay, Deanna, uh,
+A: on capital punishment in our state, they give the death penalty for shooting of a policeman,
+B: Uhhuh.
+A: and I believe also in shooting of, uh, rape, I mean killing a rape victim.
+B: Uhhuh.
+A: I mean someone in the process of rape,
+A: and I don't know what el, I don't really remember what else.
+B: Uhhuh.
+A: But.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) No, 2) Hi. 3) How do yo, wh, what do you think about it. 4) Gosh.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay,
+A: well, I don,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) yes, 2) I mean, what thoughts do you have on the subject? 3) the heck is going to root for Tampa Bay, right? 4) Well, she does not have it,
+ANSWER: 2
+______
+
+EXAMPLE:
+A: So, P C s, personal computers.
+A: Do you have a personal computer?
+B: No
+B: I don't, not at home.
+A: Uhhuh.
+B: I work with them quite a bit though.
+A: Uhhuh,
+A: I, I work with them at Kelly Services, doing, uh, data entry.
+B: Oh, okay.
+A: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) uhhuh. 2) Go ahead. 3) What do you, what do you think about them? 4) And what did you graduate in?
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, even if it's not technical. If it's, uh, some social thing or whatever. It doesn't matter. 2) right. 3) well, I can't, 4) Um, what type of magazines do you have?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) no, 2) How about you? 3) No. 4) I have a recipe if you want.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______ Correct. 2
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+______
+______
+______
+____
+================================================================================
+
+
+================================================================================
+EXAMPLE 3
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: All right,
+A: well I have a lot of different teams that I like to, to keep in touch with,
+A: of course, Texas Rangers being one of them,
+A: I mean, uh, you know, you can't live in Dallas without, you know,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well what are the others? 2) did you cut them down at the, at the ground level, 3) right? 4) Sorry about that.
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) You know, I look at those, 2) No, 3) Robert De Niro? 4) So, uh, Mike, what are your opinions on, uh, trial by jury?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Uh, tell you what. Um, I'll let you start.
+A: Okay.
+A: My major source of information, I guess, is T V news.
+A: Excuse me. I, uh, wake up to it in the morning.
+A: This is my, I guess, my prime time for news, first thing in the morning while I'm getting ready to go to work.
+A: Oh, I quite frequently glance through headlines or, in the newspaper.
+A: But, uh, primarily mine is T V news.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Typical T I, or T I, 2) How about yourself? 3) Do the most good, 4) Yeah.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay, Deanna, uh,
+A: on capital punishment in our state, they give the death penalty for shooting of a policeman,
+B: Uhhuh.
+A: and I believe also in shooting of, uh, rape, I mean killing a rape victim.
+B: Uhhuh.
+A: I mean someone in the process of rape,
+A: and I don't know what el, I don't really remember what else.
+B: Uhhuh.
+A: But.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) yeah, 2) Well, unfortunately very little. 3) How do yo, wh, what do you think about it. 4) Well, absolutely.
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+A: Okay.
+B: Okay,
+B: I guess we're ready to start.
+B: Well, I guess, what part of t, what part of the country do you live in?
+A: I'm in Dallas, Texas.
+B: Oh, okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) So I imagine you, uh, oh, with all this kind of weather it, uh, makes it kind of dangerous for you. 2) What about you? 3) Oh, my. 4) My husband didn't like it that much.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______ ____ ____ ____ ____ ____
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+______ ________ ________ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 4
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 B: Okay.
-A: > All right.
-A: 1) Is it, I mean, does it, 2) Why don't you go ahead and start off. 3) Uh, well, I don't know about that, 4) What have you seen?
-Response: 4
-
-A: Well, how do you feel about capital punishment?
-B: Well, I, I just last Friday got off a capital murder case.
-A: Oh, you did?
-B: Yeah,
-B: I was on the jury. Uh,
-A: Wow.
+A: Okay.
+A: They suggested that we, uh, discuss what we think of when we say camping.
 B: Yeah.
-B: Which is funny because I got called last night
-B: and the topic was, uh, something about juries.
-A: Oh, really?
-B: Yeah,
-B: so I am just hitting it right.
-B: 1) Well, uh, in the case of, 2) So, uh, I hope you like your office. 3) or do you still order for them? 4) Uh, how do I feel about it?
-Response: 4
+B: What do you, where do you like to camp?
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How do you like to camp? 2) well, here you can't drink, 3) What kind of newspaper do you get down there? 4) I'm trying to think back now,
+ANSWER: 1
+______
 
+EXAMPLE:
+A: Okay.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How are you? 2) that's for sure. 3) I am sure I will. 4) as guilty as the rest in that respect.
+ANSWER: 1
+______
+
+EXAMPLE:
+A: The question was on lawn and garden work.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) >. 2) Um, how do you like it? 3) now, boy, I really need to get out, you know, and apply something, you know, 4) So, when you say the morning news, or evening news or national news is when?
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) See. Well, uh, like in, uh, Iowa and Nebraska, those little bullheads, they look just like catfish, huh? 2) man. 3) thank you. 4) Well, ho, how do you feel about, uh, drug testing?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: Okay
+A: wow, I don't know what that was.
+B: What was that?
+A: I don't know.
+B: And, uh, to, uh, the Brazos River
+A: Uhhuh.
+B: near Dinosaur Valley State Park.
+A: Oh, yes.
+B: Uhhuh.
+A: Uhhuh,
+A: uh, we have not camped in any of those places,
+A: in fact it has been a number of years since we have camped,
+A: but we used to go to Tyler State Park and, uh, Daingerfield
+A: and in Texas that is where we camp basically. Uh,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I, I come from a family of, um, of, uh, take care of your elders, I guess. 2) I wonder, I wonder how, how the civil system or the court system must differ between there and say where I am in Minneapolis. 3) Um. 4) How are you?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+______ _______ ________ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 5
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: So what do you think about it?
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I am so sorry to keep you on hold. 2) Uhhuh. 3) Yeah, 4) How are we doing in recycling?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: > What do you think about the benefits in jobs?
+B: Um, I'm, I'm relatively satisfied with the benefits I have.
+B: I think that, um, our health insurance is terribly expensive.
+A: Uhhuh.
+B: I'd rather that we got a bit more coverage for a lot less money.
+B: But, um, you know, that's, that's my major complaints, I guess.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What about you? 2) Why should they be sit, sitting in, uh, prison getting their college degree. 3) >. 4) Hopkins,
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+B: All right.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) let me tell you one interesting thing 2) Well, no. 3) What, uh, what kind of camping is there in Texas? 4) Yeah.
+ANSWER: 3
+______
+
+EXAMPLE:
+B: W,
+A: Hi.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) is it a penal institution? 2) who knows, uh, 3) and I sort of wondered what your, what thoughts you had on that area. 4) Well, what do you think?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: Well Jackie, uh, on taxes, I, I guess I would have to say, that I, that my opinion is that I do think Americans are paying too much in taxes.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Good morning. Um, 2) how about when they were younger, 3) Well, isn't it weird at Christmas time without snow? 4) I beg your pardon.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______
+
+EXAMPLE:
+A: I
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+______
+______
+______
+____
+================================================================================
+
+
+================================================================================
+EXAMPLE 6
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: So, uh, do you happen to be working for a large firm?
+B: Well, it's about three hundred and fifty people.
+B: I guess that's not large compared to some,
+B: but it's big enough.
+A: Uhhuh.
+B: And they have a, they don't have any kind of pension plan where they contribute anything
+B: and I wish they did.
+A: Yeah.
+B: You know, they have a four O one K,
+B: but I put all the money into it.
+A: Uhhuh.
+B: They don't add anything.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah. 2) I guess so. 3) What about you? 4) and then w, after five minutes when the, uh, uh, voice comes on, we can talk all night if we want
+ANSWER: 3
+______
+
+EXAMPLE:
+A: They're talking about, uh, federal government, aren't they?
+B: I'm sure,
+B: well, actually probably any government,
+B: but
+A: Yeah.
+B: the federal one's the big one.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it? 2) I've never actually, never actually played it. 3) But that's only fair. 4) Hi.
+ANSWER: 1
+______
+
+EXAMPLE:
+A: They're talking about, uh, federal government, aren't they?
+B: I'm sure,
+B: well, actually probably any government,
+B: but
+A: Yeah.
+B: the federal one's the big one.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah, 2) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it? 3) right. 4) I don't remember.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: And, uh, what part of Virginia, uh?
+B: Uh, I live down in the south western part of Blacksburg.
+A: Blacksburg.
+A: Okay,
+A: I've been,
+B: Uhhuh,
+B: have you ever heard of Virginia Tech?
+A: Sounds vaguely familiar.
+B: V P I.
+A: Yeah,
+A: okay.
+B: Yeah,
+B: okay.
+A: I, I hadn't been down in that part of the state really.
+B: Uhhuh.
+B: Okay.
+B: Well, we vacation a lot.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How about you?. 2) Um, the tests that, 3) Thanks >. 4) Fine, thanks.
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: Okay.
+A: Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
+B: Well.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) is there anything else. 2) How about you? 3) I guess, 4) Great,
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______
+
+TEST EXAMPLE:
+A:
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+______ _______ _______ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 7
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth. 2) That's fine. 3) or do you think they are deliberate sorts of things? 4) and I, and I use my Visa for, for as much as I can,
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Uh, well, it's not really sight reading when you've done it, you know, again and again and again, 2) I'm sorry. 3) and we'd just let you go. 4) what do you think about it?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) That's really cute. 2) >. 3) I don't think so, 4) Uh, so, what do you think, uh, about putting the elderly in a nursing home?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Well, how about you.
+A: Do you use P C s?
+B: Oh constantly.
+A: Yeah.
+A: You and me both.
+B: It seems everything I do is computer related.
+A: Huhuh.
+B: And if it goes down, then we're stuck all day.
+A: Yeah.
+A: And so I like the I B M P C, personally.
+B: Huhuh.
+A: But that's pretty much everything I've worked with
+A: and, uh, I've become so accustomed to it that, uh, it's second nature.
+B: Yeah.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What do you use? 2) that's it. 3) August Moon, 4) Well, I think we've done them a good job today then.
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: So I own a, a P C A T at my home.
+B: Uhhuh,
+B: I could never justify owning a personal computer at home, uh,
+B: I mean, that's quite an expense to look for, uh,
+B: well, who is this,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or what's the, 2) at least. 3) Oh, okay. 4) How about yourself?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______ 1 2
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+____________ANS____ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 8
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+A: Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
+B: Well.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) No. 2) Yeah, 3) to you. 4) What do you think would be required, and so forth?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Okay,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) so now what are your opinions on recycling? 2) Dye Mound? 3) Leslie, what are you studying? 4) I don't know,
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+B: I say they, uh,
+B: probably the best things to do is, is tie them with a rope and throw them in the water
+B: if they sink
+A: I see.
+A: A
+B: they're innocent right.
+A: a good, a good southern solution.
+B: Yeah.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yes, 2) For business. 3) Uh, so, uh, how do you, how do you feel? 4) I don't know.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or you're in the middle of cooking something 2) Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth. 3) Get together any more. 4) Really?
+ANSWER: 2
+______
+
+TEST EXAMPLE:
+B: You think about AIDS research?
+A: Well, AIDS is a nasty, terrible disease,
+A: and you die from it.
+A: So I think that, uh, they need to look into it
+A: and it's kind of like cancer.
+A: I don't, you know,
+A: how many years have we tried to find a cure for cancer.
+B: Uhhuh.
+A: I think it'll probably be as difficult.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) so you have a few more years. 2) Uh, about yourself? 3) well no, 4) I mean, if you're, you're, you're knowledgeable on that.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______ 1. I think
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+____ ____ ____ ____ __ __ __
+================================================================================
+
+
+================================================================================
+EXAMPLE 9
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) For woodworking? 2) Well, not necessarily in Dallas, 3) uh, so what do you think about the school system? 4) Well, you haven't told me, uh, what sports that you are active in.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay,
+A: what types of music do you like to listen to?
+B: Well, I primarily listen to classical music when I have my druthers, partly because I find it more soothing.
+B: I don't know a lot about classical music so far as, uh, any background in music,
+B: but it's the po, the music I enjoy the most.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Uh, I'm not sure if I'm familiar with that, 2) Yes, 3) What? 4) How about you?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, ho, how do you feel about, uh, drug testing? 2) For your 3) thanks a lot. 4) Two cats.
+ANSWER: 1
+______
+
+EXAMPLE:
+B: Are you a Vietnam veteran, Dudley?.
+A: Uh, no.
+B: No?
+B: Do you have family who were in the Vietnam War?
+A: Uh, no.
+A: My father was, uh, came in right after World War two.
+B: Okay.
+B: So he was too old,
+B: and you were too young, right?
+A: I am too young, yeah.
+B: All right.
+B: Do you know some folks who have been there?
+A: Uh, yes.
+B: Okay.
+A: A couple.
+B: Okay.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How did it influence them? 2) Excuse me, my throat's not as clear today as it should be. 3) I wonder, have you ever been to a, uh, a small town, uh, 4) I don't know, I,
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: I've, uh, >
+A: are you there?
+B: Yes, sir,
+B: I'm right here.
+A: All right.
+A: Okay, um,
+A: I'm in an area where, um, we can, uh, enjoy it year round,
+A: so, I've actually been, uh, uh, been out within the past couple of weeks.
+A: I'm mainly a freshwater fisherman.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Ooh, really? 2) right. 3) Uh, see, what do we recycle? 4) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+______ ____ ________ ________
+================================================================================
+
+
+================================================================================
+EXAMPLE 10
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+B: Okay,
+B: I guess we're ready to start.
+B: Well, I guess, what part of t, what part of the country do you live in?
+A: I'm in Dallas, Texas.
+B: Oh, okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) and then they get pretty good 2) all the time. 3) so I was very much interested, 4) What about yourself?
+ANSWER: 4
+______
+
+EXAMPLE:
 A: All right.
 B: Okay,
 B: are you on an exercise program now
@@ -94,215 +778,250 @@ A: so I
 B: Uhhuh.
 A: keep up with that a little bit.
 B: Oh, yeah.
-A: 1) How about you. 2) Oh, I'll bet. 3) or is it always complicat, 4) maybe so.
-Response: 1
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) But, uh, I don't know, 2) How about you. 3) Yeah. 4) Okay.
+ANSWER: 2
+______
 
-A: Okay.
-B: 1) Yeah, 2) we have, uh, uh, kind of a core group that, that serves as, quote, officers of the organization, 3) How are you? 4) everybody's got that.
-Response: 3
+EXAMPLE:
+A: Do you play?
+B: Yeah,
+B: I, uh, consider myself a hacker.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) And then what else did I have? 2) How about you? 3) It really depends on who shows up. 4) That's okay.
+ANSWER: 2
+______
 
+EXAMPLE:
+A: So you have a child
+B: Yeah
+B: we,
+B: Two year old daughter in child care
+B: and we went through the process of searching for child care and
+A: Uhhuh.
+B: uh, finding what we consider to be,
+B: real good child care at a, uh, pretty reasonable price, we think.
+A: Uh,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) sort of like an exchange program. 2) Yes, 3) How about you, 4) Well, they said it w, this, this happened during lunch time.
+ANSWER: 3
+______
+
+TEST EXAMPLE:
 A: Okay.
-B: Okay,
-B: I guess we're ready to start.
-B: Well, I guess, what part of t, what part of the country do you live in?
-A: I'm in Dallas, Texas.
-B: Oh, okay.
-A: 1) do we not. 2) What about you? 3) >. 4) > I'm trying to think of the guy's name.
-Response:
+A: Do you work?
+B: Yes,
+B: I do.
+A: I think that's the main change.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What about you? 2) That's great. 3) I'm sorry. 4) Let me see.
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-4
-
-A: Okay.
-B: Okay
+1
+______
+ 
+I'm in a
 ================================================================================
 
 INTERVENTION OUTPUT:
 1
-
-A: 2
-
-A:
+______ ____ ______ ________ ______
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 3
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-A: Uh, let's see.
-A: How about, uh, let's see, about ten years ago,
-A: 1) Whatever you like, huh? 2) uh, what do you think was different ten years ago from now? 3) Um, well, what do you think is, uh, the pollutants, the main pollutants in the air? 4) Or should it be used, uh,
-Response: 2
-
-A: Okay.
-A: 1) Uh, first, um, I need to know, uh, how do you feel about, uh, about sending, uh, an elderly, uh, family member to a nursing home? 2) Sure, 3) I really think I am, 4) or do you, do you work or what?
-Response: 1
-
-A: Okay,
-A: 1) But, uh, in the manufacturing sectors and over in semiconductor, 2) how do you feel about them? 3) Thanks. 4) Sorry.
-Response: 2
-
-A: Okay,
-A: well, uh, some of the books I've read lately have to do with crafty type things where I've, where I've, um, learned things that I'm going to do for my children for Christmas
-B: Uhhuh.
-A: and they were really, uh, helpful, because I didn't know how to do this one stitching,
-A: and so, that was very helpful to me as far as books.
-A: Otherwise, um, I like to read children's books, and things like that.
-A: 1) What about you? 2) I don't know. 3) So, I don't, I don't even know who your favorite team is, actually. 4) I am too young, yeah.
-Response: 1
-
-A: So I own a, a P C A T at my home.
-B: Uhhuh,
-B: I could never justify owning a personal computer at home, uh,
-B: I mean, that's quite an expense to look for, uh,
-B: well, who is this,
-B: 1) Oh, okay. 2) Ok, 3) right? 4) How about yourself?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-2
-
-A: Okay,
-A:
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-
-A: 2
-
-1
-================================================================================
-
-
-================================================================================
-EXAMPLE 4
+EXAMPLE 11
 Target Output: 1
 Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
-B: Okay.
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 A: Okay.
-A: Do you, uh, do any woodworking?
-B: I do,
-B: and I really love it. Um.
-A: 1) And, of course, it has to have airconditioning. 2) uh, just not, 3) well, how many, uh, uh, families own a refrigerator, 4) Oh, um, what do you do,
-Response: 4
-
-A: So, P C s, personal computers.
-A: Do you have a personal computer?
-B: No
-B: I don't, not at home.
-A: Uhhuh.
-B: I work with them quite a bit though.
-A: Uhhuh,
-A: I, I work with them at Kelly Services, doing, uh, data entry.
-B: Oh, okay.
-A: Uhhuh.
-A: 1) Based on that, who do you think you're talking to, 2) Uh, I'm not sure if I'm familiar with that, 3) What do you, what do you think about them? 4) I'll have to make sure I catch that,
-Response: 3
-
-A: Well, uh, does the company you work for test for drugs?
-B: Actually, uh, they just recently started a policy of testing drugs, which was kind of interesting,
-B: because w, when I went to work for them, uh, they didn't do that,
-B: but, uh, since then they've, they've started a drug testing policy, not because of their own, uh, convictions, but because the clients of our company are requests that we do that.
-A: Huh.
-B: 1) >. 2) we could talk about some of the long range goals 3) he's been the best dog I've ever had in my life 4) How about you?
-Response: 4
-
-A: Hi,
-A: 1) A lot of things, 2) Well, that's, that's good to know how, 3) What's the best part, from your point of view? 4) what do you do with your credit cards?
-Response: 4
-
-A: Okay,
-A: 1) What about you? 2) Yeah, 3) But I'm wondering how many women actually major in engineering. 4) How is it?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-4
-
-A: So, I guess that
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-
-A: 3
-
-A:
-================================================================================
-
-
-================================================================================
-EXAMPLE 5
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Well what do you feel about the, um, present situation in the Mideast?
-B: Well, it looks like it's just about as volatile as it usually is.
-A: Uhhuh.
-B: 1) Really? 2) What do you think, Mark? 3) ByeBye. 4) Because they talk so much,
-Response: 2
-
-A: Uh, it seems like an unusual subject this time of the year
-A: but, uh, it's, it's camping.
-B: Really.
-B: When was the last time you went?
-A: The last time I went camping was about, uh, in the middle of October,
-A: and we went up to Lake Bonham and really enjoyed it.
-A: Had a real good time with the family.
-A: We do an awful lot of camping.
-A: 1) Uh, we had a friend give it to us. 2) Question. 3) How about yourself? 4) w, w, what baud rate do you get?
-Response: 3
-
-A: I don't believe that we're ,
-B: 1) So what do you think about, uh, recycling programs in Atlanta, Julie? 2) you're okay, 3) okay, 4) now tell me your favorite team.
-Response: 1
-
-A: Okay,
-A: let's talk about schooling.
-B: Yeah.
-B: 1) Well, you bet. 2) Oh, how exciting. 3) Uh, what, what contacts do you have with the public school sy, 4) Every, what?
-Response: 3
-
-A: Here goes Sharon.
 B: Okay.
-A: 1) No. 2) So, uh, what do you think about it? 3) Um, the hoi sin sauce? 4) Oh, they just painted over varnished wood.
-Response:
+B: Well, uh, anyways, I'm not exactly sure
+B: I, I wasn't really, uh, paying attention as to what particular, uh, parts of capital punishment we're supposed to talk about,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) but it was, uh, basically what's your views on, whether you thought there was certain cases that should be used, that sort of thing? 2) Yeah. 3) well, I can't, 4) GREEN CARD?
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+B: Okay.
+B: Well, uh, anyways, I'm not exactly sure
+B: I, I wasn't really, uh, paying attention as to what particular, uh, parts of capital punishment we're supposed to talk about,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Why should I go out of my way when it doesn't matter. 2) Oh, okay, 3) I haven't seen that yet. 4) but it was, uh, basically what's your views on, whether you thought there was certain cases that should be used, that sort of thing?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay, uh,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) why do you think it, uh, sounds, 2) That might be true, 3) Yeah. 4) Well, let's see.
+ANSWER: 1
+______
+
+EXAMPLE:
+B: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Is that just family's lack of priority, anymore, maybe yes , 2) Uh, so, what do you think, uh, about putting the elderly in a nursing home? 3) Byebye. 4) That's an important factor there.
+ANSWER: 2
+______
+
+TEST EXAMPLE:
+A: Jay, um,
+A: my kids are, are both in college, um,
+A: and I'd, I played a fairly active part in helping them decide where to go.
+A: On the other hand, they really decided themselves.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) uh, what do you consider an invasion of privacy? 2) yeah. 3) What kind of books do you like to read? 4) But I'm wondering how many women actually major in engineering.
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
 2
+______
 
-A: I'm sorry, I
+EXAMPLE:
+B: My
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+______ ____ ____ ____ ____ ____
+================================================================================
+
+
+================================================================================
+EXAMPLE 12
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+B: Are you a Vietnam veteran, Dudley?.
+A: Uh, no.
+B: No?
+B: Do you have family who were in the Vietnam War?
+A: Uh, no.
+A: My father was, uh, came in right after World War two.
+B: Okay.
+B: So he was too old,
+B: and you were too young, right?
+A: I am too young, yeah.
+B: All right.
+B: Do you know some folks who have been there?
+A: Uh, yes.
+B: Okay.
+A: A couple.
+B: Okay.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How did it influence them? 2) Uhhuh. 3) One of the things you wonder is what that's going to do to us. 4) switch,
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+B: Hi.
+B: Do you have lots of credit cards?
+A: Yeah,
+A: we, well, we have quite a few
+A: but we don't really use them a lot.
+A: We have, well, we like a lot of gasoline credit cards,
+B: Uhhuh.
+A: because we like to be able to stop, you know, when we're traveling and stuff wherever there's a station,
+A: but as far as like MasterCard and Visa, we don't use those too often.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Uh, and so let me take the lead, uh, Angela. 2) A what? 3) What about you? 4) over again. Which is also,
+ANSWER: 3
+______
+
+EXAMPLE:
+B: All right.
+A: Um, serious problems in the public education and what can be done about it.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) what do you think? 2) what else do I wear? 3) That's okay, 4) and now they're doing that
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Huh. 2) I don't know, 3) uh, what do you consider an invasion of privacy? 4) Asking.
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+A: Hello.
+B: Hello.
+B: I was, I was thinking about our topic for the night. Um, immigration problems.
+B: We have immigration problems
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or what would be the features that you would be looking for? 2) What do you think about, what do you think about the, the lower grades, you know, 3) it, it takes a bit of a shift doesn't it. 4) Well, um, I'm going to talk about when I was working as a teacher and when I
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______ 4) well,
 ================================================================================
 
 INTERVENTION OUTPUT:
 1
-
-A: 1
-
-A:
+______ANSWER ______ ______ ______
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 6
-Target Output: 2
+EXAMPLE 13
+Target Output: 4
 Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: You want to go first.
+B: Well, uh, no
+B: I don, I don't get as much exercise as I, as I should as, or as I would like to, uh, uh, these days.
+B: I,
+B: seems to be to easy to get busy with other things.
+B: Uh, I have, in the past, uh, jogged and, and run,
+B: and every, every January and every September, I start out again
+B: and then it tapers off.
+A: Really?
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Oh, no, 2) Uh, what about you? 3) Oh, okay. 4) So it's really up north in the country, really,
+ANSWER: 2
+______
+
+EXAMPLE:
 B: > Okay,
 B: what kind of crafts and hobbies do you have?
 A: Oh, not very many of those at, uh,
@@ -312,9 +1031,67 @@ B: Uhhuh.
 A: And then I have a five year old daughter
 A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
 B: Uhhuh.
-A: 1) Oh, gosh, 2) Corrode. 3) One of the, 4) Um, how about you?
-Response: 4
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Um, how about you? 2) Oh, really. 3) but, I don't know, 4) Well, I'd be curious as to what the, uh, requirement for a, an acquittal is.
+ANSWER: 1
+______
 
+EXAMPLE:
+B: Okay.
+B: Well, uh, I'll let you start, I guess.
+A: Well, uh, yeah,
+A: I, I'm employed by a company that does do, uh, random drug testing
+A: and I've got some very definite, uh, opinions about it. Uh, you know, which haven't changed all that much from my first reactions from, from when they, when they announced it. But, uh, developed a little more, I guess, but haven't changed that much.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I probably agree with that. 2) What about you? 3) That one person 4) in any means
+ANSWER: 2
+______
+
+EXAMPLE:
+A: So what do you think about it?
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Just about. 2) Well, I don't know, 3) Well, no. 4) How are we doing in recycling?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: That's it.
+B: Yes.
+A: What do you think are possible changes in the, uh, way trials are conducted these days?
+A: Do you like the way some people in there for instance, really take over and, uh, we have no way, uh, of knowing whether they are legitimately right or wrong and so forth.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) not actually. 2) I'm on the phone. 3) Deep one, you have a deep one, 4) What, what do you think about them?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+____________
+A: Do
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+______
+______
+__________
+================================================================================
+
+
+================================================================================
+EXAMPLE 14
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 A: Okay.
 B: Okay,
 B: that made a nice ugly sound.
@@ -330,195 +1107,167 @@ B: I don't read as much as I would like to either.
 B: I'm, I'm a single mom,
 B: but I have always loved reading.
 A: Uhhuh.
-B: 1) What do you like to read? 2) Oh I will 3) or lunches 4) Hi.
-Response: 1
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) He didn't broadcast. 2) or is it hour? 3) What do you like to read? 4) Hopkins,
+ANSWER: 3
+______
 
-A: We could talk about my favorite subject.
-B: Cooking and
-B: 1) What do you like to cook? 2) You know, I, I really do not know. 3) Now what can you do to stop that? 4) Um, I don't know.
-Response: 1
+EXAMPLE:
+B: Okay,
+B: all set, then.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Because if the analysis is inaccurate or biased or whatever then, you know, how good is it. 2) Uh, what do you think about it? 3) What? 4) Yeah,
+ANSWER: 2
+______
 
-A: Well, I guess, um, I'll start out,
-A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
-A: I have mixed views on all three of them.
-B: Uhhuh.
-B: 1) Okay, 2) What do you think about, what do you think about the, the lower grades, you know, 3) or do you think it can if it's done right? 4) I think that may be.
-Response: 2
+EXAMPLE:
+A: So I own a, a P C A T at my home.
+B: Uhhuh,
+B: I could never justify owning a personal computer at home, uh,
+B: I mean, that's quite an expense to look for, uh,
+B: well, who is this,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) And that is it's million of people with anywhere from thousands to tens of thousands I guess of, 2) But I don't know if that's the case. 3) and in five years, it sh, 4) what do you use yours at home for?
+ANSWER: 4
+______
 
+EXAMPLE:
 A: Okay,
-A: 1) Uh, let's see, 2) Uh, so, uh, what do you consider the most important benefit besides salary? 3) I beg your pardon. 4) I don't know.
-Response:
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) what do you think about it? 2) Uh, what else. 3) , 4) I'm on the phone.
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) But I don't, I don't know if it's still playing any where else. 2) Okay. 3) No. 4) Uh, so, uh, how do you, how do you feel?
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-1
-
-A: Well,
-A:
+2
+______ 3 2
 ================================================================================
 
 INTERVENTION OUTPUT:
 3
-
-1
-
-2
-
-1
-
-2
+____ ____ ____ ____ ____ ____ ____
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 7
-Target Output: 1
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-A: Well, I guess, um, I'll start out,
-A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
-A: I have mixed views on all three of them.
-B: Uhhuh.
-B: 1) Dump them off. 2) I'm in Dallas, Texas. 3) What do you think about, what do you think about the, the lower grades, you know, 4) Why did I pick music?
-Response: 3
-
-A: All right,
-A: well I have a lot of different teams that I like to, to keep in touch with,
-A: of course, Texas Rangers being one of them,
-A: I mean, uh, you know, you can't live in Dallas without, you know,
-B: 1) Well what are the others? 2) That's okay. 3) Oh. 4) What's that?
-Response: 1
-
-A: Hello.
-B: Hello.
-B: I was, I was thinking about our topic for the night. Um, immigration problems.
-B: We have immigration problems
-B: 1) and what do, do you think about it?. 2) > 3) Really? 4) Probably,
-Response: 1
-
-A: Okay.
-A: Uh, read any good books lately?.
-B: Uh, yes,
-B: I, I've read, uh, several good books lately.
-B: Uh, lot of them related to, uh, business and financial matters since that's what I do for a living.
-A: Oh, okay.
-A: Uhhuh.
-B: 1) right? 2) Alright. 3) How about yourself? 4) Well, just keeping up with the times,
-Response: 3
-
-A: Well, how do you feel about capital punishment?
-B: Well, I, I just last Friday got off a capital murder case.
-A: Oh, you did?
-B: Yeah,
-B: I was on the jury. Uh,
-A: Wow.
-B: Yeah.
-B: Which is funny because I got called last night
-B: and the topic was, uh, something about juries.
-A: Oh, really?
-B: Yeah,
-B: so I am just hitting it right.
-B: 1) Why don't you tell me what you have found. 2) I'm sorry, 3) That's a plus. 4) right?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-4
-
-A: Well,
-A: I
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-================================================================================
-
-
-================================================================================
-EXAMPLE 8
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Well, uh, ho, how do you view this whole subject?
-A: Are you, uh, one who feels like you have, have benefited from the change in, in roles in women?
-A: 1) or do I look for a used car that's maybe two, three years old that 2) or do you take the ferry, or what? 3) place that, that needed this. *listennot sure who's saying what 4) Or, or what do you think?
-Response: 4
-
-A: Okay,
-A: what types of music do you like to listen to?
-B: Well, I primarily listen to classical music when I have my druthers, partly because I find it more soothing.
-B: I don't know a lot about classical music so far as, uh, any background in music,
-B: but it's the po, the music I enjoy the most.
-B: 1) How about you? 2) I am so sorry to keep you on hold. 3) Learning, 4) and they won't have the same people there all the time
-Response: 1
-
-A: Okay
-A: wow, I don't know what that was.
-B: What was that?
-A: I don't know.
-B: And, uh, to, uh, the Brazos River
-A: Uhhuh.
-B: near Dinosaur Valley State Park.
-A: Oh, yes.
-B: Uhhuh.
-A: Uhhuh,
-A: uh, we have not camped in any of those places,
-A: in fact it has been a number of years since we have camped,
-A: but we used to go to Tyler State Park and, uh, Daingerfield
-A: and in Texas that is where we camp basically. Uh,
-B: 1) Just the degree itself. 2) What are they like? 3) > > Thank you. 4) Do you have any kids?
-Response: 2
-
-A: Jay, um,
-A: my kids are, are both in college, um,
-A: and I'd, I played a fairly active part in helping them decide where to go.
-A: On the other hand, they really decided themselves.
-B: Uhhuh.
-A: 1) Well, that's, that area over there is not as expensive as in the, the immediate, you know, Washington area. 2) They ought to get it for killing a civilian just as easily as a policeman. 3) Oh, that's okay. 4) Um, what, what kind of experience did you have?
-Response: 4
-
-A: Okay.
-A: Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
-B: Well.
-A: 1) what was the results there. 2) So, uh, Mike, what are your opinions on, uh, trial by jury? 3) We, 4) Well, presentation's not always all of it either.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-1
-
-A: Okay.
-A: Well
-================================================================================
-
-INTERVENTION OUTPUT:
-4
-
-A: 2
-
-A:
-================================================================================
-
-
-================================================================================
-EXAMPLE 9
+EXAMPLE 15
 Target Output: 4
 Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
-A: Uh, I get most of my news uh, from newspapers really.
-A: I read the daily newspaper, uh, the HOUSTON CHRONICLE
-A: and sometimes I'll read like the, uh, WALL STREET or the NEW YORK TIMES.
-A: I don't subscribe to either,
-A: but sometimes I get a hold of copies of it.
-A: 1) um, but it's okay, 2) Are you?. 3) Uh, how about you? 4) What else do you like?
-Response: 3
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: I'll let you go first.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or do you think that we're, we're, uh, all trying to keep up with a certain standard of living? 2) >. Okay. 3) Oh, well, what's there to say? 4) because he's not as good as another kid his same age.
+ANSWER: 3
+______
 
+EXAMPLE:
+A: Okay, uh,
+A: well, we just got our income tax return
+A: and I'm perfectly happy.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Okay, 2) So, I guess, in Texas with, 3) ma'am. 4) What about you?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay.
+B: I say they, uh,
+B: probably the best things to do is, is tie them with a rope and throw them in the water
+B: if they sink
+A: I see.
+A: A
+B: they're innocent right.
+A: a good, a good southern solution.
+B: Yeah.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) And, 2) thank you, 3) Yes, 4) Uh, so, uh, how do you, how do you feel?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay.
+B: I say they, uh,
+B: probably the best things to do is, is tie them with a rope and throw them in the water
+B: if they sink
+A: I see.
+A: A
+B: they're innocent right.
+A: a good, a good southern solution.
+B: Yeah.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) that's probably true. 2) Hi, 3) Uh, so, uh, how do you, how do you feel? 4) Not always,
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+A: Okay,
+A: so you have eight children.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I do not, I do not know. Because I am not real up on 2) my name's Diane. 3) Yeah, 4) Um, wh, where do you stand, uh, on,
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______ 3
+______
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+______
+______ ________ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 16
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Um, I don't think I ever tried. 2) Oh. 3) Fine, thanks. 4) well, what, uh, what do you all do for camping?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: I don't believe that we're ,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) in what major or what year? 2) that's right. 3) So what do you think about, uh, recycling programs in Atlanta, Julie? 4) I don't know
+ANSWER: 3
+______
+
+EXAMPLE:
 A: So, uh, do you happen to be working for a large firm?
 B: Well, it's about three hundred and fifty people.
 B: I guess that's not large compared to some,
@@ -531,219 +1280,65 @@ B: You know, they have a four O one K,
 B: but I put all the money into it.
 A: Uhhuh.
 B: They don't add anything.
-B: 1) What about you? 2) Well, right now I'm a student, 3) Uhhuh. 4) thanks a lot.
-Response: 1
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) your children on an individual basis. 2) Well, that's all right. 3) What's that? 4) What about you?
+ANSWER: 4
+______
 
-B: Uh, tell you what. Um, I'll let you start.
-A: Okay.
-A: My major source of information, I guess, is T V news.
-A: Excuse me. I, uh, wake up to it in the morning.
-A: This is my, I guess, my prime time for news, first thing in the morning while I'm getting ready to go to work.
-A: Oh, I quite frequently glance through headlines or, in the newspaper.
-A: But, uh, primarily mine is T V news.
-A: 1) does it? 2) Well, what a wh, what do we currently have, 3) How about yourself? 4) uh, let's see,
-Response: 3
-
-A: We could talk about my favorite subject.
-B: Cooking and
-B: 1) didn't he? 2) What do you like to cook? 3) Oh, yeah, 4) Or is it pretty dry.
-Response: 2
-
-B: Okay.
-A: Okay,
-A: I, I do a fair amount of cooking.
+EXAMPLE:
+A: All right.
+B: Okay,
+B: are you on an exercise program now
+B: or,
+A: Yeah,
+A: I exercise pretty regularly.
 B: Uhhuh.
-A: And, and I love having guests to dinner.
-A: I probably do that about once a month.
-A: And, uh, I usually prepare something, depending upon the guests, you know,
-A: it, it, I like to prepare chicken, that seems to please everybody, pasta or a casserole.
+A: I lift weights quite a bit.
 B: Uhhuh.
-A: 1) His lips are moving. 2) and, 3) I'll change your diaper. 4) well what do you do on your yard?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: I think, uh,
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-================================================================================
-
-
-================================================================================
-EXAMPLE 10
-Target Output: 3
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Okay.
-B: Hi.
-B: Do you have lots of credit cards?
-A: Yeah,
-A: we, well, we have quite a few
-A: but we don't really use them a lot.
-A: We have, well, we like a lot of gasoline credit cards,
+A: Um, I run occasionally.
+A: Let's see what else do I do. Play golf some,
+A: and I work out on a, on a hanging bag.
+A: I'm brown belt in karate,
+A: so I
 B: Uhhuh.
-A: because we like to be able to stop, you know, when we're traveling and stuff wherever there's a station,
-A: but as far as like MasterCard and Visa, we don't use those too often.
-A: 1) I'm sorry, I dropped the phone. 2) What about you? 3) you don't have to do as much as, as I thought. 4) Uh, I wouldn't.
-Response: 2
-
-A: Okay,
-A: this topic is, is Russia a threat to our security?
-A: . I think they are more of a threat to their own people at this day and time.
-A: 1) Well, 2) Oh, okay, 3) fine, 4) , how do you feel about it?
-Response: 4
-
-A: What are your favorite shows?
-B: Well, I, it's doesn't seem like I get enough time to watch much T V,
-B: but
-A: Uhhuh.
-B: the ones that are out now.
-B: I, I've watched that SISTERS a couple of times.
-B: I think that's kind of a good show.
-A: I've never seen that.
-B: Haven't you?
-A: Huhuh.
-B: Oh. I like that one,
-B: and, um, I'm trying to think.
-B: I, I don't even know if I have any other real regular ones that I watch.
-B: 1) I don't know 2) I was wondering how, 3) Oh, I don't think so. 4) How about you?
-Response: 4
-
-A: Hi,
-A: how are you today?
-B: I'm great.
-A: Good.
-A: Well as a matter of fact I'm, before we started this conversation I was working on my P C at home.
-B: Yeah.
-A: Do you have one?
-B: No,
-B: I don't have one at home.
-B: I work with one on, at work
-A: Yeah.
-B: continually, you know,
-B: but I do not have one of my own at home.
-A: Do you have,
-B: 1) >. 2) What do you have, at home? 3) I don't know what it's like around, uh, Hattiesburg. 4) You said something else.
-Response: 2
-
-A: Well Jackie, uh, on taxes, I, I guess I would have to say, that I, that my opinion is that I do think Americans are paying too much in taxes.
-A: 1) yeah, 2) Let me ask you a question off the subject though. 3) How about you? 4) but I don't have to deal with it from here, you know,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Hi.
-A: How
-================================================================================
-
-INTERVENTION OUTPUT:
-2
-================================================================================
-
-
-================================================================================
-EXAMPLE 11
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-A: Okay,
-A: do you have.
-B: Are you there?
-A: Yeah.
-B: Okay.
-A: There, okay.
-B: Okay.
-A: Had to mess with my phone here.
-A: Um, do you have children?
-B: Yes,
-B: I have one.
-A: Oh, okay.
-B: 1) or, how do you work your budgeting? 2) and, um, what was the name of that? 3) How about you? 4) our people aren't going to understand what
-Response: 3
-
-A: Okay, uh,
-A: 1) Really? 2) I don't know, 3) Yeah. 4) what kind of hobbies do you have Lori?
-Response: 4
-
-A: Okay.
-A: 1) Thank you, 2) Hi, 3) Well, ho, how do you feel about, uh, drug testing? 4) stick shift,
-Response: 3
-
-A: Okay.
-A: Uh, I haven't been in this situation yet.
-A: You know, my, my parents are not quite at that age yet,
-B: quite elderly, huh.
-A: No.
-A: So I haven't, uh, really been in that situation although they are thinking about my grandmother
-A: but, uh
-B: Uhhuh.
-A: but that's really about it.
-A: 1) Uh, never 2) How about you? 3) Oh. 4) Uh, I'm not sure if I'm familiar with that,
-Response: 2
-
-B: Do you want to start?
-B: G,
-A: Yeah,
-A: I'm trying to think what I've seen lately.
-A: I me, we,
-A: well we just finished watching, uh, TEENAGE MUTANT NINJA TURTLES on tape, you know.
-B: Did you watch DANCES WITH WOLVES,
-B: did you see the movie?
-A: Yeah,
-A: we, we've seen that,
-A: yeah.
-B: Did you like it?
-A: Yeah,
-A: it was great,
-A: have you seen it?
-B: I thought it was very well done.
-A: Yeah,
-A: I, um,
-B: 1) Well, how is that helping my child, you know. 2) How about you? 3) don't get me to lying. 4) the lens to the light.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Okay.
-A: Well
-================================================================================
-
-INTERVENTION OUTPUT:
-2
-
-A: 2
-
+A: keep up with that a little bit.
+B: Oh, yeah.
 A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) uh, I just, you know, 2) You'll get it. 3) thanks for that, uh, reference. 4) How about you.
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) But, uh, what kinds of things do you and your family do? 2) No, 3) what are they called, 4) Well, here they and,
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______8. A:
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+______ __ ______ ________ ______
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 12
+EXAMPLE 17
 Target Output: 1
 Target Dialogue Act: qo
 Next Caller: B
 ================================================================================
 PROMPT:
-B: Well, let's see.
-A: 1) Clothing, sales. 2) Bye, bye. 3) So what, 4) let alone other countries,
-Response: 3
-
-A: Okay, uh,
-A: 1) Who is that? 2) Um, well, I don't know Dallas, 3) right? 4) what kind of hobbies do you have Lori?
-Response: 4
-
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 A: Well, how about you.
 A: Do you use P C s?
 B: Oh constantly.
@@ -758,219 +1353,206 @@ B: Huhuh.
 A: But that's pretty much everything I've worked with
 A: and, uh, I've become so accustomed to it that, uh, it's second nature.
 B: Yeah.
-A: 1) What do you use? 2) at, at some point, what can you do to sort of raise rev, I mean, to raise jobs I wonder. 3) isn't worth very much then. 4) wow, eight kids?
-Response: 1
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) > Oh. Kalachandji's . 2) What do you use? 3) you're going to lock me up. 4) Is that right?
+ANSWER: 2
+______
 
+EXAMPLE:
+A: Okay,
+A: so you have eight children.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Let's ge, see how much money we can get out of her, 2) I'm sorry, 3) You are what kind of buff? 4) Um, what type of things do you do as a family to spend time together.
+ANSWER: 4
+______
+
+EXAMPLE:
+B: You think about AIDS research?
+A: Well, AIDS is a nasty, terrible disease,
+A: and you die from it.
+A: So I think that, uh, they need to look into it
+A: and it's kind of like cancer.
+A: I don't, you know,
+A: how many years have we tried to find a cure for cancer.
+B: Uhhuh.
+A: I think it'll probably be as difficult.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, they would probably never make it then 2) Are you, do you work, 3) I don't know, 4) Uh, how about yourself.
+ANSWER: 4
+______
+
+EXAMPLE:
 A: Uh, what kind of house do you live in?
 B: Uh, we live in a one story, just like a style home, you know, the standard Texas, uh, Fox and Jacobs.
 A: Oh, yeah.
 A: With,
-B: 1) I don't know if you've heard Neurotic Collection. 2) and yet most of our usage of the car was just this little shuttle back and forth, 3) No, 4) How about you guys?
-Response: 4
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Um? 2) Well, not so much personally 3) What about the, the work effort those ten people did when the company was doing well. 4) How about you guys?
+ANSWER: 4
+______
 
-A: All right,
-A: I, I think our experience of camping is,
-A: I, I am the, the passive member,
-A: I get things ready and then I enjoy.
-B: Uhhuh.
-A: Uh, because, my, my husband is a good camper
-A: and so they,
-A: he manages the troops
-A: and they do the work
-A: and I have fun.
-B: Uhhuh.
-B: Well, uh, uh, your, you said your family was gro, uh, all grown up now,
-B: 1) What about you? 2) I'll tell you what, 3) Yeah, 4) I'll let you lead out.
-Response:
+TEST EXAMPLE:
+A: Okay.
+A: Do you work?
+B: Yes,
+B: I do.
+A: I think that's the main change.
+A: What do you think?
+B: Well, I think that's a big part of it
+B: and I, I think it maybe started because women wanted outside of the home
+B: and,
+B: almost think with our society and, and inflation and the cost of things it's anymore it's almost couples have to work outside the home.
+A: That's right.
+B: But, but yeah, I think that's a big change.
+B: I'd like to not work.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How about you? 2) or do you like, uh, just action 3) Uh. 4) Of course, I guess that's not bad.
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-4
-
-A: Oh, I, I
+1
+______ 1 2
 ================================================================================
 
 INTERVENTION OUTPUT:
-4
+1
+____ ______ ______ ______ ______ ______ ______
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 13
-Target Output: 3
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Hi, Cynthia.
-A: What did you wear to work today?
-B: Um, let's see.
-B: What did I wear to work today?
-B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
-A: So, can you dress pretty casually?
-B: Um, on occasion.
-A: Yeah.
-B: On occasion.
-B: Um, I do vary.
-B: Um, you know, I wear suits,
-B: I wear skirts and sweaters.
-B: On occasion I can wear jeans.
-B: 1) Um, how about you? 2) I want, 3) Right. 4) Pardon?
-Response: 1
-
-A: Okay,
-A: 1) That's okay, 2) No returned checks or anything. 3) Oh, really. 4) uh, so what do you think about the school system?
-Response: 4
-
-A: Wh,
-A: your, uh,
-A: are you into the Cowboys?
-B: Oh, God, no.
-B: Uh, no,
-B: I'm not,
-B: I haven't been,
-B: I grew up in Dallas but I'm still not a Cowboys' man.
-B: I like Philadelphia Eagles.
-A: Oh, yeah?
-B: Yeah.
-B: my favorite team,
-B: so.
-A: that's all
-B: now that Randall's coming back next season, I hope they'll be, do a little bit better.
-B: They didn't do too bad last season.
-A: Yeah.
-B: But, I hope they can do better.
-B: 1) How about yourself? 2) right. 3) >. 4) opposite from mine,
-Response: 1
-
-B: Okay.
-B: Well, uh, I'll let you start, I guess.
-A: Well, uh, yeah,
-A: I, I'm employed by a company that does do, uh, random drug testing
-A: and I've got some very definite, uh, opinions about it. Uh, you know, which haven't changed all that much from my first reactions from, from when they, when they announced it. But, uh, developed a little more, I guess, but haven't changed that much.
-A: 1) Yeah, 2) and you have a good day. 3) What about you? 4) or is it?
-Response: 3
-
-B: All right.
-A: Okay,
-A: 1) >. 2) don't provide very much education. 3) Uh, so, uh, what do you consider the most important benefit besides salary? 4) Uh, and I, I think that, uh, that there's something that has to be changed in the system to, to do that.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-B: Okay.
-A: Okay
-================================================================================
-
-INTERVENTION OUTPUT:
-4
-================================================================================
-
-
-================================================================================
-EXAMPLE 14
-Target Output: 1
+EXAMPLE 18
+Target Output: 2
 Target Dialogue Act: qo
 Next Caller: B
 ================================================================================
 PROMPT:
-A: Hi, Cynthia.
-A: What did you wear to work today?
-B: Um, let's see.
-B: What did I wear to work today?
-B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
-A: So, can you dress pretty casually?
-B: Um, on occasion.
-A: Yeah.
-B: On occasion.
-B: Um, I do vary.
-B: Um, you know, I wear suits,
-B: I wear skirts and sweaters.
-B: On occasion I can wear jeans.
-B: 1) where are you from, 2) Um, how about you? 3) Yes, 4) I don't, you know,
-Response: 2
-
-A: Okay, um,
-A: let's see.
-A: 1) The witnesses? 2) what's the word, 3) How do you feel about credit cards? 4) Yeah,
-Response: 3
-
-A: I've, uh, >
-A: are you there?
-B: Yes, sir,
-B: I'm right here.
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 A: All right.
-A: Okay, um,
-A: I'm in an area where, um, we can, uh, enjoy it year round,
-A: so, I've actually been, uh, uh, been out within the past couple of weeks.
-A: I'm mainly a freshwater fisherman.
-A: 1) Right. 2) How about yourself? 3) Um, actually, when I was younger, I was a Cardinal fan, too. 4) does she need help with anything,
-Response: 2
+A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
+A: but my mother's always been administrator of a nursing home
+B: Uhhuh.
+A: so I've always been involved, you know, in one.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How do you feel about them, I mean, since you've 2) What did you do when your kids were growing up? 3) excuse me, 4) or is it all,
+ANSWER: 1
+______
 
-A: Your turn.
-B: Oh, I, I start.
-B: Okay.
-B: Well, uh, we keep a budget to an extent.
-B: Uh, and really, i, i, we were really forced into keeping a budget because I'm, I'm paid once a month which sort of, sort of forces some, uh, uh, restrictions
-B: and you need to make sure all your bills are paid.
-B: 1) Okay, 2) it's one of his first books, THE STAND. 3) Uh, about yourself? 4) I'm calling from Texas.
-Response: 3
+EXAMPLE:
+B: kids too?
+A: Yeah.
+B: Oh, you laugh.
+B: How many,
+B: what ages?.
+A: Well, twentyseven up.
+B: Uh.
+A: And we had five.
+B: You've been through the fun part.
+A: Oh, yeah.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or do you get to stay home with them? 2) not really. 3) thank you, I'm sorry, I just got home from work 4) And how about yourself?
+ANSWER: 4
+______
 
+EXAMPLE:
+A: Okay.
+B: I say they, uh,
+B: probably the best things to do is, is tie them with a rope and throw them in the water
+B: if they sink
+A: I see.
+A: A
+B: they're innocent right.
+A: a good, a good southern solution.
+B: Yeah.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) yeah, 2) Yeah, 3) Uh, so, uh, how do you, how do you feel? 4) no.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay,
+A: so you have eight children.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Um, what type of things do you do as a family to spend time together. 2) I woul, 3) Hi. 4) or is it something that is, uh, a little bit different from that?
+ANSWER: 1
+______
+
+TEST EXAMPLE:
 A: Okay, um, Chuck, do you have any pets
 A: And what kind do you have?
 B: I've got a male Siamese about a year old here.
 B: I live alone in an apartment,
 B: except for the cat.
 A: Uhhuh.
-B: 1) What do you think invades your privacy? > 2) and, uh, inevitably everyone is just very interested 3) Fine, thanks. 4) sorry about my mind.
-Response:
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) roughly. 2) How do yo, wh, what do you think about it. 3) But, uh, no, 4) What kind of cats are they?
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-1
-
-A: Um, so, um
+4
+______ 1
+______
 ================================================================================
 
 INTERVENTION OUTPUT:
-3
-
-A: 3
-
-A:
+2
+____ ______ _______ _______ __
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 15
-Target Output: 1
+EXAMPLE 19
+Target Output: 4
 Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
-A: Do you have any children?
-B: Yeah,
-B: I have two, two boys, twelve and sixteen.
-A: Twelve and sixteen.
-B: Uhhuh,
-B: 1) that's okay, 2) moved from, 3) You know. 4) how about you?
-Response: 4
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+A: Do you work?
+B: Yes,
+B: I do.
+A: I think that's the main change.
+A: What do you think?
+B: Well, I think that's a big part of it
+B: and I, I think it maybe started because women wanted outside of the home
+B: and,
+B: almost think with our society and, and inflation and the cost of things it's anymore it's almost couples have to work outside the home.
+A: That's right.
+B: But, but yeah, I think that's a big change.
+B: I'd like to not work.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) it took me back to the sixties, and stuff like that. 2) And, uh, uh, a house full of snow. 3) What about you? 4) Oh, they do?
+ANSWER: 3
+______
 
-A: I pushed it.
-B: Okay.
-A: 1) Unfortunately, yes. 2) Oh, really? 3) What are they going up to, thirty bucks or something? 4) So what do you you in your lawn?
-Response: 4
-
+EXAMPLE:
 A: Okay,
-A: what types of music do you like to listen to?
-B: Well, I primarily listen to classical music when I have my druthers, partly because I find it more soothing.
-B: I don't know a lot about classical music so far as, uh, any background in music,
-B: but it's the po, the music I enjoy the most.
-B: 1) or do you all like mail out stuff? 2) How about you? 3) Yeah, 4) so, so how do people in Wisconsin dress?
-Response: 2
+A: I'll just go with you first.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Tahiti? 2) why should we help starving people somewhere else. 3) What kind of 4) or is this something that maybe learning phonetics,
+ANSWER: 3
+______
 
+EXAMPLE:
 A: Okay,
 A: all set.
 B: Good morning.
@@ -987,292 +1569,41 @@ B: Uhhuh.
 A: when I get the opportunity, which isn't very often.
 B: Really,
 B: that's too bad.
-A: 1) Okay. 2) Because it's what? 3) How about yourself? 4) Um, I don't know,
-Response: 3
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Hi. 2) How about yourself? 3) sorry about that. 4) which was really the first year he was really able to
+ANSWER: 2
+______
 
-B: You think about AIDS research?
-A: Well, AIDS is a nasty, terrible disease,
-A: and you die from it.
-A: So I think that, uh, they need to look into it
-A: and it's kind of like cancer.
-A: I don't, you know,
-A: how many years have we tried to find a cure for cancer.
-B: Uhhuh.
-A: I think it'll probably be as difficult.
-A: 1) Well what are the others? 2) You go ahead first, if you'd like. 3) Did he get hurt again? 4) That's all right.
-Response:
+EXAMPLE:
+B: Well, do you exercise regularly, Judy?
+A: Um, I try to ride the stationary bicycle every day about five miles
+B: Uhhuh
+A: and I love to walk,
+A: so if I have a lunch hour with nice weather I get out and, and walk.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) For how many years? 2) I'm trying to think, I went to high school in Chicago, I'm trying to think what Purdue kids watch. 3) I don't know. 4) What about you?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+B: All right.
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) right 2) No, 3) Paris. 4) Well, how did it go?
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
 4
-
-A: Okay,
-A: I
+______1) Well, how
 ================================================================================
 
 INTERVENTION OUTPUT:
-2
-================================================================================
-
-
-================================================================================
-EXAMPLE 16
-Target Output: 3
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-B: Well, let's see.
-A: 1) Yes. 2) So, you just call him direct 3) So what, 4) yeah,
-Response: 3
-
-B: So do you have an opinion on credit cards?
-A: Um, I do.
-B: You do?
-A: 1) What, what do you think about them? 2) to own them . 3) I can tell you about my last job or 4) My,
-Response: 1
-
-A: I pushed it.
-B: Okay.
-A: 1) So what do you you in your lawn? 2) Yeah. 3) And, um, let's see what else. 4) sorry.
-Response: 1
-
-A: You want to go first.
-B: Well, uh, no
-B: I don, I don't get as much exercise as I, as I should as, or as I would like to, uh, uh, these days.
-B: I,
-B: seems to be to easy to get busy with other things.
-B: Uh, I have, in the past, uh, jogged and, and run,
-B: and every, every January and every September, I start out again
-B: and then it tapers off.
-A: Really?
-B: 1) Uh, what about you? 2) Service charge you mean? 3) Isn't it amazing that somebody can write that many books about science fiction? 4) >.
-Response: 1
-
-A: Hello.
-B: Hello.
-B: I was, I was thinking about our topic for the night. Um, immigration problems.
-B: We have immigration problems
-B: 1) unless an employer has a reason to 2) Yes. 3) How do you feel about them, I mean, since you've 4) >. She's so nice,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-1
-
-A: Yeah, I mean,
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-
-A: 3
-
-B:
-================================================================================
-
-
-================================================================================
-EXAMPLE 17
-Target Output: 1
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-A: Well, well, Pat, did you vote in the last election?
-B: Most assuredly.
-A: Oh, you did?
-B: Yes ma'am.
-B: I've voted in every major election since I turned twentyone.
-A: Oh, that's great.
-A: 1) Well, why do you think, 2) You took them to someone's home? 3) Well, but the majority of them are in, like, just like how you said in close, close quarters. 4) All right.
-Response: 1
-
-B: So, how do you feel about capital punishment?
-A: Well, it's,
-A: I am pretty much against it.
-B: Really?
-A: Yeah.
-A: 1) How about you? 2) Yeah. 3) Uh, actually I'm a big Chicago Bears' fan. 4) Okay,
-Response: 1
-
-B: > Okay,
-B: what kind of crafts and hobbies do you have?
-A: Oh, not very many of those at, uh,
-A: sometimes I, I play the trumpet,
-A: and sometimes I work on trumpet mouthpieces.
-B: Uhhuh.
-A: And then I have a five year old daughter
-A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
-B: Uhhuh.
-A: 1) Uhhuh. 2) More of a retirement home. 3) Um, how about you? 4) Let me tell you.
-Response: 3
-
-A: Okay.
-A: Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
-B: Well.
-A: 1) Well, I do it all. 2) I don't know. 3) What do you think would be required, and so forth? 4) What?
-Response: 3
-
-A: Okay
-A: wow, I don't know what that was.
-B: What was that?
-A: I don't know.
-B: And, uh, to, uh, the Brazos River
-A: Uhhuh.
-B: near Dinosaur Valley State Park.
-A: Oh, yes.
-B: Uhhuh.
-A: Uhhuh,
-A: uh, we have not camped in any of those places,
-A: in fact it has been a number of years since we have camped,
-A: but we used to go to Tyler State Park and, uh, Daingerfield
-A: and in Texas that is where we camp basically. Uh,
-B: 1) How about yourself? 2) I mean, I do not, I do not know how it is in the Air Force base. 3) No, 4) Oh, sure.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-1
-
-B: Well, that's fine
-================================================================================
-
-INTERVENTION OUTPUT:
-2
-
-A: 2
-
-A:
-================================================================================
-
-
-================================================================================
-EXAMPLE 18
-Target Output: 1
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-B: Okay,
-B: I'm ready.
-A: Okay,
-A: so we're going to talk about, uh, what kind of clothes we wear while we work.
-B: Uhhuh.
-A: Do you work for T I?
-B: No,
-B: I work at home.
-A: Oh, you do,
-A: well, you're like me then.
-A: I stay home also.
-B: Do you have children?
-A: Yes,
-A: I have two, a seven year old and three and a half year old.
-B: Oh, that's good.
-A: 1) How about you? 2) Do we get enough news or something like 3) let's see, 4) For the month or whatever.
-Response: 1
-
-A: Yes,
-A: 1) Okay. 2) what's that, what's that state north of us, 3) um, how do you feel about, um, the way the U S has reacted in the Middle East? 4) I, um, I was thinking about it for a long time,
-Response: 3
-
-A: Okay.
-A: 1) Uhhuh. 2) So, uh, what do you think about it? 3) yes. 4) and then reverse it,
-Response: 2
-
-B: So, how do you feel about capital punishment?
-A: Well, it's,
-A: I am pretty much against it.
-B: Really?
-A: Yeah.
-A: 1) I think that we should not loan them anymore money, 2) How about you? 3) oh, really? 4) For making government issue underwear.
-Response: 2
-
-A: Okay, Howard,
-A: 1) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it? 2) I would be prefer , 3) Right? 4) actually I didn't go diving.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-1
-
-A: Okay.
-A:
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-
-1
-
-A: 1
-================================================================================
-
-
-================================================================================
-EXAMPLE 19
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-A: Okay.
-A: We're talking about capital punishment.
-B: Right.
-A: 1) How do you feel about that Lenore ? 2) And, you know, in order to survive in this area, I think they have to be good. 3) It's a, it's a debit card, 4) I've become very aware of different political views because some of the things we have to discuss are very politically motivated or whatever,
-Response: 1
-
-A: I pushed it.
-B: Okay.
-A: 1) and, uh, it's really helped, you know, ours 2) how could he say it was, uh, 3) No 4) So what do you you in your lawn?
-Response: 4
-
-B: Do you have kids?
-A: Oh yeah.
-A: I got three.
-A: 1) Yeah. 2) Huh? 3) And that is, it, 4) How about yourself?
-Response: 4
-
-A: Hi, Cynthia.
-A: What did you wear to work today?
-B: Um, let's see.
-B: What did I wear to work today?
-B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
-A: So, can you dress pretty casually?
-B: Um, on occasion.
-A: Yeah.
-B: On occasion.
-B: Um, I do vary.
-B: Um, you know, I wear suits,
-B: I wear skirts and sweaters.
-B: On occasion I can wear jeans.
-B: 1) I have no idea. 2) that's awful, well, 3) Um, how about you? 4) What, what kind of heavy metal are we talking about?
-Response: 3
-
-A: Okay,
-A: I'll let you start this time.
-B: Well, how much do you like lawn and garden work?
-A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
-B: Oh.
-A: the last, I don't know, fifteen, twenty years, so
-B: Oh, for goodness sakes.
-A: Uh, I'm,
-B: 1) Oh, 2) Oh, here's an easy way to make some money. 3) Uh 4) How about you guys?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: 1) Well,
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-
-B: 3
-
-A:
+4
+____ ____ ____ ____ ____ ____ ____
 ================================================================================
 
 
@@ -1280,797 +1611,48 @@ A:
 EXAMPLE 20
 Target Output: 4
 Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-B: Okay.
-B: How's the weather been out there?
-A: Well, the last three days it's been pretty rainy.
-A: We went to the beach
-B: Uhhuh.
-A: and, uh, it started, uh, let's see, around four o'clock,
-B: >.
-A: and, uh, it had thunder and lightning,
-A: it was, and then, you know, it was just overcast and rainy for, uh, the next two or three days straight.
-A: 1) It got real cold, 2) yes, 3) How about yours? 4) Yeah,
-Response: 3
-
-A: Uh, let's see.
-A: How about, uh, let's see, about ten years ago,
-A: 1) how much benefit, 2) Oh, you haven't? 3) do you do your own gardening? 4) uh, what do you think was different ten years ago from now?
-Response: 4
-
-A: Yes,
-A: 1) No, 2) You know the Barney? 3) um, how do you feel about, um, the way the U S has reacted in the Middle East? 4) How old were you when you left?
-Response: 3
-
-A: Okay,
-A: 1) uh, what do you consider an invasion of privacy? 2) isn't it? 3) > 4) Yeah.
-Response: 1
-
-A: you've done.
-B: Our most recent series of projects I guess, was, inside was, uh, we remodeled a bathroom recently.
-A: 1) So all we had to sit here and, and ask is well, what aren't they telling us, you know. 2) What, what's my motivation? 3) what else for catering. Uh, 4) How about yourself?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Okay.
-A:
-================================================================================
-
-INTERVENTION OUTPUT:
-2
-
-A: 3
-
-A:
-================================================================================
-
-
-================================================================================
-EXAMPLE 21
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Okay,
-A: well, I don,
-A: 1) Weatherwise. 2) I mean, what thoughts do you have on the subject? 3) it could be. 4) ,
-Response: 2
-
-A: Okay.
-A: Uh, I haven't been in this situation yet.
-A: You know, my, my parents are not quite at that age yet,
-B: quite elderly, huh.
-A: No.
-A: So I haven't, uh, really been in that situation although they are thinking about my grandmother
-A: but, uh
-B: Uhhuh.
-A: but that's really about it.
-A: 1) How about you? 2) as a 3) sorry, 4) Well, do not tell that to all my friends.
-Response: 1
-
-A: Uh, I get most of my news uh, from newspapers really.
-A: I read the daily newspaper, uh, the HOUSTON CHRONICLE
-A: and sometimes I'll read like the, uh, WALL STREET or the NEW YORK TIMES.
-A: I don't subscribe to either,
-A: but sometimes I get a hold of copies of it.
-A: 1) what else have I seen. 2) Huh. 3) yeah. 4) Uh, how about you?
-Response: 4
-
-A: Okay.
-B: Okay,
-B: that made a nice ugly sound.
-B: So,
-A: Your name is Lynn?
-B: Linda.
-A: Linda.
-B: Uhhuh.
-B: So, sounds like you like to read.
-A: Yeah,
-A: I read quite a bit, probably don't read as much as I would like to.
-B: I don't read as much as I would like to either.
-B: I'm, I'm a single mom,
-B: but I have always loved reading.
-A: Uhhuh.
-B: 1) Yeah, 2) work on our vehicle. 3) and, I mean, here it is just a real big deal. 4) What do you like to read?
-Response: 4
-
-A: Jay, um,
-A: my kids are, are both in college, um,
-A: and I'd, I played a fairly active part in helping them decide where to go.
-A: On the other hand, they really decided themselves.
-B: Uhhuh.
-A: 1) Okay. 2) uh, what do you think was different ten years ago from now? 3) I don't want to serve on jury duty, 4) What, what type of area is that,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Okay,
-A: I
-================================================================================
-
-INTERVENTION OUTPUT:
-4
-================================================================================
-
-
-================================================================================
-EXAMPLE 22
-Target Output: 1
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: I pushed it.
-B: Okay.
-A: 1) Hope it's a good program there. 2) I mean but where are they, where are they, 3) So, how do you use your credit cards? 4) I guess so.
-Response: 3
-
-A: Well, ironically enough I'm sitting here with a cast on my leg because I resumed an aerobics class the night before last.
-B: Oh, no.
-A: I ripped the ligaments in my right ankle.
-B: Gosh.
-A: Yeah
-A: so,
-B: Exercise is not supposed to do that to you.
-A: That's what the nurses kept saying as they laughed all the way, you know, down the hallway.
-A: 1) What? 2) Well, it's, uh, it's really both. 3) Do you do anything on a regular basis? 4) Gee whiz,
-Response: 3
-
-B: You think about AIDS research?
-A: Well, AIDS is a nasty, terrible disease,
-A: and you die from it.
-A: So I think that, uh, they need to look into it
-A: and it's kind of like cancer.
-A: I don't, you know,
-A: how many years have we tried to find a cure for cancer.
-B: Uhhuh.
-A: I think it'll probably be as difficult.
-A: 1) Uh, how about yourself. 2) Excuse me, my throat's not as clear today as it should be. 3) What, what kind of, what kind of paint do you normally use? 4) No,
-Response: 1
-
-A: Okay, Deanna, uh,
-A: on capital punishment in our state, they give the death penalty for shooting of a policeman,
-B: Uhhuh.
-A: and I believe also in shooting of, uh, rape, I mean killing a rape victim.
-B: Uhhuh.
-A: I mean someone in the process of rape,
-A: and I don't know what el, I don't really remember what else.
-B: Uhhuh.
-A: But.
-B: 1) but you have a rider. 2) No. 3) it depends. 4) How do yo, wh, what do you think about it.
-Response: 4
-
-B: Okay.
-A: Okay.
-A: Do you, uh, do any woodworking?
-B: I do,
-B: and I really love it. Um.
-A: 1) How do you feel about them, I mean, since you've 2) No, 3) Did, uh, did, like, did you go to Disneyland? 4) I can remember when our children were small.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-4
-
-B: 1) I was
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-================================================================================
-
-
-================================================================================
-EXAMPLE 23
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Steve, uh, with the election year and whatnot coming up, do you think we ought to cut taxes, raise them,
-A: 1) pretty much that time. 2) you could take a little longer. 3) Nay. 4) or, or, or what do you think?
-Response: 4
-
-A: Okay,
-A: 1) I think so. 2) So, 3) In other words you own your own home. 4) so, what are, what are your views on capital punishment?
-Response: 4
-
-B: Okay.
-A: 1) Uh, so, what do you think, uh, about putting the elderly in a nursing home? 2) well, I don't know. 3) Really? 4) Is this going to be fun?
-Response: 1
-
-B: So, how do you feel about capital punishment?
-A: Well, it's,
-A: I am pretty much against it.
-B: Really?
-A: Yeah.
-A: 1) Now what year are we talking about? 2) So I certainly hope you have a nice New Year. 3) How about you? 4) Oh, yeah,
-Response: 3
-
-B: Well, let me see,
-B: what have you seen lately?
-A: Well, uh, CITY SLICKERS, and STAR TREK FIVE.
-B: FIVE?
-A: Yeah,
-A: yeah.
-B: Y,
-B: only, only five?
-A: Yeah.
-A: I thought I'd better see that one before I go and see six.
-B: Well, no,
-B: didn't need to.
-A: No,
-A: I found that out.
-A: 1) Right. 2) Well, what do you think about Nolan Ryan being the first baseball player to earn a million dollars? 3) What are you, what are you studying? 4) my goodness, Diane, get down from there.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-1
-
-B: Well, I think that
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-
-B: 4
-
-B:
-================================================================================
-
-
-================================================================================
-EXAMPLE 24
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Well, well, Pat, did you vote in the last election?
-B: Most assuredly.
-A: Oh, you did?
-B: Yes ma'am.
-B: I've voted in every major election since I turned twentyone.
-A: Oh, that's great.
-A: 1) Well, why do you think, 2) Marcos 3) Well I, I, I think overall that's right. 4) I'm Jay in Dallas.
-Response: 1
-
-A: All right.
-A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
-A: but my mother's always been administrator of a nursing home
-B: Uhhuh.
-A: so I've always been involved, you know, in one.
-B: 1) Well, 2) well, thanks so much. 3) How do you feel about them, I mean, since you've 4) Well,
-Response: 3
-
-A: All right.
-A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
-A: but my mother's always been administrator of a nursing home
-B: Uhhuh.
-A: so I've always been involved, you know, in one.
-B: 1) I'm not sure. 2) If they want to, right. 3) but I have to tell you this if I don't because you're in Plano, 4) How do you feel about them, I mean, since you've
-Response: 4
-
-A: The question was on lawn and garden work.
-A: 1) Ha, have you ever seen those bunnies 2) Um, how do you like it? 3) What, what do you think is, uh, is an appropriate, uh, punishment for some of the various, you know, such as, things such as rape or, or, uh, murder 4) I do not know if you listen to him or not,
-Response: 2
-
-A: Okay.
-A: Do you work?
-B: Yes,
-B: I do.
-A: I think that's the main change.
-A: 1) you had better hurry. 2) and, uh, I just wondering how I go about getting the cash. 3) don't they? 4) What about you?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-4
-
-A: Okay.
-A: Do
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-================================================================================
-
-
-================================================================================
-EXAMPLE 25
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Okay.
-B: 1) So, tell me the last time you went for a boat ride. 2) How are you? 3) Oh, sure, 4) > Just a minute,
-Response: 2
-
-A: Uh, I'm of the age that could have gone, although I didn't
-A: and, uh, I guess, uh, looking back on it, I tend to think it was pretty, uh, mostly a mistake.
-B: Uhhuh.
-A: On the other hand, uh, the more I learn about the history, the more I see it was incremental, uh, decisions. Any one of which was sort of understandable at the time.
-B: Uhhuh.
-A: And, uh, but on the whole I think it, uh, probably was the wrong thing to do.
-A: 1) Right. 2) How about you? 3) Byebye. 4) Right?
-Response: 2
-
-A: Well, we, uh,
-A: taxes,
-A: everyone thinks taxes are too high I'm sure.
-A: But, uh, I think we do get quite a good value for the tax dollars we spend in most cases.
-A: 1) Saginaw? 2) this is Betty 3) What do you think? 4) I'll have to check that out,
-Response: 3
-
-A: Okay,
-A: 1) yeah. 2) good luck. 3) how do you feel about them? 4) oh okay.
-Response: 3
-
-A: Okay,
-A: I think we're supposed to discuss our view of the Soviet Union as a continuing threat to the United States.
-B: Okay.
-A: 1) and, uh, in fact I think I was the first person in our department to have my thesis published on recyclable pa, recycled paper. 2) Oh, I know 3) I bet. 4) What about you?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Okay,
-A: I
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-================================================================================
-
-
-================================================================================
-EXAMPLE 26
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-B: Okay,
-B: I'm ready.
-A: Okay,
-A: so we're going to talk about, uh, what kind of clothes we wear while we work.
-B: Uhhuh.
-A: Do you work for T I?
-B: No,
-B: I work at home.
-A: Oh, you do,
-A: well, you're like me then.
-A: I stay home also.
-B: Do you have children?
-A: Yes,
-A: I have two, a seven year old and three and a half year old.
-B: Oh, that's good.
-A: 1) excuse me. 2) How about you? 3) Do you, do you have an idea of, of how much. 4) Uh, not that I can think of.
-Response: 2
-
-A: So you have a child
-B: Yeah
-B: we,
-B: Two year old daughter in child care
-B: and we went through the process of searching for child care and
-A: Uhhuh.
-B: uh, finding what we consider to be,
-B: real good child care at a, uh, pretty reasonable price, we think.
-A: Uh,
-B: 1) How about you, 2) Oh well, take care. 3) or, I am sorry, 4) Yeah,
-Response: 1
-
-B: Uhhuh,
-B: I have got two.
-B: One is, uh, two
-B: and the other one's four
-B: and, uh, this is my first year of staying home.
-B: I've always had them in child care.
-A: Oh, well, then you are familiar with it?
-B: Uhhuh.
-A: Okay,
-A: I, uh, I have grandchildren
-A: and I know, uh, one has gone to a, well, two of them have gone to preschool.
-B: Uhhuh.
-A: And I know what the experience my daughter has faced with that.
-A: 1) fine. 2) Yeah, 3) Why don't you tell me what you have found. 4) I think two.
-Response: 3
-
-B: Well, this is an unusual topic.
-B: 1) Does it, does it on its little, on its, on the flower, does it have a beard on it at all? Any kind of fuzzies? 2) I think you would be more willing to either help that person or help it get accomplished, you know. 3) What do you think about it? 4) I got out of that kind of situation.
-Response: 3
-
-A: Okay,
-A: 1) What are some other ones I've seen lately. 2) Uh, what do you think about it? 3) Never 4) Tha, that's right.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Okay,
-A:
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-
-A: 1
-
-A:
-================================================================================
-
-
-================================================================================
-EXAMPLE 27
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-B: W,
-A: Hi.
-B: 1) Byebye. 2) Thank you. 3) Well, what do you think? 4) I'm watching, Janice,
-Response: 3
-
-A: Okay,
-A: I'll let you start this time.
-B: Well, how much do you like lawn and garden work?
-A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
-B: Oh.
-A: the last, I don't know, fifteen, twenty years, so
-B: Oh, for goodness sakes.
-A: Uh, I'm,
-B: 1) no, 2) What do you do? 3) is it? 4) Have you seen that movie?
-Response: 2
-
-A: They're talking about, uh, federal government, aren't they?
-B: I'm sure,
-B: well, actually probably any government,
-B: but
-A: Yeah.
-B: the federal one's the big one.
-B: 1) Right, 2) Well, I guess. 3) I beg your pardon? 4) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it?
-Response: 4
-
-A: Well, I guess, um, I'll start out,
-A: and that is, um, I don't know what section of the public school system they're talking about, whether it's the first eight grades, the high school, or colleges.
-A: I have mixed views on all three of them.
-B: Uhhuh.
-B: 1) Because I often, I often sort of wonder how, having never been to the Soviet Union, um, how different the people there really are, you know. 2) And the money is also another issue. How you're going to pay for it. 3) But I've never really tried anything like that since then. 4) What do you think about, what do you think about the, the lower grades, you know,
-Response: 4
-
-A: Okay.
-A: 1) I, I talked to so many people from Texas 2) How about you? 3) Oh that's, wonderful. 4) Let me ask Nicole.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-4
-
-A: 1) Oh,
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-================================================================================
-
-
-================================================================================
-EXAMPLE 28
-Target Output: 2
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: I'm ready if you are.
-B: Okay.
-B: 1) Um, wh, where do you stand, uh, on, 2) right. 3) That's right. 4) Excuse me?
-Response: 1
-
-A: Okay,
-A: have you ever served as a juror?
-B: Never.
-B: I've never been served on the jury, never been called up in a jury, although some of my friends have been jurors.
-A: Uhhuh.
-A: I never have either.
-B: You haven't, huh.
-B: 1) Well, it's going to be interesting. 2) If you were, uh, what do you think about the whole concept of a trial by your peers? 3) and I don't know which ones, 4) Right out,
-Response: 2
-
-A: Uh, what sort of camping do you like to do the most?
-B: Uh, well, I, I do, uh, real rough type camping.
-B: I have a motor home.
-A: Huh, rough type, huh?
-B: Yeah.
-A: Okay.
-B: Uh.
-A: Oh, yeah,
-A: motor homes can be a lot of fun.
-B: Yeah,
-B: they really are.
-A: Yeah.
-B: They really are.
-B: I've, I've enjoyed it.
-B: I've never actually done any, uh, like tent camping,
-A: Uh, that can be a lot of fun, too.
-A: Yeah.
-B: 1) I'm sorry 2) You know. 3) I would love to. 4) How about you?
-Response: 4
-
-A: I pushed it.
-B: Okay.
-A: 1) It sure would be cool and comfortable to wear, you know, 2) so. Um, anyway, let me press one. 3) and my wife normally says, oh, Tom, why, why don't you make a stir fry tonight 4) So what do you you in your lawn?
-Response: 4
-
-A: Uh, it seems like an unusual subject this time of the year
-A: but, uh, it's, it's camping.
-B: Really.
-B: When was the last time you went?
-A: The last time I went camping was about, uh, in the middle of October,
-A: and we went up to Lake Bonham and really enjoyed it.
-A: Had a real good time with the family.
-A: We do an awful lot of camping.
-A: 1) you're okay, 2) What about you? 3) And someone else isn't going to take the time to put it in two separate bags. 4) Mazda,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: 1) I don
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-================================================================================
-
-
-================================================================================
-EXAMPLE 29
-Target Output: 3
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Okay,
-A: I'm here.
-A: How do you feel about public schools?
-B: Well, our public schools are, are really poor, I feel.
-A: Uhhuh.
-B: Uh, I'm not sure where Georgia ranks in the nation
-B: but, uh, we're toward the bottom.
-A: Yeah.
-B: And, uh, there's a lot of things that I see that are so obviously wrong.
-A: Uhhuh.
-B: That you would think it would be easy to correct.
-A: Right.
-B: But the system doesn't allow for the corrections.
-A: Uhhuh.
-B: 1) How about you? 2) I don't, 3) A small bowl will be plenty. 4) but I don't understand with racialism and the way religion is and everything else how you can get people that are total, totally impartial to it.
-Response: 1
-
-A: Well, I think we pay too much in taxes.
-B: Yeah.
-A: 1) What are yours? 2) Relax, 3) Um, I've never noticed that. 4) How about you?
-Response: 4
-
-A: Jay, um,
-A: my kids are, are both in college, um,
-A: and I'd, I played a fairly active part in helping them decide where to go.
-A: On the other hand, they really decided themselves.
-B: Uhhuh.
-A: 1) Or, I'm sorry no, 2) Um, what, what kind of experience did you have? 3) shall we say? 4) Yeah,
-Response: 2
-
-B: Okay.
-A: > All right.
-A: 1) I'm sorry, 2) , 3) Who's, who's not very well educated? 4) What have you seen?
-Response: 4
-
-B: Well, do you do any recycling?
-A: Uh, we do here.
-A: Uh, see, what do we recycle?
-A: We, they recycle,
-A: they have bins
-B: Yeah.
-A: and they also have centers where you can take aluminum cans and, uh, plastic bottles
-A: and I think that's all they have.
-B: Oh.
-A: 1) but it's kind of boring. 2) Or, I'm sorry no, 3) Well, how did it go? 4) well, then I don't know how much you've been through it,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Well, I think,
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-
-A: 3
-================================================================================
-
-
-================================================================================
-EXAMPLE 30
-Target Output: 3
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Here goes Sharon.
-B: Okay.
-A: 1) Well, what do you think about Nolan Ryan being the first baseball player to earn a million dollars? 2) Well, I think that, well, part, I think that's partially true, too. 3) No, 4) Yeah
-Response: 1
-
-A: Okay,
-A: well, uh, some of the books I've read lately have to do with crafty type things where I've, where I've, um, learned things that I'm going to do for my children for Christmas
-B: Uhhuh.
-A: and they were really, uh, helpful, because I didn't know how to do this one stitching,
-A: and so, that was very helpful to me as far as books.
-A: Otherwise, um, I like to read children's books, and things like that.
-A: 1) don't tell me what women can do. 2) Okay. 3) Isn't that pretty. 4) What about you?
-Response: 4
-
-B: Bye >. >
-B: So we're, uh, our discussion's about, uh, the care of the elderly?
-A: That's right,
-A: that's right.
-A: 1) Well, no, 2) You know, what, what, uh, what do you think is important? 3) Yeah, 4) Caddo Lake.
-Response: 2
-
-A: Okay,
-A: do you have.
-B: Are you there?
-A: Yeah.
-B: Okay.
-A: There, okay.
-B: Okay.
-A: Had to mess with my phone here.
-A: Um, do you have children?
-B: Yes,
-B: I have one.
-A: Oh, okay.
-B: 1) Yeah. 2) Well, just an amateur singer. 3) How about you? 4) Definitely more to look at.
-Response: 3
-
-A: I've, uh, >
-A: are you there?
-B: Yes, sir,
-B: I'm right here.
-A: All right.
-A: Okay, um,
-A: I'm in an area where, um, we can, uh, enjoy it year round,
-A: so, I've actually been, uh, uh, been out within the past couple of weeks.
-A: I'm mainly a freshwater fisherman.
-A: 1) I think you'll enjoy it. 2) Well, sometimes it's rewarding, 3) Um, what type of magazines do you have? 4) Kiss some butt,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-2
-
-A: Well, I'm not
-================================================================================
-
-INTERVENTION OUTPUT:
-1
-================================================================================
-
-
-================================================================================
-EXAMPLE 31
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Okay.
-B: 1) of course it's going to take a lot. 2) And, uh, I don't know, 3) So what do you guys having up there? 4) Well, I could pick country music. *answered as if to a qw
-Response: 3
-
-A: Okay.
-B: Hi,
-B: Well, do you do a lot of dining out?
-A: No, um,
-A: we don't although we enjoy it.
-A: Um, we do it more when we have company
-A: 1) I was trying to think, uh, 2) Well, I, I think one of the things that always happens is I think is when the one end wh, you know were moving out to the end where a lot of women will be at work 3) Um, what about you? 4) Okay.
-Response: 3
-
-A: I pushed it.
-B: Okay.
-A: 1) and you get together once a year. 2) let's see. 3) I don't know, 4) So, how do you use your credit cards?
-Response: 4
-
-B: There we go.
-A: Okay.
-A: 1) No. 2) Well, uh, what do you think about taxes, 3) where'd you live at, 4) Yeah
-Response: 2
-
-A: That's it.
-B: Yes.
-A: What do you think are possible changes in the, uh, way trials are conducted these days?
-A: Do you like the way some people in there for instance, really take over and, uh, we have no way, uh, of knowing whether they are legitimately right or wrong and so forth.
-A: 1) yeah, 2) so, we had to, we had to flea bath them 3) Hi, 4) How about you?
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-2
-
-A: Okay.
-B:
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-
-A: 3
-
-A:
-================================================================================
-
-
-================================================================================
-EXAMPLE 32
-Target Output: 4
-Target Dialogue Act: qo
 Next Caller: B
 ================================================================================
 PROMPT:
-A: Okay.
-B: Okay,
-B: that made a nice ugly sound.
-B: So,
-A: Your name is Lynn?
-B: Linda.
-A: Linda.
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Kathy?
 B: Uhhuh.
-B: So, sounds like you like to read.
-A: Yeah,
-A: I read quite a bit, probably don't read as much as I would like to.
-B: I don't read as much as I would like to either.
-B: I'm, I'm a single mom,
-B: but I have always loved reading.
-A: Uhhuh.
-B: 1) What do you like to read? 2) Someti, 3) no 4) you kind of divide it in fourths in a way, don't you?
-Response: 1
+A: what is your, uh, family,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) they do here in Sarasota county is they've got, 2) Yeah. 3) Could be. 4) what do you usually do as far as budgeting?
+ANSWER: 4
+______
 
-A: Your turn.
-B: Oh, I, I start.
-B: Okay.
-B: Well, uh, we keep a budget to an extent.
-B: Uh, and really, i, i, we were really forced into keeping a budget because I'm, I'm paid once a month which sort of, sort of forces some, uh, uh, restrictions
-B: and you need to make sure all your bills are paid.
-B: 1) we got ripped off buying our new car. 2) Did I say channel nine to begin with? 3) Uh, about yourself? 4) instead of being completely penned up.
-Response: 3
+EXAMPLE:
+A: Uh, let's see.
+A: How about, uh, let's see, about ten years ago,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) uh, what do you think was different ten years ago from now? 2) Well, let's see, 3) Bless you. 4) Well, it sort of is.
+ANSWER: 1
+______
 
+EXAMPLE:
 A: We could talk about my favorite subject.
 B: Cooking and
-B: 1) A whole new, 2) What do you like to cook? 3) as a separate country, 4) I know that it's a real problem.
-Response: 2
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I'm sorry. 2) No, 3) What do you like to cook? 4) Was what?
+ANSWER: 3
+______
 
-B: There we go.
+EXAMPLE:
 A: Okay.
-A: 1) I wonder, I wonder how, how the civil system or the court system must differ between there and say where I am in Minneapolis. 2) know ? 3) or is this, is there a series on. 4) Well, uh, what do you think about taxes,
-Response: 4
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Okay, 2) Uh, first, um, I need to know, uh, how do you feel about, uh, about sending, uh, an elderly, uh, family member to a nursing home? 3) or they're, they're freeze it, freeze out because the roots are all, in the Winter, uh, 4) Yeah.
+ANSWER: 2
+______
 
+TEST EXAMPLE:
 A: favorite type of music or musician or any.
 B: I don't really have a favorite type.
 B: I like, uh, a lot of different types of music.
@@ -2081,120 +1663,116 @@ A: Uhhuh.
 B: but it's pretty varied.
 A: Uhhuh.
 B: Yeah.
-B: 1) Let's see , 2) Yeah. 3) or you do that as, just on the side, or what? 4) How do you feel about public schools?
-Response:
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) And I'll read your book sometime. 2) Hello Chuck. 3) No, 4) Um, how do you like it?
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-3
-
-A: Oh, I'm glad
+4
+______ 1) I think
 ================================================================================
 
 INTERVENTION OUTPUT:
-3
+4
+______
+______
+______ ______
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 33
+EXAMPLE 21
 Target Output: 2
 Target Dialogue Act: qo
 Next Caller: A
 ================================================================================
 PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: All right.
+A: Well, uh, quite a few
+A: and they're varied.
+A: They don't, uh, uh, encompass, uh, many handcrafts like knitting and that kind of thing.
+B: Uhhuh.
+A: But, I do, uh, quite a bit of wreath making
+A: and my dogs are my hobbies.
+A: I do a lot of gardening.
+A: I go to estate sales, which takes up a lot of time.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) , taking one more life doesn't, doesn't, doesn't re, 2) I don't, 3) Now, what do you mostly do? 4) Ford.
+ANSWER: 3
+______
+
+EXAMPLE:
+B: Okay,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah. 2) I don't think, I don't think they have the right to do that. 3) Good morning. Um, 4) so now what are your opinions on recycling?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: There you go.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) you can really see them well there. 2) I don't disagree or agree with you. 3) I'm sorry for these beeps, 4) What do you think invades your privacy? >
+ANSWER: 4
+______
+
+EXAMPLE:
 A: Okay.
+A: Um, what do you do this weekend?
+B: Well, uh, pretty much spent most of my time either in the yard or at nurseries buying stuff for the yard.
+A: Huh. Which is,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I haven't either other than, 2) and let me get out of here. 3) Oh quality, okay. 4) wh, d, what do you plan, have planned for your yard?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
 B: Okay.
-A: 1) put it this way, I think, 2) I do not know, 3) DEFENDING YOUR LIFE, 4) So, what do you think about it?
-Response: 4
-
-A: Do you have any children?
-B: Yeah,
-B: I have two, two boys, twelve and sixteen.
-A: Twelve and sixteen.
-B: Uhhuh,
-B: 1) how about you? 2) as opposed to paying for cable. 3) Oh, improve upon that? 4) Um, um, and I don't think this would have anything to do with it,
-Response: 1
-
 A: Okay.
-A: 1) A tent? 2) It wouldn't have, 3) I guess that's some of the answer, I guess is business, uh. Uh, 4) So, uh, Mike, what are your opinions on, uh, trial by jury?
-Response: 4
-
-B: I guess we're ready to talk.
-A: How you doing, Howard?
-A: This is a, a subject that I'm not real well versed on,
-A: but.
-B: Well, let's talk about air pollution.
-A: Okay.
-B: What do you think causes air pollution in Dallas?
-B: Or where are you from?
-A: No.
-B: Maybe you're not in Dallas.
-A: Okay,
-A: I'm from the, uh,
-A: I'm from Dallas.
-A: I'm in Richardson.
-B: Okay. Uh,
-A: 1) I've heard of it a lot, 2) What do you think as far as air pollution in the Dallas area? 3) or do you think it would be better for our leaders to just start seeking God on how to turn our nation around financially? 4) I'm in Plano, > Texas.
-Response: 2
-
-A: Okay,
-A: so you have eight children.
-A: 1) and I know I don't, 2) How about you? 3) No, 4) Isn't that interesting?
-Response:
+A: Do you, uh, do any woodworking?
+B: I do,
+B: and I really love it. Um.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Mine are actually the lowest in the neighborhood. 2) How about you? 3) of course I li 4) Yeah,
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-1
+2
+______
 
-A: Okay.
-B: Okay
+A: I think I
 ================================================================================
 
 INTERVENTION OUTPUT:
 2
-
-A: 2
+______
+______
+______
+____
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 34
-Target Output: 4
+EXAMPLE 22
+Target Output: 2
 Target Dialogue Act: qo
-Next Caller: B
+Next Caller: A
 ================================================================================
 PROMPT:
-B: Okay,
-B: all set, then.
-B: 1) Uh, what do you think about it? 2) Uhhuh. 3) so maybe it's the law that wrong in their eyes 4) so um, I'm going to leave you alone.
-Response: 1
-
-A: Okay.
-B: All right.
-B: 1) don't provide very much education. 2) and roads, is falling apart. 3) Do you think? 4) What, uh, what kind of camping is there in Texas?
-Response: 4
-
-B: Uhhuh,
-B: I have got two.
-B: One is, uh, two
-B: and the other one's four
-B: and, uh, this is my first year of staying home.
-B: I've always had them in child care.
-A: Oh, well, then you are familiar with it?
-B: Uhhuh.
-A: Okay,
-A: I, uh, I have grandchildren
-A: and I know, uh, one has gone to a, well, two of them have gone to preschool.
-B: Uhhuh.
-A: And I know what the experience my daughter has faced with that.
-A: 1) That's okay. 2) Why don't you tell me what you have found. 3) No, 4) So what car do you drive?
-Response: 2
-
-A: Okay.
-B: 1) So how serious is the, 2) I'll have to make sure I catch that. 3) Uhhuh. 4) Oh, have you?
-Response: 1
-
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 A: Hi, Cynthia.
 A: What did you wear to work today?
 B: Um, let's see.
@@ -2208,283 +1786,129 @@ B: Um, I do vary.
 B: Um, you know, I wear suits,
 B: I wear skirts and sweaters.
 B: On occasion I can wear jeans.
-B: 1) Oh, I know it. 2) no, 3) Possibly. 4) What do you think would be required, and so forth?
-Response:
-================================================================================
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Thank you, 2) Well, it has them 3) Uh, here's what went on in Asia over the past week, 4) Um, how about you?
+ANSWER: 4
+______
 
-CLEAN OUTPUT:
-1
-
-B: 1) That's
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-
-1
-
-1
-
-2
-
-1
-================================================================================
-
-
-================================================================================
-EXAMPLE 35
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-A: Well, I think we pay too much in taxes.
-B: Yeah.
-A: 1) How about you? 2) I have not heard of it, any problems of it flooding anywhere, 3) But, but, but it's, it's more significant, in the sense of, it's a great agricultural region. 4) right?
-Response: 1
-
-A: Wh,
-A: your, uh,
-A: are you into the Cowboys?
-B: Oh, God, no.
-B: Uh, no,
-B: I'm not,
-B: I haven't been,
-B: I grew up in Dallas but I'm still not a Cowboys' man.
-B: I like Philadelphia Eagles.
-A: Oh, yeah?
-B: Yeah.
-B: my favorite team,
-B: so.
-A: that's all
-B: now that Randall's coming back next season, I hope they'll be, do a little bit better.
-B: They didn't do too bad last season.
-A: Yeah.
-B: But, I hope they can do better.
-B: 1) How about yourself? 2) Is that right? 3) > 4) Well, I, I think, uh, my background is probably what absolutely turned me off with SIXTY MINUTES.
-Response: 1
-
+EXAMPLE:
 A: Okay.
-A: We're talking about capital punishment.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) So, uh, Mike, what are your opinions on, uh, trial by jury? 2) right. 3) we don't, 4) and, uh, but he will turn that on, especially for, if, again, if our, uh, oldest grandson is over here.
+ANSWER: 1
+______
+
+EXAMPLE:
+B: One way or another we're now recording.
+A: Okay.
+B: Um, um, oh, yeah.
+A: helping your parents.
 B: Right.
-A: 1) How do you feel about that Lenore ? 2) Excuse me. 3) Well, not in the morning, 4) >.
-Response: 1
-
-A: All right.
-A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
-A: but my mother's always been administrator of a nursing home
+B: I still am really.
+B: They're, uh, > sort of remodeling a house out in downtown Atlanta, in Candler Park.
+A: Uhhuh.
+B: And, uh, we've done lots to it.
+B: We've taken out the glass and most of the windows and the sashes and replaced them.
+A: you're remodeling?
 B: Uhhuh.
-A: so I've always been involved, you know, in one.
-B: 1) with scallops. 2) this is 3) How do you feel about them, I mean, since you've 4) That's good.
-Response: 3
+A: Okay.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) well, not really. 2) How about you? 3) correct? 4) how can I say it?
+ANSWER: 2
+______
 
+EXAMPLE:
+A: Well, uh, does the company you work for test for drugs?
+B: Actually, uh, they just recently started a policy of testing drugs, which was kind of interesting,
+B: because w, when I went to work for them, uh, they didn't do that,
+B: but, uh, since then they've, they've started a drug testing policy, not because of their own, uh, convictions, but because the clients of our company are requests that we do that.
+A: Huh.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) right? 2) Drug testing in the work place. 3) How about you? 4) what is,
+ANSWER: 3
+______
+
+TEST EXAMPLE:
 A: Well, we, uh,
 A: taxes,
 A: everyone thinks taxes are too high I'm sure.
 A: But, uh, I think we do get quite a good value for the tax dollars we spend in most cases.
-A: 1) right, 2) to pay the delivery. 3) or, uh, do you belong to a group? 4) How do you feel about public schools?
-Response:
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Oh, for heaven's sake. 2) How about you. 3) Uh, 4) Never.
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-1
-
-A: Yeah.
-A: Well
+2
+______ Corrected Answer
+ANS
 ================================================================================
 
 INTERVENTION OUTPUT:
-1
-
-A: 1
-
-1
+2
+______ ________________________________________ ______________________________________
 ================================================================================
 
 
 ================================================================================
-EXAMPLE 36
+EXAMPLE 23
 Target Output: 1
 Target Dialogue Act: qo
 Next Caller: B
 ================================================================================
 PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
 A: Okay,
-A: 1) and I live in Virginia. 2) what kind of hobbies do you have? 3) Yes, 4) Let's see, what did we have the last time we had guests over.
-Response: 2
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I know what you mean. 2) I, m, m, most wholeheartedly agree. 3) well what do you do on your yard? 4) Maybe not.
+ANSWER: 3
+______
 
-A: Okay
-A: wow, I don't know what that was.
-B: What was that?
-A: I don't know.
-B: And, uh, to, uh, the Brazos River
-A: Uhhuh.
-B: near Dinosaur Valley State Park.
-A: Oh, yes.
-B: Uhhuh.
-A: Uhhuh,
-A: uh, we have not camped in any of those places,
-A: in fact it has been a number of years since we have camped,
-A: but we used to go to Tyler State Park and, uh, Daingerfield
-A: and in Texas that is where we camp basically. Uh,
-B: 1) and I, I think there's a, a shadow of a doubt, you know, like with this, this guy in, in Milwaukee. 2) Uh, well, a bunch of stuff, I guess, uh, fair number of novels, but mostly shorter ones. 3) What are they like? 4) Oh, okay.
-Response: 3
+EXAMPLE:
+A: I've, uh, >
+A: are you there?
+B: Yes, sir,
+B: I'm right here.
+A: All right.
+A: Okay, um,
+A: I'm in an area where, um, we can, uh, enjoy it year round,
+A: so, I've actually been, uh, uh, been out within the past couple of weeks.
+A: I'm mainly a freshwater fisherman.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Hi. 2) How about yourself? 3) I, I assume that means good for the Minnesota, 4) no big deal, you know,
+ANSWER: 2
+______
 
+EXAMPLE:
+A: All right,
+A: well I have a lot of different teams that I like to, to keep in touch with,
+A: of course, Texas Rangers being one of them,
+A: I mean, uh, you know, you can't live in Dallas without, you know,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Um, hobbies, 2) Well what are the others? 3) Newspapers? 4) Where did you cry.
+ANSWER: 2
+______
+
+EXAMPLE:
 A: Okay,
-A: I think we're supposed to discuss our view of the Soviet Union as a continuing threat to the United States.
-B: Okay.
-A: 1) I don't know, 2) I'll look at my map later. 3) How do you feel about that. 4) > Ju,
-Response: 3
+A: I'm here.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Oh do you. 2) that's probably true. 3) He's just immature. 4) How do you feel about public schools?
+ANSWER: 4
+______
 
-B: > Okay,
-B: what kind of crafts and hobbies do you have?
-A: Oh, not very many of those at, uh,
-A: sometimes I, I play the trumpet,
-A: and sometimes I work on trumpet mouthpieces.
-B: Uhhuh.
-A: And then I have a five year old daughter
-A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
-B: Uhhuh.
-A: 1) But I have, you know, MasterCard and Visa as you know, 2) but because there's no strings attached, it like gives them a freedom to give us something back. 3) I don't know 4) Um, how about you?
-Response: 4
-
-A: Okay.
-A: Do you work?
-B: Yes,
-B: I do.
-A: I think that's the main change.
-A: What do you think?
-B: Well, I think that's a big part of it
-B: and I, I think it maybe started because women wanted outside of the home
-B: and,
-B: almost think with our society and, and inflation and the cost of things it's anymore it's almost couples have to work outside the home.
-A: That's right.
-B: But, but yeah, I think that's a big change.
-B: I'd like to not work.
-B: 1) What about yourself? 2) A, a, a team effort, 3) No? 4) Uh, it's similar.
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-4
-
-A: Okay,
-A: you
-================================================================================
-
-INTERVENTION OUTPUT:
-2
-================================================================================
-
-
-================================================================================
-EXAMPLE 37
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: B
-================================================================================
-PROMPT:
-A: You bet.
-A: They tell you our topic?
-B: Uh, pets.
-A: You've got it.
-B: Do you have pets?
-A: Yes,
-A: we do.
-A: Uh, my wife and I have a dog that soon be eight years old,
-A: and we have a, a cat, which is, uh, I guess about five years old.
-B: Oh, my goodness.
-A: 1) What's your out of the, out of the state type, 2) that's okay. 3) How about you guys? 4) like say Houston.
-Response: 3
-
-A: You bet.
-A: They tell you our topic?
-B: Uh, pets.
-A: You've got it.
-B: Do you have pets?
-A: Yes,
-A: we do.
-A: Uh, my wife and I have a dog that soon be eight years old,
-A: and we have a, a cat, which is, uh, I guess about five years old.
-B: Oh, my goodness.
-A: 1) How about you guys? 2) Let me ask you a question off the subject though. 3) Are you in the part of town where, uh, they have gotten into the other containers yet for recycling? 4) You don't?
-Response: 1
-
-A: Okay,
-A: I'll let you start this time.
-B: Well, how much do you like lawn and garden work?
-A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
-B: Oh.
-A: the last, I don't know, fifteen, twenty years, so
-B: Oh, for goodness sakes.
-A: Uh, I'm,
-B: 1) What do you do? 2) and it's, uh, real true that, uh, you know, they'll say one thing, 3) I don't know. Um. 4) well, have you any plans to, uh, maybe, uh, expand or move onward?
-Response: 1
-
-A: Wh,
-A: your, uh,
-A: are you into the Cowboys?
-B: Oh, God, no.
-B: Uh, no,
-B: I'm not,
-B: I haven't been,
-B: I grew up in Dallas but I'm still not a Cowboys' man.
-B: I like Philadelphia Eagles.
-A: Oh, yeah?
-B: Yeah.
-B: my favorite team,
-B: so.
-A: that's all
-B: now that Randall's coming back next season, I hope they'll be, do a little bit better.
-B: They didn't do too bad last season.
-A: Yeah.
-B: But, I hope they can do better.
-B: 1) Right, 2) How about yourself? 3) Well there was stuff like that in Florida 4) That's right,
-Response: 2
-
-B: Okay,
-B: well the topic is selecting care for the elderly.
-A: Uhhuh.
-B: And I don't have elderly parents, yet but not that far in the distant future.
-B: 1) Oh well. 2) You know what I bet you they are? 3) I see. 4) Uh, what, what contacts do you have with the public school sy,
-Response:
-================================================================================
-
-CLEAN OUTPUT:
-3
-
-A: Well,
-A: uh
-================================================================================
-
-INTERVENTION OUTPUT:
-3
-================================================================================
-
-
-================================================================================
-EXAMPLE 38
-Target Output: 4
-Target Dialogue Act: qo
-Next Caller: A
-================================================================================
-PROMPT:
-B: > Well I always think I'm paying too much taxes.
-B: 1) Thank you, 2) How about you? 3) Lawn? 4) Really?
-Response: 2
-
-B: So, let's talk about the, uh, wonderful abuses in the State of Pennsylvania of personal property taxes whereby you can purchase something mail order
-B: and after the fact, the State of Pennsylvania can find out about it and send you a bill for the sales tax appropriate to that item that you purchased as well as interest and penalties from the time that you bought it.
-B: 1) What do you think? 2) Yeah. 3) pardon the terminology, 4) I mean, I do not, I do not know how it is in the Air Force base.
-Response: 1
-
-B: Okay,
-B: well the topic is selecting care for the elderly.
-A: Uhhuh.
-B: And I don't have elderly parents, yet but not that far in the distant future.
-B: 1) I haven't done it in quite awhile 2) actually as a matter of fact, they just ran the phone three years ago. 3) How is T I in that mode? 4) What about yourself?
-Response: 4
-
+TEST EXAMPLE:
 B: Do you want to start?
 B: G,
 A: Yeah,
@@ -2503,30 +1927,1223 @@ A: have you seen it?
 B: I thought it was very well done.
 A: Yeah,
 A: I, um,
-B: 1) or you going rent it, lease it again? 2) So, I don't know 3) How about GHOST? 4) Huh, rough type, huh?
-Response: 3
-
-A: Okay.
-A: 1) I'm sorry. 2) And, the plots are more, um, challenging, you know, than the sitcoms of regular T V. 3) there's nowhere that you can go that you would have to be afraid. 4) uh, what do you think was different ten years ago from now?
-Response:
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, why do you think, 2) it's like how much money did the U S spend when they could have paid so much money for each barrel of oil that was being, 3) Oh, I see, 4) I can tell.
+ANSWER:
 ================================================================================
 
 CLEAN OUTPUT:
-3
-
-A: Okay.
-B: Yeah
+1
+______1) Oh, I
 ================================================================================
 
 INTERVENTION OUTPUT:
 1
+____ ____ ________ ______ ______ ______
+================================================================================
 
-1
 
-1
+================================================================================
+EXAMPLE 24
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Did you hear our topic?
+A: It's in regards to discussing homes.
+B: Homes,
+B: yes, sir,
+B: uhhuh.
+B: What are, are you settled in a place?
+A: Yeah,
+A: I'm settled in a place.
+A: I've been in it for twelve years, since nineteen, uh, actually thirteen years, since nineteen seventyeight
+A: and it's in Richardson, Texas, which is north Texas
+B: Right >.
+A: or north Dallas.
+B: Uhhuh.
+A: And we've lived in two houses in Richardson.
+A: We moved here in seventyfour and, uh, changed locations in seventyeight.
+B: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah, 2) >. 3) that's probably true. 4) How about yourself?
+ANSWER: 4
+______
 
-1
+EXAMPLE:
+A: Yes,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Oh, really. 2) um, how do you feel about, um, the way the U S has reacted in the Middle East? 3) Either way, 4) But is not that difficult to do when you are working full time and have to come home and prepare a meal and,
+ANSWER: 2
+______
 
+EXAMPLE:
+A: Okay, uh,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Is, is, is that with seafood? 2) Well, in, in Dallas, what are the, what is the newspaper situation? 3) that's all right. 4) what kind of hobbies do you have Lori?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) so, what are, what are your views on capital punishment? 2) That's amazing. 3) Uh, well, a bunch of stuff, I guess, uh, fair number of novels, but mostly shorter ones. 4) I don't know if it w, was,
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: Here goes Sharon.
+B: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How do you feel about credit cards? 2) I wonder how you, 3) I'm going u, I'm going to switch to the white ones. 4) I don't need to.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______ 3 2
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+____ _______ ______ ______ ______ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 25
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+A: Um, what do you do this weekend?
+B: Well, uh, pretty much spent most of my time either in the yard or at nurseries buying stuff for the yard.
+A: Huh. Which is,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) wh, d, what do you plan, have planned for your yard? 2) I did for years. 3) well, let me go a head and push one 4) Uhhuh.
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay,
+A: what types of music do you like to listen to?
+B: Well, I primarily listen to classical music when I have my druthers, partly because I find it more soothing.
+B: I don't know a lot about classical music so far as, uh, any background in music,
+B: but it's the po, the music I enjoy the most.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) competing for jobs. 2) How about you? 3) he hopes to be a writer. 4) no big deal, you know,
+ANSWER: 2
+______
+
+EXAMPLE:
+B: Okay.
+A: Okay.
+A: Do you, uh, do any woodworking?
+B: I do,
+B: and I really love it. Um.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) exactly. 2) Oh, um, what do you do, 3) Well supporting the Kurds 4) no,
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay,
+A: I'm here.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Byebye. 2) How do you feel about public schools? 3) well let me go ahead and press one. 4) Well, it sort of is.
+ANSWER: 2
+______
+
+TEST EXAMPLE:
+B: Well, do you do any recycling?
+A: Uh, we do here.
+A: Uh, see, what do we recycle?
+A: We, they recycle,
+A: they have bins
+B: Yeah.
+A: and they also have centers where you can take aluminum cans and, uh, plastic bottles
+A: and I think that's all they have.
+B: Oh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Has, what's been your voting experience? 2) Thanks. 3) Challenges. 4) let's see what was,
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
 2
+______ ______ ______ ______ ______ ______
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+____________ ________ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 26
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: I don't believe that we're ,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) So what do you think about, uh, recycling programs in Atlanta, Julie? 2) and, 3) isn't it? 4) Well, um, I'm going to talk about when I was working as a teacher and when I
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+B: Hi.
+B: Do you have lots of credit cards?
+A: Yeah,
+A: we, well, we have quite a few
+A: but we don't really use them a lot.
+A: We have, well, we like a lot of gasoline credit cards,
+B: Uhhuh.
+A: because we like to be able to stop, you know, when we're traveling and stuff wherever there's a station,
+A: but as far as like MasterCard and Visa, we don't use those too often.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Oh. 2) So outrageous. 3) What about you? 4) That's okay.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: you've done.
+B: Our most recent series of projects I guess, was, inside was, uh, we remodeled a bathroom recently.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Let's see. 2) Well, I have, I have very fixed feelings about Israel. 3) Oh, okay. 4) Well, how did it go?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Do you have kids?
+A: Oh yeah.
+A: I got three.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) How about yourself? 2) that's okay. 3) Did you? 4) Traction?
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: Okay,
+A: I'll let you start this time.
+B: Well, how much do you like lawn and garden work?
+A: Well, uh, even though it's totally out of my, uh, my degree training, I've been working as, as, in the horticultural aspect, so
+B: Oh.
+A: the last, I don't know, fifteen, twenty years, so
+B: Oh, for goodness sakes.
+A: Uh, I'm,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) um, how do you feel about, um, the way the U S has reacted in the Middle East? 2) I mean, they don't, uh, uh, 3) the middle altogether. 4) I appreciate the call.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+______ _______ ______ _______
+================================================================================
+
+
+================================================================================
+EXAMPLE 27
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: So I own a, a P C A T at my home.
+B: Uhhuh,
+B: I could never justify owning a personal computer at home, uh,
+B: I mean, that's quite an expense to look for, uh,
+B: well, who is this,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) wait a minute, 2) Well, 3) I, well, I don't, because I work all day. 4) what do you use yours at home for?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: You want to go first.
+B: Well, uh, no
+B: I don, I don't get as much exercise as I, as I should as, or as I would like to, uh, uh, these days.
+B: I,
+B: seems to be to easy to get busy with other things.
+B: Uh, I have, in the past, uh, jogged and, and run,
+B: and every, every January and every September, I start out again
+B: and then it tapers off.
+A: Really?
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I don't have any Suzuki students. Uh, 2) Talk about asking for trouble, huh? 3) Oh, okay. 4) Uh, what about you?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Uh, tell you what. Um, I'll let you start.
+A: Okay.
+A: My major source of information, I guess, is T V news.
+A: Excuse me. I, uh, wake up to it in the morning.
+A: This is my, I guess, my prime time for news, first thing in the morning while I'm getting ready to go to work.
+A: Oh, I quite frequently glance through headlines or, in the newspaper.
+A: But, uh, primarily mine is T V news.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah, 2) I do not really know, 3) Huh? 4) How about yourself?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) God bless y, 2) not really. 3) The first Sunday in October, the Jordan family gets together. 4) so, what are, what are your views on capital punishment?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: you've done.
+B: Our most recent series of projects I guess, was, inside was, uh, we remodeled a bathroom recently.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) okay. 2) Yeah. 3) What about you guys? 4) I do not know how the New York state prison system
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+3
+______
+
+A: So you're
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+____ ______ ______ ______ ______ ______ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 28
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+B: All righty.
+B: So, uh, do you think Russia's still a threat?
+A: Well, I guess I'm maybe naive,
+A: but I never did feel that Russia was a big threat to us.
+B: There you go.
+A: I mean, obviously there's the, the, the possibility of, or, was the possibility of war, uh,
+A: but, I somehow think that war is one of those things that maybe is inevitable,
+A: but, uh, I don't look at it as a threat in the same sense that, that I think this question was meant.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) thank you. 2) And where did you go? 3) What about you? 4) should begin. *listen; could probably code if we could tell if it said "we" or "you"
+ANSWER: 3
+______
+
+EXAMPLE:
+B: All righty.
+B: So, uh, do you think Russia's still a threat?
+A: Well, I guess I'm maybe naive,
+A: but I never did feel that Russia was a big threat to us.
+B: There you go.
+A: I mean, obviously there's the, the, the possibility of, or, was the possibility of war, uh,
+A: but, I somehow think that war is one of those things that maybe is inevitable,
+A: but, uh, I don't look at it as a threat in the same sense that, that I think this question was meant.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I guess we might as well. 2) do you ever go for steak? Just a steak and potato and salad bar, that kind of thing. 3) What about you? 4) >.
+ANSWER: 3
+______
+
+EXAMPLE:
+B: Well, this is an unusual topic.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I'm in Texas, too. 2) What do you think about it? 3) Let's see, 4) Oh no,
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Jay, um,
+A: my kids are, are both in college, um,
+A: and I'd, I played a fairly active part in helping them decide where to go.
+A: On the other hand, they really decided themselves.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) a friend of mine that I spend a lot of time with does recycle quite a bit 2) what are they, 3) Um, what, what kind of experience did you have? 4) Yeah,
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Trying to think what else is, 2) Hi, 3) How about you? 4) it may not be.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+3
+______ 4 3
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+______
+______
+______
+____
+================================================================================
+
+
+================================================================================
+EXAMPLE 29
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+B: > Okay,
+B: what kind of crafts and hobbies do you have?
+A: Oh, not very many of those at, uh,
+A: sometimes I, I play the trumpet,
+A: and sometimes I work on trumpet mouthpieces.
+B: Uhhuh.
+A: And then I have a five year old daughter
+A: and we cut out things, kind of, you know, and color and, uh, and, uh, use markers and things like that.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) No, 2) well, thank you very much. 3) Um, how about you? 4) Right.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay, uh,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, yo, we watched it, 2) why do you think it, uh, sounds, 3) But I, I also, I also, I don't know if you've, uh, read any of the, um, oh, what do they call those. The, uh, the early republican, uh, republic documents, uh, when they were arguing through constitutional law written by Hamilton and all those people. 4) and you're out, you know.
+ANSWER: 2
+______
+
+EXAMPLE:
+B: You think about AIDS research?
+A: Well, AIDS is a nasty, terrible disease,
+A: and you die from it.
+A: So I think that, uh, they need to look into it
+A: and it's kind of like cancer.
+A: I don't, you know,
+A: how many years have we tried to find a cure for cancer.
+B: Uhhuh.
+A: I think it'll probably be as difficult.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah, 2) Uh, how about yourself. 3) and this is what it took finally. 4) wait a minute,
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay, uh,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, actually, I, I've known how to sail pretty much my whole life. 2) why do you think it, uh, sounds, 3) as I know, 4) Um, let's see,
+ANSWER: 2
+______
+
+TEST EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) isn't it? 2) Well it's a whole lot better than that San Francisco paper 3) it didn't sound, 4) how do you feel about them?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______1) I think that
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+____ ____ ____ ____ ____ ____ __
+================================================================================
+
+
+================================================================================
+EXAMPLE 30
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Well, uh, does the company you work for test for drugs?
+B: Actually, uh, they just recently started a policy of testing drugs, which was kind of interesting,
+B: because w, when I went to work for them, uh, they didn't do that,
+B: but, uh, since then they've, they've started a drug testing policy, not because of their own, uh, convictions, but because the clients of our company are requests that we do that.
+A: Huh.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) a barbecue 2) you? 3) and, um, it's good that they allow you that. 4) How about you?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Okay,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or would you go into Can, 2) Very badly. 3) so now what are your opinions on recycling? 4) Yeah,
+ANSWER: 3
+______
+
+EXAMPLE:
+B: All right.
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) No mother to talk to. 2) Hi, 3) A certain subject? 4) so what do you think of the Giants?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, it is, 2) Oh 3) So, uh, what do you think about it? 4) You better believe it,
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+B: Okay,
+B: well the topic is selecting care for the elderly.
+A: Uhhuh.
+B: And I don't have elderly parents, yet but not that far in the distant future.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Uh, how about yourself. 2) Um, 3) > what you doing ? 4) Huh, okay,
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+____ ____ ____ ____ ____ ____ ____
+================================================================================
+
+
+================================================================================
+EXAMPLE 31
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+B: So do you have an opinion on credit cards?
+A: Um, I do.
+B: You do?
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Or did you, 2) Uh, well, we probably have about three months, 3) What, what do you think about them? 4) Hi,
+ANSWER: 3
+______
+
+EXAMPLE:
+B: Are you a Vietnam veteran, Dudley?.
+A: Uh, no.
+B: No?
+B: Do you have family who were in the Vietnam War?
+A: Uh, no.
+A: My father was, uh, came in right after World War two.
+B: Okay.
+B: So he was too old,
+B: and you were too young, right?
+A: I am too young, yeah.
+B: All right.
+B: Do you know some folks who have been there?
+A: Uh, yes.
+B: Okay.
+A: A couple.
+B: Okay.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or the phone rang or, 2) but , 3) I've never actually, never actually played it. 4) How did it influence them?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: All right.
+A: Well, uh, quite a few
+A: and they're varied.
+A: They don't, uh, uh, encompass, uh, many handcrafts like knitting and that kind of thing.
+B: Uhhuh.
+A: But, I do, uh, quite a bit of wreath making
+A: and my dogs are my hobbies.
+A: I do a lot of gardening.
+A: I go to estate sales, which takes up a lot of time.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) will permanently damage, uh, the character of the child. 2) Now, what do you mostly do? 3) but I, I do not like to do that. 4) Oh, gee.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay, uh,
+A: well, we just got our income tax return
+A: and I'm perfectly happy.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) > Okay. 2) I understand. 3) Just let me see what I got, 4) What about you?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: All right,
+A: I, I think our experience of camping is,
+A: I, I am the, the passive member,
+A: I get things ready and then I enjoy.
+B: Uhhuh.
+A: Uh, because, my, my husband is a good camper
+A: and so they,
+A: he manages the troops
+A: and they do the work
+A: and I have fun.
+B: Uhhuh.
+B: Well, uh, uh, your, you said your family was gro, uh, all grown up now,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) And, uh, let me go ahead and push one here. 2) How about you? 3) Uh, I don't know what y'all are paying in Dallas, 4) What year?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______ _______ _______ ______
+================================================================================
+
+INTERVENTION OUTPUT:
+2
+______ANSWER ____ ________
+================================================================================
+
+
+================================================================================
+EXAMPLE 32
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) But no, 2) well what do you do on your yard? 3) Texas, 4) No kidding.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay.
+A: Um, what do you do this weekend?
+B: Well, uh, pretty much spent most of my time either in the yard or at nurseries buying stuff for the yard.
+A: Huh. Which is,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or are you talking about 2) wh, d, what do you plan, have planned for your yard? 3) what was it? 4) right, you know,
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Hello.
+B: Hello.
+B: I was, I was thinking about our topic for the night. Um, immigration problems.
+B: We have immigration problems
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) do we not. 2) I don't want to hear you. 3) thank you. 4) and what do, do you think about it?.
+ANSWER: 4
+______
+
+EXAMPLE:
+A: They're talking about, uh, federal government, aren't they?
+B: I'm sure,
+B: well, actually probably any government,
+B: but
+A: Yeah.
+B: the federal one's the big one.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) that's too bad. 2) Oh, I don't like nineties. 3) So, uh, so what do you, what do you think in the short term we should be doing to, to improve it? 4) Exactly,
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or, or, uh, now what was it they called them? 2) Um. Okay. 3) Um, how do you like it? 4) How you doing?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______ ____ ____ ____ ____ ____
+================================================================================
+
+INTERVENTION OUTPUT:
+3
+______ ______ ______ ______ __________
+================================================================================
+
+
+================================================================================
+EXAMPLE 33
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Well, uh, does the company you work for test for drugs?
+B: Actually, uh, they just recently started a policy of testing drugs, which was kind of interesting,
+B: because w, when I went to work for them, uh, they didn't do that,
+B: but, uh, since then they've, they've started a drug testing policy, not because of their own, uh, convictions, but because the clients of our company are requests that we do that.
+A: Huh.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) So if you were to improve it, what would you do to improve it? 2) Okay, 3) How about you? 4) Hi.
+ANSWER: 3
+______
+
+EXAMPLE:
+A: There you go.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) yo, you comment on it, 2) I'm sorry, 3) Huh, did you get to talk to him? 4) What do you think invades your privacy? >
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Uh, let's see.
+A: How about, uh, let's see, about ten years ago,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) uh, what do you think was different ten years ago from now? 2) And they look just as good. 3) Oh, that's a good idea. 4) Okay?
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) > Girls, put that away. 2) Well, I don't know, 3) Well, ho, how do you feel about, uh, drug testing? 4) Thanks for punching in
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+A: Okay, Howard,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I mean, I know that they're causing massive problems in society up here, 2) but, um, they would have, um, so many community outdoor theaters and, 3) But, maybe I'll try it one day. 4) How about you?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______ 4 ____ ____ ____
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+______ ________ ________ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 34
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+A: Um, what do you do this weekend?
+B: Well, uh, pretty much spent most of my time either in the yard or at nurseries buying stuff for the yard.
+A: Huh. Which is,
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) It's, it's gets cold at night, and then warm in the afternoons. 2) and I, it just, you know, 3) Wow. 4) wh, d, what do you plan, have planned for your yard?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: There we go.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) It should be over and done with. 2) Uh, so, uh, what do you consider the most important benefit besides salary? 3) or were you able to stay at home with him? 4) >.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Hi.
+A: What do you think about gun control?
+B: Well, uh, sort of mixed feelings about it, I guess, uh, uh,
+B: I, I s, I lean more towards the control side than, than towards, you know, just the, the free, free army.
+B: Uh, on the other hand I, it's, it's sort of an issue of, of uh,
+B: I'm not, I'm not a great fan of, of government control in general
+B: and so it's, it's kind of a tough issue.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Anymore. 2) Pardon me. 3) I know, uh, 4) What about yourself?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay,
+A: well, uh, some of the books I've read lately have to do with crafty type things where I've, where I've, um, learned things that I'm going to do for my children for Christmas
+B: Uhhuh.
+A: and they were really, uh, helpful, because I didn't know how to do this one stitching,
+A: and so, that was very helpful to me as far as books.
+A: Otherwise, um, I like to read children's books, and things like that.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I wonder though. 2) or do you think that, 3) but I really like to have a Mazda M P V van,, 4) What about you?
+ANSWER: 4
+______
+
+TEST EXAMPLE:
+A: Well, how do you feel about capital punishment?
+B: Well, I, I just last Friday got off a capital murder case.
+A: Oh, you did?
+B: Yeah,
+B: I was on the jury. Uh,
+A: Wow.
+B: Yeah.
+B: Which is funny because I got called last night
+B: and the topic was, uh, something about juries.
+A: Oh, really?
+B: Yeah,
+B: so I am just hitting it right.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Uh, where is your family from? 2) Because after, I guess after he, you know, gets to a certain age she's going to have to take him to a day care. 3) they'll have all ten of those shown back to back, 4) what do you think of our space budget
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______ 2) Because after
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+____ ______ ________ ______ ______ ______
+================================================================================
+
+
+================================================================================
+EXAMPLE 35
+Target Output: 3
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: I don't believe that we're ,
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) you bring this, 2) Huhuh. 3) Uhhuh. 4) So what do you think about, uh, recycling programs in Atlanta, Julie?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: So, let's talk about the, uh, wonderful abuses in the State of Pennsylvania of personal property taxes whereby you can purchase something mail order
+B: and after the fact, the State of Pennsylvania can find out about it and send you a bill for the sales tax appropriate to that item that you purchased as well as interest and penalties from the time that you bought it.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What do you think? 2) I don't know, you know, 3) Right. 4) no tears.
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay,
+A: I'll just go with you first.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) let's see, 2) Politicians pushing it, or, uh 3) I'm sorry, 4) What kind of
+ANSWER: 4
+______
+
+EXAMPLE:
+A: Okay, uh,
+A: well, we just got our income tax return
+A: and I'm perfectly happy.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What about you? 2) or did you pull them, 3) Let's see, what did we have the last time we had guests over. 4) Yeah,
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+B: Okay.
+A: Okay,
+A: I, I do a fair amount of cooking.
+B: Uhhuh.
+A: And, and I love having guests to dinner.
+A: I probably do that about once a month.
+A: And, uh, I usually prepare something, depending upon the guests, you know,
+A: it, it, I like to prepare chicken, that seems to please everybody, pasta or a casserole.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) And have a family? 2) It was nice talking 3) What do you, what do you think about them? 4) not for that,
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+3
+______
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+____ ____ ____ ________ ________
+================================================================================
+
+
+================================================================================
+EXAMPLE 36
+Target Output: 4
+Target Dialogue Act: qo
+Next Caller: B
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: well I guess first of all I, I could have asked that before.
+A: Do you have children?
+B: No.
+A: No.
+A: Okay.
+A: Because I, I didn't know if that would make a difference
+A: felt.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) That's the N B A? 2) Um, what do you think about the proposal that all young Americans should spend a year or two, 3) I'm not sure, 4) Well, sometimes, if, you know, if you're in transportation, in public transportation
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Okay.
+B: Okay,
+B: I guess we're ready to start.
+B: Well, I guess, what part of t, what part of the country do you live in?
+A: I'm in Dallas, Texas.
+B: Oh, okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What about yourself? 2) Okay. 3) I don't know, 4) or did you have a budget to, uh, get your down payment going to get a house?
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Okay.
+B: Hi.
+B: Do you have lots of credit cards?
+A: Yeah,
+A: we, well, we have quite a few
+A: but we don't really use them a lot.
+A: We have, well, we like a lot of gasoline credit cards,
+B: Uhhuh.
+A: because we like to be able to stop, you know, when we're traveling and stuff wherever there's a station,
+A: but as far as like MasterCard and Visa, we don't use those too often.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) but it does sound like it's definitely growing. 2) What about you? 3) you went to school, 4) Okay, um,
+ANSWER: 2
+______
+
+EXAMPLE:
+A: You want to go first.
+B: Well, uh, no
+B: I don, I don't get as much exercise as I, as I should as, or as I would like to, uh, uh, these days.
+B: I,
+B: seems to be to easy to get busy with other things.
+B: Uh, I have, in the past, uh, jogged and, and run,
+B: and every, every January and every September, I start out again
+B: and then it tapers off.
+A: Really?
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Uh, what about you? 2) A grand jury or, 3) Lobster? 4) AVIS.
+ANSWER: 1
+______
+
+TEST EXAMPLE:
+A: Hi, Cynthia.
+A: What did you wear to work today?
+B: Um, let's see.
+B: What did I wear to work today?
+B: Um, actually I wore corduroy shorts with a white blouse, um, and flat shoes.
+A: So, can you dress pretty casually?
+B: Um, on occasion.
+A: Yeah.
+B: On occasion.
+B: Um, I do vary.
+B: Um, you know, I wear suits,
+B: I wear skirts and sweaters.
+B: On occasion I can wear jeans.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) what was the spoof on TOP GUN, 2) but it, 3) Where do you go? 4) What about you?
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+4
+______
+
+
+
+A: I'm
+================================================================================
+
+INTERVENTION OUTPUT:
+4
+____ ____ ____ ____ ____ ____ ____
+================================================================================
+
+
+================================================================================
+EXAMPLE 37
+Target Output: 2
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+B: There we go.
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) I don't know di, I don't know how old you are, 2) Well, uh, what do you think about taxes, 3) And that's how you got involved. 4) I'm Tina.
+ANSWER: 2
+______
+
+EXAMPLE:
+A: Well, I, uh, before I was married, I used to play a lot of sports.
+B: Uhhuh.
+A: And, uh, but when I got married and had children and everything, it seems like I keep all my activity just chasing around fulfilling my obligations
+A: so I haven't done a lot of, uh, exercise on purpose.
+B: Uhhuh.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Put a big cast on it. 2) probably, well, 3) you know, you'd go and sleep at night time. 4) What about you?
+ANSWER: 4
+______
+
+EXAMPLE:
+B: Okay,
+B: well the topic is selecting care for the elderly.
+A: Uhhuh.
+B: And I don't have elderly parents, yet but not that far in the distant future.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What about yourself? 2) I, I don't know. 3) I would be curious to know what you thought as to how like say C N N T V news compared to the three networks. 4) And, uh,
+ANSWER: 1
+______
+
+EXAMPLE:
+A: Uh, I get most of my news uh, from newspapers really.
+A: I read the daily newspaper, uh, the HOUSTON CHRONICLE
+A: and sometimes I'll read like the, uh, WALL STREET or the NEW YORK TIMES.
+A: I don't subscribe to either,
+A: but sometimes I get a hold of copies of it.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) We don't have anyplace right now that will take them. 2) Uh, how about you? 3) , 4) that's okay.
+ANSWER: 2
+______
+
+TEST EXAMPLE:
+A: Okay,
+A: I think we're supposed to discuss our view of the Soviet Union as a continuing threat to the United States.
+B: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Well, um, I'm going to listen. 2) What do you, what do you think about them? 3) So, uh, let's see, 4) That's okay.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+2
+______ 1 3
+================================================================================
+
+INTERVENTION OUTPUT:
+____ ____ ____ ____ ____ ____ ____ ____ ____
+================================================================================
+
+
+================================================================================
+EXAMPLE 38
+Target Output: 1
+Target Dialogue Act: qo
+Next Caller: A
+================================================================================
+PROMPT:
+You are given a short conversation and four candidate responses.
+                Pick the SINGLE best response.
+                Output ONLY the option number (1-4). Do not output anything else.EXAMPLE:
+A: Okay.
+A: Um, does, is this something that concerns you?
+B: > Well, I think it does, um, especially because I just moved to Massachusetts and, uh, they're having real problems because they have so many, uh, police layoffs.
+A: Uhhuh.
+B: And, uh, personally I don't live in a real bad section of town
+B: but, uh, just because of the general area I live in, the insurance rates are real high on your car
+B: and, there's a lot of crime within a few miles of me.
+A: Right.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) wh, uh, w, 2) No. 3) My name is Jean. 4) How about you?
+ANSWER: 4
+______
+
+EXAMPLE:
+A: well I guess first of all I, I could have asked that before.
+A: Do you have children?
+B: No.
+A: No.
+A: Okay.
+A: Because I, I didn't know if that would make a difference
+A: felt.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) or do you get butterflies in your stomach when you go there? 2) go ahead. 3) Um, what do you think about the proposal that all young Americans should spend a year or two, 4) Really?
+ANSWER: 3
+______
+
+EXAMPLE:
+A: Okay.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) Yeah, 2) Sorry about that, 3) Well, excuse me just second. 4) Well, Carolyn, the, uh, one of the main things I'd like, like to know is, uh, how do you feel about the, knowing about the environment of a nursing home before you would send someone there to live and so forth.
+ANSWER: 4
+______
+
+EXAMPLE:
+A: All right.
+A: Well, on this subject, I really hadn't had to deal with putting someone in there yet,
+A: but my mother's always been administrator of a nursing home
+B: Uhhuh.
+A: so I've always been involved, you know, in one.
+B:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) > Girls, put that away. 2) Uh, but, uh, no 3) How do you feel about them, I mean, since you've 4) I tell you what, I, I don't think I really have,
+ANSWER: 3
+______
+
+TEST EXAMPLE:
+B: Well, let me see,
+B: what have you seen lately?
+A: Well, uh, CITY SLICKERS, and STAR TREK FIVE.
+B: FIVE?
+A: Yeah,
+A: yeah.
+B: Y,
+B: only, only five?
+A: Yeah.
+A: I thought I'd better see that one before I go and see six.
+B: Well, no,
+B: didn't need to.
+A: No,
+A: I found that out.
+A:
+QUESTION: Given the conversation context above, which response is most appropriate?
+OPTIONS: 1) What about you? 2) there was no, 3) Or did you start at the edge? 4) But, no.
+ANSWER:
+================================================================================
+
+CLEAN OUTPUT:
+1
+______
+
+
+A: Hi,
+================================================================================
+
+INTERVENTION OUTPUT:
+1
+______
+____________ ______
 ================================================================================
 

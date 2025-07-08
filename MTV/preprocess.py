@@ -9,16 +9,21 @@ If the question can not be answered, respond unanswerable. """
 
 def open_data(dataset_name, path, dialogue_act=None):
     jsonl_format_dataset = ["vizwiz", "okvqa"]
-    list_format_dataset = ["flower", "cub", "dtd", "swda"]
+    list_format_dataset = ["flower", "cub", "dtd", "swda"]  # saved as full JSON arrays
 
-    with open(path, 'r') as json_file:
-        if dataset_name in jsonl_format_dataset:
-            dataset = list(json_file)
-        elif dataset_name in list_format_dataset:
-            dataset = json.load(json_file)
+    # DailyDialog is stored as JSON Lines (one object per line)
+    if dataset_name == "dailydialog":
+        with open(path, 'r', encoding='utf-8') as json_file:
+            dataset = [json.loads(l) for l in json_file]
+    else:
+        with open(path, 'r') as json_file:
+            if dataset_name in jsonl_format_dataset:
+                dataset = list(json_file)
+            elif dataset_name in list_format_dataset:
+                dataset = json.load(json_file)
     
-    # If dialogue_act is specified and dataset is swda, filter for that act
-    if dialogue_act is not None and dataset_name == "swda":
+    # If dialogue_act is specified and dataset is swda or dailydialog, filter for that act
+    if dialogue_act is not None and dataset_name in ("swda", "dailydialog"):
         filtered_dataset = []
         for item in dataset:
             # item is already a dict for .json files
@@ -41,7 +46,8 @@ def get_format_func(cur_dataset, zero_shot=False):
         return format_cub
     if cur_dataset == "dtd":
         return format_dtd
-    if cur_dataset == "swda" or cur_dataset == "swda_nextutt":
+    if cur_dataset in ("swda", "swda_nextutt", "dailydialog"):
+        # Re-use the same multiple-choice formatting for DailyDialog
         return format_swda_multiple_choice
 
 
@@ -239,13 +245,16 @@ def format_swda_next_utt(all_data, cur_item=None, num_shot=0, model_helper=None,
 
 def format_swda_multiple_choice(filtered_dataset, full_dataset, cur_item=None, num_shot=0, model_helper=None, split="train", mcq_options=None):
     """
-    Format function for SWDA multiple choice with letter generation.
+    Format function for SWDA multiple choice with improved prompt engineering for Llama-3.1-8B-Instruct.
     
     Args:
-        all_data: Dataset filtered to target dialogue act (for correct answers)
+        filtered_dataset: Dataset filtered to target dialogue act (for correct answers)
         full_dataset: Complete dataset with all acts (for distractors)
         cur_item: Current example to format
-        ...
+        num_shot: Number of few-shot examples
+        model_helper: Model helper instance
+        split: Dataset split
+        mcq_options: Pre-defined multiple choice options (optional)
     """
     if cur_item is None:
         data = random.sample(filtered_dataset, 1)[0]
@@ -260,7 +269,8 @@ def format_swda_multiple_choice(filtered_dataset, full_dataset, cur_item=None, n
             act_to_examples[act] = []
         act_to_examples[act].append(ex)
 
-    prompt = ""
+    prompt = """You are given a short conversation and four candidate responses. Pick the SINGLE best response. Output ONLY the option number (1-4). Do not output anything else.\n\n"""
+
     if num_shot > 0:
         # Get examples with the same act as current example
         target_act = data.get('dialog_act', 'o')
@@ -304,22 +314,30 @@ def format_swda_multiple_choice(filtered_dataset, full_dataset, cur_item=None, n
             # Find correct number after shuffling
             correct_number = options.index(correct_utterance) + 1
 
-            # Format the example
+            # Format the example with clear structure
             context = correct_example.get("text", "").strip()
             if context:
                 context_lines = context.split('\n')
                 formatted_context = '\n'.join([line.strip() for line in context_lines if line.strip()])
-                prompt += f"{formatted_context}\n"
+                prompt += f"EXAMPLE:\n{formatted_context}\n"
+                prompt += f"{correct_example['caller']}:\n"
+            else:
+                prompt += "EXAMPLE:\n[Brief conversation]\n"
 
-            prompt += f"{correct_example['caller']}: 1) {options[0]} 2) {options[1]} 3) {options[2]} 4) {options[3]}\n"
-            prompt += f"Response: {correct_number}\n\n"
+            prompt += f"QUESTION: Given the conversation context above, which response is most appropriate?\n"
+            prompt += f"OPTIONS: 1) {options[0]} 2) {options[1]} 3) {options[2]} 4) {options[3]}\n"
+            prompt += f"ANSWER: {correct_number}\n"
+            prompt += "______\n\n"
 
-    # Add the current query
+    # Add the current query with improved formatting
     context = data.get("text", "").strip()
     if context:
         context_lines = context.split('\n')
         formatted_context = '\n'.join([line.strip() for line in context_lines if line.strip()])
-        prompt += f"{formatted_context}\n"
+        prompt += f"TEST EXAMPLE:\n{formatted_context}\n"
+        prompt += f"{data['caller']}:\n"
+    else:
+        prompt += "TEST EXAMPLE:\n[Brief conversation]\n"
 
     # Handle current example options
     target_act = data.get('dialog_act', 'o')
@@ -362,8 +380,9 @@ def format_swda_multiple_choice(filtered_dataset, full_dataset, cur_item=None, n
     # Find correct number after shuffling
     target_number = options.index(correct_utterance) + 1
 
-    # Format final prompt
-    prompt += f"{data['caller']}: 1) {options[0]} 2) {options[1]} 3) {options[2]} 4) {options[3]}\n"
-    prompt += "Response:"
+    # Format final prompt with clear structure
+    prompt += f"QUESTION: Given the conversation context above, which response is most appropriate?\n"
+    prompt += f"OPTIONS: 1) {options[0]} 2) {options[1]} 3) {options[2]} 4) {options[3]}\n"
+    prompt += "ANSWER:"
 
     return prompt, [], str(target_number), data.get("utterance_id", -1)

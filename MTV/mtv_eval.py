@@ -49,8 +49,8 @@ def eval_reinforce(args):
     val_dataset = open_data(args.data_name, args.val_path, getattr(args, 'dialogue_act', None))
     print(f"[INFO] Loaded {len(val_dataset)} validation examples.")
 
-    # Filter for non-empty contexts (for SWDA)
-    if args.data_name == "swda":
+    # Filter for non-empty contexts (for SWDA and DailyDialog)
+    if args.data_name in ("swda", "dailydialog"):
         train_dataset = [ex for ex in train_dataset if ex.get('text', '').strip()]
         val_dataset = [ex for ex in val_dataset if ex.get('text', '').strip()]
         print(f"[INFO] After filtering for non-empty contexts: {len(train_dataset)} training examples, {len(val_dataset)} validation examples")

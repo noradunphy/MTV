@@ -82,16 +82,18 @@ def load_model(model_name, cur_dataset, zero_shot=False):
     if model_name == "text":
         from transformers import AutoModelForCausalLM, AutoTokenizer
         model = AutoModelForCausalLM.from_pretrained(
-            "meta-llama/Llama-3.1-8B",
+            "meta-llama/Llama-3.1-8B-Instruct",
             torch_dtype=torch.bfloat16,
             device_map="auto"
         ).eval()
         tokenizer = AutoTokenizer.from_pretrained(
-            "meta-llama/Llama-3.1-8B",
+            "meta-llama/Llama-3.1-8B-Instruct",
             padding_side="right",
             use_fast=False
         )
+        # Set pad token to eos token for Llama models (this is the standard practice)
         tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.pad_token_id = tokenizer.eos_token_id
         model_helper = TextModelHelper(model, tokenizer, cur_dataset, zero_shot)
         print("this is in mtv_utils.py")
     
@@ -232,6 +234,8 @@ def get_last_mean_head_activations(dataset, model_helper, N_TRIALS = 50, shot=4,
             text, image_list, _, _ = model_helper.format_func(dataset, full_dataset, None, num_shot=shot, model_helper=model_helper)
         if n % 10 == 0:
             print(text)
+        # print(text)
+        # pdb.set_trace()
         #is this actually getting the last token?
         inputs = model_helper.insert_image(text, image_list)
         activations_td, result = gather_last_attn_activations(inputs, model_helper)
